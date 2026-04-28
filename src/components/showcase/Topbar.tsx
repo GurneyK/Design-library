@@ -1,0 +1,50 @@
+import { Component, LayoutTemplate } from "lucide-react";
+import { SearchBox } from "./SearchBox";
+
+interface TopbarProps {
+  query: string;
+  section: "components" | "templates";
+  onQueryChange: (query: string) => void;
+  onSectionChange: (section: "components" | "templates") => void;
+}
+
+export function Topbar({ query, section, onQueryChange, onSectionChange }: TopbarProps) {
+  return (
+    <header className="sticky top-0 z-10 border-b border-gray-200 bg-white/95 backdrop-blur">
+      <div className="flex min-h-16 flex-col gap-3 px-4 py-3 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-700">
+            Unilever H3L
+          </p>
+          <h1 className="text-lg font-semibold text-gray-900">Design Library</h1>
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <SearchBox value={query} onChange={onQueryChange} />
+          <div className="grid h-10 grid-cols-2 rounded-habibiMd bg-gray-100 p-1 text-sm font-semibold text-gray-600">
+            <button
+              className={`focus-ring flex items-center justify-center gap-2 rounded-habibiSm px-3 ${
+                section === "components" ? "bg-white text-gray-900 shadow-habibiXs" : "hover:text-gray-900"
+              }`}
+              onClick={() => onSectionChange("components")}
+              type="button"
+            >
+              <Component className="h-4 w-4" />
+              Components
+            </button>
+            <button
+              className={`focus-ring flex items-center justify-center gap-2 rounded-habibiSm px-3 ${
+                section === "templates" ? "bg-white text-gray-900 shadow-habibiXs" : "hover:text-gray-900"
+              }`}
+              onClick={() => onSectionChange("templates")}
+              type="button"
+            >
+              <LayoutTemplate className="h-4 w-4" />
+              Templates
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
