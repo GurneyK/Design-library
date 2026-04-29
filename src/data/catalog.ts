@@ -24,6 +24,13 @@ import {
   switchEntry,
   textareaEntry,
 } from "./dataEntryEntries";
+import {
+  alertEntry,
+  bannerEntry,
+  progressEntry,
+  skeletonEntry,
+  spinnerEntry,
+} from "./feedbackEntries";
 
 export type PropRow = {
   name: string;
@@ -72,4 +79,9 @@ export const catalog = [
   switchEntry,
   sliderEntry,
   searchInputEntry,
+  alertEntry,
+  bannerEntry,
+  spinnerEntry,
+  progressEntry,
+  skeletonEntry,
 ] satisfies CatalogEntry[];
