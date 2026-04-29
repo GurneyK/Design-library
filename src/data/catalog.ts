@@ -25,6 +25,16 @@ import {
   textareaEntry,
 } from "./dataEntryEntries";
 import {
+  areaChartEntry,
+  barChartEntry,
+  chartContainerEntry,
+  chartLegendEntry,
+  chartTooltipEntry,
+  donutChartEntry,
+  lineChartEntry,
+  summaryChartCardEntry,
+} from "./chartEntries";
+import {
   descriptionListEntry,
   emptyStateEntry,
   listEntry,
@@ -100,6 +110,14 @@ export const catalog = [
   statCardEntry,
   emptyStateEntry,
   timelineEntry,
+  chartContainerEntry,
+  chartLegendEntry,
+  chartTooltipEntry,
+  lineChartEntry,
+  areaChartEntry,
+  barChartEntry,
+  donutChartEntry,
+  summaryChartCardEntry,
   alertEntry,
   bannerEntry,
   spinnerEntry,
