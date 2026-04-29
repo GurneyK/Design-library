@@ -25,6 +25,14 @@ import {
   textareaEntry,
 } from "./dataEntryEntries";
 import {
+  descriptionListEntry,
+  emptyStateEntry,
+  listEntry,
+  statCardEntry,
+  tableEntry,
+  timelineEntry,
+} from "./dataDisplayEntries";
+import {
   alertEntry,
   bannerEntry,
   progressEntry,
@@ -86,6 +94,12 @@ export const catalog = [
   switchEntry,
   sliderEntry,
   searchInputEntry,
+  tableEntry,
+  listEntry,
+  descriptionListEntry,
+  statCardEntry,
+  emptyStateEntry,
+  timelineEntry,
   alertEntry,
   bannerEntry,
   spinnerEntry,
