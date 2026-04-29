@@ -7,6 +7,13 @@ import {
   spacingFoundationEntry,
   typographyFoundationEntry,
 } from "./foundationEntries";
+import {
+  avatarEntry,
+  badgeEntry,
+  dividerEntry,
+  surfaceEntry,
+  tooltipEntry,
+} from "./primitiveEntries";
 
 export type PropRow = {
   name: string;
@@ -42,4 +49,9 @@ export const catalog = [
   shadowFoundationEntry,
   darkModeFoundationEntry,
   buttonEntry,
+  badgeEntry,
+  avatarEntry,
+  dividerEntry,
+  tooltipEntry,
+  surfaceEntry,
 ] satisfies CatalogEntry[];
