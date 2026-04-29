@@ -55,6 +55,14 @@ import {
   timelineEntry,
 } from "./dataDisplayEntries";
 import {
+  activityFeedEntry,
+  dashboardHeaderEntry,
+  insightCardEntry,
+  quickActionPanelEntry,
+  runStatusPillEntry,
+  workspaceSwitcherEntry,
+} from "./dashboardEntries";
+import {
   alertEntry,
   bannerEntry,
   progressEntry,
@@ -140,6 +148,12 @@ export const catalog = [
   sourceDrawerEntry,
   agentAvatarEntry,
   thinkingStateEntry,
+  dashboardHeaderEntry,
+  workspaceSwitcherEntry,
+  runStatusPillEntry,
+  activityFeedEntry,
+  insightCardEntry,
+  quickActionPanelEntry,
   alertEntry,
   bannerEntry,
   spinnerEntry,
