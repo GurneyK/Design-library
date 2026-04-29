@@ -70,6 +70,15 @@ import {
   spinnerEntry,
 } from "./feedbackEntries";
 import {
+  comboboxEntry,
+  datePickerEntry,
+  fileUploadEntry,
+  formActionsEntry,
+  formGroupEntry,
+  formSectionEntry,
+  validationMessageEntry,
+} from "./formEntries";
+import {
   drawerEntry,
   modalEntry,
   popconfirmEntry,
@@ -158,6 +167,13 @@ export const catalog = [
   switchEntry,
   sliderEntry,
   searchInputEntry,
+  formSectionEntry,
+  formGroupEntry,
+  validationMessageEntry,
+  fileUploadEntry,
+  comboboxEntry,
+  datePickerEntry,
+  formActionsEntry,
   tableEntry,
   listEntry,
   descriptionListEntry,

@@ -4,6 +4,7 @@ export const taxonomy = [
   "Layout",
   "Navigation",
   "Data Entry",
+  "Forms",
   "Data Display",
   "Feedback",
   "Charts / Data Viz",
