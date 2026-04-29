@@ -14,6 +14,16 @@ import {
   surfaceEntry,
   tooltipEntry,
 } from "./primitiveEntries";
+import {
+  checkboxEntry,
+  formFieldEntry,
+  inputEntry,
+  searchInputEntry,
+  selectEntry,
+  sliderEntry,
+  switchEntry,
+  textareaEntry,
+} from "./dataEntryEntries";
 
 export type PropRow = {
   name: string;
@@ -54,4 +64,12 @@ export const catalog = [
   dividerEntry,
   tooltipEntry,
   surfaceEntry,
+  formFieldEntry,
+  inputEntry,
+  textareaEntry,
+  selectEntry,
+  checkboxEntry,
+  switchEntry,
+  sliderEntry,
+  searchInputEntry,
 ] satisfies CatalogEntry[];
