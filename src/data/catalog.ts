@@ -31,6 +31,13 @@ import {
   skeletonEntry,
   spinnerEntry,
 } from "./feedbackEntries";
+import {
+  drawerEntry,
+  modalEntry,
+  popconfirmEntry,
+  popoverEntry,
+  toastEntry,
+} from "./feedbackOverlayEntries";
 
 export type PropRow = {
   name: string;
@@ -84,4 +91,9 @@ export const catalog = [
   spinnerEntry,
   progressEntry,
   skeletonEntry,
+  modalEntry,
+  drawerEntry,
+  popoverEntry,
+  popconfirmEntry,
+  toastEntry,
 ] satisfies CatalogEntry[];
