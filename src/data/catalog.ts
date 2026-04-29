@@ -86,6 +86,15 @@ import {
   stackEntry,
   topbarEntry,
 } from "./layoutEntries";
+import {
+  breadcrumbEntry,
+  commandPaletteEntry,
+  menuEntry,
+  paginationEntry,
+  sidebarNavItemEntry,
+  stepsEntry,
+  tabsEntry,
+} from "./navigationEntries";
 
 export type PropRow = {
   name: string;
@@ -134,6 +143,13 @@ export const catalog = [
   sectionEntry,
   sidebarEntry,
   topbarEntry,
+  tabsEntry,
+  breadcrumbEntry,
+  paginationEntry,
+  menuEntry,
+  stepsEntry,
+  sidebarNavItemEntry,
+  commandPaletteEntry,
   formFieldEntry,
   inputEntry,
   textareaEntry,
