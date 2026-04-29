@@ -27,7 +27,7 @@ export const buttonEntry = {
   status: "draft",
   source: ["written-spec", "reference-code", "figma-deferred"],
   description:
-    "Buttons trigger important actions across Design Library surfaces. They use Habibi action tokens, explicit variants, stable sizing, visible focus states, and clear icon slots.",
+    "Buttons trigger important actions across Design Library surfaces. They use Habibi action tokens, explicit variants, stable sizing, visible focus states, and clear leading, trailing, loading, and icon-only slots.",
   preview: ButtonPreview,
   variants: [
     "Primary",
@@ -101,22 +101,26 @@ export const buttonEntry = {
     "Use secondary buttons for supporting actions near a primary action.",
     "Use tertiary buttons for low-emphasis inline actions.",
     "Use destructive buttons only for actions that remove, delete, revoke, or reset.",
+    "Use icon-only buttons for compact toolbars when the icon is widely understood and an accessible label is provided.",
   ],
   avoid: [
     "Do not place multiple primary buttons in the same action group.",
     "Do not use a destructive button for reversible navigation.",
     "Do not rely on icon-only buttons without an accessible label.",
+    "Do not use loading buttons without preserving enough width for the action label.",
   ],
   accessibility: [
     "Buttons use semantic button elements.",
     "Focus states are visible through the Habibi focus ring.",
     "Loading and disabled states prevent repeated submission.",
     "Icon-only buttons require an aria-label.",
+    "Button labels should describe the action, not the destination or generic confirmation.",
   ],
   agentGuidance: [
     "Choose one primary button per screen or modal footer.",
     "Pair primary and secondary actions in predictable order: secondary left, primary right.",
     "Prefer action-specific labels like 'Create Agent' or 'Save Changes' instead of generic labels like 'Submit'.",
+    "If generating an icon-only action, include aria-label and choose size='icon'.",
   ],
   code: buttonCode,
 } as const;
