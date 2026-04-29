@@ -76,6 +76,16 @@ import {
   popoverEntry,
   toastEntry,
 } from "./feedbackOverlayEntries";
+import {
+  cardEntry,
+  containerEntry,
+  gridEntry,
+  panelEntry,
+  sectionEntry,
+  sidebarEntry,
+  stackEntry,
+  topbarEntry,
+} from "./layoutEntries";
 
 export type PropRow = {
   name: string;
@@ -116,6 +126,14 @@ export const catalog = [
   dividerEntry,
   tooltipEntry,
   surfaceEntry,
+  containerEntry,
+  stackEntry,
+  gridEntry,
+  cardEntry,
+  panelEntry,
+  sectionEntry,
+  sidebarEntry,
+  topbarEntry,
   formFieldEntry,
   inputEntry,
   textareaEntry,
