@@ -1,8 +1,13 @@
+import { AgentAvatar } from "../components/ui/agent/AgentAvatar";
 import { ChatMessage } from "../components/ui/agent/ChatMessage";
 import { ChatSurface } from "../components/ui/agent/ChatSurface";
 import { Composer } from "../components/ui/agent/Composer";
+import { CitationChip } from "../components/ui/agent/CitationChip";
+import { SourceDrawer } from "../components/ui/agent/SourceDrawer";
 import { StreamingState } from "../components/ui/agent/StreamingState";
 import { SuggestionChips } from "../components/ui/agent/SuggestionChips";
+import { ThinkingState } from "../components/ui/agent/ThinkingState";
+import { ToolCallCard } from "../components/ui/agent/ToolCallCard";
 import { Badge } from "../components/ui/badge/Badge";
 import type { CatalogEntry } from "./catalog";
 
@@ -62,6 +67,46 @@ function StreamingStatePreview() {
       <StreamingState label="Drafting response" />
     </div>
   );
+}
+
+function CitationChipPreview() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <CitationChip index={1} label="Regional lift summary" source="Analytics run" tone="brand" />
+      <CitationChip confidence="92%" index={2} label="Attribution confidence" tone="success" />
+      <CitationChip index={3} label="Budget recommendation" />
+    </div>
+  );
+}
+
+function ToolCallCardPreview() {
+  return (
+    <div className="space-y-3">
+      <ToolCallCard meta="analytics.query.regionalPerformance" status="running" toolName="Analytics Query">
+        Fetching response quality, campaign volume, and attribution confidence by region.
+      </ToolCallCard>
+      <ToolCallCard description="The source set was indexed and attached to the final response." status="success" toolName="Source Retrieval" />
+    </div>
+  );
+}
+
+function SourceDrawerPreview() {
+  return <SourceDrawer />;
+}
+
+function AgentAvatarPreview() {
+  return (
+    <div className="flex items-center gap-5">
+      <AgentAvatar status="active" />
+      <AgentAvatar status="complete" tone="neutral" />
+      <AgentAvatar initials="GK" status="idle" tone="user" />
+      <AgentAvatar size="lg" status="active" />
+    </div>
+  );
+}
+
+function ThinkingStatePreview() {
+  return <ThinkingState />;
 }
 
 const agentDefaults = {
@@ -163,4 +208,111 @@ export const streamingStateEntry: CatalogEntry = {
   accessibility: ["Visible text describes the activity.", "Future implementation should respect reduced motion preferences."],
   agentGuidance: ["Use activity-specific labels like 'Calling analytics tool' rather than generic 'Loading'.", "Pair streaming state with the message that will receive output."],
   code: `import { StreamingState } from "./StreamingState";\n\n<StreamingState label="Calling analytics tool" />`,
+};
+
+export const citationChipEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "citation-chip",
+  name: "Citation Chip",
+  subcategory: "Evidence",
+  description: "Citation Chip links an agent claim to a specific source, excerpt, or evidence item.",
+  preview: CitationChipPreview,
+  variants: ["Neutral", "Brand", "Success", "With index", "With confidence", "With source label"],
+  props: [
+    { name: "label", type: "string", defaultValue: "-", description: "Visible source or evidence label." },
+    { name: "index", type: "number", defaultValue: "-", description: "Numeric citation marker that maps to the source drawer." },
+    { name: "source", type: "string", defaultValue: "-", description: "Optional source family or system label." },
+    { name: "confidence", type: "string", defaultValue: "-", description: "Optional confidence label." },
+    { name: "tone", type: '"neutral" | "brand" | "success"', defaultValue: '"neutral"', description: "Visual emphasis for the citation." },
+  ],
+  tokens: ["white", "gray-200", "gray-400", "gray-700", "brand-50", "brand-100", "brand-200", "brand-700", "success-50", "success-700"],
+  usage: ["Use next to agent claims that need evidence.", "Use numbered citations when a Source Drawer is present.", "Use confidence only when it comes from a real scoring model."],
+  avoid: ["Do not use citations as decorative tags.", "Do not show confidence values that are not backed by data."],
+  accessibility: ["Citation chips are buttons and reachable by keyboard.", "The label should identify the source action without relying on the number alone."],
+  agentGuidance: ["Use Citation Chip whenever an answer references source material.", "Pair indexed chips with Source Drawer entries using the same index."],
+  code: `import { CitationChip } from "./CitationChip";\n\n<CitationChip index={1} label="Regional lift summary" source="Analytics run" tone="brand" />`,
+};
+
+export const toolCallCardEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "tool-call-card",
+  name: "Tool Call Card",
+  subcategory: "Agent Activity",
+  description: "Tool Call Card exposes an agent's connected tool activity, including running, complete, and review states.",
+  preview: ToolCallCardPreview,
+  variants: ["Running", "Complete", "Needs review", "With metadata", "With output summary"],
+  props: [
+    { name: "toolName", type: "string", defaultValue: "-", description: "Human-readable tool name." },
+    { name: "status", type: '"running" | "success" | "error"', defaultValue: '"running"', description: "Current tool execution state." },
+    { name: "description", type: "string", defaultValue: "-", description: "Short explanation of what the tool is doing." },
+    { name: "meta", type: "string", defaultValue: "-", description: "Optional endpoint, run id, or internal tool identifier." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-400", "gray-600", "gray-900", "brand-50", "success-50", "error-50", "shadow-xs"],
+  usage: ["Use when a tool call should be visible to users.", "Use inside chat streams, activity feeds, or run detail panels."],
+  avoid: ["Do not expose sensitive internal payloads.", "Do not use for normal static status badges."],
+  accessibility: ["Status is visible as text, not color alone.", "Long tool details should remain in reading order."],
+  agentGuidance: ["Use Tool Call Card for transparent agent actions like retrieval, analysis, export, or validation.", "Summarize payloads instead of rendering raw JSON by default."],
+  code: `import { ToolCallCard } from "./ToolCallCard";\n\n<ToolCallCard status="running" toolName="Analytics Query">\n  Fetching campaign metrics by region.\n</ToolCallCard>`,
+};
+
+export const sourceDrawerEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "source-drawer",
+  name: "Source Drawer",
+  subcategory: "Evidence",
+  description: "Source Drawer collects the sources behind an agent answer so users can inspect evidence without leaving the workflow.",
+  preview: SourceDrawerPreview,
+  variants: ["Default", "Searchable", "Citation mapped", "Evidence list", "Side panel"],
+  props: [
+    { name: "sources", type: "SourceDrawerSource[]", defaultValue: "defaultSources", description: "Source rows with id, title, meta, and excerpt." },
+    { name: "title", type: "string", defaultValue: '"Sources"', description: "Drawer title." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use beside agent responses that contain citations.", "Use for source review, audit, and evidence inspection."],
+  avoid: ["Do not put primary navigation in Source Drawer.", "Do not hide critical evidence behind unlabeled icons."],
+  accessibility: ["Sources are rendered as articles in a readable sequence.", "Future drawer behavior should include focus management when opened as an overlay."],
+  agentGuidance: ["Use Source Drawer as the destination for Citation Chip source inspection.", "Keep excerpts concise and include enough metadata to judge trust."],
+  code: `import { SourceDrawer } from "./SourceDrawer";\n\n<SourceDrawer sources={sources} />`,
+};
+
+export const agentAvatarEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "agent-avatar",
+  name: "Agent Avatar",
+  subcategory: "Identity",
+  description: "Agent Avatar represents an agent, user, or system identity with size, tone, and status variants.",
+  preview: AgentAvatarPreview,
+  variants: ["Brand", "Neutral", "User", "Small", "Medium", "Large", "Idle", "Active", "Complete"],
+  props: [
+    { name: "tone", type: '"brand" | "neutral" | "user"', defaultValue: '"brand"', description: "Identity treatment." },
+    { name: "size", type: '"sm" | "md" | "lg"', defaultValue: '"md"', description: "Avatar size." },
+    { name: "status", type: '"idle" | "active" | "complete"', defaultValue: '"idle"', description: "Status indicator." },
+    { name: "initials", type: "string", defaultValue: "-", description: "Optional initials instead of icon." },
+  ],
+  tokens: ["brand-200", "brand-500", "brand-700", "gray-200", "gray-400", "gray-700", "gray-900", "success-500", "radius-md", "shadow-xs"],
+  usage: ["Use in chat messages, agent headers, run cards, and identity rows.", "Use status when the agent is actively working or complete."],
+  avoid: ["Do not use decorative avatars without identity meaning.", "Do not rely on the status dot without nearby status text for critical states."],
+  accessibility: ["Avatar exposes an image role with an accessible label.", "Status dot exposes a short status label."],
+  agentGuidance: ["Use Agent Avatar for AI or system identities instead of generic Avatar when the status matters.", "Use the user tone for human-authored turns."],
+  code: `import { AgentAvatar } from "./AgentAvatar";\n\n<AgentAvatar status="active" />`,
+};
+
+export const thinkingStateEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "thinking-state",
+  name: "Thinking State",
+  subcategory: "Agent Activity",
+  description: "Thinking State shows a compact step list for what an agent is doing while work is in progress.",
+  preview: ThinkingStatePreview,
+  variants: ["Default", "Complete step", "Active step", "Pending step", "Custom label"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Agent is working"', description: "Heading for the current activity." },
+    { name: "steps", type: "ThinkingStep[]", defaultValue: "defaultSteps", description: "Ordered work steps with status." },
+  ],
+  tokens: ["brand-50", "brand-200", "brand-400", "brand-700", "brand-800", "success-500", "radius-lg", "motion-spin"],
+  usage: ["Use for multi-step agent work that takes more than a moment.", "Use when naming the work increases trust and reduces perceived wait time."],
+  avoid: ["Do not expose private chain-of-thought.", "Do not use for instant loading states where Spinner or Streaming State is enough."],
+  accessibility: ["Steps are rendered as an ordered list.", "Active work includes text as well as animation."],
+  agentGuidance: ["Use Thinking State for transparent process summaries, not hidden reasoning.", "Describe observable workflow steps like retrieval, validation, or drafting."],
+  code: `import { ThinkingState } from "./ThinkingState";\n\n<ThinkingState label="Checking sources" steps={steps} />`,
 };

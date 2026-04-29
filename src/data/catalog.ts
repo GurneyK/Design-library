@@ -35,11 +35,16 @@ import {
   summaryChartCardEntry,
 } from "./chartEntries";
 import {
+  agentAvatarEntry,
   chatMessageEntry,
   chatSurfaceEntry,
   composerEntry,
+  citationChipEntry,
+  sourceDrawerEntry,
   streamingStateEntry,
   suggestionChipsEntry,
+  thinkingStateEntry,
+  toolCallCardEntry,
 } from "./agentEntries";
 import {
   descriptionListEntry,
@@ -130,6 +135,11 @@ export const catalog = [
   composerEntry,
   suggestionChipsEntry,
   streamingStateEntry,
+  citationChipEntry,
+  toolCallCardEntry,
+  sourceDrawerEntry,
+  agentAvatarEntry,
+  thinkingStateEntry,
   alertEntry,
   bannerEntry,
   spinnerEntry,
