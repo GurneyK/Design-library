@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 91,
+    "entries": 96,
     "categories": 13,
     "templates": 8
   },
@@ -2547,6 +2547,138 @@
         "Use Command Palette for action search once available."
       ],
       "code": "import { SearchInput } from \"./SearchInput\";\n\n<SearchInput placeholder=\"Search agents, templates, or components\" />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "radio-group",
+      "kind": "component",
+      "name": "Radio Group",
+      "category": "Data Entry",
+      "subcategory": "Choice controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Radio Group captures one choice from a small set of mutually exclusive options.",
+      "variants": [
+        "Default",
+        "Selected",
+        "With description",
+        "Disabled option"
+      ],
+      "props": [
+        {
+          "name": "options",
+          "type": "RadioOption[]",
+          "defaultValue": "defaultOptions",
+          "description": "Options with label, value, description, and disabled state."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "defaultValue": "\"analytics\"",
+          "description": "Selected option value."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "defaultValue": "\"radio-group\"",
+          "description": "Native radio group name."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-200",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when users must choose exactly one option from a small set.",
+        "Use descriptions when the options have meaningful tradeoffs."
+      ],
+      "doNotUseWhen": [
+        "Do not use for large option lists; use Select or Combobox.",
+        "Do not use Checkbox for mutually exclusive choices."
+      ],
+      "accessibility": [
+        "Uses fieldset and native radio inputs.",
+        "Labels wrap each option for a larger click target."
+      ],
+      "agentGuidance": [
+        "Use Radio Group for 2-5 mutually exclusive choices.",
+        "Use Select for compact static choices and Combobox for searchable lists."
+      ],
+      "code": "import { RadioGroup } from \"./RadioGroup\";\n\n<RadioGroup value=\"analytics\" options={options} />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "segmented-control",
+      "kind": "component",
+      "name": "Segmented Control",
+      "category": "Data Entry",
+      "subcategory": "Choice controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Segmented Control switches between compact peer modes or views within the same context.",
+      "variants": [
+        "Two segments",
+        "Three segments",
+        "Active segment",
+        "Compact mode switcher"
+      ],
+      "props": [
+        {
+          "name": "segments",
+          "type": "Segment[]",
+          "defaultValue": "defaultSegments",
+          "description": "Segment labels, values, and active state."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"View\"",
+          "description": "Accessible label for the control."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-100",
+        "gray-600",
+        "gray-900",
+        "radius-md",
+        "radius-sm",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for small view or mode switches.",
+        "Use when all options should remain visible."
+      ],
+      "doNotUseWhen": [
+        "Do not use for global navigation.",
+        "Do not use for long labels or many options."
+      ],
+      "accessibility": [
+        "Segments expose pressed state.",
+        "A screen-reader label describes the control."
+      ],
+      "agentGuidance": [
+        "Use Segmented Control for local modes like Components/Templates or Overview/Runs/Sources.",
+        "Use Tabs when the view change needs stronger page structure."
+      ],
+      "code": "import { SegmentedControl } from \"./SegmentedControl\";\n\n<SegmentedControl segments={segments} />",
       "sourceFile": "src/data/dataEntryEntries.tsx"
     },
     {
@@ -5145,6 +5277,210 @@
         "Compose Surface with Badge, Button, Divider, and Avatar for common cards."
       ],
       "code": "import { Surface } from \"./Surface\";\n\n<Surface variant=\"raised\">\n  <h3>Agent status</h3>\n  <p>Ready to run</p>\n</Surface>",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "icon-button",
+      "kind": "component",
+      "name": "Icon Button",
+      "category": "Primitives",
+      "subcategory": "Actions",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Icon Button triggers compact actions in toolbars, tables, cards, and dense workspace chrome.",
+      "variants": [
+        "Primary",
+        "Secondary",
+        "Ghost",
+        "Destructive",
+        "sm",
+        "md",
+        "lg"
+      ],
+      "props": [
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Icon rendered as the button content."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Accessible label for screen readers."
+        },
+        {
+          "name": "variant",
+          "type": "\"primary\" | \"secondary\" | \"ghost\" | \"destructive\"",
+          "defaultValue": "\"secondary\"",
+          "description": "Visual and semantic treatment."
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "defaultValue": "\"md\"",
+          "description": "Button dimensions."
+        }
+      ],
+      "tokens": [
+        "brand-700",
+        "brand-600",
+        "gray-50",
+        "gray-300",
+        "gray-500",
+        "gray-700",
+        "error-600",
+        "error-700",
+        "radius-md",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in compact toolbars and table rows when the icon is familiar.",
+        "Use destructive only for remove, revoke, reset, or delete actions."
+      ],
+      "doNotUseWhen": [
+        "Do not use without an accessible label.",
+        "Do not use for primary page actions when a text label would scan better."
+      ],
+      "accessibility": [
+        "Icon Button requires the label prop for aria-label.",
+        "Focus ring remains visible on keyboard focus."
+      ],
+      "agentGuidance": [
+        "Use Icon Button for compact repeated actions.",
+        "Use Button with visible text for primary actions and unfamiliar commands."
+      ],
+      "code": "import { IconButton } from \"./IconButton\";\nimport { Copy } from \"lucide-react\";\n\n<IconButton icon={<Copy className=\"h-4 w-4\" />} label=\"Copy response\" />",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "tag",
+      "kind": "component",
+      "name": "Tag",
+      "category": "Primitives",
+      "subcategory": "Metadata",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Tags label categories, filters, segments, and removable metadata values.",
+      "variants": [
+        "Neutral",
+        "Brand",
+        "Success",
+        "Warning",
+        "Error",
+        "Removable"
+      ],
+      "props": [
+        {
+          "name": "tone",
+          "type": "\"neutral\" | \"brand\" | \"success\" | \"warning\" | \"error\"",
+          "defaultValue": "\"neutral\"",
+          "description": "Semantic color treatment."
+        },
+        {
+          "name": "removable",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Adds a compact remove affordance."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Tag label."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-700",
+        "brand-50",
+        "brand-200",
+        "brand-700",
+        "success-50",
+        "warning-50",
+        "error-50",
+        "radius-sm"
+      ],
+      "useWhen": [
+        "Use for category labels, filters, and compact metadata.",
+        "Use removable tags in filter builders and selected-value lists."
+      ],
+      "doNotUseWhen": [
+        "Do not use tags as primary actions.",
+        "Do not use removable tags without a clear label."
+      ],
+      "accessibility": [
+        "Removable tags expose a remove button with an accessible label.",
+        "Text communicates meaning beyond color."
+      ],
+      "agentGuidance": [
+        "Use Tag for metadata and selected values.",
+        "Use Badge for status and severity."
+      ],
+      "code": "import { Tag } from \"./Tag\";\n\n<Tag tone=\"brand\" removable>Retail media</Tag>",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "keyboard-key",
+      "kind": "component",
+      "name": "Keyboard Key",
+      "category": "Primitives",
+      "subcategory": "Help",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Keyboard Key renders compact keyboard shortcut hints for commands and power-user workflows.",
+      "variants": [
+        "Single key",
+        "Shortcut sequence",
+        "Inline help"
+      ],
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Key label such as Ctrl, K, or Enter."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "radius-sm",
+        "shadow-xs",
+        "font-mono"
+      ],
+      "useWhen": [
+        "Use beside command labels and shortcut hints.",
+        "Use short key labels that match the user's operating system when possible."
+      ],
+      "doNotUseWhen": [
+        "Do not use as a decorative badge.",
+        "Do not rely on shortcuts as the only way to perform an action."
+      ],
+      "accessibility": [
+        "Keyboard shortcuts must have equivalent clickable controls.",
+        "Keep shortcut text readable and visible."
+      ],
+      "agentGuidance": [
+        "Use Keyboard Key inside command palette, menus, and shortcut help.",
+        "Do not replace visible action labels with shortcut-only UI."
+      ],
+      "code": "import { Kbd } from \"./Kbd\";\n\n<Kbd>Ctrl</Kbd> + <Kbd>K</Kbd>",
       "sourceFile": "src/data/primitiveEntries.tsx"
     },
     {

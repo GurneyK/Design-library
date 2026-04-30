@@ -6,6 +6,8 @@ import { Checkbox } from "../components/ui/checkbox/Checkbox";
 import { Switch } from "../components/ui/switch/Switch";
 import { Slider } from "../components/ui/slider/Slider";
 import { SearchInput } from "../components/ui/search-input/SearchInput";
+import { RadioGroup } from "../components/ui/radio-group/RadioGroup";
+import { SegmentedControl } from "../components/ui/segmented-control/SegmentedControl";
 import type { CatalogEntry } from "./catalog";
 
 function FormFieldPreview() {
@@ -110,6 +112,22 @@ function SearchInputPreview() {
       <SearchInput placeholder="Search agents, templates, or components" />
       <SearchInput disabled placeholder="Search unavailable" />
     </div>
+  );
+}
+
+function RadioGroupPreview() {
+  return <RadioGroup />;
+}
+
+function SegmentedControlPreview() {
+  return (
+    <SegmentedControl
+      segments={[
+        { active: true, label: "Overview", value: "overview" },
+        { label: "Runs", value: "runs" },
+        { label: "Sources", value: "sources" },
+      ]}
+    />
   );
 }
 
@@ -285,4 +303,45 @@ export const searchInputEntry: CatalogEntry = {
   accessibility: ["Uses native search input.", "Provide a visible or sr-only label."],
   agentGuidance: ["Use Search Input for filtering existing content.", "Use Command Palette for action search once available."],
   code: `import { SearchInput } from "./SearchInput";\n\n<SearchInput placeholder="Search agents, templates, or components" />`,
+};
+
+export const radioGroupEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "radio-group",
+  name: "Radio Group",
+  subcategory: "Choice controls",
+  description: "Radio Group captures one choice from a small set of mutually exclusive options.",
+  preview: RadioGroupPreview,
+  variants: ["Default", "Selected", "With description", "Disabled option"],
+  props: [
+    { name: "options", type: "RadioOption[]", defaultValue: "defaultOptions", description: "Options with label, value, description, and disabled state." },
+    { name: "value", type: "string", defaultValue: '"analytics"', description: "Selected option value." },
+    { name: "name", type: "string", defaultValue: '"radio-group"', description: "Native radio group name." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-500", "gray-900", "brand-50", "brand-200", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use when users must choose exactly one option from a small set.", "Use descriptions when the options have meaningful tradeoffs."],
+  avoid: ["Do not use for large option lists; use Select or Combobox.", "Do not use Checkbox for mutually exclusive choices."],
+  accessibility: ["Uses fieldset and native radio inputs.", "Labels wrap each option for a larger click target."],
+  agentGuidance: ["Use Radio Group for 2-5 mutually exclusive choices.", "Use Select for compact static choices and Combobox for searchable lists."],
+  code: `import { RadioGroup } from "./RadioGroup";\n\n<RadioGroup value="analytics" options={options} />`,
+};
+
+export const segmentedControlEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "segmented-control",
+  name: "Segmented Control",
+  subcategory: "Choice controls",
+  description: "Segmented Control switches between compact peer modes or views within the same context.",
+  preview: SegmentedControlPreview,
+  variants: ["Two segments", "Three segments", "Active segment", "Compact mode switcher"],
+  props: [
+    { name: "segments", type: "Segment[]", defaultValue: "defaultSegments", description: "Segment labels, values, and active state." },
+    { name: "label", type: "string", defaultValue: '"View"', description: "Accessible label for the control." },
+  ],
+  tokens: ["white", "gray-100", "gray-600", "gray-900", "radius-md", "radius-sm", "shadow-xs"],
+  usage: ["Use for small view or mode switches.", "Use when all options should remain visible."],
+  avoid: ["Do not use for global navigation.", "Do not use for long labels or many options."],
+  accessibility: ["Segments expose pressed state.", "A screen-reader label describes the control."],
+  agentGuidance: ["Use Segmented Control for local modes like Components/Templates or Overview/Runs/Sources.", "Use Tabs when the view change needs stronger page structure."],
+  code: `import { SegmentedControl } from "./SegmentedControl";\n\n<SegmentedControl segments={segments} />`,
 };
