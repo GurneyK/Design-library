@@ -1,11 +1,14 @@
 import { Activity, Bot, Database, FileText, MessageSquare, Plus, TrendingUp } from "lucide-react";
+import { Accordion } from "../components/ui/accordion/Accordion";
 import { Badge } from "../components/ui/badge/Badge";
+import { DataToolbar } from "../components/ui/data-toolbar/DataToolbar";
 import { DescriptionList } from "../components/ui/description-list/DescriptionList";
 import { EmptyState } from "../components/ui/empty-state/EmptyState";
 import { List } from "../components/ui/list/List";
 import { StatCard } from "../components/ui/stat-card/StatCard";
 import { Table } from "../components/ui/table/Table";
 import { Timeline } from "../components/ui/timeline/Timeline";
+import { Tree } from "../components/ui/tree/Tree";
 import type { CatalogEntry } from "./catalog";
 
 function TablePreview() {
@@ -114,6 +117,18 @@ function TimelinePreview() {
       ]}
     />
   );
+}
+
+function AccordionPreview() {
+  return <Accordion />;
+}
+
+function TreePreview() {
+  return <Tree />;
+}
+
+function DataToolbarPreview() {
+  return <DataToolbar />;
 }
 
 const displayDefaults = {
@@ -240,4 +255,61 @@ export const timelineEntry: CatalogEntry = {
   accessibility: ["Uses ordered list semantics.", "Event text includes meaning beyond color."],
   agentGuidance: ["Use Timeline for eval replay, tool-call history, and activity feeds."],
   code: `import { Timeline } from "./Timeline";\n\n<Timeline items={[{ title: "Turn 1", time: "10:24 AM", content: "User query received." }]} />`,
+};
+
+export const accordionEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "accordion",
+  name: "Accordion",
+  subcategory: "Disclosure",
+  description: "Accordion reveals and hides grouped content such as help text, FAQs, and progressive detail.",
+  preview: AccordionPreview,
+  variants: ["Default", "Open item", "Closed item", "Multi item"],
+  props: [
+    { name: "items", type: "AccordionItem[]", defaultValue: "defaultItems", description: "Disclosure rows with title, content, and defaultOpen state." },
+  ],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-400", "gray-600", "gray-900", "radius-lg", "shadow-xs"],
+  usage: ["Use for secondary detail that should not dominate the page.", "Use for FAQs, help text, and grouped configuration notes."],
+  avoid: ["Do not hide required form instructions inside an accordion.", "Do not use for primary navigation."],
+  accessibility: ["Uses native details and summary semantics.", "Summary rows are keyboard reachable."],
+  agentGuidance: ["Use Accordion for optional explanatory content.", "Use Tabs for peer views and Tree for hierarchical navigation."],
+  code: `import { Accordion } from "./Accordion";\n\n<Accordion items={items} />`,
+};
+
+export const treeEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "tree",
+  name: "Tree",
+  subcategory: "Hierarchical data",
+  description: "Tree displays nested workspaces, source libraries, folders, and agent/project hierarchies.",
+  preview: TreePreview,
+  variants: ["Default", "Nested", "Selected node", "With metadata"],
+  props: [
+    { name: "nodes", type: "TreeNode[]", defaultValue: "defaultNodes", description: "Nested nodes with label, children, metadata, and selected state." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-400", "gray-600", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use for source libraries, workspace folders, and nested project structures.", "Use metadata for counts or short state labels."],
+  avoid: ["Do not use Tree for flat lists.", "Do not create deep hierarchies without search."],
+  accessibility: ["Preview uses navigation and list structure.", "Production tree behavior should add full tree keyboard semantics when interactive."],
+  agentGuidance: ["Use Tree when hierarchy matters to the task.", "Use List for flat collections and Sidebar for primary routes."],
+  code: `import { Tree } from "./Tree";\n\n<Tree nodes={nodes} />`,
+};
+
+export const dataToolbarEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "data-toolbar",
+  name: "Data Toolbar",
+  subcategory: "Table controls",
+  description: "Data Toolbar combines search, filters, selected filter tags, result count, refresh, and export actions for data views.",
+  preview: DataToolbarPreview,
+  variants: ["Search", "Filters", "Active tags", "Result count", "Refresh", "Export"],
+  props: [
+    { name: "resultCount", type: "string", defaultValue: '"148 results"', description: "Visible result count or data summary." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-700", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use above tables, source lists, and run lists.", "Use active tags to make filters visible and removable."],
+  avoid: ["Do not add toolbar controls that do not affect the data below.", "Do not hide active filters only inside a menu."],
+  accessibility: ["Search input has an accessible label.", "Icon actions use accessible labels through Icon Button."],
+  agentGuidance: ["Use Data Toolbar with Table, List, and Pagination.", "Use Quick Action Panel for task launch rather than data filtering."],
+  code: `import { DataToolbar } from "./DataToolbar";\n\n<DataToolbar resultCount="148 results" />`,
 };

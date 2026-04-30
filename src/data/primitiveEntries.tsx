@@ -1,5 +1,6 @@
 import { Copy, Info, MoreHorizontal, Plus, Settings, Trash2, UserRound } from "lucide-react";
 import { Avatar } from "../components/ui/avatar/Avatar";
+import { AvatarGroup } from "../components/ui/avatar-group/AvatarGroup";
 import { Badge } from "../components/ui/badge/Badge";
 import { Divider } from "../components/ui/divider/Divider";
 import { Button } from "../components/ui/button/Button";
@@ -133,6 +134,15 @@ function KbdPreview() {
       <Kbd>K</Kbd>
       <span>or submit chat with</span>
       <Kbd>Enter</Kbd>
+    </div>
+  );
+}
+
+function AvatarGroupPreview() {
+  return (
+    <div className="space-y-4">
+      <AvatarGroup />
+      <p className="text-sm text-gray-500">Use for collaborators, reviewers, and mixed human/agent ownership.</p>
     </div>
   );
 }
@@ -304,4 +314,24 @@ export const kbdEntry: CatalogEntry = {
   accessibility: ["Keyboard shortcuts must have equivalent clickable controls.", "Keep shortcut text readable and visible."],
   agentGuidance: ["Use Keyboard Key inside command palette, menus, and shortcut help.", "Do not replace visible action labels with shortcut-only UI."],
   code: `import { Kbd } from "./Kbd";\n\n<Kbd>Ctrl</Kbd> + <Kbd>K</Kbd>`,
+};
+
+export const avatarGroupEntry: CatalogEntry = {
+  ...primitiveDefaults,
+  id: "avatar-group",
+  name: "Avatar Group",
+  subcategory: "Identity",
+  description: "Avatar Group shows multiple collaborators, reviewers, or agents in a compact overlapping stack.",
+  preview: AvatarGroupPreview,
+  variants: ["Default", "Overflow count", "Human collaborators", "Agent ownership"],
+  props: [
+    { name: "items", type: "AvatarGroupItem[]", defaultValue: "defaultItems", description: "Avatar labels and initials." },
+    { name: "max", type: "number", defaultValue: "3", description: "Maximum visible avatars before overflow count." },
+  ],
+  tokens: ["white", "gray-100", "gray-200", "gray-600", "brand-700", "radius-full"],
+  usage: ["Use for ownership, collaborators, reviewers, and shared workspaces.", "Use overflow count when more than three identities are present."],
+  avoid: ["Do not use for decorative clustering.", "Do not hide critical ownership only in initials."],
+  accessibility: ["Each visible avatar receives an accessible label.", "Overflow count is visible text."],
+  agentGuidance: ["Use Avatar Group when a row or card has multiple owners.", "Use Avatar for one identity and Agent Avatar for AI-specific status."],
+  code: `import { AvatarGroup } from "./AvatarGroup";\n\n<AvatarGroup items={items} max={3} />`,
 };

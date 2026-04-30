@@ -8,6 +8,7 @@ import {
   typographyFoundationEntry,
 } from "./foundationEntries";
 import {
+  avatarGroupEntry,
   avatarEntry,
   badgeEntry,
   dividerEntry,
@@ -53,12 +54,15 @@ import {
 } from "./agentEntries";
 import { agentManifestEntry } from "./agentReferenceEntries";
 import {
+  accordionEntry,
+  dataToolbarEntry,
   descriptionListEntry,
   emptyStateEntry,
   listEntry,
   statCardEntry,
   tableEntry,
   timelineEntry,
+  treeEntry,
 } from "./dataDisplayEntries";
 import {
   activityFeedEntry,
@@ -163,6 +167,7 @@ export const catalog = [
   iconButtonEntry,
   tagEntry,
   kbdEntry,
+  avatarGroupEntry,
   containerEntry,
   stackEntry,
   gridEntry,
@@ -201,6 +206,9 @@ export const catalog = [
   statCardEntry,
   emptyStateEntry,
   timelineEntry,
+  accordionEntry,
+  treeEntry,
+  dataToolbarEntry,
   chartContainerEntry,
   chartLegendEntry,
   chartTooltipEntry,
