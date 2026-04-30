@@ -1,7 +1,11 @@
 import { AnalyticsAgentWorkspace } from "../components/templates/AnalyticsAgentWorkspace";
+import { AuthScreen } from "../components/templates/AuthScreen";
+import { CitationReviewBlock } from "../components/templates/CitationReviewBlock";
 import { DashboardOverview } from "../components/templates/DashboardOverview";
 import { EmptyStateLibrary } from "../components/templates/EmptyStateLibrary";
 import { InciLookupView } from "../components/templates/InciLookupView";
+import { MarketingWorkspace } from "../components/templates/MarketingWorkspace";
+import { SettingsFormScreen } from "../components/templates/SettingsFormScreen";
 import type { CatalogEntry } from "./catalog";
 
 const templateDefaults = {
@@ -76,4 +80,72 @@ export const emptyStateLibraryEntry: CatalogEntry = {
   accessibility: ["Each empty state has a visible title, description, and labeled action.", "Icon meaning is supported by text."],
   agentGuidance: ["Use Empty State Library patterns for first-run, no-source, and no-insight states.", "Make the action specific to the missing content."],
   code: `import { EmptyStateLibrary } from "./EmptyStateLibrary";\n\n<EmptyStateLibrary />`,
+};
+
+export const marketingWorkspaceEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-marketing-workspace",
+  name: "Marketing Workspace",
+  subcategory: "Full Page",
+  description: "A marketing-agent workspace for campaign analysis, brief generation, audience direction, and chat follow-up.",
+  preview: MarketingWorkspace,
+  variants: ["Full page", "Brief builder", "Agent chat", "Campaign performance"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "warning-50", "radius-lg"],
+  usage: ["Use for campaign planning and agent-assisted brief generation.", "Use when marketing teams need charts, structured inputs, and conversation in one workspace."],
+  avoid: ["Do not use for pure reporting dashboards without brief generation.", "Do not publish agent suggestions without source or review context."],
+  accessibility: ["Composed from labeled fields, sections, buttons, and readable chat order.", "Production chart data should include non-visual summaries."],
+  agentGuidance: ["Compose with Dashboard Header, Insight Card, Quick Action Panel, Panel, Form Field, Textarea, Chat Surface, and Suggestion Chips.", "Use this template when the workflow output is a campaign brief or marketing recommendation."],
+  code: `import { MarketingWorkspace } from "./MarketingWorkspace";\n\n<MarketingWorkspace />`,
+};
+
+export const authScreenEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-auth-screen",
+  name: "Auth Screen",
+  subcategory: "Full Page",
+  description: "A restrained internal-tool sign-in screen with trust messaging, form fields, validation, and primary action.",
+  preview: AuthScreen,
+  variants: ["Split layout", "Email and password", "SSO-ready", "Internal notice"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "info-700", "radius-lg", "shadow-xs"],
+  usage: ["Use for internal product authentication and protected design-library contexts.", "Use when permission and trust messaging must be clear."],
+  avoid: ["Do not use as a marketing landing page.", "Do not add decorative content that distracts from sign-in."],
+  accessibility: ["Fields have visible labels and the primary action has visible text.", "Production auth should use real form semantics and identity-provider behavior."],
+  agentGuidance: ["Compose with Alert, Form Field, Input, Validation Message, and Button.", "Keep auth screens quiet, direct, and security-focused."],
+  code: `import { AuthScreen } from "./AuthScreen";\n\n<AuthScreen />`,
+};
+
+export const citationReviewBlockEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-citation-review-block",
+  name: "Citation Review Block",
+  subcategory: "Blocks",
+  description: "A review block for inspecting an agent answer, mapped citations, source drawer, and approval actions.",
+  preview: CitationReviewBlock,
+  variants: ["Answer review", "Source drawer", "Approval actions", "Citation mapped"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "warning-50", "success-50", "radius-lg"],
+  usage: ["Use when an agent answer needs human review before publishing.", "Use when citations and source evidence must stay visible together."],
+  avoid: ["Do not use for answers without source evidence.", "Do not hide approval context behind a modal if review is the main task."],
+  accessibility: ["The answer and sources remain in readable order.", "Approval actions use visible labels."],
+  agentGuidance: ["Compose with Panel, Citation Chip, Source Drawer, Description List, Badge, and Button.", "Use this block whenever a workflow needs citation-backed approval."],
+  code: `import { CitationReviewBlock } from "./CitationReviewBlock";\n\n<CitationReviewBlock />`,
+};
+
+export const settingsFormScreenEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-settings-form-screen",
+  name: "Settings Form Screen",
+  subcategory: "Full Page",
+  description: "A settings workflow for configuring workspace details, agent behavior, review dates, and save actions.",
+  preview: SettingsFormScreen,
+  variants: ["Workspace details", "Agent behavior", "Validation", "Save actions"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-700", "radius-lg", "shadow-xs"],
+  usage: ["Use for admin settings, workspace setup, and agent configuration pages.", "Use when a form needs grouped sections and clear save/cancel behavior."],
+  avoid: ["Do not use for short inline edits where a modal or panel is enough.", "Do not mix unrelated settings in one section."],
+  accessibility: ["Fields and controls keep visible labels.", "Validation appears near the actions and uses text plus icon."],
+  agentGuidance: ["Compose with Alert, Form Section, Form Group, Form Field, Combobox, Date Picker, Switch, Checkbox, Validation Message, and Form Actions.", "Use this template when generating configuration or setup workflows."],
+  code: `import { SettingsFormScreen } from "./SettingsFormScreen";\n\n<SettingsFormScreen />`,
 };
