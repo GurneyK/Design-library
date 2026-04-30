@@ -1,0 +1,5558 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "Design Library",
+  "description": "Machine-readable component and template catalog for Habibi/Nexus-style product surfaces.",
+  "publicUrl": "https://gurneyk.github.io/Design-library/",
+  "manifestUrls": [
+    "https://gurneyk.github.io/Design-library/site/manifest.json",
+    "https://gurneyk.github.io/Design-library/manifest.json"
+  ],
+  "counts": {
+    "entries": 91,
+    "categories": 13,
+    "templates": 8
+  },
+  "categories": [
+    "Primitives",
+    "Agent UI",
+    "Agent Reference",
+    "Charts / Data Viz",
+    "Dashboard / Product Patterns",
+    "Data Display",
+    "Data Entry",
+    "Feedback",
+    "Forms",
+    "Foundations",
+    "Layout",
+    "Navigation",
+    "Templates / Blocks"
+  ],
+  "entries": [
+    {
+      "id": "button",
+      "kind": "component",
+      "name": "Button",
+      "category": "Primitives",
+      "subcategory": "Actions",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Buttons trigger important actions across Design Library surfaces. They use Habibi action tokens, explicit variants, stable sizing, visible focus states, and clear leading, trailing, loading, and icon-only slots.",
+      "variants": [
+        "Primary",
+        "Secondary Color",
+        "Secondary Gray",
+        "Tertiary Color",
+        "Tertiary Gray",
+        "Destructive",
+        "Icon Only",
+        "Loading",
+        "Disabled"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"primary\" | \"secondaryColor\" | \"secondaryGray\" | \"tertiaryColor\" | \"tertiaryGray\" | \"destructive\"",
+          "defaultValue": "\"primary\"",
+          "description": "Controls the visual treatment and semantic emphasis."
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\" | \"icon\"",
+          "defaultValue": "\"md\"",
+          "description": "Controls height, padding, and text size."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Optional icon rendered before the label."
+        },
+        {
+          "name": "trailingIcon",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Optional icon rendered after the label."
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Disables the button and replaces the leading slot with a spinner."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Prevents interaction and reduces opacity."
+        }
+      ],
+      "tokens": [
+        "brand-50",
+        "brand-100",
+        "brand-200",
+        "brand-600",
+        "brand-700",
+        "brand-800",
+        "gray-50",
+        "gray-100",
+        "gray-300",
+        "gray-600",
+        "gray-700",
+        "error-600",
+        "error-700",
+        "radius-md",
+        "shadow-xs",
+        "focus-ring"
+      ],
+      "useWhen": [
+        "Use primary buttons for the single most important action in a region.",
+        "Use secondary buttons for supporting actions near a primary action.",
+        "Use tertiary buttons for low-emphasis inline actions.",
+        "Use destructive buttons only for actions that remove, delete, revoke, or reset.",
+        "Use icon-only buttons for compact toolbars when the icon is widely understood and an accessible label is provided."
+      ],
+      "doNotUseWhen": [
+        "Do not place multiple primary buttons in the same action group.",
+        "Do not use a destructive button for reversible navigation.",
+        "Do not rely on icon-only buttons without an accessible label.",
+        "Do not use loading buttons without preserving enough width for the action label."
+      ],
+      "accessibility": [
+        "Buttons use semantic button elements.",
+        "Focus states are visible through the Habibi focus ring.",
+        "Loading and disabled states prevent repeated submission.",
+        "Icon-only buttons require an aria-label.",
+        "Button labels should describe the action, not the destination or generic confirmation."
+      ],
+      "agentGuidance": [
+        "Choose one primary button per screen or modal footer.",
+        "Pair primary and secondary actions in predictable order: secondary left, primary right.",
+        "Prefer action-specific labels like 'Create Agent' or 'Save Changes' instead of generic labels like 'Submit'.",
+        "If generating an icon-only action, include aria-label and choose size='icon'."
+      ],
+      "code": "import { Button } from \"./Button\";\nimport { ArrowRight, Plus } from \"lucide-react\";\n\nexport function Example() {\n  return (\n    <div className=\"flex flex-wrap gap-3\">\n      <Button leadingIcon={<Plus className=\"h-4 w-4\" />}>\n        Create Agent\n      </Button>\n      <Button variant=\"secondaryGray\" trailingIcon={<ArrowRight className=\"h-4 w-4\" />}>\n        View Details\n      </Button>\n      <Button variant=\"destructive\">\n        Delete\n      </Button>\n    </div>\n  );\n}",
+      "sourceFile": "src/components/ui/button/button.meta.ts"
+    },
+    {
+      "id": "chat-surface",
+      "kind": "component",
+      "name": "Chat Surface",
+      "category": "Agent UI",
+      "subcategory": "Conversation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Chat Surface frames an agent conversation with header, scrollable stream, suggestions, and composer.",
+      "variants": [
+        "Full surface",
+        "With composer",
+        "With suggestions",
+        "Dashboard embedded"
+      ],
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Message stream and composer content."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use as the parent container for agent conversations.",
+        "Compose with Chat Message, Suggestion Chips, and Composer."
+      ],
+      "doNotUseWhen": [
+        "Do not use Chat Surface for static documentation.",
+        "Do not place unrelated dashboard panels inside the message stream."
+      ],
+      "accessibility": [
+        "Conversation regions should preserve reading order.",
+        "Composer remains reachable after the message stream."
+      ],
+      "agentGuidance": [
+        "Use Chat Surface for any interactive agent workspace.",
+        "Keep system chrome outside the message stream."
+      ],
+      "code": "import { ChatSurface } from \"./ChatSurface\";\n\n<ChatSurface>\n  <ChatMessage role=\"user\">Show campaign performance.</ChatMessage>\n  <Composer />\n</ChatSurface>",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "chat-message",
+      "kind": "component",
+      "name": "Chat Message",
+      "category": "Agent UI",
+      "subcategory": "Conversation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Chat Message renders user, agent, and system turns with avatar, timestamp, content, and optional actions.",
+      "variants": [
+        "User",
+        "Agent",
+        "System",
+        "With actions",
+        "With timestamp"
+      ],
+      "props": [
+        {
+          "name": "role",
+          "type": "\"agent\" | \"user\" | \"system\"",
+          "defaultValue": "\"agent\"",
+          "description": "Controls avatar and background treatment."
+        },
+        {
+          "name": "actions",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Shows copy and feedback action buttons."
+        },
+        {
+          "name": "time",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional timestamp."
+        }
+      ],
+      "tokens": [
+        "gray-50",
+        "brand-50",
+        "brand-700",
+        "gray-400",
+        "gray-700",
+        "spacing-5"
+      ],
+      "useWhen": [
+        "Use for every turn in a conversation.",
+        "Use system messages for tool events or state changes.",
+        "Use actions on agent responses."
+      ],
+      "doNotUseWhen": [
+        "Do not hide important system events outside the stream.",
+        "Do not use message bubbles for non-conversation cards."
+      ],
+      "accessibility": [
+        "Messages preserve semantic reading order.",
+        "Action buttons should have accessible labels in production."
+      ],
+      "agentGuidance": [
+        "Use role='user' for user-authored turns and role='agent' for assistant responses.",
+        "Use system messages for tool or workflow state."
+      ],
+      "code": "import { ChatMessage } from \"./ChatMessage\";\n\n<ChatMessage role=\"agent\" actions>\n  The evaluation completed successfully.\n</ChatMessage>",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "composer",
+      "kind": "component",
+      "name": "Composer / Chat Input",
+      "category": "Agent UI",
+      "subcategory": "Conversation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Composer captures chat input with attachment, microphone, send action, helper text, and character count.",
+      "variants": [
+        "Pinned",
+        "With attach",
+        "With mic",
+        "Active send",
+        "Character count"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-300",
+        "gray-400",
+        "brand-300",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use at the bottom of agent chat surfaces.",
+        "Use helper text to explain keyboard behavior.",
+        "Keep send disabled until content exists in production."
+      ],
+      "doNotUseWhen": [
+        "Do not make the composer scroll away in primary chat experiences.",
+        "Do not omit labels for icon-only actions."
+      ],
+      "accessibility": [
+        "Textarea is keyboard accessible.",
+        "Icon-only controls include aria labels."
+      ],
+      "agentGuidance": [
+        "Use Composer for agent chat and prompt entry.",
+        "Use Textarea for settings forms and Composer for conversational input."
+      ],
+      "code": "import { Composer } from \"./Composer\";\n\n<Composer />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "suggestion-chips",
+      "kind": "component",
+      "name": "Suggestion Chips",
+      "category": "Agent UI",
+      "subcategory": "Conversation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Suggestion Chips offer fast follow-up prompts and next actions after agent responses.",
+      "variants": [
+        "Default",
+        "Hover",
+        "Wrap",
+        "Follow-up"
+      ],
+      "props": [
+        {
+          "name": "suggestions",
+          "type": "string[]",
+          "defaultValue": "[]",
+          "description": "Prompt suggestions to render."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-600",
+        "brand-50",
+        "brand-200",
+        "brand-700",
+        "radius-full",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use after agent responses to reduce typing effort.",
+        "Use for common follow-up actions and prompt starters."
+      ],
+      "doNotUseWhen": [
+        "Do not show too many chips at once.",
+        "Do not use vague suggestions like 'More'."
+      ],
+      "accessibility": [
+        "Chips are buttons and keyboard reachable.",
+        "Labels describe the action directly."
+      ],
+      "agentGuidance": [
+        "Generate chips that continue the user's current task.",
+        "Keep chip labels short and action-oriented."
+      ],
+      "code": "import { SuggestionChips } from \"./SuggestionChips\";\n\n<SuggestionChips suggestions={[\"Show sources\", \"Export summary\"]} />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "streaming-state",
+      "kind": "component",
+      "name": "Thinking / Streaming State",
+      "category": "Agent UI",
+      "subcategory": "Conversation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Streaming State shows what the agent is doing while a response or tool call is in progress.",
+      "variants": [
+        "Thinking",
+        "Calling tool",
+        "Drafting",
+        "Spinner",
+        "Dots"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"Thinking through sources\"",
+          "description": "Visible activity label."
+        }
+      ],
+      "tokens": [
+        "brand-50",
+        "brand-400",
+        "brand-700",
+        "radius-full",
+        "motion-spin",
+        "motion-bounce"
+      ],
+      "useWhen": [
+        "Use when an agent response is streaming or a tool call is active.",
+        "Name the current activity when possible."
+      ],
+      "doNotUseWhen": [
+        "Do not show anonymous loading for long AI actions.",
+        "Do not use only animated dots without text."
+      ],
+      "accessibility": [
+        "Visible text describes the activity.",
+        "Future implementation should respect reduced motion preferences."
+      ],
+      "agentGuidance": [
+        "Use activity-specific labels like 'Calling analytics tool' rather than generic 'Loading'.",
+        "Pair streaming state with the message that will receive output."
+      ],
+      "code": "import { StreamingState } from \"./StreamingState\";\n\n<StreamingState label=\"Calling analytics tool\" />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "citation-chip",
+      "kind": "component",
+      "name": "Citation Chip",
+      "category": "Agent UI",
+      "subcategory": "Evidence",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Citation Chip links an agent claim to a specific source, excerpt, or evidence item.",
+      "variants": [
+        "Neutral",
+        "Brand",
+        "Success",
+        "With index",
+        "With confidence",
+        "With source label"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Visible source or evidence label."
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "defaultValue": "-",
+          "description": "Numeric citation marker that maps to the source drawer."
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional source family or system label."
+        },
+        {
+          "name": "confidence",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional confidence label."
+        },
+        {
+          "name": "tone",
+          "type": "\"neutral\" | \"brand\" | \"success\"",
+          "defaultValue": "\"neutral\"",
+          "description": "Visual emphasis for the citation."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-400",
+        "gray-700",
+        "brand-50",
+        "brand-100",
+        "brand-200",
+        "brand-700",
+        "success-50",
+        "success-700"
+      ],
+      "useWhen": [
+        "Use next to agent claims that need evidence.",
+        "Use numbered citations when a Source Drawer is present.",
+        "Use confidence only when it comes from a real scoring model."
+      ],
+      "doNotUseWhen": [
+        "Do not use citations as decorative tags.",
+        "Do not show confidence values that are not backed by data."
+      ],
+      "accessibility": [
+        "Citation chips are buttons and reachable by keyboard.",
+        "The label should identify the source action without relying on the number alone."
+      ],
+      "agentGuidance": [
+        "Use Citation Chip whenever an answer references source material.",
+        "Pair indexed chips with Source Drawer entries using the same index."
+      ],
+      "code": "import { CitationChip } from \"./CitationChip\";\n\n<CitationChip index={1} label=\"Regional lift summary\" source=\"Analytics run\" tone=\"brand\" />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "tool-call-card",
+      "kind": "component",
+      "name": "Tool Call Card",
+      "category": "Agent UI",
+      "subcategory": "Agent Activity",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Tool Call Card exposes an agent's connected tool activity, including running, complete, and review states.",
+      "variants": [
+        "Running",
+        "Complete",
+        "Needs review",
+        "With metadata",
+        "With output summary"
+      ],
+      "props": [
+        {
+          "name": "toolName",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Human-readable tool name."
+        },
+        {
+          "name": "status",
+          "type": "\"running\" | \"success\" | \"error\"",
+          "defaultValue": "\"running\"",
+          "description": "Current tool execution state."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Short explanation of what the tool is doing."
+        },
+        {
+          "name": "meta",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional endpoint, run id, or internal tool identifier."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-400",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "success-50",
+        "error-50",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when a tool call should be visible to users.",
+        "Use inside chat streams, activity feeds, or run detail panels."
+      ],
+      "doNotUseWhen": [
+        "Do not expose sensitive internal payloads.",
+        "Do not use for normal static status badges."
+      ],
+      "accessibility": [
+        "Status is visible as text, not color alone.",
+        "Long tool details should remain in reading order."
+      ],
+      "agentGuidance": [
+        "Use Tool Call Card for transparent agent actions like retrieval, analysis, export, or validation.",
+        "Summarize payloads instead of rendering raw JSON by default."
+      ],
+      "code": "import { ToolCallCard } from \"./ToolCallCard\";\n\n<ToolCallCard status=\"running\" toolName=\"Analytics Query\">\n  Fetching campaign metrics by region.\n</ToolCallCard>",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "source-drawer",
+      "kind": "component",
+      "name": "Source Drawer",
+      "category": "Agent UI",
+      "subcategory": "Evidence",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Source Drawer collects the sources behind an agent answer so users can inspect evidence without leaving the workflow.",
+      "variants": [
+        "Default",
+        "Searchable",
+        "Citation mapped",
+        "Evidence list",
+        "Side panel"
+      ],
+      "props": [
+        {
+          "name": "sources",
+          "type": "SourceDrawerSource[]",
+          "defaultValue": "defaultSources",
+          "description": "Source rows with id, title, meta, and excerpt."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "\"Sources\"",
+          "description": "Drawer title."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use beside agent responses that contain citations.",
+        "Use for source review, audit, and evidence inspection."
+      ],
+      "doNotUseWhen": [
+        "Do not put primary navigation in Source Drawer.",
+        "Do not hide critical evidence behind unlabeled icons."
+      ],
+      "accessibility": [
+        "Sources are rendered as articles in a readable sequence.",
+        "Future drawer behavior should include focus management when opened as an overlay."
+      ],
+      "agentGuidance": [
+        "Use Source Drawer as the destination for Citation Chip source inspection.",
+        "Keep excerpts concise and include enough metadata to judge trust."
+      ],
+      "code": "import { SourceDrawer } from \"./SourceDrawer\";\n\n<SourceDrawer sources={sources} />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "agent-avatar",
+      "kind": "component",
+      "name": "Agent Avatar",
+      "category": "Agent UI",
+      "subcategory": "Identity",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Agent Avatar represents an agent, user, or system identity with size, tone, and status variants.",
+      "variants": [
+        "Brand",
+        "Neutral",
+        "User",
+        "Small",
+        "Medium",
+        "Large",
+        "Idle",
+        "Active",
+        "Complete"
+      ],
+      "props": [
+        {
+          "name": "tone",
+          "type": "\"brand\" | \"neutral\" | \"user\"",
+          "defaultValue": "\"brand\"",
+          "description": "Identity treatment."
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "defaultValue": "\"md\"",
+          "description": "Avatar size."
+        },
+        {
+          "name": "status",
+          "type": "\"idle\" | \"active\" | \"complete\"",
+          "defaultValue": "\"idle\"",
+          "description": "Status indicator."
+        },
+        {
+          "name": "initials",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional initials instead of icon."
+        }
+      ],
+      "tokens": [
+        "brand-200",
+        "brand-500",
+        "brand-700",
+        "gray-200",
+        "gray-400",
+        "gray-700",
+        "gray-900",
+        "success-500",
+        "radius-md",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in chat messages, agent headers, run cards, and identity rows.",
+        "Use status when the agent is actively working or complete."
+      ],
+      "doNotUseWhen": [
+        "Do not use decorative avatars without identity meaning.",
+        "Do not rely on the status dot without nearby status text for critical states."
+      ],
+      "accessibility": [
+        "Avatar exposes an image role with an accessible label.",
+        "Status dot exposes a short status label."
+      ],
+      "agentGuidance": [
+        "Use Agent Avatar for AI or system identities instead of generic Avatar when the status matters.",
+        "Use the user tone for human-authored turns."
+      ],
+      "code": "import { AgentAvatar } from \"./AgentAvatar\";\n\n<AgentAvatar status=\"active\" />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "thinking-state",
+      "kind": "component",
+      "name": "Thinking State",
+      "category": "Agent UI",
+      "subcategory": "Agent Activity",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Thinking State shows a compact step list for what an agent is doing while work is in progress.",
+      "variants": [
+        "Default",
+        "Complete step",
+        "Active step",
+        "Pending step",
+        "Custom label"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"Agent is working\"",
+          "description": "Heading for the current activity."
+        },
+        {
+          "name": "steps",
+          "type": "ThinkingStep[]",
+          "defaultValue": "defaultSteps",
+          "description": "Ordered work steps with status."
+        }
+      ],
+      "tokens": [
+        "brand-50",
+        "brand-200",
+        "brand-400",
+        "brand-700",
+        "brand-800",
+        "success-500",
+        "radius-lg",
+        "motion-spin"
+      ],
+      "useWhen": [
+        "Use for multi-step agent work that takes more than a moment.",
+        "Use when naming the work increases trust and reduces perceived wait time."
+      ],
+      "doNotUseWhen": [
+        "Do not expose private chain-of-thought.",
+        "Do not use for instant loading states where Spinner or Streaming State is enough."
+      ],
+      "accessibility": [
+        "Steps are rendered as an ordered list.",
+        "Active work includes text as well as animation."
+      ],
+      "agentGuidance": [
+        "Use Thinking State for transparent process summaries, not hidden reasoning.",
+        "Describe observable workflow steps like retrieval, validation, or drafting."
+      ],
+      "code": "import { ThinkingState } from \"./ThinkingState\";\n\n<ThinkingState label=\"Checking sources\" steps={steps} />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "agent-manifest",
+      "kind": "component",
+      "name": "Agent Manifest",
+      "category": "Agent Reference",
+      "subcategory": "Machine Readability",
+      "status": "draft",
+      "source": [
+        "generated-json",
+        "reference-code"
+      ],
+      "description": "Agent Manifest exposes the component and template catalog as predictable JSON for AI tools and code-generation agents.",
+      "variants": [
+        "Public JSON",
+        "Generated from catalog",
+        "Components",
+        "Templates",
+        "Agent guidance"
+      ],
+      "props": [
+        {
+          "name": "schemaVersion",
+          "type": "string",
+          "defaultValue": "\"1.0.0\"",
+          "description": "Manifest schema version."
+        },
+        {
+          "name": "entries",
+          "type": "AgentManifestEntry[]",
+          "defaultValue": "generated",
+          "description": "Component, foundation, and template records."
+        },
+        {
+          "name": "manifestUrls",
+          "type": "string[]",
+          "defaultValue": "public URLs",
+          "description": "Fetchable manifest locations."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-700",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Load the manifest before generating Design Library UI.",
+        "Select entries by category, component kind, props, variants, tokens, and agent guidance."
+      ],
+      "doNotUseWhen": [
+        "Do not scrape visual docs when the manifest is available.",
+        "Do not generate components that are not present in the manifest unless they are approved gaps."
+      ],
+      "accessibility": [
+        "The manifest entry provides visible endpoint text and readable summary metrics.",
+        "Generated UI should still follow each entry's accessibility notes."
+      ],
+      "agentGuidance": [
+        "Fetch the manifest, choose from approved entries, and honor useWhen, doNotUseWhen, props, variants, and tokens.",
+        "For templates, copy composition patterns before inventing new layouts."
+      ],
+      "code": "const response = await fetch(\"https://gurneyk.github.io/Design-library/site/manifest.json\");\nconst manifest = await response.json();\n\nconst button = manifest.entries.find((entry) => entry.id === \"button\");",
+      "sourceFile": "src/data/agentReferenceEntries.tsx"
+    },
+    {
+      "id": "chart-container",
+      "kind": "component",
+      "name": "Chart Container",
+      "category": "Charts / Data Viz",
+      "subcategory": "Chart anatomy",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Chart Container wraps chart visuals with title, description, toolbar, border, radius, and spacing.",
+      "variants": [
+        "Title",
+        "Description",
+        "Toolbar",
+        "Legend slot"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Chart title."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional context under the title."
+        },
+        {
+          "name": "toolbar",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Optional filter or badge slot."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs",
+        "spacing-5"
+      ],
+      "useWhen": [
+        "Use around every dashboard chart.",
+        "Use description to clarify timeframe or measurement."
+      ],
+      "doNotUseWhen": [
+        "Do not place charts in unlabelled containers.",
+        "Do not omit empty/loading/error states in production wrappers."
+      ],
+      "accessibility": [
+        "Chart title gives the visualization a text anchor.",
+        "Future wrappers should expose data tables or summaries for screen readers."
+      ],
+      "agentGuidance": [
+        "Use Chart Container before placing any chart in dashboards.",
+        "Add a toolbar only when it changes the chart data."
+      ],
+      "code": "import { ChartContainer } from \"./ChartContainer\";\n\n<ChartContainer title=\"Conversation volume\">\n  <LineChart />\n</ChartContainer>",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "chart-legend",
+      "kind": "component",
+      "name": "Chart Legend",
+      "category": "Charts / Data Viz",
+      "subcategory": "Chart anatomy",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Legend maps chart colors to human-readable series labels.",
+      "variants": [
+        "Single series",
+        "Multi series",
+        "Inline"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "ChartLegendItem[]",
+          "defaultValue": "[]",
+          "description": "Label and color pairs."
+        }
+      ],
+      "tokens": [
+        "gray-700",
+        "spacing-4",
+        "radius-full"
+      ],
+      "useWhen": [
+        "Use when a chart has multiple series or non-obvious colors.",
+        "Keep labels short and specific."
+      ],
+      "doNotUseWhen": [
+        "Do not rely on legend color alone when labels can be direct.",
+        "Do not use vague labels like Series 1."
+      ],
+      "accessibility": [
+        "Legend text names each series.",
+        "Colors should not be the only differentiator in complex charts."
+      ],
+      "agentGuidance": [
+        "Use legend for multi-series dashboards.",
+        "For one-series charts, title and axis labels may be enough."
+      ],
+      "code": "import { ChartLegend } from \"./ChartLegend\";\n\n<ChartLegend items={[{ color: \"#6941C6\", label: \"Current period\" }]} />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "chart-tooltip",
+      "kind": "component",
+      "name": "Chart Tooltip",
+      "category": "Charts / Data Viz",
+      "subcategory": "Chart anatomy",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Chart Tooltip shows the active point, category, and value during hover or focus.",
+      "variants": [
+        "Single value",
+        "Future: multi-series",
+        "With arrow"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Category or time label."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Formatted value."
+        }
+      ],
+      "tokens": [
+        "gray-900",
+        "white",
+        "radius-sm",
+        "shadow-md",
+        "spacing-2",
+        "spacing-3"
+      ],
+      "useWhen": [
+        "Use for precise chart values.",
+        "Format values for the domain."
+      ],
+      "doNotUseWhen": [
+        "Do not require hover to understand the chart.",
+        "Do not show raw unformatted data."
+      ],
+      "accessibility": [
+        "Tooltips should have keyboard/focus equivalents in production chart wrappers."
+      ],
+      "agentGuidance": [
+        "Use Chart Tooltip for hoverable data points and bars.",
+        "Keep values formatted and concise."
+      ],
+      "code": "import { ChartTooltip } from \"./ChartTooltip\";\n\n<ChartTooltip label=\"April 2026\" value=\"148 conversations\" />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "line-chart",
+      "kind": "component",
+      "name": "Line Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Line Chart shows trend over time with points and a tokenized brand stroke.",
+      "variants": [
+        "Trend",
+        "With points",
+        "Dashboard card"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-700",
+        "gray-100",
+        "white",
+        "stroke-3"
+      ],
+      "useWhen": [
+        "Use for time-series trends.",
+        "Use points when individual observations matter."
+      ],
+      "doNotUseWhen": [
+        "Do not use line charts for unrelated categories.",
+        "Do not overload with too many series."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation.",
+        "Production charts should expose data summaries."
+      ],
+      "agentGuidance": [
+        "Use Line Chart for quality, latency, cost, and volume trends over time."
+      ],
+      "code": "import { LineChart } from \"./LineChart\";\n\n<LineChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "area-chart",
+      "kind": "component",
+      "name": "Area Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Area Chart emphasizes volume or magnitude over time with a subtle filled region.",
+      "variants": [
+        "Volume",
+        "Trend fill"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-700",
+        "brand-opacity-10",
+        "gray-100"
+      ],
+      "useWhen": [
+        "Use for volume trends and cumulative-feeling metrics.",
+        "Keep fill opacity low so the chart stays quiet."
+      ],
+      "doNotUseWhen": [
+        "Do not use area fill when exact comparison matters more than trend shape."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation."
+      ],
+      "agentGuidance": [
+        "Use Area Chart for conversation volume, degradation, or response quality over time."
+      ],
+      "code": "import { AreaChart } from \"./AreaChart\";\n\n<AreaChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "bar-chart",
+      "kind": "component",
+      "name": "Bar Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Bar Chart compares values across categories or time buckets.",
+      "variants": [
+        "Vertical",
+        "Highlighted bar",
+        "Dashboard"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-500",
+        "brand-700",
+        "gray-100",
+        "radius-sm"
+      ],
+      "useWhen": [
+        "Use for comparisons across categories.",
+        "Highlight the selected or latest bar when useful."
+      ],
+      "doNotUseWhen": [
+        "Do not use bars for continuous relationships better shown as lines."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation."
+      ],
+      "agentGuidance": [
+        "Use Bar Chart for workspace counts, monthly usage, and ranked comparisons."
+      ],
+      "code": "import { BarChart } from \"./BarChart\";\n\n<BarChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "donut-chart",
+      "kind": "component",
+      "name": "Donut Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Donut Chart shows part-to-whole progress or distribution with a center value.",
+      "variants": [
+        "Progress",
+        "Distribution",
+        "Center value"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-700",
+        "info-500",
+        "gray-100",
+        "text-2xl"
+      ],
+      "useWhen": [
+        "Use for small part-to-whole summaries.",
+        "Use center text for the main value."
+      ],
+      "doNotUseWhen": [
+        "Do not use donut charts for precise comparison across many categories.",
+        "Do not use more than 4-6 segments."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation."
+      ],
+      "agentGuidance": [
+        "Use Donut Chart for completion, distribution, and simple category shares."
+      ],
+      "code": "import { DonutChart } from \"./DonutChart\";\n\n<DonutChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "summary-chart-card",
+      "kind": "component",
+      "name": "Summary Chart Card",
+      "category": "Charts / Data Viz",
+      "subcategory": "Chart cards",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Summary Chart Card combines a KPI, trend badge, and compact chart preview.",
+      "variants": [
+        "KPI",
+        "Trend",
+        "Compact line chart"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "success-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in dashboard overview grids.",
+        "Pair the value with a trend and compact chart."
+      ],
+      "doNotUseWhen": [
+        "Do not use for detailed analysis; link to a full chart view.",
+        "Do not omit the metric label."
+      ],
+      "accessibility": [
+        "Value and label are visible text.",
+        "Compact chart should be supplemental."
+      ],
+      "agentGuidance": [
+        "Use Summary Chart Card for dashboard overviews and generated analytics sections."
+      ],
+      "code": "import { SummaryChartCard } from \"./SummaryChartCard\";\n\n<SummaryChartCard />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "dashboard-header",
+      "kind": "component",
+      "name": "Dashboard Header",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Workspace Chrome",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Dashboard Header introduces a product workspace with title, description, status, and primary actions.",
+      "variants": [
+        "Default",
+        "With status",
+        "With custom actions",
+        "Long description"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Primary page or workspace title."
+        },
+        {
+          "name": "eyebrow",
+          "type": "string",
+          "defaultValue": "\"Project North Star\"",
+          "description": "Small context label above the title."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Short explanation of the workspace."
+        },
+        {
+          "name": "status",
+          "type": "ReactNode",
+          "defaultValue": "RunStatusPill",
+          "description": "Optional status slot."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "defaultValue": "Export / New run",
+          "description": "Action slot for page commands."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use at the top of dashboard, workspace, and run-detail pages.",
+        "Place primary page actions in the action slot."
+      ],
+      "doNotUseWhen": [
+        "Do not use for card-level headings.",
+        "Do not overload the header with every available action."
+      ],
+      "accessibility": [
+        "Uses a semantic header and h1 title.",
+        "Action controls preserve visible labels."
+      ],
+      "agentGuidance": [
+        "Use Dashboard Header once per full-page dashboard or workspace view.",
+        "Pair it with Workspace Switcher when the user can change context."
+      ],
+      "code": "import { DashboardHeader } from \"./DashboardHeader\";\n\n<DashboardHeader title=\"Analytics workspace\" />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "workspace-switcher",
+      "kind": "component",
+      "name": "Workspace Switcher",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Workspace Chrome",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Workspace Switcher lets users move between product, agent, or dashboard contexts.",
+      "variants": [
+        "Default",
+        "Selected workspace",
+        "Three workspaces",
+        "Compact menu"
+      ],
+      "props": [
+        {
+          "name": "workspaces",
+          "type": "WorkspaceOption[]",
+          "defaultValue": "defaultWorkspaces",
+          "description": "Workspace options with label, meta, and selected state."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-500",
+        "brand-700",
+        "radius-lg"
+      ],
+      "useWhen": [
+        "Use when a user can switch between Nexus, marketing, INCI, or other project spaces.",
+        "Keep metadata short so the selected workspace scans quickly."
+      ],
+      "doNotUseWhen": [
+        "Do not use for local tabs inside one panel.",
+        "Do not mix workspace selection with destructive actions."
+      ],
+      "accessibility": [
+        "Items are buttons with visible labels.",
+        "Production dropdown behavior should add menu semantics and keyboard roving focus."
+      ],
+      "agentGuidance": [
+        "Use Workspace Switcher near the top of cross-project surfaces.",
+        "Prefer Tabs for local page sections and Workspace Switcher for global context."
+      ],
+      "code": "import { WorkspaceSwitcher } from \"./WorkspaceSwitcher\";\n\n<WorkspaceSwitcher workspaces={workspaces} />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "run-status-pill",
+      "kind": "component",
+      "name": "Run Status Pill",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Status",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Run Status Pill communicates the state of an agent run, export, analysis, or queued job.",
+      "variants": [
+        "Queued",
+        "Running",
+        "Complete",
+        "Failed",
+        "Custom label"
+      ],
+      "props": [
+        {
+          "name": "status",
+          "type": "\"queued\" | \"running\" | \"complete\" | \"failed\"",
+          "defaultValue": "\"running\"",
+          "description": "Status treatment and icon."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "status label",
+          "description": "Optional custom label."
+        }
+      ],
+      "tokens": [
+        "gray-100",
+        "gray-700",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "error-50",
+        "error-700",
+        "radius-full"
+      ],
+      "useWhen": [
+        "Use in dashboard headers, tables, activity rows, and run cards.",
+        "Use visible text with color so status is not color-only."
+      ],
+      "doNotUseWhen": [
+        "Do not use for arbitrary tags.",
+        "Do not show running animation for inactive states."
+      ],
+      "accessibility": [
+        "Status is shown as text and icon.",
+        "Running icon is decorative because the label carries the meaning."
+      ],
+      "agentGuidance": [
+        "Use Run Status Pill for job-like states only.",
+        "Use Badge for simpler labels that are not workflow state."
+      ],
+      "code": "import { RunStatusPill } from \"./RunStatusPill\";\n\n<RunStatusPill status=\"running\" />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "activity-feed",
+      "kind": "component",
+      "name": "Activity Feed",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Monitoring",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Activity Feed shows recent agent actions, workspace events, and system updates in a dashboard context.",
+      "variants": [
+        "Default",
+        "Agent event",
+        "Message event",
+        "System event",
+        "Mixed statuses"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "ActivityFeedItem[]",
+          "defaultValue": "defaultItems",
+          "description": "Feed rows with label, description, meta, type, and status."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-400",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use on dashboards that need recent work visibility.",
+        "Use for audit-friendly product events and agent activity."
+      ],
+      "doNotUseWhen": [
+        "Do not use for long-form logs where a table or timeline is better.",
+        "Do not mix unrelated product areas without context."
+      ],
+      "accessibility": [
+        "Feed is an ordered list with readable event text.",
+        "Status text is visible in each row."
+      ],
+      "agentGuidance": [
+        "Use Activity Feed when summarizing what happened recently.",
+        "Use Timeline when event sequence and dates are the primary content."
+      ],
+      "code": "import { ActivityFeed } from \"./ActivityFeed\";\n\n<ActivityFeed items={items} />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "insight-card",
+      "kind": "component",
+      "name": "Insight Card",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Insights",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Insight Card highlights an agent-generated recommendation, risk, or opportunity with a clear next action.",
+      "variants": [
+        "Brand",
+        "Success",
+        "Warning",
+        "Neutral",
+        "With metric",
+        "Without metric"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Insight headline."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "One-sentence explanation."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"Agent insight\"",
+          "description": "Small contextual label."
+        },
+        {
+          "name": "metric",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional supporting metric."
+        },
+        {
+          "name": "tone",
+          "type": "\"brand\" | \"success\" | \"warning\" | \"neutral\"",
+          "defaultValue": "\"brand\"",
+          "description": "Insight emphasis."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "success-50",
+        "warning-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for one high-signal recommendation or risk.",
+        "Pair with charts, tables, or source drawers when evidence is available."
+      ],
+      "doNotUseWhen": [
+        "Do not use for generic marketing copy.",
+        "Do not stack too many insight cards without prioritization."
+      ],
+      "accessibility": [
+        "Insight title and description are readable without the icon.",
+        "The review action has visible text."
+      ],
+      "agentGuidance": [
+        "Use Insight Card for synthesized recommendations, not raw facts.",
+        "Keep each card to one decision or action."
+      ],
+      "code": "import { InsightCard } from \"./InsightCard\";\n\n<InsightCard title=\"Performance is improving\" description=\"Response quality increased by region.\" metric=\"+4.2%\" />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "quick-action-panel",
+      "kind": "component",
+      "name": "Quick Action Panel",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Actions",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Quick Action Panel combines search with common product actions so users can move quickly in a workspace.",
+      "variants": [
+        "Default",
+        "Search",
+        "Two-column actions",
+        "Agent actions",
+        "Source actions"
+      ],
+      "props": [
+        {
+          "name": "actions",
+          "type": "QuickAction[]",
+          "defaultValue": "defaultActions",
+          "description": "Action rows with label, description, and type."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use on dashboard home pages and workspaces where repeated actions matter.",
+        "Keep actions specific and task-oriented."
+      ],
+      "doNotUseWhen": [
+        "Do not use as a replacement for full navigation.",
+        "Do not include actions that require dangerous confirmation without a confirm step."
+      ],
+      "accessibility": [
+        "Search input has an accessible label.",
+        "Actions are buttons with visible labels and descriptions."
+      ],
+      "agentGuidance": [
+        "Use Quick Action Panel to expose common AI workflows such as chat, analysis, source review, and drafting.",
+        "Keep labels short and descriptions concrete."
+      ],
+      "code": "import { QuickActionPanel } from \"./QuickActionPanel\";\n\n<QuickActionPanel actions={actions} />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "table",
+      "kind": "component",
+      "name": "Table",
+      "category": "Data Display",
+      "subcategory": "Structured data",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Table presents structured rows and columns for dashboards, feedback, agents, runs, and evaluation data.",
+      "variants": [
+        "Basic",
+        "Hover rows",
+        "Badge cells",
+        "Action cells",
+        "Future: sorting",
+        "Future: selection"
+      ],
+      "props": [
+        {
+          "name": "columns",
+          "type": "TableColumn<Row>[]",
+          "defaultValue": "-",
+          "description": "Column definitions and optional cell renderers."
+        },
+        {
+          "name": "rows",
+          "type": "Row[]",
+          "defaultValue": "[]",
+          "description": "Rows to render."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for comparable structured records.",
+        "Use badge cells for status.",
+        "Pair with filters and pagination for large datasets."
+      ],
+      "doNotUseWhen": [
+        "Do not use tables for narrative content.",
+        "Do not make users scan large tables without search or filters."
+      ],
+      "accessibility": [
+        "Uses semantic table, thead, th, tbody, and td elements.",
+        "Header cells use scope."
+      ],
+      "agentGuidance": [
+        "Use Table for agent lists, feedback, runs, and evaluation data.",
+        "Use Empty State when there are no rows."
+      ],
+      "code": "import { Table } from \"./Table\";\n\n<Table columns={columns} rows={rows} />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "list",
+      "kind": "component",
+      "name": "List",
+      "category": "Data Display",
+      "subcategory": "Collections",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "List presents compact stacked items with optional leading icons, metadata, and descriptions.",
+      "variants": [
+        "Icon",
+        "Meta",
+        "Description",
+        "Status badge"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "ListItem[]",
+          "defaultValue": "[]",
+          "description": "List items with title, optional description, leading slot, and meta slot."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for recent activity, agents, sources, and short collections.",
+        "Use meta for time, status, or counts."
+      ],
+      "doNotUseWhen": [
+        "Do not use lists for dense comparison; use Table.",
+        "Do not overload list rows with too many actions."
+      ],
+      "accessibility": [
+        "Use semantic list structure in future enhancements where needed.",
+        "Keep row labels readable and descriptive."
+      ],
+      "agentGuidance": [
+        "Use List for compact activity and source collections.",
+        "Use Table when users compare multiple fields."
+      ],
+      "code": "import { List } from \"./List\";\n\n<List items={[{ title: \"Analytics Agent\", description: \"Ready\" }]} />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "description-list",
+      "kind": "component",
+      "name": "Description List",
+      "category": "Data Display",
+      "subcategory": "Key-value",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Description List presents labeled metadata for detail panels, modals, and drawers.",
+      "variants": [
+        "Key-value",
+        "With badges",
+        "Stacked mobile"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "DescriptionItem[]",
+          "defaultValue": "[]",
+          "description": "Label/value pairs."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in detail panels, feedback modals, and source drawers.",
+        "Use for stable metadata that users scan by label."
+      ],
+      "doNotUseWhen": [
+        "Do not use for editable forms.",
+        "Do not use for large row sets."
+      ],
+      "accessibility": [
+        "Uses semantic dl, dt, and dd elements.",
+        "Labels and values remain paired."
+      ],
+      "agentGuidance": [
+        "Use Description List for source metadata, agent settings summaries, and modal details."
+      ],
+      "code": "import { DescriptionList } from \"./DescriptionList\";\n\n<DescriptionList items={[{ label: \"Status\", value: \"Active\" }]} />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "stat-card",
+      "kind": "component",
+      "name": "Stat / KPI Card",
+      "category": "Data Display",
+      "subcategory": "Metrics",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Stat cards highlight key metrics with optional trend, helper text, and icon slot.",
+      "variants": [
+        "Value",
+        "Trend",
+        "Helper",
+        "Icon"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Metric label."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Primary metric value."
+        },
+        {
+          "name": "trend",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional trend badge."
+        },
+        {
+          "name": "helper",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional contextual text."
+        }
+      ],
+      "tokens": [
+        "white",
+        "brand-50",
+        "brand-700",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for dashboard summaries.",
+        "Include trend or helper context when possible.",
+        "Use a grid for related metrics."
+      ],
+      "doNotUseWhen": [
+        "Do not show numbers without context.",
+        "Do not use too many stat cards above the fold."
+      ],
+      "accessibility": [
+        "Use clear labels and values.",
+        "Do not rely on trend color alone."
+      ],
+      "agentGuidance": [
+        "Use Stat Card for KPI overviews and analytics dashboards.",
+        "Add helper text that answers 'so what?'."
+      ],
+      "code": "import { StatCard } from \"./StatCard\";\n\n<StatCard label=\"Conversations\" value=\"148\" trend=\"+12%\" />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "empty-state",
+      "kind": "component",
+      "name": "Empty State",
+      "category": "Data Display",
+      "subcategory": "States",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Empty State explains what would appear in an empty region and gives the user a clear next action.",
+      "variants": [
+        "No data",
+        "No search results",
+        "First use",
+        "With action"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Short empty state summary."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Explains what happened and what to do next."
+        },
+        {
+          "name": "actionLabel",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional primary action label."
+        }
+      ],
+      "tokens": [
+        "white",
+        "brand-50",
+        "brand-700",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "radius-lg"
+      ],
+      "useWhen": [
+        "Use whenever a list, table, or page has no content.",
+        "Give users a recovery or creation action."
+      ],
+      "doNotUseWhen": [
+        "Do not show blank panels.",
+        "Do not use vague text like 'No data' without guidance."
+      ],
+      "accessibility": [
+        "Uses readable text and a real action button when provided.",
+        "Icon is decorative unless paired with text."
+      ],
+      "agentGuidance": [
+        "Use Empty State for first-use, no-results, and no-data cases.",
+        "Always explain the next useful action."
+      ],
+      "code": "import { EmptyState } from \"./EmptyState\";\n\n<EmptyState title=\"No agents yet\" description=\"Create an agent to get started.\" actionLabel=\"Create first agent\" />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "timeline",
+      "kind": "component",
+      "name": "Timeline",
+      "category": "Data Display",
+      "subcategory": "Events",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Timeline presents ordered events such as agent turns, tool calls, runs, and audit activity.",
+      "variants": [
+        "Event",
+        "With badge",
+        "Timestamp",
+        "Agent turn"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "TimelineItem[]",
+          "defaultValue": "[]",
+          "description": "Ordered timeline events."
+        }
+      ],
+      "tokens": [
+        "brand-700",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "white",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for chronological activity.",
+        "Use badges for event types and statuses."
+      ],
+      "doNotUseWhen": [
+        "Do not use timeline for unordered lists.",
+        "Do not hide timestamps when sequence matters."
+      ],
+      "accessibility": [
+        "Uses ordered list semantics.",
+        "Event text includes meaning beyond color."
+      ],
+      "agentGuidance": [
+        "Use Timeline for eval replay, tool-call history, and activity feeds."
+      ],
+      "code": "import { Timeline } from \"./Timeline\";\n\n<Timeline items={[{ title: \"Turn 1\", time: \"10:24 AM\", content: \"User query received.\" }]} />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "form-field",
+      "kind": "component",
+      "name": "Form Field",
+      "category": "Data Entry",
+      "subcategory": "Forms",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Form Field composes label, optional marker, control, helper text, and validation message into a consistent input unit.",
+      "variants": [
+        "Default",
+        "Optional",
+        "Helper text",
+        "Error text"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Visible label above the control."
+        },
+        {
+          "name": "optional",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Marks optional fields. Required is the default."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Helper text below the control."
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Validation message below the control."
+        }
+      ],
+      "tokens": [
+        "text-sm",
+        "gray-700",
+        "gray-500",
+        "error-700",
+        "spacing-1.5"
+      ],
+      "useWhen": [
+        "Use Form Field for every labeled form control.",
+        "Show helper text before users make errors.",
+        "Use error text with recovery instructions."
+      ],
+      "doNotUseWhen": [
+        "Do not use placeholder text as the only label.",
+        "Do not mark every required field with an asterisk; mark optional fields instead."
+      ],
+      "accessibility": [
+        "Labels are linked to controls with htmlFor.",
+        "Errors should be announced by connecting aria-describedby in future enhancements."
+      ],
+      "agentGuidance": [
+        "Always compose Input, Select, Textarea, and Slider with Form Field when a visible label is needed.",
+        "Prefer explicit labels and helper text over vague placeholders."
+      ],
+      "code": "import { FormField } from \"./FormField\";\nimport { Input } from \"../input/Input\";\n\n<FormField label=\"Agent name\" description=\"Agent names must be unique.\">\n  <Input placeholder=\"Surfactant analyzer\" />\n</FormField>",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "input",
+      "kind": "component",
+      "name": "Input",
+      "category": "Data Entry",
+      "subcategory": "Text controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Input captures short text values such as names, emails, IDs, and filter terms.",
+      "variants": [
+        "Default",
+        "Focus",
+        "Error",
+        "Disabled",
+        "Optional"
+      ],
+      "props": [
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Applies error border and aria-invalid."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Prevents input and applies disabled styling."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Format hint, not a replacement for label."
+        }
+      ],
+      "tokens": [
+        "gray-300",
+        "gray-400",
+        "gray-900",
+        "brand-300",
+        "brand-100",
+        "error-300",
+        "error-100",
+        "radius-md",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for short free-text values.",
+        "Use placeholder text to show format examples.",
+        "Pair with Form Field for labels and helper text."
+      ],
+      "doNotUseWhen": [
+        "Do not use for long-form prompts; use Textarea.",
+        "Do not hide labels inside placeholders."
+      ],
+      "accessibility": [
+        "Uses native input semantics.",
+        "Invalid state sets aria-invalid."
+      ],
+      "agentGuidance": [
+        "Use Input for one-line values only.",
+        "Use specific placeholders like you@unilever.com instead of 'Enter email'."
+      ],
+      "code": "import { Input } from \"./Input\";\n\n<Input placeholder=\"you@unilever.com\" />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "textarea",
+      "kind": "component",
+      "name": "Textarea",
+      "category": "Data Entry",
+      "subcategory": "Text controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Textarea captures longer free-form content such as prompts, descriptions, comments, and instructions.",
+      "variants": [
+        "Default",
+        "Error",
+        "Disabled",
+        "Resizable"
+      ],
+      "props": [
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Applies error border and aria-invalid."
+        },
+        {
+          "name": "rows",
+          "type": "number",
+          "defaultValue": "-",
+          "description": "Optional native row count."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Short example of expected content."
+        }
+      ],
+      "tokens": [
+        "gray-300",
+        "gray-400",
+        "gray-900",
+        "brand-300",
+        "error-300",
+        "radius-md",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for multi-line input.",
+        "Use for system prompts and agent descriptions.",
+        "Pair with helper text for constraints."
+      ],
+      "doNotUseWhen": [
+        "Do not use for single short values.",
+        "Do not validate on every keystroke."
+      ],
+      "accessibility": [
+        "Uses native textarea semantics.",
+        "Invalid state sets aria-invalid."
+      ],
+      "agentGuidance": [
+        "Use Textarea for prompts and explanations.",
+        "Keep helper text visible when content has rules or limits."
+      ],
+      "code": "import { Textarea } from \"./Textarea\";\n\n<Textarea placeholder=\"Describe the agent behavior\" />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "select",
+      "kind": "component",
+      "name": "Select",
+      "category": "Data Entry",
+      "subcategory": "Choice controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Select lets users choose one option from a known set.",
+      "variants": [
+        "Default",
+        "Error",
+        "Disabled",
+        "Placeholder option"
+      ],
+      "props": [
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Applies error border and aria-invalid."
+        },
+        {
+          "name": "children",
+          "type": "option[]",
+          "defaultValue": "-",
+          "description": "Native option elements."
+        }
+      ],
+      "tokens": [
+        "gray-300",
+        "gray-400",
+        "brand-300",
+        "error-300",
+        "radius-md",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when options are known and limited.",
+        "Use Combobox later for searchable or large option sets."
+      ],
+      "doNotUseWhen": [
+        "Do not use Select for free-form values.",
+        "Do not include too many options without search."
+      ],
+      "accessibility": [
+        "Uses native select semantics.",
+        "Visible label should come from Form Field."
+      ],
+      "agentGuidance": [
+        "Use Select for compact controlled choices.",
+        "Use Combobox for user, project, or source lists once available."
+      ],
+      "code": "import { Select } from \"./Select\";\n\n<Select defaultValue=\"chat\">\n  <option value=\"chat\">Chat app</option>\n  <option value=\"dashboard\">Dashboard</option>\n</Select>",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "checkbox",
+      "kind": "component",
+      "name": "Checkbox",
+      "category": "Data Entry",
+      "subcategory": "Choice controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Checkbox captures independent yes/no choices, often with a descriptive label.",
+      "variants": [
+        "Unchecked",
+        "Checked",
+        "Disabled",
+        "With description"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Visible choice label."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional explanatory copy."
+        },
+        {
+          "name": "checked",
+          "type": "boolean",
+          "defaultValue": "-",
+          "description": "Controlled checked state."
+        }
+      ],
+      "tokens": [
+        "gray-300",
+        "brand-50",
+        "brand-600",
+        "brand-100",
+        "radius-sm"
+      ],
+      "useWhen": [
+        "Use for independent binary choices.",
+        "Use descriptions when the label alone is not enough."
+      ],
+      "doNotUseWhen": [
+        "Do not use for mutually exclusive choices; use Radio or Select.",
+        "Do not create color-only checked states."
+      ],
+      "accessibility": [
+        "Uses native checkbox input.",
+        "Label wraps the control for a larger click target."
+      ],
+      "agentGuidance": [
+        "Use Checkbox for permission toggles and multi-select settings.",
+        "Use Switch for immediate on/off settings."
+      ],
+      "code": "import { Checkbox } from \"./Checkbox\";\n\n<Checkbox label=\"Use knowledge base\" description=\"Allow approved document retrieval.\" />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "switch",
+      "kind": "component",
+      "name": "Switch",
+      "category": "Data Entry",
+      "subcategory": "Choice controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Switch toggles an immediate on/off setting.",
+      "variants": [
+        "Off",
+        "On",
+        "Disabled",
+        "With label"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional visible label."
+        },
+        {
+          "name": "checked",
+          "type": "boolean",
+          "defaultValue": "-",
+          "description": "Controlled checked state."
+        }
+      ],
+      "tokens": [
+        "gray-200",
+        "brand-600",
+        "white",
+        "shadow-xs",
+        "radius-full"
+      ],
+      "useWhen": [
+        "Use for settings that can be toggled on or off.",
+        "Use when the change can be understood immediately."
+      ],
+      "doNotUseWhen": [
+        "Do not use for submitting a form.",
+        "Do not use when choosing among more than two options."
+      ],
+      "accessibility": [
+        "Uses native checkbox behavior visually styled as a switch.",
+        "Label expands the click target."
+      ],
+      "agentGuidance": [
+        "Use Switch for feature enablement and policy toggles.",
+        "Use Checkbox when the choice is part of a form submission."
+      ],
+      "code": "import { Switch } from \"./Switch\";\n\n<Switch label=\"Enable live tool calls\" />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "slider",
+      "kind": "component",
+      "name": "Slider",
+      "category": "Data Entry",
+      "subcategory": "Numeric controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Slider adjusts bounded numeric values such as temperature, depth, thresholds, and weighting.",
+      "variants": [
+        "Default",
+        "Disabled",
+        "With label"
+      ],
+      "props": [
+        {
+          "name": "min",
+          "type": "number",
+          "defaultValue": "-",
+          "description": "Minimum value."
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "defaultValue": "-",
+          "description": "Maximum value."
+        },
+        {
+          "name": "defaultValue",
+          "type": "number",
+          "defaultValue": "-",
+          "description": "Initial uncontrolled value."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional visible label."
+        }
+      ],
+      "tokens": [
+        "brand-700",
+        "gray-200",
+        "radius-full"
+      ],
+      "useWhen": [
+        "Use for bounded numeric tuning.",
+        "Pair with visible values when precision matters."
+      ],
+      "doNotUseWhen": [
+        "Do not use when users need exact numeric entry only.",
+        "Do not hide the meaning of min/max."
+      ],
+      "accessibility": [
+        "Uses native range input.",
+        "Provide a label for screen reader context."
+      ],
+      "agentGuidance": [
+        "Use Slider for model parameters like temperature.",
+        "Add visible current value in templates where precision matters."
+      ],
+      "code": "import { Slider } from \"./Slider\";\n\n<Slider label=\"Temperature\" min={0} max={100} defaultValue={35} />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "search-input",
+      "kind": "component",
+      "name": "Search Input",
+      "category": "Data Entry",
+      "subcategory": "Search",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Search Input lets users filter catalog entries, tables, agents, templates, and dashboards.",
+      "variants": [
+        "Default",
+        "Disabled",
+        "With icon"
+      ],
+      "props": [
+        {
+          "name": "placeholder",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Search hint text."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Controlled search text."
+        },
+        {
+          "name": "onChange",
+          "type": "ChangeEventHandler",
+          "defaultValue": "-",
+          "description": "Search text change handler."
+        }
+      ],
+      "tokens": [
+        "gray-300",
+        "gray-400",
+        "gray-900",
+        "brand-300",
+        "radius-md",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when a list has more than 20 items.",
+        "Use in topbars, filter bars, and catalog search."
+      ],
+      "doNotUseWhen": [
+        "Do not add search to tiny lists.",
+        "Do not return blank empty states; provide helpful recovery copy."
+      ],
+      "accessibility": [
+        "Uses native search input.",
+        "Provide a visible or sr-only label."
+      ],
+      "agentGuidance": [
+        "Use Search Input for filtering existing content.",
+        "Use Command Palette for action search once available."
+      ],
+      "code": "import { SearchInput } from \"./SearchInput\";\n\n<SearchInput placeholder=\"Search agents, templates, or components\" />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "alert",
+      "kind": "component",
+      "name": "Alert",
+      "category": "Feedback",
+      "subcategory": "Inline feedback",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Alerts communicate contextual success, warning, error, or information inside the current page or section.",
+      "variants": [
+        "Success",
+        "Error",
+        "Warning",
+        "Info",
+        "Dismissible",
+        "With title"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"success\" | \"error\" | \"warning\" | \"info\"",
+          "defaultValue": "\"info\"",
+          "description": "Controls semantic treatment and icon."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional short summary."
+        },
+        {
+          "name": "dismissible",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Adds a dismiss affordance."
+        }
+      ],
+      "tokens": [
+        "success-50",
+        "success-700",
+        "error-50",
+        "error-700",
+        "warning-50",
+        "warning-700",
+        "brand-50",
+        "brand-700",
+        "radius-md"
+      ],
+      "useWhen": [
+        "Use for inline state messages close to the affected content.",
+        "Use error alerts with recovery instructions.",
+        "Use warning alerts before risky or delayed actions."
+      ],
+      "doNotUseWhen": [
+        "Do not use alerts for global announcements; use Banner.",
+        "Do not show success without naming what happened."
+      ],
+      "accessibility": [
+        "Error alerts use alert role.",
+        "Non-error alerts use status role.",
+        "Dismiss controls include accessible labels."
+      ],
+      "agentGuidance": [
+        "Use Alert when the message belongs to a specific form, table, card, or section.",
+        "Include what happened and what the user can do next."
+      ],
+      "code": "import { Alert } from \"./Alert\";\n\n<Alert title=\"Could not save\" variant=\"error\">\n  The agent name is empty. Add a name and try again.\n</Alert>",
+      "sourceFile": "src/data/feedbackEntries.tsx"
+    },
+    {
+      "id": "banner",
+      "kind": "component",
+      "name": "Banner",
+      "category": "Feedback",
+      "subcategory": "Page feedback",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Banners communicate page-level announcements, operational status, and persistent calls to action.",
+      "variants": [
+        "Info",
+        "Success",
+        "Warning",
+        "Error",
+        "With action",
+        "Dismissible"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"info\" | \"success\" | \"warning\" | \"error\"",
+          "defaultValue": "\"info\"",
+          "description": "Controls semantic treatment."
+        },
+        {
+          "name": "action",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Optional action slot."
+        },
+        {
+          "name": "dismissible",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Adds a dismiss affordance."
+        }
+      ],
+      "tokens": [
+        "brand-50",
+        "brand-200",
+        "success-50",
+        "warning-50",
+        "error-50",
+        "radius-lg",
+        "spacing-5"
+      ],
+      "useWhen": [
+        "Use for page-level or dashboard-level announcements.",
+        "Use actions when the banner asks the user to resolve something."
+      ],
+      "doNotUseWhen": [
+        "Do not use banners for field validation.",
+        "Do not stack many banners at the top of a page."
+      ],
+      "accessibility": [
+        "Uses alert role for error variant and status role for other variants.",
+        "Action and dismiss controls are keyboard reachable."
+      ],
+      "agentGuidance": [
+        "Use Banner above the main content area for persistent operational context.",
+        "Prefer Alert for section-specific feedback."
+      ],
+      "code": "import { Banner } from \"./Banner\";\n\n<Banner title=\"Deployment review\" action={<button>Review</button>}>\n  This workspace has 3 agents waiting for approval.\n</Banner>",
+      "sourceFile": "src/data/feedbackEntries.tsx"
+    },
+    {
+      "id": "spinner",
+      "kind": "component",
+      "name": "Spinner",
+      "category": "Feedback",
+      "subcategory": "Loading",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Spinner indicates short indeterminate loading states.",
+      "variants": [
+        "sm",
+        "md",
+        "lg",
+        "With label"
+      ],
+      "props": [
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "defaultValue": "\"md\"",
+          "description": "Controls icon size."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"Loading\"",
+          "description": "Visible loading label."
+        }
+      ],
+      "tokens": [
+        "brand-700",
+        "gray-600",
+        "motion-spin"
+      ],
+      "useWhen": [
+        "Use for short loading states under a few seconds.",
+        "Pair with text when the wait has meaning."
+      ],
+      "doNotUseWhen": [
+        "Do not use only a spinner for long operations; use Progress or Skeleton.",
+        "Do not leave users without context for slow operations."
+      ],
+      "accessibility": [
+        "Uses status role.",
+        "Provides visible or screen-reader loading text."
+      ],
+      "agentGuidance": [
+        "Use Spinner for brief async actions.",
+        "For page loads, prefer Skeleton so layout feels stable."
+      ],
+      "code": "import { Spinner } from \"./Spinner\";\n\n<Spinner label=\"Analyzing data\" />",
+      "sourceFile": "src/data/feedbackEntries.tsx"
+    },
+    {
+      "id": "progress",
+      "kind": "component",
+      "name": "Progress",
+      "category": "Feedback",
+      "subcategory": "Loading",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Progress shows determinate completion for imports, evaluations, deployments, and long-running tasks.",
+      "variants": [
+        "Determinate",
+        "With label",
+        "Complete"
+      ],
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "defaultValue": "-",
+          "description": "Current value."
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "defaultValue": "100",
+          "description": "Maximum value."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional visible label."
+        }
+      ],
+      "tokens": [
+        "brand-700",
+        "gray-200",
+        "radius-full"
+      ],
+      "useWhen": [
+        "Use when completion percentage is known.",
+        "Use for imports, deploys, replays, and checklists."
+      ],
+      "doNotUseWhen": [
+        "Do not fake precision if the system cannot estimate progress.",
+        "Do not use for instant actions."
+      ],
+      "accessibility": [
+        "Uses progressbar role and aria value attributes.",
+        "Visible label provides task context."
+      ],
+      "agentGuidance": [
+        "Use Progress for long-running known tasks.",
+        "Use Spinner when progress cannot be estimated."
+      ],
+      "code": "import { Progress } from \"./Progress\";\n\n<Progress label=\"Knowledge import\" value={68} />",
+      "sourceFile": "src/data/feedbackEntries.tsx"
+    },
+    {
+      "id": "skeleton",
+      "kind": "component",
+      "name": "Skeleton",
+      "category": "Feedback",
+      "subcategory": "Loading",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Skeleton preserves layout while content loads, reducing perceived wait time and layout shift.",
+      "variants": [
+        "Line",
+        "Circle",
+        "Block",
+        "Card composition"
+      ],
+      "props": [
+        {
+          "name": "shape",
+          "type": "\"line\" | \"circle\" | \"block\"",
+          "defaultValue": "\"line\"",
+          "description": "Controls placeholder geometry."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Adjusts dimensions for composition."
+        }
+      ],
+      "tokens": [
+        "gray-200",
+        "radius-full",
+        "radius-lg",
+        "motion-pulse"
+      ],
+      "useWhen": [
+        "Use for page, card, table, and chat loading states.",
+        "Match skeleton shape to the final content layout."
+      ],
+      "doNotUseWhen": [
+        "Do not use skeletons for actions that complete almost instantly.",
+        "Do not show unrelated placeholder shapes."
+      ],
+      "accessibility": [
+        "Skeletons are aria-hidden because they are visual placeholders.",
+        "Pair with a higher-level loading announcement when needed."
+      ],
+      "agentGuidance": [
+        "Use Skeleton when content structure is known but data is not ready.",
+        "Use it in tables, cards, dashboards, and message streams."
+      ],
+      "code": "import { Skeleton } from \"./Skeleton\";\n\n<Skeleton className=\"w-1/2\" />\n<Skeleton shape=\"block\" />",
+      "sourceFile": "src/data/feedbackEntries.tsx"
+    },
+    {
+      "id": "modal",
+      "kind": "component",
+      "name": "Modal / Dialog",
+      "category": "Feedback",
+      "subcategory": "Overlays",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Modal interrupts the current workflow for focused confirmation, forms, or high-priority information.",
+      "variants": [
+        "Base",
+        "Confirmation",
+        "Form",
+        "Destructive",
+        "With footer"
+      ],
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "defaultValue": "-",
+          "description": "Controls dialog visibility."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "(open: boolean) => void",
+          "defaultValue": "-",
+          "description": "Receives visibility changes."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Dialog heading."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional supporting copy."
+        }
+      ],
+      "tokens": [
+        "gray-900/60",
+        "white",
+        "gray-200",
+        "radius-lg",
+        "shadow-lg",
+        "spacing-6"
+      ],
+      "useWhen": [
+        "Use for blocking decisions or focused forms.",
+        "Use clear action labels in the footer.",
+        "Use destructive variants only for irreversible actions."
+      ],
+      "doNotUseWhen": [
+        "Do not use modals for lightweight hints.",
+        "Do not stack modals.",
+        "Do not hide long workflows inside a small modal."
+      ],
+      "accessibility": [
+        "Uses dialog semantics and aria-modal.",
+        "Close control has an accessible label.",
+        "Future Radix implementation should add focus trapping and Escape handling."
+      ],
+      "agentGuidance": [
+        "Use Modal when the user must decide before continuing.",
+        "Use Drawer when context should remain visible."
+      ],
+      "code": "import { Modal } from \"./Modal\";\n\n<Modal open={open} onOpenChange={setOpen} title=\"Deploy agent\">\n  Review deployment details.\n</Modal>",
+      "sourceFile": "src/data/feedbackOverlayEntries.tsx"
+    },
+    {
+      "id": "drawer",
+      "kind": "component",
+      "name": "Drawer",
+      "category": "Feedback",
+      "subcategory": "Overlays",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Drawer exposes supporting details without fully removing the user from the current surface.",
+      "variants": [
+        "Right",
+        "Left",
+        "Source drawer",
+        "Filter drawer",
+        "Detail drawer"
+      ],
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "defaultValue": "-",
+          "description": "Controls drawer visibility."
+        },
+        {
+          "name": "side",
+          "type": "\"right\" | \"left\"",
+          "defaultValue": "\"right\"",
+          "description": "Controls drawer edge."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Drawer heading."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-900/50",
+        "gray-200",
+        "shadow-lg",
+        "spacing-6"
+      ],
+      "useWhen": [
+        "Use for source details, trace panels, filters, and inspectors.",
+        "Use when users need to keep page context."
+      ],
+      "doNotUseWhen": [
+        "Do not use drawers for small tooltips.",
+        "Do not use drawers when a full page is needed."
+      ],
+      "accessibility": [
+        "Uses dialog semantics and aria-modal.",
+        "Close control has an accessible label.",
+        "Future Radix implementation should add focus trapping."
+      ],
+      "agentGuidance": [
+        "Use Drawer for citations, source inspection, and dashboard detail panels.",
+        "Keep drawer content scannable and sectioned."
+      ],
+      "code": "import { Drawer } from \"./Drawer\";\n\n<Drawer open={open} onOpenChange={setOpen} title=\"Source details\">\n  Source metadata\n</Drawer>",
+      "sourceFile": "src/data/feedbackOverlayEntries.tsx"
+    },
+    {
+      "id": "popover",
+      "kind": "component",
+      "name": "Popover",
+      "category": "Feedback",
+      "subcategory": "Overlays",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Popover shows anchored supporting content for compact explanations, quick settings, or lightweight panels.",
+      "variants": [
+        "Hover",
+        "Focus",
+        "Anchored panel"
+      ],
+      "props": [
+        {
+          "name": "content",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Popover panel content."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Trigger element."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-600",
+        "shadow-md",
+        "radius-lg",
+        "spacing-4"
+      ],
+      "useWhen": [
+        "Use for lightweight contextual panels.",
+        "Use when content is more substantial than a tooltip."
+      ],
+      "doNotUseWhen": [
+        "Do not use for destructive confirmations; use Popconfirm.",
+        "Do not put long workflows in popovers."
+      ],
+      "accessibility": [
+        "Appears on hover and focus-within in this first implementation.",
+        "Future headless implementation should manage open state and focus."
+      ],
+      "agentGuidance": [
+        "Use Popover for short settings, compact metadata, and contextual detail.",
+        "Use Tooltip for a sentence of help text."
+      ],
+      "code": "import { Popover } from \"./Popover\";\n\n<Popover content={<p>Workspace-only settings.</p>}>\n  <button>Open</button>\n</Popover>",
+      "sourceFile": "src/data/feedbackOverlayEntries.tsx"
+    },
+    {
+      "id": "popconfirm",
+      "kind": "component",
+      "name": "Popconfirm",
+      "category": "Feedback",
+      "subcategory": "Overlays",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Popconfirm asks for lightweight confirmation near the action that triggered it.",
+      "variants": [
+        "Destructive",
+        "Warning",
+        "With cancel",
+        "With confirm"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Confirmation title."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Consequence and recovery text."
+        },
+        {
+          "name": "onConfirm",
+          "type": "() => void",
+          "defaultValue": "-",
+          "description": "Called when confirm is selected."
+        }
+      ],
+      "tokens": [
+        "white",
+        "warning-100",
+        "warning-700",
+        "error-600",
+        "gray-200",
+        "shadow-md",
+        "radius-lg"
+      ],
+      "useWhen": [
+        "Use for quick confirmation of risky actions.",
+        "Keep the confirmation close to the triggering control."
+      ],
+      "doNotUseWhen": [
+        "Do not use for irreversible high-impact actions that need full context.",
+        "Do not use generic labels like OK or Yes."
+      ],
+      "accessibility": [
+        "Confirmation buttons are keyboard reachable.",
+        "Future headless implementation should manage focus and dismiss behavior."
+      ],
+      "agentGuidance": [
+        "Use Popconfirm for table/list delete actions.",
+        "Use Modal when consequences need a longer explanation."
+      ],
+      "code": "import { Popconfirm } from \"./Popconfirm\";\n\n<Popconfirm title=\"Delete draft?\" description=\"This cannot be undone.\">\n  <button>Delete</button>\n</Popconfirm>",
+      "sourceFile": "src/data/feedbackOverlayEntries.tsx"
+    },
+    {
+      "id": "toast",
+      "kind": "component",
+      "name": "Toast / Message",
+      "category": "Feedback",
+      "subcategory": "Transient feedback",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Toast communicates short-lived feedback after an action, without blocking the workflow.",
+      "variants": [
+        "Success",
+        "Error",
+        "Warning",
+        "Info",
+        "Loading"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"success\" | \"error\" | \"warning\" | \"info\" | \"loading\"",
+          "defaultValue": "\"info\"",
+          "description": "Controls icon and semantic border."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Short feedback summary."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "success-600",
+        "error-600",
+        "warning-600",
+        "brand-700",
+        "shadow-md",
+        "radius-lg"
+      ],
+      "useWhen": [
+        "Use after actions like save, copy, publish, or refresh.",
+        "Keep copy short and action-specific."
+      ],
+      "doNotUseWhen": [
+        "Do not use toasts for information the user must act on later.",
+        "Do not show silent success when a toast is needed."
+      ],
+      "accessibility": [
+        "Uses status role.",
+        "Loading variant includes spinner animation."
+      ],
+      "agentGuidance": [
+        "Use Toast for short post-action confirmation.",
+        "Use Alert or Banner when feedback needs to remain visible."
+      ],
+      "code": "import { Toast } from \"./Toast\";\n\n<Toast title=\"Saved\" variant=\"success\">\n  Your changes were saved.\n</Toast>",
+      "sourceFile": "src/data/feedbackOverlayEntries.tsx"
+    },
+    {
+      "id": "form-section",
+      "kind": "component",
+      "name": "Form Section",
+      "category": "Forms",
+      "subcategory": "Composition",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Form Section groups related fields under a heading, description, and body slot.",
+      "variants": [
+        "Default",
+        "With description",
+        "With grouped fields",
+        "With actions"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Section heading."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Supporting instructions."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Fields, groups, validation, and actions."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use to break long forms into readable field groups.",
+        "Use one section per meaningful setting area."
+      ],
+      "doNotUseWhen": [
+        "Do not use for a single isolated field.",
+        "Do not nest form sections inside form sections."
+      ],
+      "accessibility": [
+        "Renders as a section with a visible heading.",
+        "Keep fields inside the section in logical order."
+      ],
+      "agentGuidance": [
+        "Use Form Section for settings, setup, and edit workflows.",
+        "Use Panel for non-form dashboard regions."
+      ],
+      "code": "import { FormSection } from \"./FormSection\";\n\n<FormSection title=\"Workspace settings\">\n  <FormGroup>...</FormGroup>\n  <FormActions />\n</FormSection>",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "form-group",
+      "kind": "component",
+      "name": "Form Group",
+      "category": "Forms",
+      "subcategory": "Composition",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Form Group lays out related fields in responsive one, two, or three-column grids.",
+      "variants": [
+        "1 column",
+        "2 columns",
+        "3 columns",
+        "Responsive"
+      ],
+      "props": [
+        {
+          "name": "columns",
+          "type": "1 | 2 | 3",
+          "defaultValue": "2",
+          "description": "Responsive field columns."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Form fields or controls."
+        }
+      ],
+      "tokens": [
+        "spacing-4"
+      ],
+      "useWhen": [
+        "Use for fields that should scan together.",
+        "Use one column for long inputs and three columns for short comparable fields."
+      ],
+      "doNotUseWhen": [
+        "Do not force three columns for complex controls.",
+        "Do not use arbitrary margins between fields when Form Group can own spacing."
+      ],
+      "accessibility": [
+        "Preserves DOM reading order.",
+        "Labels remain owned by each child field."
+      ],
+      "agentGuidance": [
+        "Use Form Group inside Form Section.",
+        "Prefer two columns for normal settings forms."
+      ],
+      "code": "import { FormGroup } from \"./FormGroup\";\n\n<FormGroup columns={2}>\n  <FormField label=\"Name\">...</FormField>\n</FormGroup>",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "validation-message",
+      "kind": "component",
+      "name": "Validation Message",
+      "category": "Forms",
+      "subcategory": "Validation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Validation Message provides field or form feedback with error, success, and info tones.",
+      "variants": [
+        "Error",
+        "Success",
+        "Info",
+        "With icon"
+      ],
+      "props": [
+        {
+          "name": "tone",
+          "type": "\"error\" | \"success\" | \"info\"",
+          "defaultValue": "\"error\"",
+          "description": "Semantic validation tone."
+        },
+        {
+          "name": "children",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Validation text."
+        }
+      ],
+      "tokens": [
+        "error-700",
+        "success-700",
+        "info-700"
+      ],
+      "useWhen": [
+        "Use below fields or near form actions when validation blocks progress.",
+        "Use success sparingly for confirmation that matters."
+      ],
+      "doNotUseWhen": [
+        "Do not use color alone to communicate validation.",
+        "Do not show vague messages like 'Invalid input' without next steps."
+      ],
+      "accessibility": [
+        "Message includes visible text and icon.",
+        "Production forms should connect messages with aria-describedby."
+      ],
+      "agentGuidance": [
+        "Use Validation Message for form feedback only.",
+        "Use Alert for broader page-level feedback."
+      ],
+      "code": "import { ValidationMessage } from \"./ValidationMessage\";\n\n<ValidationMessage>Campaign name is required.</ValidationMessage>",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "file-upload",
+      "kind": "component",
+      "name": "File Upload",
+      "category": "Forms",
+      "subcategory": "Inputs",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "File Upload lets users attach source files, datasets, exports, or product documents.",
+      "variants": [
+        "Default",
+        "With description",
+        "Drag area",
+        "Hidden input"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"Upload a file\"",
+          "description": "Visible upload call to action."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Accepted file types or limits."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for CSV uploads, source documents, product files, and campaign assets.",
+        "State accepted formats and limits close to the control."
+      ],
+      "doNotUseWhen": [
+        "Do not hide upload constraints until after failure.",
+        "Do not use for simple URL entry."
+      ],
+      "accessibility": [
+        "Native file input remains present and keyboard reachable.",
+        "Upload area has visible label and description."
+      ],
+      "agentGuidance": [
+        "Use File Upload when a workflow needs source material.",
+        "Pair with Validation Message for file type or size errors."
+      ],
+      "code": "import { FileUpload } from \"./FileUpload\";\n\n<FileUpload description=\"CSV or PDF up to 10 MB.\" />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "combobox",
+      "kind": "component",
+      "name": "Combobox",
+      "category": "Forms",
+      "subcategory": "Inputs",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Combobox combines a selectable value with an option list for agent, workspace, or source selection.",
+      "variants": [
+        "Default",
+        "Selected",
+        "With options",
+        "Placeholder"
+      ],
+      "props": [
+        {
+          "name": "options",
+          "type": "ComboboxOption[]",
+          "defaultValue": "defaultOptions",
+          "description": "Selectable options with selected state."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "defaultValue": "\"Select agent\"",
+          "description": "Fallback text when no value is selected."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-400",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when users choose from known options and may eventually need search.",
+        "Use for agent, workspace, project, or source selection."
+      ],
+      "doNotUseWhen": [
+        "Do not use Combobox for very small binary choices.",
+        "Do not use without keyboard support in production."
+      ],
+      "accessibility": [
+        "This preview documents visual structure; production should use combobox ARIA and keyboard behavior.",
+        "Selected option has a visible check icon."
+      ],
+      "agentGuidance": [
+        "Use Combobox when option lists may grow or need filtering.",
+        "Use Select for small static lists."
+      ],
+      "code": "import { Combobox } from \"./Combobox\";\n\n<Combobox options={agentOptions} />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "date-picker",
+      "kind": "component",
+      "name": "Date Picker",
+      "category": "Forms",
+      "subcategory": "Inputs",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Date Picker captures a date value for runs, reports, campaign windows, and review deadlines.",
+      "variants": [
+        "Default",
+        "Selected date",
+        "Calendar trigger"
+      ],
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "defaultValue": "\"Apr 29, 2026\"",
+          "description": "Formatted selected date."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-300",
+        "gray-400",
+        "gray-900",
+        "radius-md",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for date-specific filters, schedules, and deadlines.",
+        "Use clear date formatting aligned with the user locale."
+      ],
+      "doNotUseWhen": [
+        "Do not use Date Picker for free-text time ranges.",
+        "Do not build calendar behavior from scratch in production."
+      ],
+      "accessibility": [
+        "The preview is a button trigger with visible text.",
+        "Production calendar should support keyboard navigation and focus management."
+      ],
+      "agentGuidance": [
+        "Use Date Picker for one date.",
+        "Use a date range component when selecting start and end dates together."
+      ],
+      "code": "import { DatePicker } from \"./DatePicker\";\n\n<DatePicker value=\"Apr 29, 2026\" />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "form-actions",
+      "kind": "component",
+      "name": "Form Actions",
+      "category": "Forms",
+      "subcategory": "Composition",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Form Actions places cancel, save, submit, or review controls at the end of a form.",
+      "variants": [
+        "Default",
+        "Custom children",
+        "Cancel / save",
+        "Submit row"
+      ],
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "Cancel / Save changes",
+          "description": "Action controls."
+        }
+      ],
+      "tokens": [
+        "gray-200",
+        "spacing-3",
+        "spacing-5"
+      ],
+      "useWhen": [
+        "Use at the end of forms and settings sections.",
+        "Keep the primary action last in left-to-right layouts."
+      ],
+      "doNotUseWhen": [
+        "Do not place unrelated navigation in Form Actions.",
+        "Do not repeat the same primary action in multiple places."
+      ],
+      "accessibility": [
+        "Buttons keep visible labels.",
+        "Action order should match product risk and workflow expectations."
+      ],
+      "agentGuidance": [
+        "Use Form Actions at the bottom of Form Section.",
+        "Use Button variants to separate primary and secondary intent."
+      ],
+      "code": "import { FormActions } from \"./FormActions\";\n\n<FormActions />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "color",
+      "kind": "foundation",
+      "name": "Color",
+      "category": "Foundations",
+      "subcategory": "Tokens",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Color tokens define brand, neutral, semantic, and dark-mode roles for all components.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "brand-25..900",
+        "gray-25..900",
+        "success",
+        "warning",
+        "error",
+        "info"
+      ],
+      "useWhen": [
+        "Use brand tokens for primary actions, focus, links, and selected states.",
+        "Use semantic tokens for status and feedback.",
+        "Use gray tokens for structure, text, borders, and quiet surfaces."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "Prefer token names over hex values.",
+        "Use semantic tokens with text or icon labels so meaning is not color-only."
+      ],
+      "code": "bg-brand-700 text-white border-gray-200 text-gray-700",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "typography",
+      "kind": "foundation",
+      "name": "Typography",
+      "category": "Foundations",
+      "subcategory": "Tokens",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Typography defines readable, scannable text roles across dense internal tools and agent surfaces.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "display-xs",
+        "text-xl",
+        "text-md",
+        "text-sm",
+        "text-xs",
+        "font-sans",
+        "font-mono"
+      ],
+      "useWhen": [
+        "Use 14px as the minimum body text size.",
+        "Use monospace for code, tool names, and machine-readable identifiers.",
+        "Keep line length between 45 and 75 characters for reading surfaces."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "Reserve display styles for page-level headings.",
+        "Use text-sm for compact controls and tables, but avoid body copy below 14px."
+      ],
+      "code": "font-sans text-sm leading-5 text-gray-700",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "spacing",
+      "kind": "foundation",
+      "name": "Spacing",
+      "category": "Foundations",
+      "subcategory": "Tokens",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Spacing uses a 4px-based scale so layouts, components, and templates compose predictably.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "sp-1",
+        "sp-2",
+        "sp-3",
+        "sp-4",
+        "sp-6",
+        "sp-8",
+        "sp-12",
+        "sp-16"
+      ],
+      "useWhen": [
+        "Use small spacing tokens for icon gaps and compact controls.",
+        "Use medium spacing tokens for cards, forms, and sections.",
+        "Use large spacing tokens for major page separation."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "Choose spacing tokens by composition level: slot, component, section, page.",
+        "Do not create arbitrary pixel gaps in generated UI."
+      ],
+      "code": "gap-2 p-4 space-y-6",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "radius",
+      "kind": "foundation",
+      "name": "Radius",
+      "category": "Foundations",
+      "subcategory": "Tokens",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Radius tokens define the shape language for controls, cards, overlays, and pills.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "radius-sm",
+        "radius-md",
+        "radius-lg",
+        "radius-xl",
+        "radius-full"
+      ],
+      "useWhen": [
+        "Use radius-md for buttons and inputs.",
+        "Use radius-lg for cards, modals, and chart containers.",
+        "Use radius-full for pills, dots, and circular avatars."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "Do not make every surface overly rounded.",
+        "Match radius to the component role, not personal taste."
+      ],
+      "code": "rounded-habibiMd rounded-habibiLg rounded-full",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "shadows",
+      "kind": "foundation",
+      "name": "Shadows",
+      "category": "Foundations",
+      "subcategory": "Tokens",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Shadow tokens communicate subtle elevation without making internal tools feel decorative.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "shadow-xs",
+        "shadow-sm",
+        "shadow-md",
+        "shadow-lg"
+      ],
+      "useWhen": [
+        "Use subtle shadows for controls and cards.",
+        "Use stronger shadows only for overlays and modals.",
+        "Prefer borders over shadows when elevation is not meaningful."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "Use elevation to clarify stacking and interaction.",
+        "Do not stack multiple heavy shadows on one surface."
+      ],
+      "code": "shadow-habibiXs shadow-habibiSm shadow-habibiMd",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "dark-mode",
+      "kind": "foundation",
+      "name": "Dark Mode",
+      "category": "Foundations",
+      "subcategory": "Themes",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Dark mode maps surfaces, text, and borders deliberately instead of simply inverting colors.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "dark-deepest",
+        "dark-base",
+        "dark-raised",
+        "dark-hover",
+        "dark-border",
+        "dark-text-primary"
+      ],
+      "useWhen": [
+        "Use mapped dark surfaces for app backgrounds, cards, inputs, and overlays.",
+        "Keep semantic colors recognizable in both themes.",
+        "Use dark borders to separate surfaces without washing out the interface."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "When generating dark UI, swap surface roles rather than inverting light tokens.",
+        "Keep focus and status states visible against dark surfaces."
+      ],
+      "code": "bg-[#09090B] text-[#F4F4F5] border-white/10",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "container",
+      "kind": "component",
+      "name": "Container",
+      "category": "Layout",
+      "subcategory": "Page Structure",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Container sets responsive page width and horizontal gutters for full-page layouts.",
+      "variants": [
+        "Small",
+        "Medium",
+        "Large",
+        "Extra large",
+        "Full"
+      ],
+      "props": [
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\"",
+          "defaultValue": "\"lg\"",
+          "description": "Maximum content width."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Page content."
+        }
+      ],
+      "tokens": [
+        "spacing-4",
+        "spacing-6",
+        "spacing-8"
+      ],
+      "useWhen": [
+        "Use once around main page content.",
+        "Use size to control reading width and dashboard density."
+      ],
+      "doNotUseWhen": [
+        "Do not nest containers inside containers.",
+        "Do not use Container for card padding."
+      ],
+      "accessibility": [
+        "Container does not change semantics.",
+        "Pair with main, section, or header landmarks as needed."
+      ],
+      "agentGuidance": [
+        "Use Container for page-level horizontal rhythm.",
+        "Use Panel or Card for framed content instead of Container."
+      ],
+      "code": "import { Container } from \"./Container\";\n\n<Container size=\"lg\">\n  <DashboardHeader title=\"Analytics workspace\" />\n</Container>",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "stack",
+      "kind": "component",
+      "name": "Stack",
+      "category": "Layout",
+      "subcategory": "Composition",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Stack arranges child elements in a consistent vertical or horizontal flow.",
+      "variants": [
+        "Vertical",
+        "Horizontal",
+        "Gap xs",
+        "Gap sm",
+        "Gap md",
+        "Gap lg",
+        "Align start",
+        "Align center"
+      ],
+      "props": [
+        {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\"",
+          "defaultValue": "\"vertical\"",
+          "description": "Flow direction."
+        },
+        {
+          "name": "gap",
+          "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+          "defaultValue": "\"md\"",
+          "description": "Tokenized spacing between children."
+        },
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | \"stretch\"",
+          "defaultValue": "\"stretch\"",
+          "description": "Cross-axis alignment."
+        }
+      ],
+      "tokens": [
+        "spacing-2",
+        "spacing-3",
+        "spacing-4",
+        "spacing-6"
+      ],
+      "useWhen": [
+        "Use for simple repeated spacing between sibling elements.",
+        "Use inside forms, panels, and dashboard regions."
+      ],
+      "doNotUseWhen": [
+        "Do not use Stack when CSS grid semantics are clearer.",
+        "Do not use ad hoc margins between children when Stack can own spacing."
+      ],
+      "accessibility": [
+        "Stack preserves child order.",
+        "Use semantic child elements inside the slot."
+      ],
+      "agentGuidance": [
+        "Use Stack as the default composition primitive for vertical rhythm.",
+        "Use Grid when children should align into columns."
+      ],
+      "code": "import { Stack } from \"./Stack\";\n\n<Stack gap=\"md\">\n  <Alert title=\"Saved\" />\n  <Panel>Content</Panel>\n</Stack>",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "grid",
+      "kind": "component",
+      "name": "Grid",
+      "category": "Layout",
+      "subcategory": "Composition",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Grid arranges cards, metrics, and panels into responsive columns.",
+      "variants": [
+        "1 column",
+        "2 columns",
+        "3 columns",
+        "4 columns",
+        "Gap sm",
+        "Gap md",
+        "Gap lg"
+      ],
+      "props": [
+        {
+          "name": "columns",
+          "type": "1 | 2 | 3 | 4",
+          "defaultValue": "3",
+          "description": "Responsive column pattern."
+        },
+        {
+          "name": "gap",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "defaultValue": "\"md\"",
+          "description": "Tokenized grid gap."
+        }
+      ],
+      "tokens": [
+        "spacing-3",
+        "spacing-4",
+        "spacing-6"
+      ],
+      "useWhen": [
+        "Use for dashboards, card groups, and repeated tiles.",
+        "Use responsive columns instead of fixed pixel widths."
+      ],
+      "doNotUseWhen": [
+        "Do not use for one-dimensional lists.",
+        "Do not force too many columns into narrow viewports."
+      ],
+      "accessibility": [
+        "Grid does not change reading order.",
+        "Keep visual order aligned with DOM order."
+      ],
+      "agentGuidance": [
+        "Use Grid for repeatable dashboard modules.",
+        "Use Stack for single-column flows."
+      ],
+      "code": "import { Grid } from \"./Grid\";\n\n<Grid columns={3}>\n  <StatCard label=\"Quality\" value=\"87.3%\" />\n</Grid>",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "card",
+      "kind": "component",
+      "name": "Card",
+      "category": "Layout",
+      "subcategory": "Surfaces",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Card frames one repeatable object with optional title and footer slots.",
+      "variants": [
+        "Plain",
+        "Brand",
+        "Muted",
+        "With title",
+        "With footer"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional card heading."
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Optional footer slot."
+        },
+        {
+          "name": "tone",
+          "type": "\"plain\" | \"brand\" | \"muted\"",
+          "defaultValue": "\"plain\"",
+          "description": "Surface treatment."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-200",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for repeatable objects like workspaces, sources, or insights.",
+        "Use footer for secondary actions."
+      ],
+      "doNotUseWhen": [
+        "Do not put cards inside cards.",
+        "Do not use Card as a full page section."
+      ],
+      "accessibility": [
+        "Card renders as an article.",
+        "The title slot provides a local heading when present."
+      ],
+      "agentGuidance": [
+        "Use Card for one object; use Panel for a larger region with internal content.",
+        "Never nest Card inside Card."
+      ],
+      "code": "import { Card } from \"./Card\";\n\n<Card title=\"Workspace card\">Card content</Card>",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "panel",
+      "kind": "component",
+      "name": "Panel",
+      "category": "Layout",
+      "subcategory": "Surfaces",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Panel frames a larger dashboard region with header, description, actions, and body slots.",
+      "variants": [
+        "Default",
+        "With actions",
+        "With description",
+        "Body only"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Panel heading."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Supporting panel copy."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Header action slot."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Panel body."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for dashboard regions, data tables, and grouped workflow content.",
+        "Use actions for region-level commands."
+      ],
+      "doNotUseWhen": [
+        "Do not use Panel for a single small object where Card is enough.",
+        "Do not nest panels inside panels."
+      ],
+      "accessibility": [
+        "Panel renders as a section.",
+        "Use clear titles for landmark-like regions."
+      ],
+      "agentGuidance": [
+        "Use Panel for major dashboard blocks.",
+        "Use Card inside Grid for repeatable objects, not Panel."
+      ],
+      "code": "import { Panel } from \"./Panel\";\n\n<Panel title=\"Recent activity\" actions={<Button>View all</Button>}>\n  Content\n</Panel>",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "section",
+      "kind": "component",
+      "name": "Section",
+      "category": "Layout",
+      "subcategory": "Page Structure",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Section creates full-width page bands with optional intro copy and constrained inner content.",
+      "variants": [
+        "Plain",
+        "Muted",
+        "Brand",
+        "With eyebrow",
+        "With title",
+        "With description"
+      ],
+      "props": [
+        {
+          "name": "tone",
+          "type": "\"plain\" | \"muted\" | \"brand\"",
+          "defaultValue": "\"plain\"",
+          "description": "Section background treatment."
+        },
+        {
+          "name": "eyebrow",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional section label."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional section heading."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional introduction copy."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "spacing-8"
+      ],
+      "useWhen": [
+        "Use to divide full-page experiences into bands.",
+        "Use when a section needs its own intro copy."
+      ],
+      "doNotUseWhen": [
+        "Do not style sections as floating cards.",
+        "Do not use Section inside Card or Panel."
+      ],
+      "accessibility": [
+        "Section renders as a section landmark.",
+        "Use headings in order across the page."
+      ],
+      "agentGuidance": [
+        "Use Section for page bands and Container for page gutters.",
+        "Do not place Section inside framed surfaces."
+      ],
+      "code": "import { Section } from \"./Section\";\n\n<Section title=\"Dashboard section\" tone=\"muted\">\n  <Grid columns={2}>...</Grid>\n</Section>",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "sidebar",
+      "kind": "component",
+      "name": "Sidebar",
+      "category": "Layout",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Sidebar provides persistent workspace navigation with active item and metadata slots.",
+      "variants": [
+        "Default",
+        "Active item",
+        "With metadata",
+        "Workspace nav"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "SidebarItem[]",
+          "defaultValue": "defaultItems",
+          "description": "Navigation rows with label, meta, and active state."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "\"Design Library\"",
+          "description": "Navigation label and visible title."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for persistent app or workspace navigation.",
+        "Use active state to show the current route."
+      ],
+      "doNotUseWhen": [
+        "Do not use Sidebar for short local option lists.",
+        "Do not hide important labels behind icons only."
+      ],
+      "accessibility": [
+        "Sidebar contains a labeled nav region.",
+        "Navigation items are keyboard reachable buttons in this demo."
+      ],
+      "agentGuidance": [
+        "Use Sidebar in full-page app shells.",
+        "Use Tabs or Menu for local navigation inside a panel."
+      ],
+      "code": "import { Sidebar } from \"./Sidebar\";\n\n<Sidebar items={items} title=\"Nexus\" />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "topbar",
+      "kind": "component",
+      "name": "Topbar",
+      "category": "Layout",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Topbar provides workspace title, search, utility actions, and user identity in an application shell.",
+      "variants": [
+        "Default",
+        "With search",
+        "With utility actions",
+        "With avatar",
+        "Custom actions"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "\"Nexus workspace\"",
+          "description": "Current workspace or page title."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "defaultValue": "Help / notifications / avatar",
+          "description": "Right-side action slot."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use at the top of app shells and workspaces.",
+        "Use search only when the workspace supports search."
+      ],
+      "doNotUseWhen": [
+        "Do not use Topbar inside a card.",
+        "Do not duplicate page-level actions already in Dashboard Header."
+      ],
+      "accessibility": [
+        "Icon controls include aria labels.",
+        "Search input has an accessible label."
+      ],
+      "agentGuidance": [
+        "Use Topbar with Sidebar for full application shell templates.",
+        "Use Dashboard Header for page content title below the shell."
+      ],
+      "code": "import { Topbar } from \"./Topbar\";\n\n<Topbar title=\"Nexus workspace\" />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "tabs",
+      "kind": "component",
+      "name": "Tabs",
+      "category": "Navigation",
+      "subcategory": "Local Navigation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Tabs switch between peer sections within the same page, panel, or workspace.",
+      "variants": [
+        "Default",
+        "Active",
+        "With count",
+        "Scrollable",
+        "Wrapped"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "TabItem[]",
+          "defaultValue": "defaultItems",
+          "description": "Tab labels with optional count and active state."
+        }
+      ],
+      "tokens": [
+        "gray-100",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-700",
+        "brand-50",
+        "brand-700"
+      ],
+      "useWhen": [
+        "Use for sibling views at the same hierarchy level.",
+        "Use counts for lists, runs, or source totals."
+      ],
+      "doNotUseWhen": [
+        "Do not use tabs for global navigation.",
+        "Do not put unrelated tasks in one tab set."
+      ],
+      "accessibility": [
+        "Uses tablist and tab roles.",
+        "Production state should wire keyboard arrow navigation."
+      ],
+      "agentGuidance": [
+        "Use Tabs for local view switching inside a page.",
+        "Use Sidebar or Menu for app-level navigation."
+      ],
+      "code": "import { Tabs } from \"./Tabs\";\n\n<Tabs items={items} />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "breadcrumb",
+      "kind": "component",
+      "name": "Breadcrumb",
+      "category": "Navigation",
+      "subcategory": "Wayfinding",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Breadcrumb shows the user's path through nested pages or workspace hierarchy.",
+      "variants": [
+        "Default",
+        "Current page",
+        "With home icon",
+        "Long path"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "BreadcrumbItem[]",
+          "defaultValue": "defaultItems",
+          "description": "Ordered path items with optional current state."
+        }
+      ],
+      "tokens": [
+        "gray-50",
+        "gray-300",
+        "gray-500",
+        "gray-700",
+        "radius-sm"
+      ],
+      "useWhen": [
+        "Use on detail pages nested inside a broader workspace.",
+        "Use when users need a quick way back to parent contexts."
+      ],
+      "doNotUseWhen": [
+        "Do not use breadcrumbs as the primary navigation.",
+        "Do not show breadcrumbs on shallow one-page tools."
+      ],
+      "accessibility": [
+        "Uses a breadcrumb nav landmark.",
+        "The current page item sets aria-current."
+      ],
+      "agentGuidance": [
+        "Use Breadcrumb above page titles for nested detail screens.",
+        "Keep labels short and page-like."
+      ],
+      "code": "import { Breadcrumb } from \"./Breadcrumb\";\n\n<Breadcrumb items={items} />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "pagination",
+      "kind": "component",
+      "name": "Pagination",
+      "category": "Navigation",
+      "subcategory": "Collection Navigation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Pagination moves through pages of tabular, list, or search-result content.",
+      "variants": [
+        "Default",
+        "Current page",
+        "Previous / next",
+        "Five pages"
+      ],
+      "props": [
+        {
+          "name": "currentPage",
+          "type": "number",
+          "defaultValue": "2",
+          "description": "Active page."
+        },
+        {
+          "name": "pageCount",
+          "type": "number",
+          "defaultValue": "5",
+          "description": "Total page buttons rendered."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-300",
+        "gray-600",
+        "gray-700",
+        "brand-50",
+        "brand-700",
+        "radius-md",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for paged tables, source lists, and search results.",
+        "Keep the active page clearly visible."
+      ],
+      "doNotUseWhen": [
+        "Do not use for short lists that fit comfortably on one page.",
+        "Do not hide previous and next labels behind icons only."
+      ],
+      "accessibility": [
+        "Uses a pagination nav landmark.",
+        "The current page sets aria-current."
+      ],
+      "agentGuidance": [
+        "Use Pagination when content is split into numbered pages.",
+        "Use infinite scroll only if specifically requested by product."
+      ],
+      "code": "import { Pagination } from \"./Pagination\";\n\n<Pagination currentPage={2} pageCount={5} />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "menu",
+      "kind": "component",
+      "name": "Menu",
+      "category": "Navigation",
+      "subcategory": "Action Navigation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Menu presents a compact list of destinations or actions with icon and metadata slots.",
+      "variants": [
+        "Default",
+        "Active item",
+        "With metadata",
+        "Icon menu"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "MenuItem[]",
+          "defaultValue": "defaultItems",
+          "description": "Menu rows with label, meta, and active state."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in popovers, drawers, or compact navigation panels.",
+        "Use metadata when choices need clarification."
+      ],
+      "doNotUseWhen": [
+        "Do not use Menu for long data collections.",
+        "Do not put destructive actions beside routine navigation without separation."
+      ],
+      "accessibility": [
+        "Uses menu and menuitem roles.",
+        "Production behavior should add roving focus and Escape handling."
+      ],
+      "agentGuidance": [
+        "Use Menu for compact navigation or action groups.",
+        "Use Sidebar for persistent app navigation."
+      ],
+      "code": "import { Menu } from \"./Menu\";\n\n<Menu items={items} />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "steps",
+      "kind": "component",
+      "name": "Steps",
+      "category": "Navigation",
+      "subcategory": "Workflow Navigation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Steps show progress through a linear workflow such as setup, analysis, and publish.",
+      "variants": [
+        "Complete",
+        "Active",
+        "Pending",
+        "With description",
+        "Three-step flow"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "StepItem[]",
+          "defaultValue": "defaultItems",
+          "description": "Ordered steps with label, description, and status."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for linear setup, review, approval, and publish flows.",
+        "Use concise labels and one-line descriptions."
+      ],
+      "doNotUseWhen": [
+        "Do not use for non-linear navigation.",
+        "Do not show too many steps without grouping."
+      ],
+      "accessibility": [
+        "Steps render as an ordered list.",
+        "Status is visible through text context and icon state."
+      ],
+      "agentGuidance": [
+        "Use Steps when a user must understand where they are in a process.",
+        "Use Progress for percentage completion instead."
+      ],
+      "code": "import { Steps } from \"./Steps\";\n\n<Steps items={items} />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "sidebar-nav-item",
+      "kind": "component",
+      "name": "Sidebar Nav Item",
+      "category": "Navigation",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Sidebar Nav Item is the repeatable row primitive for persistent workspace sidebars.",
+      "variants": [
+        "Default",
+        "Active",
+        "With meta",
+        "With badge",
+        "With icon"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Visible nav label."
+        },
+        {
+          "name": "meta",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional supporting line."
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Active route state."
+        },
+        {
+          "name": "badge",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Optional count or status slot."
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "defaultValue": "MessageSquareText",
+          "description": "Leading icon slot."
+        }
+      ],
+      "tokens": [
+        "gray-50",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-md"
+      ],
+      "useWhen": [
+        "Use inside Sidebar for route-level navigation.",
+        "Use badges for counts or status only when they help scanning."
+      ],
+      "doNotUseWhen": [
+        "Do not use for command menus or one-off action lists.",
+        "Do not make labels icon-only in dense enterprise tools."
+      ],
+      "accessibility": [
+        "The item is keyboard reachable and keeps visible text.",
+        "Use link semantics in production when routing."
+      ],
+      "agentGuidance": [
+        "Use Sidebar Nav Item as the child primitive for app sidebars.",
+        "Use Menu Item patterns for popover menus."
+      ],
+      "code": "import { SidebarNavItem } from \"./SidebarNavItem\";\n\n<SidebarNavItem active label=\"Agent chat\" meta=\"Conversation workspace\" />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "command-palette",
+      "kind": "component",
+      "name": "Command Palette",
+      "category": "Navigation",
+      "subcategory": "Command Navigation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Command Palette lets users search pages, commands, sources, and agent workflows from one overlay.",
+      "variants": [
+        "Default",
+        "Highlighted result",
+        "With shortcut",
+        "Agent commands",
+        "Source commands"
+      ],
+      "props": [
+        {
+          "name": "commands",
+          "type": "CommandItem[]",
+          "defaultValue": "defaultCommands",
+          "description": "Command rows with label, description, and type."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-400",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-md"
+      ],
+      "useWhen": [
+        "Use for cross-workspace search and fast command execution.",
+        "Use when the product has many agent workflows or pages."
+      ],
+      "doNotUseWhen": [
+        "Do not use as the only way to access core navigation.",
+        "Do not include unsafe actions without confirmation."
+      ],
+      "accessibility": [
+        "Search input has a label and results are buttons.",
+        "Production overlay should manage focus, Escape, and keyboard selection."
+      ],
+      "agentGuidance": [
+        "Use Command Palette for global search and task launch.",
+        "Use Quick Action Panel when commands should stay visible on a dashboard."
+      ],
+      "code": "import { CommandPalette } from \"./CommandPalette\";\n\n<CommandPalette commands={commands} />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "badge",
+      "kind": "component",
+      "name": "Badge / Pill",
+      "category": "Primitives",
+      "subcategory": "Status",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Badges and pills label status, severity, filters, versions, and compact metadata.",
+      "variants": [
+        "Success",
+        "Error",
+        "Warning",
+        "Brand",
+        "Info",
+        "Neutral",
+        "Dot",
+        "Filter pill"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"success\" | \"error\" | \"warning\" | \"brand\" | \"info\" | \"neutral\"",
+          "defaultValue": "\"neutral\"",
+          "description": "Controls semantic color treatment."
+        },
+        {
+          "name": "dot",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Adds a small status dot before the label."
+        }
+      ],
+      "tokens": [
+        "success-50",
+        "success-700",
+        "error-50",
+        "warning-50",
+        "brand-50",
+        "info-50",
+        "gray-100",
+        "radius-full"
+      ],
+      "useWhen": [
+        "Use badges for compact status or metadata.",
+        "Use dot badges for presence or run state.",
+        "Use filter pills when values can be toggled."
+      ],
+      "doNotUseWhen": [
+        "Do not use color alone to communicate status.",
+        "Do not use badges as primary actions."
+      ],
+      "accessibility": [
+        "Badge text must include the status meaning.",
+        "Do not rely only on dot color for meaning."
+      ],
+      "agentGuidance": [
+        "Use semantic variants for status labels.",
+        "Pair badges with tables, cards, and tool-call rows."
+      ],
+      "code": "import { Badge } from \"./Badge\";\n\n<Badge dot variant=\"success\">Active</Badge>\n<Badge variant=\"brand\">Version 1</Badge>",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "avatar",
+      "kind": "component",
+      "name": "Avatar",
+      "category": "Primitives",
+      "subcategory": "Identity",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Avatars identify people, agents, and presence states across chat, navigation, and lists.",
+      "variants": [
+        "User circle",
+        "Agent square",
+        "Initials",
+        "Image",
+        "Status dot",
+        "sm",
+        "md",
+        "lg"
+      ],
+      "props": [
+        {
+          "name": "shape",
+          "type": "\"circle\" | \"agent\"",
+          "defaultValue": "\"circle\"",
+          "description": "Controls whether the avatar represents a person or an AI agent."
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "defaultValue": "\"md\"",
+          "description": "Controls avatar dimensions."
+        },
+        {
+          "name": "status",
+          "type": "\"online\" | \"away\" | \"offline\"",
+          "defaultValue": "-",
+          "description": "Optional presence indicator."
+        },
+        {
+          "name": "initials",
+          "type": "string",
+          "defaultValue": "\"AI\"",
+          "description": "Fallback text when no image is provided."
+        }
+      ],
+      "tokens": [
+        "brand-700",
+        "gray-200",
+        "success-500",
+        "warning-500",
+        "gray-400",
+        "radius-full",
+        "radius-md"
+      ],
+      "useWhen": [
+        "Use circular avatars for people.",
+        "Use rounded-square avatars for agents.",
+        "Use status dots only when presence matters."
+      ],
+      "doNotUseWhen": [
+        "Do not infer personal identity from an image.",
+        "Do not use decorative avatars without an accessible label when identity matters."
+      ],
+      "accessibility": [
+        "Provide alt text when the avatar communicates identity.",
+        "Keep status paired with text nearby when status is important."
+      ],
+      "agentGuidance": [
+        "Use agent shape for assistants and tools.",
+        "Use user shape for people in chat and navigation."
+      ],
+      "code": "import { Avatar } from \"./Avatar\";\n\n<Avatar alt=\"Agent\" initials=\"AI\" shape=\"agent\" />\n<Avatar alt=\"Gurney\" initials=\"GK\" status=\"online\" />",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "divider",
+      "kind": "component",
+      "name": "Divider",
+      "category": "Primitives",
+      "subcategory": "Structure",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Dividers separate related content, toolbar groups, list sections, and panel regions.",
+      "variants": [
+        "Horizontal",
+        "Vertical"
+      ],
+      "props": [
+        {
+          "name": "orientation",
+          "type": "\"horizontal\" | \"vertical\"",
+          "defaultValue": "\"horizontal\"",
+          "description": "Controls divider direction."
+        }
+      ],
+      "tokens": [
+        "gray-200",
+        "dark-border",
+        "spacing-2",
+        "spacing-4"
+      ],
+      "useWhen": [
+        "Use dividers to separate related groups.",
+        "Use vertical dividers inside compact horizontal chrome."
+      ],
+      "doNotUseWhen": [
+        "Do not use dividers to compensate for weak hierarchy.",
+        "Do not over-separate every small element."
+      ],
+      "accessibility": [
+        "Dividers use separator semantics.",
+        "Do not place focus on passive dividers."
+      ],
+      "agentGuidance": [
+        "Use dividers inside cards, sidebars, tables, and topbars when grouping helps scanning."
+      ],
+      "code": "import { Divider } from \"./Divider\";\n\n<Divider />\n<Divider orientation=\"vertical\" />",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "tooltip",
+      "kind": "component",
+      "name": "Tooltip",
+      "category": "Primitives",
+      "subcategory": "Help",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Tooltips provide short contextual help for icons, metrics, and unfamiliar controls.",
+      "variants": [
+        "Hover",
+        "Focus",
+        "With arrow",
+        "Max width"
+      ],
+      "props": [
+        {
+          "name": "content",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Tooltip body text."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Trigger element."
+        }
+      ],
+      "tokens": [
+        "gray-900",
+        "white",
+        "shadow-md",
+        "radius-sm",
+        "spacing-2",
+        "spacing-3"
+      ],
+      "useWhen": [
+        "Use tooltips to answer what an icon or metric means.",
+        "Keep tooltip copy short and specific."
+      ],
+      "doNotUseWhen": [
+        "Do not hide required information only in a tooltip.",
+        "Do not use tooltips for long instructions."
+      ],
+      "accessibility": [
+        "Tooltip appears on hover and focus-within.",
+        "Trigger controls still need accessible names."
+      ],
+      "agentGuidance": [
+        "Use tooltips for compact explanatory text, not onboarding copy.",
+        "Prefer visible helper text for form requirements."
+      ],
+      "code": "import { Tooltip } from \"./Tooltip\";\n\n<Tooltip content=\"This explains the metric.\">\n  <button aria-label=\"Metric help\">?</button>\n</Tooltip>",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "surface",
+      "kind": "component",
+      "name": "Surface / Card Base",
+      "category": "Primitives",
+      "subcategory": "Containers",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Surface is the base container primitive for cards, panels, selected regions, and repeated items.",
+      "variants": [
+        "Plain",
+        "Raised",
+        "Brand",
+        "sm padding",
+        "md padding",
+        "lg padding"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"plain\" | \"raised\" | \"brand\"",
+          "defaultValue": "\"plain\"",
+          "description": "Controls surface emphasis."
+        },
+        {
+          "name": "padding",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "defaultValue": "\"md\"",
+          "description": "Controls internal spacing."
+        }
+      ],
+      "tokens": [
+        "white",
+        "brand-50",
+        "brand-200",
+        "gray-200",
+        "radius-lg",
+        "shadow-xs",
+        "shadow-sm",
+        "spacing-4",
+        "spacing-6"
+      ],
+      "useWhen": [
+        "Use Surface as the base for cards and panels.",
+        "Use brand surfaces for selected or highlighted regions."
+      ],
+      "doNotUseWhen": [
+        "Do not nest cards inside cards unless the inner item is a distinct repeated object.",
+        "Do not use brand surfaces as decoration."
+      ],
+      "accessibility": [
+        "Use semantic HTML inside the surface for headings, lists, and actions.",
+        "Do not rely on surface color alone for selection state."
+      ],
+      "agentGuidance": [
+        "Use Surface before inventing a new card wrapper.",
+        "Compose Surface with Badge, Button, Divider, and Avatar for common cards."
+      ],
+      "code": "import { Surface } from \"./Surface\";\n\n<Surface variant=\"raised\">\n  <h3>Agent status</h3>\n  <p>Ready to run</p>\n</Surface>",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "template-analytics-agent-workspace",
+      "kind": "template",
+      "name": "Analytics Agent Workspace",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A full agent workspace combining chat, tool activity, citations, source review, charts, and insight cards.",
+      "variants": [
+        "Full page",
+        "Chat plus sources",
+        "With dashboard context",
+        "With tool activity"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use as the reference composition for analytics chat surfaces.",
+        "Use when an agent answer needs evidence, dashboard context, and follow-up actions."
+      ],
+      "doNotUseWhen": [
+        "Do not use this full template for a compact embedded assistant.",
+        "Do not remove source review when claims require evidence."
+      ],
+      "accessibility": [
+        "Composed from semantic sections, buttons, and readable message order.",
+        "Future production shell should manage chat scroll and source drawer focus."
+      ],
+      "agentGuidance": [
+        "Compose from Chat Surface, Chat Message, Citation Chip, Tool Call Card, Source Drawer, Summary Chart Card, and Insight Card.",
+        "Keep the chat stream and source review adjacent when an answer depends on evidence."
+      ],
+      "code": "import { AnalyticsAgentWorkspace } from \"./AnalyticsAgentWorkspace\";\n\n<AnalyticsAgentWorkspace />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-dashboard-overview",
+      "kind": "template",
+      "name": "Dashboard Overview",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A product dashboard shell with sidebar, topbar, workspace header, metrics, charts, activity, and quick actions.",
+      "variants": [
+        "Full page",
+        "Sidebar shell",
+        "Metric grid",
+        "Activity and actions"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "warning-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use as the baseline for Nexus and cross-project dashboard pages.",
+        "Use when teams need a balanced view of metrics, work activity, and next actions."
+      ],
+      "doNotUseWhen": [
+        "Do not use this density for marketing landing pages.",
+        "Do not add unrelated cards just to fill the grid."
+      ],
+      "accessibility": [
+        "Uses visible labels across navigation, search, and card actions.",
+        "Chart panels need production text alternatives for underlying data."
+      ],
+      "agentGuidance": [
+        "Compose with Topbar, Sidebar, Dashboard Header, Grid, Panel, Summary Chart Card, Activity Feed, and Quick Action Panel.",
+        "Use this template when generating operational dashboards, not conversational-first pages."
+      ],
+      "code": "import { DashboardOverview } from \"./DashboardOverview\";\n\n<DashboardOverview />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-inci-lookup-view",
+      "kind": "template",
+      "name": "INCI Lookup View",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A product-information workflow for ingredient lookup, file upload, source review, and evidence-backed summary.",
+      "variants": [
+        "Lookup form",
+        "Source drawer",
+        "Upload state",
+        "Review needed"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "warning-50",
+        "success-50"
+      ],
+      "useWhen": [
+        "Use for product information, ingredient, and source-review workflows.",
+        "Use when the workflow starts with structured lookup fields and source evidence."
+      ],
+      "doNotUseWhen": [
+        "Do not use for general dashboards where product lookup is not the primary task.",
+        "Do not show regulatory or ingredient claims without source context."
+      ],
+      "accessibility": [
+        "Fields keep visible labels and source rows remain readable.",
+        "Production combobox and date behaviors should use full keyboard support."
+      ],
+      "agentGuidance": [
+        "Compose with Panel, Form Field, Combobox, File Upload, Description List, Empty State, Source Drawer, and Badge.",
+        "Use this template when generating product intelligence or INCI workflows."
+      ],
+      "code": "import { InciLookupView } from \"./InciLookupView\";\n\n<InciLookupView />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-empty-state-library",
+      "kind": "template",
+      "name": "Empty State Library",
+      "category": "Templates / Blocks",
+      "subcategory": "Blocks",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A reusable set of empty-state blocks for conversation, source, and insight-first workflows.",
+      "variants": [
+        "No conversation",
+        "No sources",
+        "No insights",
+        "With action"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when a workspace has no content yet and the next best action is clear.",
+        "Use to keep blank pages useful and calm."
+      ],
+      "doNotUseWhen": [
+        "Do not use vague empty-state copy.",
+        "Do not show more than one primary action per empty state."
+      ],
+      "accessibility": [
+        "Each empty state has a visible title, description, and labeled action.",
+        "Icon meaning is supported by text."
+      ],
+      "agentGuidance": [
+        "Use Empty State Library patterns for first-run, no-source, and no-insight states.",
+        "Make the action specific to the missing content."
+      ],
+      "code": "import { EmptyStateLibrary } from \"./EmptyStateLibrary\";\n\n<EmptyStateLibrary />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-marketing-workspace",
+      "kind": "template",
+      "name": "Marketing Workspace",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A marketing-agent workspace for campaign analysis, brief generation, audience direction, and chat follow-up.",
+      "variants": [
+        "Full page",
+        "Brief builder",
+        "Agent chat",
+        "Campaign performance"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "warning-50",
+        "radius-lg"
+      ],
+      "useWhen": [
+        "Use for campaign planning and agent-assisted brief generation.",
+        "Use when marketing teams need charts, structured inputs, and conversation in one workspace."
+      ],
+      "doNotUseWhen": [
+        "Do not use for pure reporting dashboards without brief generation.",
+        "Do not publish agent suggestions without source or review context."
+      ],
+      "accessibility": [
+        "Composed from labeled fields, sections, buttons, and readable chat order.",
+        "Production chart data should include non-visual summaries."
+      ],
+      "agentGuidance": [
+        "Compose with Dashboard Header, Insight Card, Quick Action Panel, Panel, Form Field, Textarea, Chat Surface, and Suggestion Chips.",
+        "Use this template when the workflow output is a campaign brief or marketing recommendation."
+      ],
+      "code": "import { MarketingWorkspace } from \"./MarketingWorkspace\";\n\n<MarketingWorkspace />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-auth-screen",
+      "kind": "template",
+      "name": "Auth Screen",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A restrained internal-tool sign-in screen with trust messaging, form fields, validation, and primary action.",
+      "variants": [
+        "Split layout",
+        "Email and password",
+        "SSO-ready",
+        "Internal notice"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "info-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for internal product authentication and protected design-library contexts.",
+        "Use when permission and trust messaging must be clear."
+      ],
+      "doNotUseWhen": [
+        "Do not use as a marketing landing page.",
+        "Do not add decorative content that distracts from sign-in."
+      ],
+      "accessibility": [
+        "Fields have visible labels and the primary action has visible text.",
+        "Production auth should use real form semantics and identity-provider behavior."
+      ],
+      "agentGuidance": [
+        "Compose with Alert, Form Field, Input, Validation Message, and Button.",
+        "Keep auth screens quiet, direct, and security-focused."
+      ],
+      "code": "import { AuthScreen } from \"./AuthScreen\";\n\n<AuthScreen />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-citation-review-block",
+      "kind": "template",
+      "name": "Citation Review Block",
+      "category": "Templates / Blocks",
+      "subcategory": "Blocks",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A review block for inspecting an agent answer, mapped citations, source drawer, and approval actions.",
+      "variants": [
+        "Answer review",
+        "Source drawer",
+        "Approval actions",
+        "Citation mapped"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "warning-50",
+        "success-50",
+        "radius-lg"
+      ],
+      "useWhen": [
+        "Use when an agent answer needs human review before publishing.",
+        "Use when citations and source evidence must stay visible together."
+      ],
+      "doNotUseWhen": [
+        "Do not use for answers without source evidence.",
+        "Do not hide approval context behind a modal if review is the main task."
+      ],
+      "accessibility": [
+        "The answer and sources remain in readable order.",
+        "Approval actions use visible labels."
+      ],
+      "agentGuidance": [
+        "Compose with Panel, Citation Chip, Source Drawer, Description List, Badge, and Button.",
+        "Use this block whenever a workflow needs citation-backed approval."
+      ],
+      "code": "import { CitationReviewBlock } from \"./CitationReviewBlock\";\n\n<CitationReviewBlock />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-settings-form-screen",
+      "kind": "template",
+      "name": "Settings Form Screen",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A settings workflow for configuring workspace details, agent behavior, review dates, and save actions.",
+      "variants": [
+        "Workspace details",
+        "Agent behavior",
+        "Validation",
+        "Save actions"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for admin settings, workspace setup, and agent configuration pages.",
+        "Use when a form needs grouped sections and clear save/cancel behavior."
+      ],
+      "doNotUseWhen": [
+        "Do not use for short inline edits where a modal or panel is enough.",
+        "Do not mix unrelated settings in one section."
+      ],
+      "accessibility": [
+        "Fields and controls keep visible labels.",
+        "Validation appears near the actions and uses text plus icon."
+      ],
+      "agentGuidance": [
+        "Compose with Alert, Form Section, Form Group, Form Field, Combobox, Date Picker, Switch, Checkbox, Validation Message, and Form Actions.",
+        "Use this template when generating configuration or setup workflows."
+      ],
+      "code": "import { SettingsFormScreen } from \"./SettingsFormScreen\";\n\n<SettingsFormScreen />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    }
+  ]
+}

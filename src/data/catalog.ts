@@ -46,6 +46,7 @@ import {
   thinkingStateEntry,
   toolCallCardEntry,
 } from "./agentEntries";
+import { agentManifestEntry } from "./agentReferenceEntries";
 import {
   descriptionListEntry,
   emptyStateEntry,
@@ -214,6 +215,7 @@ export const catalog = [
   activityFeedEntry,
   insightCardEntry,
   quickActionPanelEntry,
+  agentManifestEntry,
   alertEntry,
   bannerEntry,
   spinnerEntry,

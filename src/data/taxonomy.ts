@@ -10,6 +10,7 @@ export const taxonomy = [
   "Charts / Data Viz",
   "Agent UI",
   "Dashboard / Product Patterns",
+  "Agent Reference",
   "Templates / Blocks",
 ] as const;
 
