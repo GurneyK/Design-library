@@ -1,7 +1,9 @@
 import { ActivityFeed } from "../components/ui/dashboard/ActivityFeed";
 import { DashboardHeader } from "../components/ui/dashboard/DashboardHeader";
+import { EvaluationScorecard } from "../components/ui/dashboard/EvaluationScorecard";
 import { InsightCard } from "../components/ui/dashboard/InsightCard";
 import { QuickActionPanel } from "../components/ui/dashboard/QuickActionPanel";
+import { RunCard } from "../components/ui/dashboard/RunCard";
 import { RunStatusPill } from "../components/ui/dashboard/RunStatusPill";
 import { WorkspaceSwitcher } from "../components/ui/dashboard/WorkspaceSwitcher";
 import type { CatalogEntry } from "./catalog";
@@ -50,6 +52,19 @@ function InsightCardPreview() {
 
 function QuickActionPanelPreview() {
   return <QuickActionPanel />;
+}
+
+function RunCardPreview() {
+  return (
+    <div className="space-y-4">
+      <RunCard title="Analytics evaluation run" />
+      <RunCard description="Exporting approved campaign summary to the dashboard workspace." progress={100} status="complete" title="Dashboard export" />
+    </div>
+  );
+}
+
+function EvaluationScorecardPreview() {
+  return <EvaluationScorecard />;
 }
 
 const dashboardDefaults = {
@@ -179,4 +194,46 @@ export const quickActionPanelEntry: CatalogEntry = {
   accessibility: ["Search input has an accessible label.", "Actions are buttons with visible labels and descriptions."],
   agentGuidance: ["Use Quick Action Panel to expose common AI workflows such as chat, analysis, source review, and drafting.", "Keep labels short and descriptions concrete."],
   code: `import { QuickActionPanel } from "./QuickActionPanel";\n\n<QuickActionPanel actions={actions} />`,
+};
+
+export const runCardEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "run-card",
+  name: "Run Card",
+  subcategory: "Runs",
+  description: "Run Card summarizes an agent run or export with status, progress, timing, and a detail action.",
+  preview: RunCardPreview,
+  variants: ["Running", "Complete", "Queued", "Failed", "With progress", "With action"],
+  props: [
+    { name: "title", type: "string", defaultValue: "-", description: "Run title." },
+    { name: "description", type: "string", defaultValue: "-", description: "Short run summary." },
+    { name: "status", type: '"queued" | "running" | "complete" | "failed"', defaultValue: '"running"', description: "Run state." },
+    { name: "progress", type: "number", defaultValue: "72", description: "Progress value from 0 to 100." },
+  ],
+  tokens: ["white", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "success-50", "error-50", "radius-lg", "shadow-xs"],
+  usage: ["Use for agent runs, exports, analysis jobs, and evaluation jobs.", "Pair with Activity Feed or Timeline for more detailed history."],
+  avoid: ["Do not use for static status labels; use Run Status Pill.", "Do not show progress if the backend cannot estimate it."],
+  accessibility: ["Progress uses semantic progressbar from Progress.", "Status is visible as text."],
+  agentGuidance: ["Use Run Card when an AI workflow is job-like and has state over time.", "Use Tool Call Card for one tool event inside a conversation."],
+  code: `import { RunCard } from "./RunCard";\n\n<RunCard title="Analytics evaluation run" status="running" progress={72} />`,
+};
+
+export const evaluationScorecardEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "evaluation-scorecard",
+  name: "Evaluation Scorecard",
+  subcategory: "Evaluation",
+  description: "Evaluation Scorecard summarizes answer quality, source coverage, and policy checks for an agent run.",
+  preview: EvaluationScorecardPreview,
+  variants: ["Default", "Overall score", "Quality metric", "Source coverage", "Policy checks"],
+  props: [
+    { name: "score", type: "string", defaultValue: '"91%"', description: "Overall evaluation score." },
+    { name: "metrics", type: "EvaluationMetric[]", defaultValue: "defaultMetrics", description: "Metric labels and values." },
+  ],
+  tokens: ["white", "gray-200", "gray-500", "gray-900", "success-50", "success-700", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use after agent evaluations, red-team checks, and source coverage reviews.", "Use when teams need a quick quality read before publishing."],
+  avoid: ["Do not show scores without explaining what they measure.", "Do not use as a substitute for detailed evaluation logs."],
+  accessibility: ["Each metric uses visible labels and progress semantics.", "Overall score is text, not color-only."],
+  agentGuidance: ["Use Evaluation Scorecard for quality gates and review workflows.", "Pair with Citation Review Block or Run Card when users need more context."],
+  code: `import { EvaluationScorecard } from "./EvaluationScorecard";\n\n<EvaluationScorecard score="91%" metrics={metrics} />`,
 };

@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 100,
+    "entries": 104,
     "categories": 13,
     "templates": 8
   },
@@ -791,6 +791,125 @@
         "Describe observable workflow steps like retrieval, validation, or drafting."
       ],
       "code": "import { ThinkingState } from \"./ThinkingState\";\n\n<ThinkingState label=\"Checking sources\" steps={steps} />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "prompt-card",
+      "kind": "component",
+      "name": "Prompt Card",
+      "category": "Agent UI",
+      "subcategory": "Prompting",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Prompt Card packages a reusable prompt with tags, description, and copy action.",
+      "variants": [
+        "Default",
+        "With tags",
+        "Copy action",
+        "Prompt metadata"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Prompt title."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Prompt body or summary."
+        },
+        {
+          "name": "tags",
+          "type": "string[]",
+          "defaultValue": "default tags",
+          "description": "Prompt categories and usage labels."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for reusable prompts in libraries and quick-start panels.",
+        "Use tags to show workflow, domain, or review status."
+      ],
+      "doNotUseWhen": [
+        "Do not use for live chat messages.",
+        "Do not store sensitive prompt text without access control."
+      ],
+      "accessibility": [
+        "Copy action has visible text.",
+        "Prompt title and description remain readable without icon meaning."
+      ],
+      "agentGuidance": [
+        "Use Prompt Card when presenting reusable prompt starters.",
+        "Pair with Prompt Library when multiple prompts need search and scanning."
+      ],
+      "code": "import { PromptCard } from \"./PromptCard\";\n\n<PromptCard title=\"Summarize evaluation run\" tags={[\"Analytics\", \"Review\"]} />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "prompt-library",
+      "kind": "component",
+      "name": "Prompt Library",
+      "category": "Agent UI",
+      "subcategory": "Prompting",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Prompt Library combines search and prompt cards so teams can reuse approved agent prompts.",
+      "variants": [
+        "Default",
+        "Search",
+        "Three-card grid",
+        "Approved prompts"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use inside agent workspaces and settings pages where prompt reuse matters.",
+        "Use for approved prompts, starter prompts, and workflow snippets."
+      ],
+      "doNotUseWhen": [
+        "Do not mix approved prompts with unreviewed prompt drafts without status labels.",
+        "Do not use when a single Suggestion Chip row is enough."
+      ],
+      "accessibility": [
+        "Search input has an accessible label.",
+        "Prompt cards remain readable in source order."
+      ],
+      "agentGuidance": [
+        "Use Prompt Library for curated prompt collections.",
+        "Use Suggestion Chips for context-specific next prompts after a response."
+      ],
+      "code": "import { PromptLibrary } from \"./PromptLibrary\";\n\n<PromptLibrary />",
       "sourceFile": "src/data/agentEntries.tsx"
     },
     {
@@ -1650,6 +1769,149 @@
         "Keep labels short and descriptions concrete."
       ],
       "code": "import { QuickActionPanel } from \"./QuickActionPanel\";\n\n<QuickActionPanel actions={actions} />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "run-card",
+      "kind": "component",
+      "name": "Run Card",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Runs",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Run Card summarizes an agent run or export with status, progress, timing, and a detail action.",
+      "variants": [
+        "Running",
+        "Complete",
+        "Queued",
+        "Failed",
+        "With progress",
+        "With action"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Run title."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Short run summary."
+        },
+        {
+          "name": "status",
+          "type": "\"queued\" | \"running\" | \"complete\" | \"failed\"",
+          "defaultValue": "\"running\"",
+          "description": "Run state."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "defaultValue": "72",
+          "description": "Progress value from 0 to 100."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "error-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for agent runs, exports, analysis jobs, and evaluation jobs.",
+        "Pair with Activity Feed or Timeline for more detailed history."
+      ],
+      "doNotUseWhen": [
+        "Do not use for static status labels; use Run Status Pill.",
+        "Do not show progress if the backend cannot estimate it."
+      ],
+      "accessibility": [
+        "Progress uses semantic progressbar from Progress.",
+        "Status is visible as text."
+      ],
+      "agentGuidance": [
+        "Use Run Card when an AI workflow is job-like and has state over time.",
+        "Use Tool Call Card for one tool event inside a conversation."
+      ],
+      "code": "import { RunCard } from \"./RunCard\";\n\n<RunCard title=\"Analytics evaluation run\" status=\"running\" progress={72} />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "evaluation-scorecard",
+      "kind": "component",
+      "name": "Evaluation Scorecard",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Evaluation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Evaluation Scorecard summarizes answer quality, source coverage, and policy checks for an agent run.",
+      "variants": [
+        "Default",
+        "Overall score",
+        "Quality metric",
+        "Source coverage",
+        "Policy checks"
+      ],
+      "props": [
+        {
+          "name": "score",
+          "type": "string",
+          "defaultValue": "\"91%\"",
+          "description": "Overall evaluation score."
+        },
+        {
+          "name": "metrics",
+          "type": "EvaluationMetric[]",
+          "defaultValue": "defaultMetrics",
+          "description": "Metric labels and values."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "success-50",
+        "success-700",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use after agent evaluations, red-team checks, and source coverage reviews.",
+        "Use when teams need a quick quality read before publishing."
+      ],
+      "doNotUseWhen": [
+        "Do not show scores without explaining what they measure.",
+        "Do not use as a substitute for detailed evaluation logs."
+      ],
+      "accessibility": [
+        "Each metric uses visible labels and progress semantics.",
+        "Overall score is text, not color-only."
+      ],
+      "agentGuidance": [
+        "Use Evaluation Scorecard for quality gates and review workflows.",
+        "Pair with Citation Review Block or Run Card when users need more context."
+      ],
+      "code": "import { EvaluationScorecard } from \"./EvaluationScorecard\";\n\n<EvaluationScorecard score=\"91%\" metrics={metrics} />",
       "sourceFile": "src/data/dashboardEntries.tsx"
     },
     {

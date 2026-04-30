@@ -3,6 +3,8 @@ import { ChatMessage } from "../components/ui/agent/ChatMessage";
 import { ChatSurface } from "../components/ui/agent/ChatSurface";
 import { Composer } from "../components/ui/agent/Composer";
 import { CitationChip } from "../components/ui/agent/CitationChip";
+import { PromptCard } from "../components/ui/agent/PromptCard";
+import { PromptLibrary } from "../components/ui/agent/PromptLibrary";
 import { SourceDrawer } from "../components/ui/agent/SourceDrawer";
 import { StreamingState } from "../components/ui/agent/StreamingState";
 import { SuggestionChips } from "../components/ui/agent/SuggestionChips";
@@ -107,6 +109,14 @@ function AgentAvatarPreview() {
 
 function ThinkingStatePreview() {
   return <ThinkingState />;
+}
+
+function PromptCardPreview() {
+  return <PromptCard title="Summarize evaluation run" />;
+}
+
+function PromptLibraryPreview() {
+  return <PromptLibrary />;
 }
 
 const agentDefaults = {
@@ -315,4 +325,42 @@ export const thinkingStateEntry: CatalogEntry = {
   accessibility: ["Steps are rendered as an ordered list.", "Active work includes text as well as animation."],
   agentGuidance: ["Use Thinking State for transparent process summaries, not hidden reasoning.", "Describe observable workflow steps like retrieval, validation, or drafting."],
   code: `import { ThinkingState } from "./ThinkingState";\n\n<ThinkingState label="Checking sources" steps={steps} />`,
+};
+
+export const promptCardEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "prompt-card",
+  name: "Prompt Card",
+  subcategory: "Prompting",
+  description: "Prompt Card packages a reusable prompt with tags, description, and copy action.",
+  preview: PromptCardPreview,
+  variants: ["Default", "With tags", "Copy action", "Prompt metadata"],
+  props: [
+    { name: "title", type: "string", defaultValue: "-", description: "Prompt title." },
+    { name: "description", type: "string", defaultValue: "-", description: "Prompt body or summary." },
+    { name: "tags", type: "string[]", defaultValue: "default tags", description: "Prompt categories and usage labels." },
+  ],
+  tokens: ["white", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use for reusable prompts in libraries and quick-start panels.", "Use tags to show workflow, domain, or review status."],
+  avoid: ["Do not use for live chat messages.", "Do not store sensitive prompt text without access control."],
+  accessibility: ["Copy action has visible text.", "Prompt title and description remain readable without icon meaning."],
+  agentGuidance: ["Use Prompt Card when presenting reusable prompt starters.", "Pair with Prompt Library when multiple prompts need search and scanning."],
+  code: `import { PromptCard } from "./PromptCard";\n\n<PromptCard title="Summarize evaluation run" tags={["Analytics", "Review"]} />`,
+};
+
+export const promptLibraryEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "prompt-library",
+  name: "Prompt Library",
+  subcategory: "Prompting",
+  description: "Prompt Library combines search and prompt cards so teams can reuse approved agent prompts.",
+  preview: PromptLibraryPreview,
+  variants: ["Default", "Search", "Three-card grid", "Approved prompts"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use inside agent workspaces and settings pages where prompt reuse matters.", "Use for approved prompts, starter prompts, and workflow snippets."],
+  avoid: ["Do not mix approved prompts with unreviewed prompt drafts without status labels.", "Do not use when a single Suggestion Chip row is enough."],
+  accessibility: ["Search input has an accessible label.", "Prompt cards remain readable in source order."],
+  agentGuidance: ["Use Prompt Library for curated prompt collections.", "Use Suggestion Chips for context-specific next prompts after a response."],
+  code: `import { PromptLibrary } from "./PromptLibrary";\n\n<PromptLibrary />`,
 };
