@@ -20,16 +20,12 @@ export function NumberInput({ label = "Temperature", max = 100, min = 0, suffix 
         </span>
       </div>
       <div className="flex items-center gap-2">
-        <Button aria-label="Decrease value" size="icon" type="button" variant="secondaryGray">
-          <Minus aria-hidden="true" className="h-4 w-4" />
-        </Button>
+        <Button aria-label="Decrease value" leadingIcon={<Minus aria-hidden="true" className="h-4 w-4" />} size="icon" type="button" variant="secondaryGray" />
         <div className="relative flex-1">
           <Input className="pr-10 text-center" id="number-input-demo" max={max} min={min} type="number" value={value} readOnly />
           <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-sm font-medium text-gray-500">{suffix}</span>
         </div>
-        <Button aria-label="Increase value" size="icon" type="button" variant="secondaryGray">
-          <Plus aria-hidden="true" className="h-4 w-4" />
-        </Button>
+        <Button aria-label="Increase value" leadingIcon={<Plus aria-hidden="true" className="h-4 w-4" />} size="icon" type="button" variant="secondaryGray" />
       </div>
     </div>
   );

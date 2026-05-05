@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 116,
+    "entries": 120,
     "categories": 13,
     "templates": 8
   },
@@ -2099,6 +2099,243 @@
         "Pair with Citation Review Block or Run Card when users need more context."
       ],
       "code": "import { EvaluationScorecard } from \"./EvaluationScorecard\";\n\n<EvaluationScorecard score=\"91%\" metrics={metrics} />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "filter-bar",
+      "kind": "component",
+      "name": "Filter Bar",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Filtering",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Filter Bar combines search, status selection, date range, and active filter chips for dashboard views.",
+      "variants": [
+        "Search",
+        "Status select",
+        "Date filter",
+        "Active filters",
+        "Actions"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-300",
+        "gray-400",
+        "gray-500",
+        "brand-50",
+        "brand-700",
+        "info-50",
+        "success-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use above tables, grids, review queues, and analytics dashboards.",
+        "Show active filters as chips so users can understand scoped data."
+      ],
+      "doNotUseWhen": [
+        "Do not place a heavy filter bar above very small lists.",
+        "Do not hide the active filter state only inside menus."
+      ],
+      "accessibility": [
+        "Search and select use native controls.",
+        "Filter actions have visible labels and keyboard-reachable buttons."
+      ],
+      "agentGuidance": [
+        "Use Filter Bar for dashboards and lists with search plus multiple filters.",
+        "Pair with Table, Data Toolbar, Review Queue, or chart dashboards."
+      ],
+      "code": "import { FilterBar } from \"./FilterBar\";\n\n<FilterBar />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "data-source-card",
+      "kind": "component",
+      "name": "Data Source Card",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Sources",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Data Source Card summarizes a connected source, document count, policy state, and source actions.",
+      "variants": [
+        "Connected",
+        "Needs review",
+        "Metrics",
+        "Actions",
+        "Source description"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "\"Brand claims library\"",
+          "description": "Source name."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Short source description."
+        },
+        {
+          "name": "documents",
+          "type": "string",
+          "defaultValue": "\"248 documents\"",
+          "description": "Visible source volume metric."
+        },
+        {
+          "name": "status",
+          "type": "\"connected\" | \"review\"",
+          "defaultValue": "\"connected\"",
+          "description": "Source health state."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-600",
+        "warning-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in source libraries, workspace setup, and knowledge-base dashboards.",
+        "Expose source health and next actions directly on the card."
+      ],
+      "doNotUseWhen": [
+        "Do not use for individual documents when a table or list scans better.",
+        "Do not hide policy state from users configuring agents."
+      ],
+      "accessibility": [
+        "Card title, description, metrics, and actions are visible text.",
+        "Status is expressed through text, not color alone."
+      ],
+      "agentGuidance": [
+        "Use Data Source Card when showing connected knowledge sources.",
+        "Pair with Source Drawer, Citation Chip, or File Upload in source-management flows."
+      ],
+      "code": "import { DataSourceCard } from \"./DataSourceCard\";\n\n<DataSourceCard title=\"Brand claims library\" documents=\"248 documents\" />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "health-summary",
+      "kind": "component",
+      "name": "Health Summary",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Monitoring",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Health Summary groups readiness signals such as source coverage, latency, and open risks.",
+      "variants": [
+        "Healthy",
+        "Three metrics",
+        "Status badge",
+        "Readiness summary"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "success-50",
+        "warning-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use near the top of operational dashboards and review workspaces.",
+        "Use for quick readiness before publishing or stakeholder review."
+      ],
+      "doNotUseWhen": [
+        "Do not use without clear metric definitions.",
+        "Do not replace detailed evaluation or logs when users need diagnostics."
+      ],
+      "accessibility": [
+        "Metrics are visible text with readable labels.",
+        "Status badge has text support beyond color."
+      ],
+      "agentGuidance": [
+        "Use Health Summary for dashboard readiness and operational health.",
+        "Pair with Evaluation Scorecard for deeper model-quality review."
+      ],
+      "code": "import { HealthSummary } from \"./HealthSummary\";\n\n<HealthSummary />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "review-queue",
+      "kind": "component",
+      "name": "Review Queue",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Review",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Review Queue lists open human-review items with priority, context, and a direct open action.",
+      "variants": [
+        "Open items",
+        "Priority badges",
+        "Citation review",
+        "Policy review",
+        "Prompt review"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "warning-600",
+        "error-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for approval queues, citation checks, policy exceptions, and prompt reviews.",
+        "Place in dashboard workspaces where human-in-the-loop review is expected."
+      ],
+      "doNotUseWhen": [
+        "Do not use for immutable audit history; use Activity Feed or Timeline.",
+        "Do not show priority without a clear path to act."
+      ],
+      "accessibility": [
+        "Rows are readable article blocks with visible open actions.",
+        "Priority is displayed as text inside badges."
+      ],
+      "agentGuidance": [
+        "Use Review Queue for human approval and remediation workflows.",
+        "Pair with Citation Review Block, Confirmation Panel, or Review Checklist."
+      ],
+      "code": "import { ReviewQueue } from \"./ReviewQueue\";\n\n<ReviewQueue />",
       "sourceFile": "src/data/dashboardEntries.tsx"
     },
     {
