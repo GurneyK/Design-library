@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 128,
+    "entries": 132,
     "categories": 13,
     "templates": 8
   },
@@ -6141,6 +6141,210 @@
         "Use Dashboard Header for page content title below the shell."
       ],
       "code": "import { Topbar } from \"./Topbar\";\n\n<Topbar title=\"Nexus workspace\" />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "app-shell",
+      "kind": "component",
+      "name": "App Shell",
+      "category": "Layout",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "App Shell combines primary navigation, topbar utilities, main content, and supporting regions into a full product frame.",
+      "variants": [
+        "Rail navigation",
+        "Topbar",
+        "Main content",
+        "Supporting aside",
+        "Responsive"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-400",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use as the base frame for full-page product experiences.",
+        "Use when a workflow needs persistent navigation and workspace utilities."
+      ],
+      "doNotUseWhen": [
+        "Do not use App Shell inside cards or panels.",
+        "Do not duplicate shell navigation inside page content."
+      ],
+      "accessibility": [
+        "Uses header, main, aside, and nav landmarks inside the composition.",
+        "Icon-only actions include accessible labels."
+      ],
+      "agentGuidance": [
+        "Use App Shell for full Nexus-style apps and dashboards.",
+        "Compose Dashboard Header, Page Tabs, and panels inside the main region."
+      ],
+      "code": "import { AppShell } from \"./AppShell\";\n\n<AppShell />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "split-pane",
+      "kind": "component",
+      "name": "Split Pane",
+      "category": "Layout",
+      "subcategory": "Workspace Layout",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Split Pane places primary work content beside a persistent supporting pane such as sources, details, or settings.",
+      "variants": [
+        "Primary pane",
+        "Supporting pane",
+        "Responsive stack",
+        "Source review"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for chat plus citations, editor plus preview, and table plus details.",
+        "Keep the supporting pane narrower than the primary work area."
+      ],
+      "doNotUseWhen": [
+        "Do not use when both panes need equal priority on small screens.",
+        "Do not hide critical actions in the secondary pane."
+      ],
+      "accessibility": [
+        "Uses section and aside semantics.",
+        "Reading order keeps primary content before supporting content."
+      ],
+      "agentGuidance": [
+        "Use Split Pane for review and inspection workflows.",
+        "Pair with Source Drawer or Document Preview when grounding AI answers."
+      ],
+      "code": "import { SplitPane } from \"./SplitPane\";\n\n<SplitPane />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "sticky-footer-bar",
+      "kind": "component",
+      "name": "Sticky Footer Bar",
+      "category": "Layout",
+      "subcategory": "Action Layout",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Sticky Footer Bar keeps form or workflow actions visually anchored at the bottom of a long surface.",
+      "variants": [
+        "Status text",
+        "Cancel / save",
+        "Bottom action row",
+        "Long form support"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "success-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use at the end of long forms, settings pages, and approval flows.",
+        "Use status text to reassure users before saving."
+      ],
+      "doNotUseWhen": [
+        "Do not use for short forms where inline actions are enough.",
+        "Do not place unrelated navigation in the footer bar."
+      ],
+      "accessibility": [
+        "Actions are visible buttons.",
+        "Status text is readable and does not rely on color alone."
+      ],
+      "agentGuidance": [
+        "Use Sticky Footer Bar for long configuration and review workflows.",
+        "Pair with Form Section, Review Checklist, or Confirmation Panel."
+      ],
+      "code": "import { StickyFooterBar } from \"./StickyFooterBar\";\n\n<StickyFooterBar />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "content-sidebar",
+      "kind": "component",
+      "name": "Content Sidebar",
+      "category": "Layout",
+      "subcategory": "Workspace Layout",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Content Sidebar provides local section navigation next to detailed workflow content.",
+      "variants": [
+        "Local navigation",
+        "Active section",
+        "Badge count",
+        "Responsive stack"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "warning-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for multi-section review flows, settings pages, and detail screens.",
+        "Use when local navigation belongs to the current content, not the whole app."
+      ],
+      "doNotUseWhen": [
+        "Do not use as the primary app sidebar.",
+        "Do not create content sidebars for pages with only one or two short sections."
+      ],
+      "accessibility": [
+        "Uses a labeled nav region and main content area.",
+        "Badge counts are visible text."
+      ],
+      "agentGuidance": [
+        "Use Content Sidebar for local workflow navigation.",
+        "Use Sidebar or Navigation Rail for global app navigation."
+      ],
+      "code": "import { ContentSidebar } from \"./ContentSidebar\";\n\n<ContentSidebar />",
       "sourceFile": "src/data/layoutEntries.tsx"
     },
     {

@@ -1,11 +1,15 @@
+import { AppShell } from "../components/ui/layout/AppShell";
 import { Button } from "../components/ui/button/Button";
 import { Card } from "../components/ui/layout/Card";
 import { Container } from "../components/ui/layout/Container";
+import { ContentSidebar } from "../components/ui/layout/ContentSidebar";
 import { Grid } from "../components/ui/layout/Grid";
 import { Panel } from "../components/ui/layout/Panel";
 import { Section } from "../components/ui/layout/Section";
 import { Sidebar } from "../components/ui/layout/Sidebar";
+import { SplitPane } from "../components/ui/layout/SplitPane";
 import { Stack } from "../components/ui/layout/Stack";
+import { StickyFooterBar } from "../components/ui/layout/StickyFooterBar";
 import { Topbar } from "../components/ui/layout/Topbar";
 import type { CatalogEntry } from "./catalog";
 
@@ -77,6 +81,22 @@ function SidebarPreview() {
 
 function TopbarPreview() {
   return <Topbar />;
+}
+
+function AppShellPreview() {
+  return <AppShell />;
+}
+
+function SplitPanePreview() {
+  return <SplitPane />;
+}
+
+function StickyFooterBarPreview() {
+  return <StickyFooterBar />;
+}
+
+function ContentSidebarPreview() {
+  return <ContentSidebar />;
 }
 
 const layoutDefaults = {
@@ -249,4 +269,72 @@ export const topbarEntry: CatalogEntry = {
   accessibility: ["Icon controls include aria labels.", "Search input has an accessible label."],
   agentGuidance: ["Use Topbar with Sidebar for full application shell templates.", "Use Dashboard Header for page content title below the shell."],
   code: `import { Topbar } from "./Topbar";\n\n<Topbar title="Nexus workspace" />`,
+};
+
+export const appShellEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "app-shell",
+  name: "App Shell",
+  subcategory: "Application Shell",
+  description: "App Shell combines primary navigation, topbar utilities, main content, and supporting regions into a full product frame.",
+  preview: AppShellPreview,
+  variants: ["Rail navigation", "Topbar", "Main content", "Supporting aside", "Responsive"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-400", "gray-500", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use as the base frame for full-page product experiences.", "Use when a workflow needs persistent navigation and workspace utilities."],
+  avoid: ["Do not use App Shell inside cards or panels.", "Do not duplicate shell navigation inside page content."],
+  accessibility: ["Uses header, main, aside, and nav landmarks inside the composition.", "Icon-only actions include accessible labels."],
+  agentGuidance: ["Use App Shell for full Nexus-style apps and dashboards.", "Compose Dashboard Header, Page Tabs, and panels inside the main region."],
+  code: `import { AppShell } from "./AppShell";\n\n<AppShell />`,
+};
+
+export const splitPaneEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "split-pane",
+  name: "Split Pane",
+  subcategory: "Workspace Layout",
+  description: "Split Pane places primary work content beside a persistent supporting pane such as sources, details, or settings.",
+  preview: SplitPanePreview,
+  variants: ["Primary pane", "Supporting pane", "Responsive stack", "Source review"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use for chat plus citations, editor plus preview, and table plus details.", "Keep the supporting pane narrower than the primary work area."],
+  avoid: ["Do not use when both panes need equal priority on small screens.", "Do not hide critical actions in the secondary pane."],
+  accessibility: ["Uses section and aside semantics.", "Reading order keeps primary content before supporting content."],
+  agentGuidance: ["Use Split Pane for review and inspection workflows.", "Pair with Source Drawer or Document Preview when grounding AI answers."],
+  code: `import { SplitPane } from "./SplitPane";\n\n<SplitPane />`,
+};
+
+export const stickyFooterBarEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "sticky-footer-bar",
+  name: "Sticky Footer Bar",
+  subcategory: "Action Layout",
+  description: "Sticky Footer Bar keeps form or workflow actions visually anchored at the bottom of a long surface.",
+  preview: StickyFooterBarPreview,
+  variants: ["Status text", "Cancel / save", "Bottom action row", "Long form support"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "success-700", "radius-lg", "shadow-xs"],
+  usage: ["Use at the end of long forms, settings pages, and approval flows.", "Use status text to reassure users before saving."],
+  avoid: ["Do not use for short forms where inline actions are enough.", "Do not place unrelated navigation in the footer bar."],
+  accessibility: ["Actions are visible buttons.", "Status text is readable and does not rely on color alone."],
+  agentGuidance: ["Use Sticky Footer Bar for long configuration and review workflows.", "Pair with Form Section, Review Checklist, or Confirmation Panel."],
+  code: `import { StickyFooterBar } from "./StickyFooterBar";\n\n<StickyFooterBar />`,
+};
+
+export const contentSidebarEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "content-sidebar",
+  name: "Content Sidebar",
+  subcategory: "Workspace Layout",
+  description: "Content Sidebar provides local section navigation next to detailed workflow content.",
+  preview: ContentSidebarPreview,
+  variants: ["Local navigation", "Active section", "Badge count", "Responsive stack"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "warning-50", "radius-lg", "shadow-xs"],
+  usage: ["Use for multi-section review flows, settings pages, and detail screens.", "Use when local navigation belongs to the current content, not the whole app."],
+  avoid: ["Do not use as the primary app sidebar.", "Do not create content sidebars for pages with only one or two short sections."],
+  accessibility: ["Uses a labeled nav region and main content area.", "Badge counts are visible text."],
+  agentGuidance: ["Use Content Sidebar for local workflow navigation.", "Use Sidebar or Navigation Rail for global app navigation."],
+  code: `import { ContentSidebar } from "./ContentSidebar";\n\n<ContentSidebar />`,
 };

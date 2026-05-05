@@ -120,13 +120,17 @@ import {
   toastEntry,
 } from "./feedbackOverlayEntries";
 import {
+  appShellEntry,
   cardEntry,
   containerEntry,
+  contentSidebarEntry,
   gridEntry,
   panelEntry,
   sectionEntry,
   sidebarEntry,
+  splitPaneEntry,
   stackEntry,
+  stickyFooterBarEntry,
   topbarEntry,
 } from "./layoutEntries";
 import {
@@ -204,6 +208,10 @@ export const catalog = [
   sectionEntry,
   sidebarEntry,
   topbarEntry,
+  appShellEntry,
+  splitPaneEntry,
+  stickyFooterBarEntry,
+  contentSidebarEntry,
   tabsEntry,
   breadcrumbEntry,
   paginationEntry,
