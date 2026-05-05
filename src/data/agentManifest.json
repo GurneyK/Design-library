@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 124,
+    "entries": 128,
     "categories": 13,
     "templates": 8
   },
@@ -6569,6 +6569,207 @@
         "Use Quick Action Panel when commands should stay visible on a dashboard."
       ],
       "code": "import { CommandPalette } from \"./CommandPalette\";\n\n<CommandPalette commands={commands} />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "nav-rail",
+      "kind": "component",
+      "name": "Navigation Rail",
+      "category": "Navigation",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Navigation Rail provides compact icon-based primary navigation for dense workspaces.",
+      "variants": [
+        "Icon only",
+        "Active item",
+        "Primary navigation",
+        "Compact shell"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when horizontal space is tight but primary destinations must stay visible.",
+        "Pair with tooltips or an expanded sidebar in production."
+      ],
+      "doNotUseWhen": [
+        "Do not use icon-only navigation for unfamiliar products without labels nearby.",
+        "Do not place secondary actions in the rail."
+      ],
+      "accessibility": [
+        "Each rail button has an aria-label.",
+        "Active state is supported by color and position; production routing should add aria-current."
+      ],
+      "agentGuidance": [
+        "Use Navigation Rail for dense app shells and dashboards.",
+        "Use Sidebar when labels and metadata need to stay visible."
+      ],
+      "code": "import { NavRail } from \"./NavRail\";\n\n<NavRail />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "anchor-nav",
+      "kind": "component",
+      "name": "Anchor Nav",
+      "category": "Navigation",
+      "subcategory": "Wayfinding",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Anchor Nav lists headings on the current page so users can jump through long documentation or detail views.",
+      "variants": [
+        "On this page",
+        "Active section",
+        "Sticky side nav",
+        "Section links"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use on long component docs, policy pages, and detail screens with multiple sections.",
+        "Keep labels aligned with real page headings."
+      ],
+      "doNotUseWhen": [
+        "Do not use for global routing.",
+        "Do not include links to sections that do not exist on the page."
+      ],
+      "accessibility": [
+        "Uses a labeled nav region and real links.",
+        "Active section is indicated visually; production should update aria-current."
+      ],
+      "agentGuidance": [
+        "Use Anchor Nav for long single-page content.",
+        "Use Breadcrumb for hierarchy and Tabs for peer page sections."
+      ],
+      "code": "import { AnchorNav } from \"./AnchorNav\";\n\n<AnchorNav />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "page-tabs",
+      "kind": "component",
+      "name": "Page Tabs",
+      "category": "Navigation",
+      "subcategory": "Local Navigation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Page Tabs provide a contained tab treatment for switching high-level sections inside a workspace page.",
+      "variants": [
+        "Contained",
+        "Active",
+        "With counts",
+        "Wrapped"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use below dashboard headers when the page has clear peer sections.",
+        "Use counts for runs, sources, or review items."
+      ],
+      "doNotUseWhen": [
+        "Do not use Page Tabs for site-wide navigation.",
+        "Do not mix unrelated tasks in one tab set."
+      ],
+      "accessibility": [
+        "Uses tablist and tab roles.",
+        "Production state should add arrow-key movement and controlled panels."
+      ],
+      "agentGuidance": [
+        "Use Page Tabs for local workspace sections like Overview, Runs, Sources, and Settings.",
+        "Use standard Tabs for lighter in-panel switching."
+      ],
+      "code": "import { PageTabs } from \"./PageTabs\";\n\n<PageTabs />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "app-launcher",
+      "kind": "component",
+      "name": "App Launcher",
+      "category": "Navigation",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "App Launcher presents available agents, dashboards, and product areas as a compact launch menu.",
+      "variants": [
+        "App grid",
+        "Agent apps",
+        "Metadata",
+        "Launcher panel"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in topbars or shells when users can move between multiple agents and product spaces.",
+        "Use concise metadata to clarify each destination."
+      ],
+      "doNotUseWhen": [
+        "Do not use for one or two destinations.",
+        "Do not mix app launch destinations with destructive actions."
+      ],
+      "accessibility": [
+        "Launcher items are buttons with visible labels and descriptions.",
+        "Panel has a visible heading."
+      ],
+      "agentGuidance": [
+        "Use App Launcher for cross-product navigation between agents, dashboards, and workspaces.",
+        "Use Workspace Switcher when changing context within the same product area."
+      ],
+      "code": "import { AppLauncher } from \"./AppLauncher\";\n\n<AppLauncher />",
       "sourceFile": "src/data/navigationEntries.tsx"
     },
     {

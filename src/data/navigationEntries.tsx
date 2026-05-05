@@ -1,7 +1,11 @@
 import { Badge } from "../components/ui/badge/Badge";
+import { AnchorNav } from "../components/ui/navigation/AnchorNav";
+import { AppLauncher } from "../components/ui/navigation/AppLauncher";
 import { Breadcrumb } from "../components/ui/navigation/Breadcrumb";
 import { CommandPalette } from "../components/ui/navigation/CommandPalette";
 import { Menu } from "../components/ui/navigation/Menu";
+import { NavRail } from "../components/ui/navigation/NavRail";
+import { PageTabs } from "../components/ui/navigation/PageTabs";
 import { Pagination } from "../components/ui/navigation/Pagination";
 import { SidebarNavItem } from "../components/ui/navigation/SidebarNavItem";
 import { Steps } from "../components/ui/navigation/Steps";
@@ -40,6 +44,22 @@ function SidebarNavItemPreview() {
 
 function CommandPalettePreview() {
   return <CommandPalette />;
+}
+
+function NavRailPreview() {
+  return <NavRail />;
+}
+
+function AnchorNavPreview() {
+  return <AnchorNav />;
+}
+
+function PageTabsPreview() {
+  return <PageTabs />;
+}
+
+function AppLauncherPreview() {
+  return <AppLauncher />;
 }
 
 const navigationDefaults = {
@@ -184,4 +204,72 @@ export const commandPaletteEntry: CatalogEntry = {
   accessibility: ["Search input has a label and results are buttons.", "Production overlay should manage focus, Escape, and keyboard selection."],
   agentGuidance: ["Use Command Palette for global search and task launch.", "Use Quick Action Panel when commands should stay visible on a dashboard."],
   code: `import { CommandPalette } from "./CommandPalette";\n\n<CommandPalette commands={commands} />`,
+};
+
+export const navRailEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "nav-rail",
+  name: "Navigation Rail",
+  subcategory: "Application Shell",
+  description: "Navigation Rail provides compact icon-based primary navigation for dense workspaces.",
+  preview: NavRailPreview,
+  variants: ["Icon only", "Active item", "Primary navigation", "Compact shell"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use when horizontal space is tight but primary destinations must stay visible.", "Pair with tooltips or an expanded sidebar in production."],
+  avoid: ["Do not use icon-only navigation for unfamiliar products without labels nearby.", "Do not place secondary actions in the rail."],
+  accessibility: ["Each rail button has an aria-label.", "Active state is supported by color and position; production routing should add aria-current."],
+  agentGuidance: ["Use Navigation Rail for dense app shells and dashboards.", "Use Sidebar when labels and metadata need to stay visible."],
+  code: `import { NavRail } from "./NavRail";\n\n<NavRail />`,
+};
+
+export const anchorNavEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "anchor-nav",
+  name: "Anchor Nav",
+  subcategory: "Wayfinding",
+  description: "Anchor Nav lists headings on the current page so users can jump through long documentation or detail views.",
+  preview: AnchorNavPreview,
+  variants: ["On this page", "Active section", "Sticky side nav", "Section links"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use on long component docs, policy pages, and detail screens with multiple sections.", "Keep labels aligned with real page headings."],
+  avoid: ["Do not use for global routing.", "Do not include links to sections that do not exist on the page."],
+  accessibility: ["Uses a labeled nav region and real links.", "Active section is indicated visually; production should update aria-current."],
+  agentGuidance: ["Use Anchor Nav for long single-page content.", "Use Breadcrumb for hierarchy and Tabs for peer page sections."],
+  code: `import { AnchorNav } from "./AnchorNav";\n\n<AnchorNav />`,
+};
+
+export const pageTabsEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "page-tabs",
+  name: "Page Tabs",
+  subcategory: "Local Navigation",
+  description: "Page Tabs provide a contained tab treatment for switching high-level sections inside a workspace page.",
+  preview: PageTabsPreview,
+  variants: ["Contained", "Active", "With counts", "Wrapped"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-600", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use below dashboard headers when the page has clear peer sections.", "Use counts for runs, sources, or review items."],
+  avoid: ["Do not use Page Tabs for site-wide navigation.", "Do not mix unrelated tasks in one tab set."],
+  accessibility: ["Uses tablist and tab roles.", "Production state should add arrow-key movement and controlled panels."],
+  agentGuidance: ["Use Page Tabs for local workspace sections like Overview, Runs, Sources, and Settings.", "Use standard Tabs for lighter in-panel switching."],
+  code: `import { PageTabs } from "./PageTabs";\n\n<PageTabs />`,
+};
+
+export const appLauncherEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "app-launcher",
+  name: "App Launcher",
+  subcategory: "Application Shell",
+  description: "App Launcher presents available agents, dashboards, and product areas as a compact launch menu.",
+  preview: AppLauncherPreview,
+  variants: ["App grid", "Agent apps", "Metadata", "Launcher panel"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use in topbars or shells when users can move between multiple agents and product spaces.", "Use concise metadata to clarify each destination."],
+  avoid: ["Do not use for one or two destinations.", "Do not mix app launch destinations with destructive actions."],
+  accessibility: ["Launcher items are buttons with visible labels and descriptions.", "Panel has a visible heading."],
+  agentGuidance: ["Use App Launcher for cross-product navigation between agents, dashboards, and workspaces.", "Use Workspace Switcher when changing context within the same product area."],
+  code: `import { AppLauncher } from "./AppLauncher";\n\n<AppLauncher />`,
 };
