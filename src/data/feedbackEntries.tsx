@@ -1,6 +1,10 @@
 import { Alert } from "../components/ui/alert/Alert";
 import { Banner } from "../components/ui/banner/Banner";
 import { Button } from "../components/ui/button/Button";
+import { ConfirmationPanel } from "../components/ui/feedback/ConfirmationPanel";
+import { NotificationCenter } from "../components/ui/feedback/NotificationCenter";
+import { ReviewChecklist } from "../components/ui/feedback/ReviewChecklist";
+import { StatusSummary } from "../components/ui/feedback/StatusSummary";
 import { Progress } from "../components/ui/progress/Progress";
 import { Skeleton } from "../components/ui/skeleton/Skeleton";
 import { Spinner } from "../components/ui/spinner/Spinner";
@@ -64,6 +68,27 @@ function SkeletonPreview() {
       <Skeleton className="mt-5" shape="block" />
     </div>
   );
+}
+
+function ConfirmationPanelPreview() {
+  return (
+    <div className="space-y-3">
+      <ConfirmationPanel title="Publish answer?" description="This will make the sourced answer visible to the workspace." />
+      <ConfirmationPanel tone="danger" title="Delete prompt?" description="This removes the prompt from the approved library." />
+    </div>
+  );
+}
+
+function StatusSummaryPreview() {
+  return <StatusSummary />;
+}
+
+function ReviewChecklistPreview() {
+  return <ReviewChecklist />;
+}
+
+function NotificationCenterPreview() {
+  return <NotificationCenter />;
 }
 
 const feedbackDefaults = {
@@ -173,4 +198,80 @@ export const skeletonEntry: CatalogEntry = {
   accessibility: ["Skeletons are aria-hidden because they are visual placeholders.", "Pair with a higher-level loading announcement when needed."],
   agentGuidance: ["Use Skeleton when content structure is known but data is not ready.", "Use it in tables, cards, dashboards, and message streams."],
   code: `import { Skeleton } from "./Skeleton";\n\n<Skeleton className="w-1/2" />\n<Skeleton shape="block" />`,
+};
+
+export const confirmationPanelEntry: CatalogEntry = {
+  ...feedbackDefaults,
+  id: "confirmation-panel",
+  name: "Confirmation Panel",
+  subcategory: "Review feedback",
+  description: "Confirmation Panel presents a clear consequence, cancel action, and confirm action inside the current workflow.",
+  preview: ConfirmationPanelPreview,
+  variants: ["Warning", "Danger", "Info", "Cancel / confirm", "With consequence copy"],
+  props: [
+    { name: "title", type: "string", defaultValue: "-", description: "Confirmation heading." },
+    { name: "description", type: "string", defaultValue: "-", description: "Consequence and recovery copy." },
+    { name: "tone", type: '"warning" | "danger" | "info"', defaultValue: '"warning"', description: "Semantic confirmation tone." },
+  ],
+  tokens: ["warning-50", "warning-300", "warning-700", "error-50", "error-300", "error-700", "brand-50", "brand-200", "brand-700", "radius-lg"],
+  usage: ["Use for inline confirmations where the user should review consequences before continuing.", "Use danger tone for destructive actions."],
+  avoid: ["Do not use for tiny table-row confirmations where Popconfirm is enough.", "Do not use vague confirm labels without context."],
+  accessibility: ["Actions are visible buttons.", "Tone is supported by text and icon, not color alone."],
+  agentGuidance: ["Use Confirmation Panel inside review workflows and settings pages.", "Use Modal for blocking confirmations that require focus trapping."],
+  code: `import { ConfirmationPanel } from "./ConfirmationPanel";\n\n<ConfirmationPanel title="Publish answer?" description="This will make the answer visible." />`,
+};
+
+export const statusSummaryEntry: CatalogEntry = {
+  ...feedbackDefaults,
+  id: "status-summary",
+  name: "Status Summary",
+  subcategory: "Review feedback",
+  description: "Status Summary shows several workflow checks as compact status/value tiles.",
+  preview: StatusSummaryPreview,
+  variants: ["Complete", "Pending", "Blocked", "Three-column summary"],
+  props: [
+    { name: "items", type: "StatusSummaryItem[]", defaultValue: "defaultItems", description: "Status items with label, status, and value." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "success-50", "warning-50", "error-50", "radius-lg", "shadow-xs"],
+  usage: ["Use at the top of review, approval, and deployment workflows.", "Use to summarize readiness before a decision."],
+  avoid: ["Do not use for detailed logs.", "Do not show status colors without text labels."],
+  accessibility: ["Each status includes visible text and icon.", "Tiles preserve readable source order."],
+  agentGuidance: ["Use Status Summary before review checklists or approval actions.", "Pair with Run Card or Evaluation Scorecard when workflow state matters."],
+  code: `import { StatusSummary } from "./StatusSummary";\n\n<StatusSummary items={items} />`,
+};
+
+export const reviewChecklistEntry: CatalogEntry = {
+  ...feedbackDefaults,
+  id: "review-checklist",
+  name: "Review Checklist",
+  subcategory: "Review feedback",
+  description: "Review Checklist presents required approval steps for sourced answers, evaluations, and publishing workflows.",
+  preview: ReviewChecklistPreview,
+  variants: ["Checked item", "Unchecked item", "With description", "Approval checklist"],
+  props: [
+    { name: "items", type: "ReviewChecklistItem[]", defaultValue: "defaultItems", description: "Checklist items with label, description, and checked state." },
+  ],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-400", "gray-500", "gray-900", "success-600", "radius-lg", "shadow-xs"],
+  usage: ["Use for approval gates and review workflows.", "Use descriptions to clarify what each check means."],
+  avoid: ["Do not use for editable task management without real state handling.", "Do not hide failed checks elsewhere on the page."],
+  accessibility: ["Checklist is rendered as a list with visible state icons.", "State is supported by text and position."],
+  agentGuidance: ["Use Review Checklist for publish readiness and human approval flows.", "Pair with Citation Review Block for sourced answer approval."],
+  code: `import { ReviewChecklist } from "./ReviewChecklist";\n\n<ReviewChecklist items={items} />`,
+};
+
+export const notificationCenterEntry: CatalogEntry = {
+  ...feedbackDefaults,
+  id: "notification-center",
+  name: "Notification Center",
+  subcategory: "Transient feedback",
+  description: "Notification Center collects recent product and agent events in a compact overlay or panel.",
+  preview: NotificationCenterPreview,
+  variants: ["Default", "Unread count", "Evaluation event", "Prompt event", "Source review event"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-400", "gray-500", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use in topbars and dashboard shells for recent user-facing events.", "Use concise event titles and timestamps."],
+  avoid: ["Do not use for audit logs that require filtering and pagination.", "Do not surface low-value noise as notifications."],
+  accessibility: ["Notification titles and bodies are visible text.", "Unread count is visible through Badge text."],
+  agentGuidance: ["Use Notification Center for recent operational events.", "Use Activity Feed for persistent dashboard history."],
+  code: `import { NotificationCenter } from "./NotificationCenter";\n\n<NotificationCenter />`,
 };
