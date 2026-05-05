@@ -5,7 +5,11 @@ import { ChartContainer } from "../components/ui/charts/ChartContainer";
 import { ChartLegend } from "../components/ui/charts/ChartLegend";
 import { ChartTooltip } from "../components/ui/charts/ChartTooltip";
 import { DonutChart } from "../components/ui/charts/DonutChart";
+import { FunnelChart } from "../components/ui/charts/FunnelChart";
+import { GaugeChart } from "../components/ui/charts/GaugeChart";
+import { HeatmapChart } from "../components/ui/charts/HeatmapChart";
 import { LineChart } from "../components/ui/charts/LineChart";
+import { ScatterChart } from "../components/ui/charts/ScatterChart";
 import { SummaryChartCard } from "../components/ui/charts/SummaryChartCard";
 import type { CatalogEntry } from "./catalog";
 
@@ -67,6 +71,38 @@ function DonutChartPreview() {
     <ChartContainer title="Evaluation completion">
       <DonutChart />
       <ChartLegend items={[{ color: "#6941C6", label: "Passed" }, { color: "#2E90FA", label: "In review" }]} />
+    </ChartContainer>
+  );
+}
+
+function ScatterChartPreview() {
+  return (
+    <ChartContainer title="Latency by answer quality">
+      <ScatterChart />
+    </ChartContainer>
+  );
+}
+
+function GaugeChartPreview() {
+  return (
+    <ChartContainer title="Quality score">
+      <GaugeChart />
+    </ChartContainer>
+  );
+}
+
+function FunnelChartPreview() {
+  return (
+    <ChartContainer title="Run conversion">
+      <FunnelChart />
+    </ChartContainer>
+  );
+}
+
+function HeatmapChartPreview() {
+  return (
+    <ChartContainer title="Workspace activity">
+      <HeatmapChart />
     </ChartContainer>
   );
 }
@@ -211,6 +247,74 @@ export const donutChartEntry: CatalogEntry = {
   accessibility: ["SVG has an image role and label in this first implementation."],
   agentGuidance: ["Use Donut Chart for completion, distribution, and simple category shares."],
   code: `import { DonutChart } from "./DonutChart";\n\n<DonutChart />`,
+};
+
+export const scatterChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "scatter-chart",
+  name: "Scatter Chart",
+  subcategory: "Charts",
+  description: "Scatter Chart plots relationships between two metrics, such as latency and answer quality.",
+  preview: ScatterChartPreview,
+  variants: ["Correlation", "Trend line", "Point sizing", "Dashboard"],
+  props: [],
+  tokens: ["brand-600", "info-500", "gray-100", "gray-200", "white"],
+  usage: ["Use for correlation and distribution analysis.", "Use when two numeric measures need to be compared together."],
+  avoid: ["Do not use for simple category comparison.", "Do not make critical insight depend on color alone."],
+  accessibility: ["SVG has an image role and label in this first implementation.", "Production charts should expose the plotted data as a table or summary."],
+  agentGuidance: ["Use Scatter Chart for quality versus latency, cost versus usage, or confidence versus impact patterns."],
+  code: `import { ScatterChart } from "./ScatterChart";\n\n<ScatterChart />`,
+};
+
+export const gaugeChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "gauge-chart",
+  name: "Gauge Chart",
+  subcategory: "Charts",
+  description: "Gauge Chart shows a bounded score against qualitative ranges with a large center value.",
+  preview: GaugeChartPreview,
+  variants: ["Score", "Threshold ranges", "Needle", "Center value"],
+  props: [],
+  tokens: ["success-500", "warning-500", "brand-700", "gray-100", "gray-900", "white"],
+  usage: ["Use for quality scores, readiness, risk, or health metrics with a known range.", "Use text labels so users understand the score meaning."],
+  avoid: ["Do not use for unbounded values.", "Do not use many gauges together when a table would scan better."],
+  accessibility: ["SVG has an image role and label, and the value is visible text.", "Do not rely on range color without labels in production."],
+  agentGuidance: ["Use Gauge Chart for single bounded metrics such as quality score, risk score, or readiness."],
+  code: `import { GaugeChart } from "./GaugeChart";\n\n<GaugeChart />`,
+};
+
+export const funnelChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "funnel-chart",
+  name: "Funnel Chart",
+  subcategory: "Charts",
+  description: "Funnel Chart shows drop-off across sequential workflow stages.",
+  preview: FunnelChartPreview,
+  variants: ["Four stages", "Labeled values", "Workflow conversion"],
+  props: [],
+  tokens: ["brand-700", "brand-600", "info-500", "success-500", "gray-100", "gray-600", "gray-900", "radius-md"],
+  usage: ["Use for agent run pipelines, approval flows, and campaign conversion stages.", "Label every stage with both name and value."],
+  avoid: ["Do not use when stages are not sequential.", "Do not hide large drop-offs without explanatory copy nearby."],
+  accessibility: ["Stage labels and values are rendered as visible text.", "Bar width is supplemental to the numeric value."],
+  agentGuidance: ["Use Funnel Chart for run-to-review-to-publish pipelines and other sequential conversion flows."],
+  code: `import { FunnelChart } from "./FunnelChart";\n\n<FunnelChart />`,
+};
+
+export const heatmapChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "heatmap-chart",
+  name: "Heatmap Chart",
+  subcategory: "Charts",
+  description: "Heatmap Chart shows activity or intensity across a compact two-dimensional grid.",
+  preview: HeatmapChartPreview,
+  variants: ["Activity grid", "Intensity scale", "Compact dashboard"],
+  props: [],
+  tokens: ["brand-25", "brand-50", "brand-100", "brand-200", "brand-300", "brand-500", "brand-600", "brand-700", "gray-500", "white"],
+  usage: ["Use for workspace activity, usage by time bucket, or coverage density.", "Pair color intensity with labels or summaries in production."],
+  avoid: ["Do not use when exact values are more important than pattern recognition.", "Do not use inaccessible color ramps without text support."],
+  accessibility: ["Grid has an image role and label in this first implementation.", "Production versions should expose each cell value to assistive tech."],
+  agentGuidance: ["Use Heatmap Chart for activity, coverage, or intensity patterns across days, workspaces, or source types."],
+  code: `import { HeatmapChart } from "./HeatmapChart";\n\n<HeatmapChart />`,
 };
 
 export const summaryChartCardEntry: CatalogEntry = {

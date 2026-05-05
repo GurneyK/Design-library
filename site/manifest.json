@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 108,
+    "entries": 112,
     "categories": 13,
     "templates": 8
   },
@@ -1320,6 +1320,193 @@
         "Use Donut Chart for completion, distribution, and simple category shares."
       ],
       "code": "import { DonutChart } from \"./DonutChart\";\n\n<DonutChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "scatter-chart",
+      "kind": "component",
+      "name": "Scatter Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Scatter Chart plots relationships between two metrics, such as latency and answer quality.",
+      "variants": [
+        "Correlation",
+        "Trend line",
+        "Point sizing",
+        "Dashboard"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-600",
+        "info-500",
+        "gray-100",
+        "gray-200",
+        "white"
+      ],
+      "useWhen": [
+        "Use for correlation and distribution analysis.",
+        "Use when two numeric measures need to be compared together."
+      ],
+      "doNotUseWhen": [
+        "Do not use for simple category comparison.",
+        "Do not make critical insight depend on color alone."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation.",
+        "Production charts should expose the plotted data as a table or summary."
+      ],
+      "agentGuidance": [
+        "Use Scatter Chart for quality versus latency, cost versus usage, or confidence versus impact patterns."
+      ],
+      "code": "import { ScatterChart } from \"./ScatterChart\";\n\n<ScatterChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "gauge-chart",
+      "kind": "component",
+      "name": "Gauge Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Gauge Chart shows a bounded score against qualitative ranges with a large center value.",
+      "variants": [
+        "Score",
+        "Threshold ranges",
+        "Needle",
+        "Center value"
+      ],
+      "props": [],
+      "tokens": [
+        "success-500",
+        "warning-500",
+        "brand-700",
+        "gray-100",
+        "gray-900",
+        "white"
+      ],
+      "useWhen": [
+        "Use for quality scores, readiness, risk, or health metrics with a known range.",
+        "Use text labels so users understand the score meaning."
+      ],
+      "doNotUseWhen": [
+        "Do not use for unbounded values.",
+        "Do not use many gauges together when a table would scan better."
+      ],
+      "accessibility": [
+        "SVG has an image role and label, and the value is visible text.",
+        "Do not rely on range color without labels in production."
+      ],
+      "agentGuidance": [
+        "Use Gauge Chart for single bounded metrics such as quality score, risk score, or readiness."
+      ],
+      "code": "import { GaugeChart } from \"./GaugeChart\";\n\n<GaugeChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "funnel-chart",
+      "kind": "component",
+      "name": "Funnel Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Funnel Chart shows drop-off across sequential workflow stages.",
+      "variants": [
+        "Four stages",
+        "Labeled values",
+        "Workflow conversion"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-700",
+        "brand-600",
+        "info-500",
+        "success-500",
+        "gray-100",
+        "gray-600",
+        "gray-900",
+        "radius-md"
+      ],
+      "useWhen": [
+        "Use for agent run pipelines, approval flows, and campaign conversion stages.",
+        "Label every stage with both name and value."
+      ],
+      "doNotUseWhen": [
+        "Do not use when stages are not sequential.",
+        "Do not hide large drop-offs without explanatory copy nearby."
+      ],
+      "accessibility": [
+        "Stage labels and values are rendered as visible text.",
+        "Bar width is supplemental to the numeric value."
+      ],
+      "agentGuidance": [
+        "Use Funnel Chart for run-to-review-to-publish pipelines and other sequential conversion flows."
+      ],
+      "code": "import { FunnelChart } from \"./FunnelChart\";\n\n<FunnelChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "heatmap-chart",
+      "kind": "component",
+      "name": "Heatmap Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Heatmap Chart shows activity or intensity across a compact two-dimensional grid.",
+      "variants": [
+        "Activity grid",
+        "Intensity scale",
+        "Compact dashboard"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-25",
+        "brand-50",
+        "brand-100",
+        "brand-200",
+        "brand-300",
+        "brand-500",
+        "brand-600",
+        "brand-700",
+        "gray-500",
+        "white"
+      ],
+      "useWhen": [
+        "Use for workspace activity, usage by time bucket, or coverage density.",
+        "Pair color intensity with labels or summaries in production."
+      ],
+      "doNotUseWhen": [
+        "Do not use when exact values are more important than pattern recognition.",
+        "Do not use inaccessible color ramps without text support."
+      ],
+      "accessibility": [
+        "Grid has an image role and label in this first implementation.",
+        "Production versions should expose each cell value to assistive tech."
+      ],
+      "agentGuidance": [
+        "Use Heatmap Chart for activity, coverage, or intensity patterns across days, workspaces, or source types."
+      ],
+      "code": "import { HeatmapChart } from \"./HeatmapChart\";\n\n<HeatmapChart />",
       "sourceFile": "src/data/chartEntries.tsx"
     },
     {

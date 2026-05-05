@@ -37,7 +37,11 @@ import {
   chartLegendEntry,
   chartTooltipEntry,
   donutChartEntry,
+  funnelChartEntry,
+  gaugeChartEntry,
+  heatmapChartEntry,
   lineChartEntry,
+  scatterChartEntry,
   summaryChartCardEntry,
 } from "./chartEntries";
 import {
@@ -224,6 +228,10 @@ export const catalog = [
   areaChartEntry,
   barChartEntry,
   donutChartEntry,
+  scatterChartEntry,
+  gaugeChartEntry,
+  funnelChartEntry,
+  heatmapChartEntry,
   summaryChartCardEntry,
   chatSurfaceEntry,
   chatMessageEntry,
