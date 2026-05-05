@@ -93,11 +93,15 @@ import {
 } from "./feedbackEntries";
 import {
   comboboxEntry,
+  dateRangePickerEntry,
   datePickerEntry,
   fileUploadEntry,
   formActionsEntry,
   formGroupEntry,
   formSectionEntry,
+  numberInputEntry,
+  timePickerEntry,
+  tokenInputEntry,
   validationMessageEntry,
 } from "./formEntries";
 import {
@@ -211,6 +215,10 @@ export const catalog = [
   fileUploadEntry,
   comboboxEntry,
   datePickerEntry,
+  dateRangePickerEntry,
+  timePickerEntry,
+  numberInputEntry,
+  tokenInputEntry,
   formActionsEntry,
   tableEntry,
   listEntry,

@@ -1,10 +1,14 @@
 import { FormField } from "../components/ui/form-field/FormField";
 import { Combobox } from "../components/ui/forms/Combobox";
+import { DateRangePicker } from "../components/ui/forms/DateRangePicker";
 import { DatePicker } from "../components/ui/forms/DatePicker";
 import { FileUpload } from "../components/ui/forms/FileUpload";
 import { FormActions } from "../components/ui/forms/FormActions";
 import { FormGroup } from "../components/ui/forms/FormGroup";
 import { FormSection } from "../components/ui/forms/FormSection";
+import { NumberInput } from "../components/ui/forms/NumberInput";
+import { TimePicker } from "../components/ui/forms/TimePicker";
+import { TokenInput } from "../components/ui/forms/TokenInput";
 import { ValidationMessage } from "../components/ui/forms/ValidationMessage";
 import { Input } from "../components/ui/input/Input";
 import { Select } from "../components/ui/select/Select";
@@ -64,6 +68,27 @@ function ComboboxPreview() {
 
 function DatePickerPreview() {
   return <DatePicker />;
+}
+
+function DateRangePickerPreview() {
+  return <DateRangePicker />;
+}
+
+function TimePickerPreview() {
+  return <TimePicker />;
+}
+
+function NumberInputPreview() {
+  return (
+    <div className="space-y-5">
+      <NumberInput label="Temperature" value={35} suffix="%" />
+      <NumberInput label="Max sources" max={20} min={1} suffix="" value={8} />
+    </div>
+  );
+}
+
+function TokenInputPreview() {
+  return <TokenInput />;
 }
 
 function FormActionsPreview() {
@@ -194,6 +219,89 @@ export const datePickerEntry: CatalogEntry = {
   accessibility: ["The preview is a button trigger with visible text.", "Production calendar should support keyboard navigation and focus management."],
   agentGuidance: ["Use Date Picker for one date.", "Use a date range component when selecting start and end dates together."],
   code: `import { DatePicker } from "./DatePicker";\n\n<DatePicker value="Apr 29, 2026" />`,
+};
+
+export const dateRangePickerEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "date-range-picker",
+  name: "Date Range Picker",
+  subcategory: "Inputs",
+  description: "Date Range Picker captures start and end dates for reports, filters, schedules, and campaign windows.",
+  preview: DateRangePickerPreview,
+  variants: ["Default", "Start / end dates", "Calendar trigger", "Responsive wrap"],
+  props: [
+    { name: "start", type: "string", defaultValue: '"Apr 5, 2026"', description: "Formatted start date." },
+    { name: "end", type: "string", defaultValue: '"May 5, 2026"', description: "Formatted end date." },
+  ],
+  tokens: ["white", "gray-50", "gray-300", "gray-400", "gray-900", "radius-md", "shadow-xs"],
+  usage: ["Use for analytics windows, campaign periods, run history, and report filters.", "Show both dates in a single readable control."],
+  avoid: ["Do not use for a single date; use Date Picker.", "Do not make users type formatted ranges by hand when precision matters."],
+  accessibility: ["The preview is a button trigger with visible date text.", "Production calendars should support keyboard navigation, range announcement, and focus management."],
+  agentGuidance: ["Use Date Range Picker for time-window filters on dashboards and history views.", "Pair with Chart Container or Table when filtering data by period."],
+  code: `import { DateRangePicker } from "./DateRangePicker";\n\n<DateRangePicker start="Apr 5, 2026" end="May 5, 2026" />`,
+};
+
+export const timePickerEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "time-picker",
+  name: "Time Picker",
+  subcategory: "Inputs",
+  description: "Time Picker captures a time value with timezone context for schedules, reminders, and report delivery.",
+  preview: TimePickerPreview,
+  variants: ["Default", "Timezone label", "Clock trigger"],
+  props: [
+    { name: "value", type: "string", defaultValue: '"09:30"', description: "Formatted time." },
+    { name: "timezone", type: "string", defaultValue: '"ET"', description: "Visible timezone abbreviation." },
+  ],
+  tokens: ["white", "gray-50", "gray-300", "gray-400", "gray-500", "gray-900", "radius-md", "shadow-xs"],
+  usage: ["Use for scheduled runs, report sends, reminders, and approval deadlines.", "Always show timezone when teams may span regions."],
+  avoid: ["Do not use for duration values.", "Do not omit timezone context in shared workspaces."],
+  accessibility: ["The preview is a button trigger with visible time text.", "Production time pickers should support keyboard entry and validation."],
+  agentGuidance: ["Use Time Picker with Date Picker or Date Range Picker when scheduling workflows.", "Use plain Input only when the value is not a real time."],
+  code: `import { TimePicker } from "./TimePicker";\n\n<TimePicker value="09:30" timezone="ET" />`,
+};
+
+export const numberInputEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "number-input",
+  name: "Number Input",
+  subcategory: "Inputs",
+  description: "Number Input captures precise bounded numeric values with visible stepper controls.",
+  preview: NumberInputPreview,
+  variants: ["Default", "Stepper buttons", "Min / max hint", "Suffix"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Temperature"', description: "Visible field label." },
+    { name: "value", type: "number", defaultValue: "35", description: "Displayed numeric value." },
+    { name: "min", type: "number", defaultValue: "0", description: "Minimum allowed value." },
+    { name: "max", type: "number", defaultValue: "100", description: "Maximum allowed value." },
+    { name: "suffix", type: "string", defaultValue: '"%"', description: "Unit or suffix shown inside the control." },
+  ],
+  tokens: ["white", "gray-50", "gray-300", "gray-500", "gray-700", "gray-900", "radius-md", "shadow-xs"],
+  usage: ["Use when users need exact numeric entry rather than approximate slider adjustment.", "Use suffixes for units like percent, days, or sources."],
+  avoid: ["Do not use for long numeric ranges where Slider is easier.", "Do not hide min and max constraints until validation fails."],
+  accessibility: ["Uses a native number input plus labeled stepper buttons.", "Min and max are visible in helper text."],
+  agentGuidance: ["Use Number Input for model settings, thresholds, limits, and quotas.", "Use Slider when precision is less important than quick tuning."],
+  code: `import { NumberInput } from "./NumberInput";\n\n<NumberInput label="Temperature" min={0} max={100} value={35} suffix="%" />`,
+};
+
+export const tokenInputEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "token-input",
+  name: "Token Input",
+  subcategory: "Inputs",
+  description: "Token Input captures multiple short values as removable chips inside one field.",
+  preview: TokenInputPreview,
+  variants: ["Default", "Multiple tokens", "Remove token", "Add action"],
+  props: [
+    { name: "tokens", type: "string[]", defaultValue: "defaultTokens", description: "Current token labels." },
+    { name: "placeholder", type: "string", defaultValue: '"Add brand, market, or topic"', description: "Hint shown after existing tokens." },
+  ],
+  tokens: ["white", "gray-300", "gray-400", "brand-50", "brand-100", "brand-200", "brand-700", "radius-md", "shadow-xs"],
+  usage: ["Use for tags, brands, markets, topics, source labels, and filter chips.", "Use when multiple short values belong in one field."],
+  avoid: ["Do not use for long prose or complex objects.", "Do not create tokens without a clear remove affordance."],
+  accessibility: ["Remove buttons have token-specific labels.", "Production implementations should support keyboard deletion and token creation."],
+  agentGuidance: ["Use Token Input for multi-value metadata fields.", "Use Checkbox groups when the available options are fixed and visible."],
+  code: `import { TokenInput } from "./TokenInput";\n\n<TokenInput tokens={['Dove', 'Hair care', 'North America']} />`,
 };
 
 export const formActionsEntry: CatalogEntry = {
