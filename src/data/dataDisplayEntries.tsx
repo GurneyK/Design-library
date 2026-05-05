@@ -2,6 +2,10 @@ import { Activity, Bot, Database, FileText, MessageSquare, Plus, TrendingUp } fr
 import { Accordion } from "../components/ui/accordion/Accordion";
 import { Badge } from "../components/ui/badge/Badge";
 import { DataToolbar } from "../components/ui/data-toolbar/DataToolbar";
+import { CodeBlock } from "../components/ui/data-display/CodeBlock";
+import { ComparisonMatrix } from "../components/ui/data-display/ComparisonMatrix";
+import { DocumentPreview } from "../components/ui/data-display/DocumentPreview";
+import { KeyValueGrid } from "../components/ui/data-display/KeyValueGrid";
 import { DescriptionList } from "../components/ui/description-list/DescriptionList";
 import { EmptyState } from "../components/ui/empty-state/EmptyState";
 import { List } from "../components/ui/list/List";
@@ -129,6 +133,22 @@ function TreePreview() {
 
 function DataToolbarPreview() {
   return <DataToolbar />;
+}
+
+function CodeBlockPreview() {
+  return <CodeBlock />;
+}
+
+function KeyValueGridPreview() {
+  return <KeyValueGrid />;
+}
+
+function DocumentPreviewPreview() {
+  return <DocumentPreview />;
+}
+
+function ComparisonMatrixPreview() {
+  return <ComparisonMatrix />;
 }
 
 const displayDefaults = {
@@ -312,4 +332,82 @@ export const dataToolbarEntry: CatalogEntry = {
   accessibility: ["Search input has an accessible label.", "Icon actions use accessible labels through Icon Button."],
   agentGuidance: ["Use Data Toolbar with Table, List, and Pagination.", "Use Quick Action Panel for task launch rather than data filtering."],
   code: `import { DataToolbar } from "./DataToolbar";\n\n<DataToolbar resultCount="148 results" />`,
+};
+
+export const codeBlockEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "code-block",
+  name: "Code Block",
+  subcategory: "Developer content",
+  description: "Code Block presents runnable snippets with title, language metadata, and copy action.",
+  preview: CodeBlockPreview,
+  variants: ["Title", "Language label", "Copy action", "Status footer", "Overflow scroll"],
+  props: [
+    { name: "title", type: "string", defaultValue: '"Source search"', description: "Snippet title." },
+    { name: "language", type: "string", defaultValue: '"ts"', description: "Language label." },
+    { name: "code", type: "string", defaultValue: "defaultCode", description: "Code snippet content." },
+  ],
+  tokens: ["gray-900", "gray-700", "gray-400", "gray-100", "success-300", "white", "radius-lg", "shadow-xs"],
+  usage: ["Use for API examples, component snippets, prompt templates, and setup instructions.", "Keep snippets copyable and runnable in a configured project."],
+  avoid: ["Do not use for long documentation prose.", "Do not show snippets with dangling imports or impossible setup."],
+  accessibility: ["Code is rendered inside pre and code elements.", "Copy action has visible text and an icon."],
+  agentGuidance: ["Use Code Block when a user or agent needs implementation-ready code.", "Prefer short, complete examples that include imports."],
+  code: `import { CodeBlock } from "./CodeBlock";\n\n<CodeBlock title="Source search" language="ts" code={snippet} />`,
+};
+
+export const keyValueGridEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "key-value-grid",
+  name: "Key Value Grid",
+  subcategory: "Key-value",
+  description: "Key Value Grid displays important metadata in a compact responsive grid.",
+  preview: KeyValueGridPreview,
+  variants: ["Two columns", "Metadata cells", "Badge value", "Responsive"],
+  props: [
+    { name: "items", type: "KeyValueGridItem[]", defaultValue: "defaultItems", description: "Label/value cells." },
+  ],
+  tokens: ["white", "gray-100", "gray-200", "gray-500", "gray-900", "radius-lg", "shadow-xs"],
+  usage: ["Use for workspace metadata, source details, run configuration, and agent settings summaries.", "Use when labels and values should scan as equal cells."],
+  avoid: ["Do not use for editable form fields.", "Do not use for long paragraphs or large datasets."],
+  accessibility: ["Uses semantic dl, dt, and dd elements.", "Labels and values remain paired in the DOM."],
+  agentGuidance: ["Use Key Value Grid for compact metadata summaries.", "Use Description List for simpler stacked details in drawers and modals."],
+  code: `import { KeyValueGrid } from "./KeyValueGrid";\n\n<KeyValueGrid items={items} />`,
+};
+
+export const documentPreviewEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "document-preview",
+  name: "Document Preview",
+  subcategory: "Source content",
+  description: "Document Preview shows a sourced excerpt, highlight treatment, source filename, and open-source action.",
+  preview: DocumentPreviewPreview,
+  variants: ["Highlighted excerpt", "Source badge", "Filename metadata", "Open action"],
+  props: [
+    { name: "title", type: "string", defaultValue: '"Claim support excerpt"', description: "Preview title." },
+    { name: "excerpt", type: "string", defaultValue: "-", description: "Highlighted source text." },
+    { name: "source", type: "string", defaultValue: '"Brand evidence pack.pdf"', description: "Source file label." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-700", "warning-50", "warning-700", "radius-lg", "shadow-xs"],
+  usage: ["Use in citation drawers, source reviews, claim support, and document inspection flows.", "Highlight only the excerpt that supports the decision."],
+  avoid: ["Do not use as a full PDF reader.", "Do not show source snippets without source identity."],
+  accessibility: ["Source title, excerpt, and filename are visible text.", "Open action has visible text and icon."],
+  agentGuidance: ["Use Document Preview when grounding generated content in source material.", "Pair with Citation Chip, Source Drawer, or Review Queue."],
+  code: `import { DocumentPreview } from "./DocumentPreview";\n\n<DocumentPreview title="Claim support excerpt" source="Brand evidence pack.pdf" />`,
+};
+
+export const comparisonMatrixEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "comparison-matrix",
+  name: "Comparison Matrix",
+  subcategory: "Structured data",
+  description: "Comparison Matrix compares capabilities or states across products, agents, plans, or workspaces.",
+  preview: ComparisonMatrixPreview,
+  variants: ["Capability rows", "Included / not included", "Semantic table", "Horizontal scroll"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-400", "gray-500", "gray-900", "success-700", "radius-lg", "shadow-xs"],
+  usage: ["Use when users need to compare feature support across several entities.", "Keep row labels clear and column count modest."],
+  avoid: ["Do not use for single-object metadata.", "Do not use icons without visible included/not-included text."],
+  accessibility: ["Uses semantic table, th, scope, and readable cell text.", "Icons are supplemental to text labels."],
+  agentGuidance: ["Use Comparison Matrix for capability comparison and plan/workspace parity.", "Use Table for general records and Key Value Grid for one object's metadata."],
+  code: `import { ComparisonMatrix } from "./ComparisonMatrix";\n\n<ComparisonMatrix />`,
 };

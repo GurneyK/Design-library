@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 120,
+    "entries": 124,
     "categories": 13,
     "templates": 8
   },
@@ -2879,6 +2879,252 @@
         "Use Quick Action Panel for task launch rather than data filtering."
       ],
       "code": "import { DataToolbar } from \"./DataToolbar\";\n\n<DataToolbar resultCount=\"148 results\" />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "code-block",
+      "kind": "component",
+      "name": "Code Block",
+      "category": "Data Display",
+      "subcategory": "Developer content",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Code Block presents runnable snippets with title, language metadata, and copy action.",
+      "variants": [
+        "Title",
+        "Language label",
+        "Copy action",
+        "Status footer",
+        "Overflow scroll"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "\"Source search\"",
+          "description": "Snippet title."
+        },
+        {
+          "name": "language",
+          "type": "string",
+          "defaultValue": "\"ts\"",
+          "description": "Language label."
+        },
+        {
+          "name": "code",
+          "type": "string",
+          "defaultValue": "defaultCode",
+          "description": "Code snippet content."
+        }
+      ],
+      "tokens": [
+        "gray-900",
+        "gray-700",
+        "gray-400",
+        "gray-100",
+        "success-300",
+        "white",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for API examples, component snippets, prompt templates, and setup instructions.",
+        "Keep snippets copyable and runnable in a configured project."
+      ],
+      "doNotUseWhen": [
+        "Do not use for long documentation prose.",
+        "Do not show snippets with dangling imports or impossible setup."
+      ],
+      "accessibility": [
+        "Code is rendered inside pre and code elements.",
+        "Copy action has visible text and an icon."
+      ],
+      "agentGuidance": [
+        "Use Code Block when a user or agent needs implementation-ready code.",
+        "Prefer short, complete examples that include imports."
+      ],
+      "code": "import { CodeBlock } from \"./CodeBlock\";\n\n<CodeBlock title=\"Source search\" language=\"ts\" code={snippet} />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "key-value-grid",
+      "kind": "component",
+      "name": "Key Value Grid",
+      "category": "Data Display",
+      "subcategory": "Key-value",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Key Value Grid displays important metadata in a compact responsive grid.",
+      "variants": [
+        "Two columns",
+        "Metadata cells",
+        "Badge value",
+        "Responsive"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "KeyValueGridItem[]",
+          "defaultValue": "defaultItems",
+          "description": "Label/value cells."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for workspace metadata, source details, run configuration, and agent settings summaries.",
+        "Use when labels and values should scan as equal cells."
+      ],
+      "doNotUseWhen": [
+        "Do not use for editable form fields.",
+        "Do not use for long paragraphs or large datasets."
+      ],
+      "accessibility": [
+        "Uses semantic dl, dt, and dd elements.",
+        "Labels and values remain paired in the DOM."
+      ],
+      "agentGuidance": [
+        "Use Key Value Grid for compact metadata summaries.",
+        "Use Description List for simpler stacked details in drawers and modals."
+      ],
+      "code": "import { KeyValueGrid } from \"./KeyValueGrid\";\n\n<KeyValueGrid items={items} />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "document-preview",
+      "kind": "component",
+      "name": "Document Preview",
+      "category": "Data Display",
+      "subcategory": "Source content",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Document Preview shows a sourced excerpt, highlight treatment, source filename, and open-source action.",
+      "variants": [
+        "Highlighted excerpt",
+        "Source badge",
+        "Filename metadata",
+        "Open action"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "\"Claim support excerpt\"",
+          "description": "Preview title."
+        },
+        {
+          "name": "excerpt",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Highlighted source text."
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "defaultValue": "\"Brand evidence pack.pdf\"",
+          "description": "Source file label."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-700",
+        "warning-50",
+        "warning-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in citation drawers, source reviews, claim support, and document inspection flows.",
+        "Highlight only the excerpt that supports the decision."
+      ],
+      "doNotUseWhen": [
+        "Do not use as a full PDF reader.",
+        "Do not show source snippets without source identity."
+      ],
+      "accessibility": [
+        "Source title, excerpt, and filename are visible text.",
+        "Open action has visible text and icon."
+      ],
+      "agentGuidance": [
+        "Use Document Preview when grounding generated content in source material.",
+        "Pair with Citation Chip, Source Drawer, or Review Queue."
+      ],
+      "code": "import { DocumentPreview } from \"./DocumentPreview\";\n\n<DocumentPreview title=\"Claim support excerpt\" source=\"Brand evidence pack.pdf\" />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "comparison-matrix",
+      "kind": "component",
+      "name": "Comparison Matrix",
+      "category": "Data Display",
+      "subcategory": "Structured data",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Comparison Matrix compares capabilities or states across products, agents, plans, or workspaces.",
+      "variants": [
+        "Capability rows",
+        "Included / not included",
+        "Semantic table",
+        "Horizontal scroll"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-400",
+        "gray-500",
+        "gray-900",
+        "success-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when users need to compare feature support across several entities.",
+        "Keep row labels clear and column count modest."
+      ],
+      "doNotUseWhen": [
+        "Do not use for single-object metadata.",
+        "Do not use icons without visible included/not-included text."
+      ],
+      "accessibility": [
+        "Uses semantic table, th, scope, and readable cell text.",
+        "Icons are supplemental to text labels."
+      ],
+      "agentGuidance": [
+        "Use Comparison Matrix for capability comparison and plan/workspace parity.",
+        "Use Table for general records and Key Value Grid for one object's metadata."
+      ],
+      "code": "import { ComparisonMatrix } from \"./ComparisonMatrix\";\n\n<ComparisonMatrix />",
       "sourceFile": "src/data/dataDisplayEntries.tsx"
     },
     {
