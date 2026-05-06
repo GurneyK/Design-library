@@ -3,11 +3,15 @@ import { Input } from "../components/ui/input/Input";
 import { Textarea } from "../components/ui/textarea/Textarea";
 import { Select } from "../components/ui/select/Select";
 import { Checkbox } from "../components/ui/checkbox/Checkbox";
+import { CheckboxGroup } from "../components/ui/checkbox-group/CheckboxGroup";
 import { Switch } from "../components/ui/switch/Switch";
 import { Slider } from "../components/ui/slider/Slider";
 import { SearchInput } from "../components/ui/search-input/SearchInput";
 import { RadioGroup } from "../components/ui/radio-group/RadioGroup";
+import { QueryBuilder } from "../components/ui/query-builder/QueryBuilder";
+import { RatingInput } from "../components/ui/rating-input/RatingInput";
 import { SegmentedControl } from "../components/ui/segmented-control/SegmentedControl";
+import { TransferList } from "../components/ui/transfer-list/TransferList";
 import type { CatalogEntry } from "./catalog";
 
 function FormFieldPreview() {
@@ -129,6 +133,22 @@ function SegmentedControlPreview() {
       ]}
     />
   );
+}
+
+function CheckboxGroupPreview() {
+  return <CheckboxGroup />;
+}
+
+function TransferListPreview() {
+  return <TransferList />;
+}
+
+function RatingInputPreview() {
+  return <RatingInput />;
+}
+
+function QueryBuilderPreview() {
+  return <QueryBuilder />;
 }
 
 const dataEntryDefaults = {
@@ -344,4 +364,78 @@ export const segmentedControlEntry: CatalogEntry = {
   accessibility: ["Segments expose pressed state.", "A screen-reader label describes the control."],
   agentGuidance: ["Use Segmented Control for local modes like Components/Templates or Overview/Runs/Sources.", "Use Tabs when the view change needs stronger page structure."],
   code: `import { SegmentedControl } from "./SegmentedControl";\n\n<SegmentedControl segments={segments} />`,
+};
+
+export const checkboxGroupEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "checkbox-group",
+  name: "Checkbox Group",
+  subcategory: "Choice controls",
+  description: "Checkbox Group captures multiple independent choices under a shared legend.",
+  preview: CheckboxGroupPreview,
+  variants: ["Grouped choices", "Checked items", "Descriptions", "Fieldset"],
+  props: [
+    { name: "legend", type: "string", defaultValue: '"Knowledge sources"', description: "Visible group legend." },
+    { name: "options", type: "CheckboxGroupOption[]", defaultValue: "defaultOptions", description: "Choice labels, descriptions, and checked state." },
+  ],
+  tokens: ["white", "gray-200", "gray-500", "gray-900", "brand-50", "brand-600", "radius-lg", "shadow-xs"],
+  usage: ["Use when users can select multiple options from a short visible set.", "Use descriptions when each option has a meaningful consequence."],
+  avoid: ["Do not use for mutually exclusive choices; use Radio Group.", "Do not use for long searchable lists; use Transfer List or Combobox patterns."],
+  accessibility: ["Uses fieldset and legend to group related checkboxes.", "Each checkbox keeps a visible label."],
+  agentGuidance: ["Use Checkbox Group for permission sets, source scopes, and multi-select settings.", "Use Token Input for free-form multi-value metadata."],
+  code: `import { CheckboxGroup } from "./CheckboxGroup";\n\n<CheckboxGroup legend="Knowledge sources" options={options} />`,
+};
+
+export const transferListEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "transfer-list",
+  name: "Transfer List",
+  subcategory: "Choice controls",
+  description: "Transfer List moves items between available and selected collections.",
+  preview: TransferListPreview,
+  variants: ["Available list", "Selected list", "Move actions", "Checkbox rows"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-600", "radius-lg", "shadow-xs"],
+  usage: ["Use for selecting source sets, users, permissions, or datasets from a larger known pool.", "Use when users need to review both available and selected items."],
+  avoid: ["Do not use for one or two options.", "Do not use without search or grouping for very large collections in production."],
+  accessibility: ["Columns have visible headings and row labels.", "Move actions include accessible labels."],
+  agentGuidance: ["Use Transfer List when users curate a selected set from available items.", "Use Checkbox Group for short lists where all options remain in one group."],
+  code: `import { TransferList } from "./TransferList";\n\n<TransferList />`,
+};
+
+export const ratingInputEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "rating-input",
+  name: "Rating Input",
+  subcategory: "Feedback controls",
+  description: "Rating Input captures a compact qualitative score such as answer quality or review confidence.",
+  preview: RatingInputPreview,
+  variants: ["Five-star", "Selected value", "Keyboard buttons", "Review score"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Answer quality"', description: "Visible rating label." },
+    { name: "value", type: "number", defaultValue: "4", description: "Selected rating value." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-900", "warning-50", "warning-600", "radius-lg", "shadow-xs"],
+  usage: ["Use for lightweight user feedback and subjective review scoring.", "Pair with text feedback when the score needs explanation."],
+  avoid: ["Do not use for precise evaluation metrics from a model; use Evaluation Scorecard.", "Do not rely on icons without accessible labels."],
+  accessibility: ["Rating buttons include accessible labels.", "The group has a visible legend."],
+  agentGuidance: ["Use Rating Input for human feedback on answers, prompts, and generated artifacts.", "Use Slider or Number Input for numeric settings."],
+  code: `import { RatingInput } from "./RatingInput";\n\n<RatingInput label="Answer quality" value={4} />`,
+};
+
+export const queryBuilderEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "query-builder",
+  name: "Query Builder",
+  subcategory: "Filter controls",
+  description: "Query Builder lets users compose structured filter rules from fields, operators, and values.",
+  preview: QueryBuilderPreview,
+  variants: ["Rule rows", "Field select", "Operator select", "Value input", "Add / remove"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-500", "gray-900", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use for advanced filtering on runs, sources, review queues, and analytics data.", "Use when simple search plus filters is not expressive enough."],
+  avoid: ["Do not use for casual search.", "Do not expose query complexity unless the target users need it."],
+  accessibility: ["Controls use native selects, inputs, and labeled icon buttons.", "Production implementations should announce added and removed rules."],
+  agentGuidance: ["Use Query Builder for advanced dashboard filters and saved views.", "Use Filter Bar for common lightweight filtering."],
+  code: `import { QueryBuilder } from "./QueryBuilder";\n\n<QueryBuilder />`,
 };

@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 148,
+    "entries": 152,
     "categories": 13,
     "templates": 12
   },
@@ -4006,6 +4006,232 @@
         "Use Tabs when the view change needs stronger page structure."
       ],
       "code": "import { SegmentedControl } from \"./SegmentedControl\";\n\n<SegmentedControl segments={segments} />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "checkbox-group",
+      "kind": "component",
+      "name": "Checkbox Group",
+      "category": "Data Entry",
+      "subcategory": "Choice controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Checkbox Group captures multiple independent choices under a shared legend.",
+      "variants": [
+        "Grouped choices",
+        "Checked items",
+        "Descriptions",
+        "Fieldset"
+      ],
+      "props": [
+        {
+          "name": "legend",
+          "type": "string",
+          "defaultValue": "\"Knowledge sources\"",
+          "description": "Visible group legend."
+        },
+        {
+          "name": "options",
+          "type": "CheckboxGroupOption[]",
+          "defaultValue": "defaultOptions",
+          "description": "Choice labels, descriptions, and checked state."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-600",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when users can select multiple options from a short visible set.",
+        "Use descriptions when each option has a meaningful consequence."
+      ],
+      "doNotUseWhen": [
+        "Do not use for mutually exclusive choices; use Radio Group.",
+        "Do not use for long searchable lists; use Transfer List or Combobox patterns."
+      ],
+      "accessibility": [
+        "Uses fieldset and legend to group related checkboxes.",
+        "Each checkbox keeps a visible label."
+      ],
+      "agentGuidance": [
+        "Use Checkbox Group for permission sets, source scopes, and multi-select settings.",
+        "Use Token Input for free-form multi-value metadata."
+      ],
+      "code": "import { CheckboxGroup } from \"./CheckboxGroup\";\n\n<CheckboxGroup legend=\"Knowledge sources\" options={options} />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "transfer-list",
+      "kind": "component",
+      "name": "Transfer List",
+      "category": "Data Entry",
+      "subcategory": "Choice controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Transfer List moves items between available and selected collections.",
+      "variants": [
+        "Available list",
+        "Selected list",
+        "Move actions",
+        "Checkbox rows"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-600",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for selecting source sets, users, permissions, or datasets from a larger known pool.",
+        "Use when users need to review both available and selected items."
+      ],
+      "doNotUseWhen": [
+        "Do not use for one or two options.",
+        "Do not use without search or grouping for very large collections in production."
+      ],
+      "accessibility": [
+        "Columns have visible headings and row labels.",
+        "Move actions include accessible labels."
+      ],
+      "agentGuidance": [
+        "Use Transfer List when users curate a selected set from available items.",
+        "Use Checkbox Group for short lists where all options remain in one group."
+      ],
+      "code": "import { TransferList } from \"./TransferList\";\n\n<TransferList />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "rating-input",
+      "kind": "component",
+      "name": "Rating Input",
+      "category": "Data Entry",
+      "subcategory": "Feedback controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Rating Input captures a compact qualitative score such as answer quality or review confidence.",
+      "variants": [
+        "Five-star",
+        "Selected value",
+        "Keyboard buttons",
+        "Review score"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"Answer quality\"",
+          "description": "Visible rating label."
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "defaultValue": "4",
+          "description": "Selected rating value."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-900",
+        "warning-50",
+        "warning-600",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for lightweight user feedback and subjective review scoring.",
+        "Pair with text feedback when the score needs explanation."
+      ],
+      "doNotUseWhen": [
+        "Do not use for precise evaluation metrics from a model; use Evaluation Scorecard.",
+        "Do not rely on icons without accessible labels."
+      ],
+      "accessibility": [
+        "Rating buttons include accessible labels.",
+        "The group has a visible legend."
+      ],
+      "agentGuidance": [
+        "Use Rating Input for human feedback on answers, prompts, and generated artifacts.",
+        "Use Slider or Number Input for numeric settings."
+      ],
+      "code": "import { RatingInput } from \"./RatingInput\";\n\n<RatingInput label=\"Answer quality\" value={4} />",
+      "sourceFile": "src/data/dataEntryEntries.tsx"
+    },
+    {
+      "id": "query-builder",
+      "kind": "component",
+      "name": "Query Builder",
+      "category": "Data Entry",
+      "subcategory": "Filter controls",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Query Builder lets users compose structured filter rules from fields, operators, and values.",
+      "variants": [
+        "Rule rows",
+        "Field select",
+        "Operator select",
+        "Value input",
+        "Add / remove"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for advanced filtering on runs, sources, review queues, and analytics data.",
+        "Use when simple search plus filters is not expressive enough."
+      ],
+      "doNotUseWhen": [
+        "Do not use for casual search.",
+        "Do not expose query complexity unless the target users need it."
+      ],
+      "accessibility": [
+        "Controls use native selects, inputs, and labeled icon buttons.",
+        "Production implementations should announce added and removed rules."
+      ],
+      "agentGuidance": [
+        "Use Query Builder for advanced dashboard filters and saved views.",
+        "Use Filter Bar for common lightweight filtering."
+      ],
+      "code": "import { QueryBuilder } from \"./QueryBuilder\";\n\n<QueryBuilder />",
       "sourceFile": "src/data/dataEntryEntries.tsx"
     },
     {

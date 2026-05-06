@@ -23,16 +23,20 @@ import {
   tooltipEntry,
 } from "./primitiveEntries";
 import {
+  checkboxGroupEntry,
   checkboxEntry,
   formFieldEntry,
   inputEntry,
+  queryBuilderEntry,
   radioGroupEntry,
+  ratingInputEntry,
   searchInputEntry,
   selectEntry,
   segmentedControlEntry,
   sliderEntry,
   switchEntry,
   textareaEntry,
+  transferListEntry,
 } from "./dataEntryEntries";
 import {
   areaChartEntry,
@@ -253,6 +257,10 @@ export const catalog = [
   searchInputEntry,
   radioGroupEntry,
   segmentedControlEntry,
+  checkboxGroupEntry,
+  transferListEntry,
+  ratingInputEntry,
+  queryBuilderEntry,
   formSectionEntry,
   formGroupEntry,
   validationMessageEntry,
