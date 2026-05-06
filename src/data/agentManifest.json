@@ -12,6 +12,47 @@
     "categories": 13,
     "templates": 12
   },
+  "kindCounts": {
+    "component": 134,
+    "foundation": 10,
+    "template": 12
+  },
+  "categoryCounts": {
+    "Primitives": 14,
+    "Agent UI": 16,
+    "Agent Reference": 1,
+    "Charts / Data Viz": 12,
+    "Dashboard / Product Patterns": 12,
+    "Data Display": 13,
+    "Data Entry": 14,
+    "Feedback": 18,
+    "Forms": 11,
+    "Foundations": 10,
+    "Layout": 12,
+    "Navigation": 11,
+    "Templates / Blocks": 12
+  },
+  "consumptionGuidance": [
+    "Load this manifest before generating UI for Nexus, Design Library, or related Unilever internal tools.",
+    "Choose existing entries by kind, category, subcategory, useWhen, doNotUseWhen, variants, props, and tokens.",
+    "Prefer templates for full-page or block-level composition before assembling primitives from scratch.",
+    "Honor doNotUseWhen and accessibility notes as hard constraints during UI generation.",
+    "Do not invent components outside this manifest unless the user has approved a gap proposal."
+  ],
+  "entrySchema": {
+    "id": "Stable identifier used for lookup and references.",
+    "kind": "component | foundation | template.",
+    "category": "Top-level catalog category shown in navigation.",
+    "subcategory": "Functional grouping inside the category.",
+    "props": "Documented props or data slots for the implementation.",
+    "variants": "Supported states, tones, and structural variants.",
+    "tokens": "Habibi tokens consumed by the entry.",
+    "useWhen": "Recommended use cases.",
+    "doNotUseWhen": "Constraints and anti-patterns.",
+    "accessibility": "Baseline accessibility requirements.",
+    "agentGuidance": "Composition guidance for AI-assisted UI generation.",
+    "code": "Copyable implementation snippet or composition starter."
+  },
   "categories": [
     "Primitives",
     "Agent UI",
@@ -1170,6 +1211,30 @@
           "type": "string[]",
           "defaultValue": "public URLs",
           "description": "Fetchable manifest locations."
+        },
+        {
+          "name": "kindCounts",
+          "type": "Record<string, number>",
+          "defaultValue": "generated",
+          "description": "Entry totals by component, foundation, and template."
+        },
+        {
+          "name": "categoryCounts",
+          "type": "Record<string, number>",
+          "defaultValue": "generated",
+          "description": "Entry totals for each navigation category."
+        },
+        {
+          "name": "consumptionGuidance",
+          "type": "string[]",
+          "defaultValue": "generated",
+          "description": "Rules for AI agents consuming the catalog."
+        },
+        {
+          "name": "entrySchema",
+          "type": "Record<string, string>",
+          "defaultValue": "generated",
+          "description": "Plain-language schema map for every manifest entry."
         }
       ],
       "tokens": [
@@ -1186,7 +1251,8 @@
       ],
       "useWhen": [
         "Load the manifest before generating Design Library UI.",
-        "Select entries by category, component kind, props, variants, tokens, and agent guidance."
+        "Select entries by kind, category, subcategory, props, variants, tokens, and agent guidance.",
+        "Use templates first for full-page or block-level UI before composing primitives manually."
       ],
       "doNotUseWhen": [
         "Do not scrape visual docs when the manifest is available.",
@@ -1197,10 +1263,11 @@
         "Generated UI should still follow each entry's accessibility notes."
       ],
       "agentGuidance": [
-        "Fetch the manifest, choose from approved entries, and honor useWhen, doNotUseWhen, props, variants, and tokens.",
+        "Fetch the manifest, choose from approved entries, and honor useWhen, doNotUseWhen, props, variants, tokens, and accessibility notes.",
+        "Use categoryCounts and kindCounts to understand coverage before deciding whether a request is a component, foundation, or template task.",
         "For templates, copy composition patterns before inventing new layouts."
       ],
-      "code": "const response = await fetch(\"https://gurneyk.github.io/Design-library/site/manifest.json\");\nconst manifest = await response.json();\n\nconst button = manifest.entries.find((entry) => entry.id === \"button\");",
+      "code": "const urls = [\n  \"https://gurneyk.github.io/Design-library/manifest.json\",\n  \"https://gurneyk.github.io/Design-library/site/manifest.json\",\n];\n\nconst manifest = await fetch(urls[0]).then((response) => response.json());\nconst button = manifest.entries.find((entry) => entry.id === \"button\");",
       "sourceFile": "src/data/agentReferenceEntries.tsx"
     },
     {

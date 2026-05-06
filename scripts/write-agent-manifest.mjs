@@ -20,6 +20,14 @@ for (const file of files) {
 }
 
 const categories = [...new Set(entries.map((entry) => entry.category))];
+const categoryCounts = Object.fromEntries(
+  categories.map((category) => [category, entries.filter((entry) => entry.category === category).length]),
+);
+const kindCounts = {
+  component: entries.filter((entry) => entry.kind === "component").length,
+  foundation: entries.filter((entry) => entry.kind === "foundation").length,
+  template: entries.filter((entry) => entry.kind === "template").length,
+};
 const manifest = {
   schemaVersion: "1.0.0",
   name: "Design Library",
@@ -32,7 +40,30 @@ const manifest = {
   counts: {
     entries: entries.length,
     categories: categories.length,
-    templates: entries.filter((entry) => entry.kind === "template").length,
+    templates: kindCounts.template,
+  },
+  kindCounts,
+  categoryCounts,
+  consumptionGuidance: [
+    "Load this manifest before generating UI for Nexus, Design Library, or related Unilever internal tools.",
+    "Choose existing entries by kind, category, subcategory, useWhen, doNotUseWhen, variants, props, and tokens.",
+    "Prefer templates for full-page or block-level composition before assembling primitives from scratch.",
+    "Honor doNotUseWhen and accessibility notes as hard constraints during UI generation.",
+    "Do not invent components outside this manifest unless the user has approved a gap proposal.",
+  ],
+  entrySchema: {
+    id: "Stable identifier used for lookup and references.",
+    kind: "component | foundation | template.",
+    category: "Top-level catalog category shown in navigation.",
+    subcategory: "Functional grouping inside the category.",
+    props: "Documented props or data slots for the implementation.",
+    variants: "Supported states, tones, and structural variants.",
+    tokens: "Habibi tokens consumed by the entry.",
+    useWhen: "Recommended use cases.",
+    doNotUseWhen: "Constraints and anti-patterns.",
+    accessibility: "Baseline accessibility requirements.",
+    agentGuidance: "Composition guidance for AI-assisted UI generation.",
+    code: "Copyable implementation snippet or composition starter.",
   },
   categories,
   entries,
