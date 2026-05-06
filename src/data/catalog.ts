@@ -77,18 +77,22 @@ import {
 import { agentManifestEntry } from "./agentReferenceEntries";
 import {
   accordionEntry,
+  calendarMonthEntry,
   codeBlockEntry,
   comparisonMatrixEntry,
   dataToolbarEntry,
   descriptionListEntry,
   documentPreviewEntry,
   emptyStateEntry,
+  kanbanBoardEntry,
   keyValueGridEntry,
   listEntry,
+  roadmapEntry,
   statCardEntry,
   tableEntry,
   timelineEntry,
   treeEntry,
+  workflowMapEntry,
 } from "./dataDisplayEntries";
 import {
   activityFeedEntry,
@@ -293,6 +297,10 @@ export const catalog = [
   keyValueGridEntry,
   documentPreviewEntry,
   comparisonMatrixEntry,
+  calendarMonthEntry,
+  kanbanBoardEntry,
+  roadmapEntry,
+  workflowMapEntry,
   chartContainerEntry,
   chartLegendEntry,
   chartTooltipEntry,

@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/site/manifest.json"
   ],
   "counts": {
-    "entries": 156,
+    "entries": 160,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 134,
+    "component": 138,
     "foundation": 10,
     "template": 12
   },
@@ -22,7 +22,7 @@
     "Agent Reference": 1,
     "Charts / Data Viz": 12,
     "Dashboard / Product Patterns": 12,
-    "Data Display": 13,
+    "Data Display": 17,
     "Data Entry": 14,
     "Feedback": 18,
     "Forms": 11,
@@ -3412,6 +3412,282 @@
         "Use Table for general records and Key Value Grid for one object's metadata."
       ],
       "code": "import { ComparisonMatrix } from \"./ComparisonMatrix\";\n\n<ComparisonMatrix />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "calendar-month",
+      "kind": "component",
+      "name": "Calendar Month",
+      "category": "Data Display",
+      "subcategory": "Planning",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Calendar Month shows scheduled reviews, launches, demos, and agent operations inside a month grid.",
+      "variants": [
+        "Month grid",
+        "Muted dates",
+        "Selected day",
+        "Event badges",
+        "Month controls"
+      ],
+      "props": [
+        {
+          "name": "month",
+          "type": "string",
+          "defaultValue": "\"May 2026\"",
+          "description": "Visible month label."
+        },
+        {
+          "name": "events",
+          "type": "CalendarEvent[]",
+          "defaultValue": "[]",
+          "description": "Events keyed by date with title and optional tone."
+        },
+        {
+          "name": "selectedDate",
+          "type": "Date | string",
+          "defaultValue": "-",
+          "description": "Date to highlight for current context."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-400",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-800",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for scheduled review, release, demo, and workflow events.",
+        "Use event badges to show what makes a day actionable."
+      ],
+      "doNotUseWhen": [
+        "Do not use for dense resource scheduling that needs drag-and-drop.",
+        "Do not hide critical deadlines behind unlabeled dots."
+      ],
+      "accessibility": [
+        "Day labels and event names are visible text.",
+        "Month navigation uses icon buttons with accessible labels."
+      ],
+      "agentGuidance": [
+        "Use Calendar Month when date placement matters more than event details.",
+        "Use Timeline for sequence-heavy audit history and Roadmap for quarter-level planning."
+      ],
+      "code": "import { CalendarMonth } from \"./CalendarMonth\";\n\n<CalendarMonth />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "kanban-board",
+      "kind": "component",
+      "name": "Kanban Board",
+      "category": "Data Display",
+      "subcategory": "Planning",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Kanban Board organizes work items into status columns for design, review, and delivery workflows.",
+      "variants": [
+        "Backlog",
+        "In review",
+        "Ready",
+        "Column counts",
+        "Card metadata",
+        "Column actions"
+      ],
+      "props": [
+        {
+          "name": "columns",
+          "type": "KanbanColumn[]",
+          "defaultValue": "defaultColumns",
+          "description": "Status columns with title, count, and cards."
+        },
+        {
+          "name": "cards",
+          "type": "KanbanCard[]",
+          "defaultValue": "[]",
+          "description": "Work items with title, metadata, and status tone."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "success-50",
+        "warning-50",
+        "info-50",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for work queues where status movement is the main mental model.",
+        "Use card metadata to show owner, category, or review state."
+      ],
+      "doNotUseWhen": [
+        "Do not use for purely tabular data.",
+        "Do not use for high-volume records without search, filtering, and virtualization."
+      ],
+      "accessibility": [
+        "Cards and columns use visible headings.",
+        "Column option buttons have accessible labels; future drag behavior should preserve keyboard alternatives."
+      ],
+      "agentGuidance": [
+        "Use Kanban Board for review pipelines, design-system contribution tracking, and human-in-the-loop queues.",
+        "Use Review Queue for simpler list-based approvals."
+      ],
+      "code": "import { KanbanBoard } from \"./KanbanBoard\";\n\n<KanbanBoard />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "roadmap",
+      "kind": "component",
+      "name": "Roadmap",
+      "category": "Data Display",
+      "subcategory": "Planning",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Roadmap presents time-boxed milestones and delivery state across quarters or phases.",
+      "variants": [
+        "Quarter cards",
+        "Complete",
+        "In progress",
+        "Planned",
+        "Status icons"
+      ],
+      "props": [
+        {
+          "name": "milestones",
+          "type": "RoadmapMilestone[]",
+          "defaultValue": "defaultMilestones",
+          "description": "Milestones with period, title, status, and tone."
+        },
+        {
+          "name": "range",
+          "type": "string",
+          "defaultValue": "\"2026\"",
+          "description": "Planning range displayed in the header."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-400",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-600",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for quarter-level product, system, or rollout planning.",
+        "Keep milestone labels short enough to scan as a set."
+      ],
+      "doNotUseWhen": [
+        "Do not use for day-by-day scheduling.",
+        "Do not mix granular tasks and strategic milestones in the same roadmap."
+      ],
+      "accessibility": [
+        "Milestone status is expressed through text and icon.",
+        "The period and title remain visible in every card."
+      ],
+      "agentGuidance": [
+        "Use Roadmap for high-level delivery planning and phase communication.",
+        "Use Calendar Month for date-specific events and Kanban Board for active task state."
+      ],
+      "code": "import { Roadmap } from \"./Roadmap\";\n\n<Roadmap />",
+      "sourceFile": "src/data/dataDisplayEntries.tsx"
+    },
+    {
+      "id": "workflow-map",
+      "kind": "component",
+      "name": "Workflow Map",
+      "category": "Data Display",
+      "subcategory": "Process",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Workflow Map shows a linear process with current, complete, and upcoming steps.",
+      "variants": [
+        "Complete step",
+        "Running step",
+        "Upcoming step",
+        "Directional connectors",
+        "Status badges"
+      ],
+      "props": [
+        {
+          "name": "steps",
+          "type": "WorkflowStep[]",
+          "defaultValue": "defaultSteps",
+          "description": "Ordered process steps with label, state, and icon."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Workflow title shown above the step map."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when users need to understand where an AI or product workflow is in a process.",
+        "Use labels and badges so progress is not icon-only."
+      ],
+      "doNotUseWhen": [
+        "Do not use for branching processes with multiple paths.",
+        "Do not use for historical logs; use Timeline instead."
+      ],
+      "accessibility": [
+        "Steps are rendered in an ordered list.",
+        "Each state is shown as readable text."
+      ],
+      "agentGuidance": [
+        "Use Workflow Map for linear agent workflows such as source collection, drafting, citation review, and publish.",
+        "Use Steps for compact navigation between setup stages."
+      ],
+      "code": "import { WorkflowMap } from \"./WorkflowMap\";\n\n<WorkflowMap />",
       "sourceFile": "src/data/dataDisplayEntries.tsx"
     },
     {

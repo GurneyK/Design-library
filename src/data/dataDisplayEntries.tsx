@@ -2,10 +2,14 @@ import { Activity, Bot, Database, FileText, MessageSquare, Plus, TrendingUp } fr
 import { Accordion } from "../components/ui/accordion/Accordion";
 import { Badge } from "../components/ui/badge/Badge";
 import { DataToolbar } from "../components/ui/data-toolbar/DataToolbar";
+import { CalendarMonth } from "../components/ui/data-display/CalendarMonth";
 import { CodeBlock } from "../components/ui/data-display/CodeBlock";
 import { ComparisonMatrix } from "../components/ui/data-display/ComparisonMatrix";
 import { DocumentPreview } from "../components/ui/data-display/DocumentPreview";
+import { KanbanBoard } from "../components/ui/data-display/KanbanBoard";
 import { KeyValueGrid } from "../components/ui/data-display/KeyValueGrid";
+import { Roadmap } from "../components/ui/data-display/Roadmap";
+import { WorkflowMap } from "../components/ui/data-display/WorkflowMap";
 import { DescriptionList } from "../components/ui/description-list/DescriptionList";
 import { EmptyState } from "../components/ui/empty-state/EmptyState";
 import { List } from "../components/ui/list/List";
@@ -149,6 +153,22 @@ function DocumentPreviewPreview() {
 
 function ComparisonMatrixPreview() {
   return <ComparisonMatrix />;
+}
+
+function CalendarMonthPreview() {
+  return <CalendarMonth />;
+}
+
+function KanbanBoardPreview() {
+  return <KanbanBoard />;
+}
+
+function RoadmapPreview() {
+  return <Roadmap />;
+}
+
+function WorkflowMapPreview() {
+  return <WorkflowMap />;
 }
 
 const displayDefaults = {
@@ -410,4 +430,85 @@ export const comparisonMatrixEntry: CatalogEntry = {
   accessibility: ["Uses semantic table, th, scope, and readable cell text.", "Icons are supplemental to text labels."],
   agentGuidance: ["Use Comparison Matrix for capability comparison and plan/workspace parity.", "Use Table for general records and Key Value Grid for one object's metadata."],
   code: `import { ComparisonMatrix } from "./ComparisonMatrix";\n\n<ComparisonMatrix />`,
+};
+
+export const calendarMonthEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "calendar-month",
+  name: "Calendar Month",
+  subcategory: "Planning",
+  description: "Calendar Month shows scheduled reviews, launches, demos, and agent operations inside a month grid.",
+  preview: CalendarMonthPreview,
+  variants: ["Month grid", "Muted dates", "Selected day", "Event badges", "Month controls"],
+  props: [
+    { name: "month", type: "string", defaultValue: '"May 2026"', description: "Visible month label." },
+    { name: "events", type: "CalendarEvent[]", defaultValue: "[]", description: "Events keyed by date with title and optional tone." },
+    { name: "selectedDate", type: "Date | string", defaultValue: "-", description: "Date to highlight for current context." },
+  ],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-400", "gray-500", "gray-900", "brand-50", "brand-800", "radius-lg", "shadow-xs"],
+  usage: ["Use for scheduled review, release, demo, and workflow events.", "Use event badges to show what makes a day actionable."],
+  avoid: ["Do not use for dense resource scheduling that needs drag-and-drop.", "Do not hide critical deadlines behind unlabeled dots."],
+  accessibility: ["Day labels and event names are visible text.", "Month navigation uses icon buttons with accessible labels."],
+  agentGuidance: ["Use Calendar Month when date placement matters more than event details.", "Use Timeline for sequence-heavy audit history and Roadmap for quarter-level planning."],
+  code: `import { CalendarMonth } from "./CalendarMonth";\n\n<CalendarMonth />`,
+};
+
+export const kanbanBoardEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "kanban-board",
+  name: "Kanban Board",
+  subcategory: "Planning",
+  description: "Kanban Board organizes work items into status columns for design, review, and delivery workflows.",
+  preview: KanbanBoardPreview,
+  variants: ["Backlog", "In review", "Ready", "Column counts", "Card metadata", "Column actions"],
+  props: [
+    { name: "columns", type: "KanbanColumn[]", defaultValue: "defaultColumns", description: "Status columns with title, count, and cards." },
+    { name: "cards", type: "KanbanCard[]", defaultValue: "[]", description: "Work items with title, metadata, and status tone." },
+  ],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "success-50", "warning-50", "info-50", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for work queues where status movement is the main mental model.", "Use card metadata to show owner, category, or review state."],
+  avoid: ["Do not use for purely tabular data.", "Do not use for high-volume records without search, filtering, and virtualization."],
+  accessibility: ["Cards and columns use visible headings.", "Column option buttons have accessible labels; future drag behavior should preserve keyboard alternatives."],
+  agentGuidance: ["Use Kanban Board for review pipelines, design-system contribution tracking, and human-in-the-loop queues.", "Use Review Queue for simpler list-based approvals."],
+  code: `import { KanbanBoard } from "./KanbanBoard";\n\n<KanbanBoard />`,
+};
+
+export const roadmapEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "roadmap",
+  name: "Roadmap",
+  subcategory: "Planning",
+  description: "Roadmap presents time-boxed milestones and delivery state across quarters or phases.",
+  preview: RoadmapPreview,
+  variants: ["Quarter cards", "Complete", "In progress", "Planned", "Status icons"],
+  props: [
+    { name: "milestones", type: "RoadmapMilestone[]", defaultValue: "defaultMilestones", description: "Milestones with period, title, status, and tone." },
+    { name: "range", type: "string", defaultValue: '"2026"', description: "Planning range displayed in the header." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-400", "gray-500", "gray-900", "brand-50", "brand-700", "success-600", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for quarter-level product, system, or rollout planning.", "Keep milestone labels short enough to scan as a set."],
+  avoid: ["Do not use for day-by-day scheduling.", "Do not mix granular tasks and strategic milestones in the same roadmap."],
+  accessibility: ["Milestone status is expressed through text and icon.", "The period and title remain visible in every card."],
+  agentGuidance: ["Use Roadmap for high-level delivery planning and phase communication.", "Use Calendar Month for date-specific events and Kanban Board for active task state."],
+  code: `import { Roadmap } from "./Roadmap";\n\n<Roadmap />`,
+};
+
+export const workflowMapEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "workflow-map",
+  name: "Workflow Map",
+  subcategory: "Process",
+  description: "Workflow Map shows a linear process with current, complete, and upcoming steps.",
+  preview: WorkflowMapPreview,
+  variants: ["Complete step", "Running step", "Upcoming step", "Directional connectors", "Status badges"],
+  props: [
+    { name: "steps", type: "WorkflowStep[]", defaultValue: "defaultSteps", description: "Ordered process steps with label, state, and icon." },
+    { name: "title", type: "string", defaultValue: "-", description: "Workflow title shown above the step map." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "success-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use when users need to understand where an AI or product workflow is in a process.", "Use labels and badges so progress is not icon-only."],
+  avoid: ["Do not use for branching processes with multiple paths.", "Do not use for historical logs; use Timeline instead."],
+  accessibility: ["Steps are rendered in an ordered list.", "Each state is shown as readable text."],
+  agentGuidance: ["Use Workflow Map for linear agent workflows such as source collection, drafting, citation review, and publish.", "Use Steps for compact navigation between setup stages."],
+  code: `import { WorkflowMap } from "./WorkflowMap";\n\n<WorkflowMap />`,
 };
