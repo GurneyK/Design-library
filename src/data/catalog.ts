@@ -46,10 +46,13 @@ import {
 } from "./chartEntries";
 import {
   agentAvatarEntry,
+  artifactCardEntry,
   chatMessageEntry,
   chatSurfaceEntry,
   composerEntry,
+  contextPanelEntry,
   citationChipEntry,
+  handoffCardEntry,
   promptCardEntry,
   promptLibraryEntry,
   sourceDrawerEntry,
@@ -57,6 +60,7 @@ import {
   suggestionChipsEntry,
   thinkingStateEntry,
   toolCallCardEntry,
+  tracePanelEntry,
 } from "./agentEntries";
 import { agentManifestEntry } from "./agentReferenceEntries";
 import {
@@ -281,6 +285,10 @@ export const catalog = [
   thinkingStateEntry,
   promptCardEntry,
   promptLibraryEntry,
+  artifactCardEntry,
+  contextPanelEntry,
+  handoffCardEntry,
+  tracePanelEntry,
   dashboardHeaderEntry,
   workspaceSwitcherEntry,
   runStatusPillEntry,

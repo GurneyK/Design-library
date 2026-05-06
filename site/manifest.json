@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 132,
+    "entries": 136,
     "categories": 13,
     "templates": 8
   },
@@ -910,6 +910,227 @@
         "Use Suggestion Chips for context-specific next prompts after a response."
       ],
       "code": "import { PromptLibrary } from \"./PromptLibrary\";\n\n<PromptLibrary />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "artifact-card",
+      "kind": "component",
+      "name": "Artifact Card",
+      "category": "Agent UI",
+      "subcategory": "Outputs",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Artifact Card presents a generated report, chart, table, or document as a durable output from an agent workflow.",
+      "variants": [
+        "Report",
+        "Chart",
+        "Table",
+        "Metrics",
+        "Export action"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "\"Campaign performance summary\"",
+          "description": "Generated artifact title."
+        },
+        {
+          "name": "type",
+          "type": "\"report\" | \"chart\" | \"table\"",
+          "defaultValue": "\"report\"",
+          "description": "Artifact type and icon treatment."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when an agent produces a reusable output that should persist beyond the chat turn.",
+        "Use actions for open, export, or attach-to-workspace flows."
+      ],
+      "doNotUseWhen": [
+        "Do not use for transient tool-call state; use Tool Call Card.",
+        "Do not show generated artifacts without source or confidence context when claims are involved."
+      ],
+      "accessibility": [
+        "Title, type, metrics, and actions are visible text.",
+        "Icon is supplemental to the artifact type label."
+      ],
+      "agentGuidance": [
+        "Use Artifact Card for generated reports, charts, tables, and documents.",
+        "Pair with Citation Chip or Source Drawer when artifact content is source-backed."
+      ],
+      "code": "import { ArtifactCard } from \"./ArtifactCard\";\n\n<ArtifactCard title=\"Campaign performance summary\" type=\"report\" />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "context-panel",
+      "kind": "component",
+      "name": "Context Panel",
+      "category": "Agent UI",
+      "subcategory": "Grounding",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Context Panel summarizes the audience, knowledge base, market, and policy constraints currently grounding an agent.",
+      "variants": [
+        "Grounded",
+        "Audience",
+        "Knowledge base",
+        "Policy",
+        "Market"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use beside chat or setup flows when context affects generated output.",
+        "Use to make agent grounding explicit before users trust a response."
+      ],
+      "doNotUseWhen": [
+        "Do not expose private or sensitive context that should remain hidden.",
+        "Do not use context panels as editable forms."
+      ],
+      "accessibility": [
+        "Context items have visible labels and values.",
+        "Status is shown with text, not color alone."
+      ],
+      "agentGuidance": [
+        "Use Context Panel when generating UI for grounded agents, source-aware workflows, or regulated review contexts.",
+        "Pair with Composer or Chat Surface when users need to understand what the agent knows."
+      ],
+      "code": "import { ContextPanel } from \"./ContextPanel\";\n\n<ContextPanel />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "handoff-card",
+      "kind": "component",
+      "name": "Handoff Card",
+      "category": "Agent UI",
+      "subcategory": "Review",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Handoff Card marks a point where an agent needs human review, approval, or escalation before continuing.",
+      "variants": [
+        "Human review",
+        "Approval gate",
+        "Warning tone",
+        "Review actions"
+      ],
+      "props": [],
+      "tokens": [
+        "warning-50",
+        "warning-300",
+        "warning-700",
+        "warning-900",
+        "white",
+        "brand-700",
+        "gray-300",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for claims, policy exceptions, low-confidence results, and irreversible actions.",
+        "Make the required human action clear and direct."
+      ],
+      "doNotUseWhen": [
+        "Do not use for normal informational messages.",
+        "Do not continue automatically when a handoff requires approval."
+      ],
+      "accessibility": [
+        "Review requirement is stated as text and not only color.",
+        "Actions are visible buttons."
+      ],
+      "agentGuidance": [
+        "Use Handoff Card whenever the AI workflow must pause for human judgment.",
+        "Pair with Review Queue, Confirmation Panel, or Review Checklist."
+      ],
+      "code": "import { HandoffCard } from \"./HandoffCard\";\n\n<HandoffCard />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "trace-panel",
+      "kind": "component",
+      "name": "Trace Panel",
+      "category": "Agent UI",
+      "subcategory": "Agent Activity",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Trace Panel shows an observable execution trail for prompt receipt, retrieval, tool work, and analysis steps.",
+      "variants": [
+        "Live trace",
+        "Complete step",
+        "Active step",
+        "Source retrieval",
+        "Analysis step"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when users need transparency into agent execution.",
+        "Use for run details, evaluation replay, and debugging views."
+      ],
+      "doNotUseWhen": [
+        "Do not expose private chain-of-thought.",
+        "Do not render raw logs when summarized trace steps are enough."
+      ],
+      "accessibility": [
+        "Trace renders as an ordered list with visible labels.",
+        "Status icon is supplemental to readable step text."
+      ],
+      "agentGuidance": [
+        "Use Trace Panel for observable workflow events only: prompt received, source retrieval, tool call, validation, output generated.",
+        "Use Timeline for broader historical event streams."
+      ],
+      "code": "import { TracePanel } from \"./TracePanel\";\n\n<TracePanel />",
       "sourceFile": "src/data/agentEntries.tsx"
     },
     {

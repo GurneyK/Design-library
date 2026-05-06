@@ -1,8 +1,11 @@
 import { AgentAvatar } from "../components/ui/agent/AgentAvatar";
+import { ArtifactCard } from "../components/ui/agent/ArtifactCard";
 import { ChatMessage } from "../components/ui/agent/ChatMessage";
 import { ChatSurface } from "../components/ui/agent/ChatSurface";
 import { Composer } from "../components/ui/agent/Composer";
+import { ContextPanel } from "../components/ui/agent/ContextPanel";
 import { CitationChip } from "../components/ui/agent/CitationChip";
+import { HandoffCard } from "../components/ui/agent/HandoffCard";
 import { PromptCard } from "../components/ui/agent/PromptCard";
 import { PromptLibrary } from "../components/ui/agent/PromptLibrary";
 import { SourceDrawer } from "../components/ui/agent/SourceDrawer";
@@ -10,6 +13,7 @@ import { StreamingState } from "../components/ui/agent/StreamingState";
 import { SuggestionChips } from "../components/ui/agent/SuggestionChips";
 import { ThinkingState } from "../components/ui/agent/ThinkingState";
 import { ToolCallCard } from "../components/ui/agent/ToolCallCard";
+import { TracePanel } from "../components/ui/agent/TracePanel";
 import { Badge } from "../components/ui/badge/Badge";
 import type { CatalogEntry } from "./catalog";
 
@@ -117,6 +121,27 @@ function PromptCardPreview() {
 
 function PromptLibraryPreview() {
   return <PromptLibrary />;
+}
+
+function ArtifactCardPreview() {
+  return (
+    <div className="grid gap-4 lg:grid-cols-2">
+      <ArtifactCard />
+      <ArtifactCard title="Regional KPI table" type="table" />
+    </div>
+  );
+}
+
+function ContextPanelPreview() {
+  return <ContextPanel />;
+}
+
+function HandoffCardPreview() {
+  return <HandoffCard />;
+}
+
+function TracePanelPreview() {
+  return <TracePanel />;
 }
 
 const agentDefaults = {
@@ -363,4 +388,75 @@ export const promptLibraryEntry: CatalogEntry = {
   accessibility: ["Search input has an accessible label.", "Prompt cards remain readable in source order."],
   agentGuidance: ["Use Prompt Library for curated prompt collections.", "Use Suggestion Chips for context-specific next prompts after a response."],
   code: `import { PromptLibrary } from "./PromptLibrary";\n\n<PromptLibrary />`,
+};
+
+export const artifactCardEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "artifact-card",
+  name: "Artifact Card",
+  subcategory: "Outputs",
+  description: "Artifact Card presents a generated report, chart, table, or document as a durable output from an agent workflow.",
+  preview: ArtifactCardPreview,
+  variants: ["Report", "Chart", "Table", "Metrics", "Export action"],
+  props: [
+    { name: "title", type: "string", defaultValue: '"Campaign performance summary"', description: "Generated artifact title." },
+    { name: "type", type: '"report" | "chart" | "table"', defaultValue: '"report"', description: "Artifact type and icon treatment." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use when an agent produces a reusable output that should persist beyond the chat turn.", "Use actions for open, export, or attach-to-workspace flows."],
+  avoid: ["Do not use for transient tool-call state; use Tool Call Card.", "Do not show generated artifacts without source or confidence context when claims are involved."],
+  accessibility: ["Title, type, metrics, and actions are visible text.", "Icon is supplemental to the artifact type label."],
+  agentGuidance: ["Use Artifact Card for generated reports, charts, tables, and documents.", "Pair with Citation Chip or Source Drawer when artifact content is source-backed."],
+  code: `import { ArtifactCard } from "./ArtifactCard";\n\n<ArtifactCard title="Campaign performance summary" type="report" />`,
+};
+
+export const contextPanelEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "context-panel",
+  name: "Context Panel",
+  subcategory: "Grounding",
+  description: "Context Panel summarizes the audience, knowledge base, market, and policy constraints currently grounding an agent.",
+  preview: ContextPanelPreview,
+  variants: ["Grounded", "Audience", "Knowledge base", "Policy", "Market"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "radius-lg", "shadow-xs"],
+  usage: ["Use beside chat or setup flows when context affects generated output.", "Use to make agent grounding explicit before users trust a response."],
+  avoid: ["Do not expose private or sensitive context that should remain hidden.", "Do not use context panels as editable forms."],
+  accessibility: ["Context items have visible labels and values.", "Status is shown with text, not color alone."],
+  agentGuidance: ["Use Context Panel when generating UI for grounded agents, source-aware workflows, or regulated review contexts.", "Pair with Composer or Chat Surface when users need to understand what the agent knows."],
+  code: `import { ContextPanel } from "./ContextPanel";\n\n<ContextPanel />`,
+};
+
+export const handoffCardEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "handoff-card",
+  name: "Handoff Card",
+  subcategory: "Review",
+  description: "Handoff Card marks a point where an agent needs human review, approval, or escalation before continuing.",
+  preview: HandoffCardPreview,
+  variants: ["Human review", "Approval gate", "Warning tone", "Review actions"],
+  props: [],
+  tokens: ["warning-50", "warning-300", "warning-700", "warning-900", "white", "brand-700", "gray-300", "radius-lg", "shadow-xs"],
+  usage: ["Use for claims, policy exceptions, low-confidence results, and irreversible actions.", "Make the required human action clear and direct."],
+  avoid: ["Do not use for normal informational messages.", "Do not continue automatically when a handoff requires approval."],
+  accessibility: ["Review requirement is stated as text and not only color.", "Actions are visible buttons."],
+  agentGuidance: ["Use Handoff Card whenever the AI workflow must pause for human judgment.", "Pair with Review Queue, Confirmation Panel, or Review Checklist."],
+  code: `import { HandoffCard } from "./HandoffCard";\n\n<HandoffCard />`,
+};
+
+export const tracePanelEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "trace-panel",
+  name: "Trace Panel",
+  subcategory: "Agent Activity",
+  description: "Trace Panel shows an observable execution trail for prompt receipt, retrieval, tool work, and analysis steps.",
+  preview: TracePanelPreview,
+  variants: ["Live trace", "Complete step", "Active step", "Source retrieval", "Analysis step"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "success-700", "radius-lg", "shadow-xs"],
+  usage: ["Use when users need transparency into agent execution.", "Use for run details, evaluation replay, and debugging views."],
+  avoid: ["Do not expose private chain-of-thought.", "Do not render raw logs when summarized trace steps are enough."],
+  accessibility: ["Trace renders as an ordered list with visible labels.", "Status icon is supplemental to readable step text."],
+  agentGuidance: ["Use Trace Panel for observable workflow events only: prompt received, source retrieval, tool call, validation, output generated.", "Use Timeline for broader historical event streams."],
+  code: `import { TracePanel } from "./TracePanel";\n\n<TracePanel />`,
 };
