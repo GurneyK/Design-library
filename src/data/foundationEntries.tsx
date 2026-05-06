@@ -167,6 +167,84 @@ function DarkModePreview() {
   );
 }
 
+function MotionPreview() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-3">
+      {[
+        ["duration-150", "Fast UI response", "Hover, focus, active"],
+        ["duration-200", "Default transition", "Menus, controls, panels"],
+        ["duration-300", "Expressive transition", "Drawers, overlays, page regions"],
+      ].map(([label, title, use]) => (
+        <div className="rounded-habibiLg border border-gray-200 bg-white p-5 shadow-habibiXs" key={label}>
+          <div className="h-2 rounded-full bg-gray-100">
+            <div className="h-2 w-2/3 rounded-full bg-brand-700 transition-all duration-300" />
+          </div>
+          <p className="mt-4 text-sm font-semibold text-gray-900">{title}</p>
+          <p className="mt-1 font-mono text-xs text-brand-700">{label}</p>
+          <p className="mt-2 text-sm text-gray-500">{use}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function BreakpointPreview() {
+  return (
+    <div className="space-y-3">
+      {[
+        ["sm", "640px", "Large phones and compact tablets"],
+        ["md", "768px", "Tablet and two-column forms"],
+        ["lg", "1024px", "Dashboard split layouts"],
+        ["xl", "1280px", "Full desktop workspaces"],
+        ["2xl", "1536px", "Wide monitoring surfaces"],
+      ].map(([label, value, use]) => (
+        <div className="grid gap-3 rounded-habibiLg border border-gray-200 bg-white p-4 shadow-habibiXs sm:grid-cols-[96px_120px_minmax(0,1fr)]" key={label}>
+          <p className="font-mono text-sm font-semibold text-brand-700">{label}</p>
+          <p className="font-mono text-sm text-gray-500">{value}</p>
+          <p className="text-sm text-gray-600">{use}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FocusRingPreview() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      <button className="focus-ring rounded-habibiMd border border-brand-300 bg-white px-4 py-2 text-sm font-semibold text-brand-700 shadow-[0_0_0_4px_#F4EBFF]" type="button">
+        Focused button
+      </button>
+      <div className="rounded-habibiMd border border-brand-300 bg-white p-4 shadow-[0_0_0_4px_#F4EBFF]">
+        <p className="text-sm font-semibold text-gray-900">Focused region</p>
+        <p className="mt-1 text-sm text-gray-500">Focus rings must remain visible against light and dark surfaces.</p>
+      </div>
+    </div>
+  );
+}
+
+function LayeringPreview() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {[
+        ["base", "0", "Page content"],
+        ["sticky", "20", "Topbars and sticky actions"],
+        ["overlay", "40", "Drawers and popovers"],
+        ["modal", "50", "Dialogs and blocking surfaces"],
+      ].map(([label, value, use]) => (
+        <div className="rounded-habibiLg border border-gray-200 bg-white p-5 shadow-habibiXs" key={label}>
+          <div className="relative h-20 rounded-habibiMd bg-gray-50">
+            <div className="absolute left-4 top-4 h-10 w-20 rounded-habibiMd bg-brand-100" />
+            <div className="absolute left-10 top-8 h-10 w-20 rounded-habibiMd bg-brand-700 shadow-habibiSm" />
+          </div>
+          <p className="mt-4 text-sm font-semibold text-gray-900">z-{label}</p>
+          <p className="mt-1 font-mono text-xs text-gray-500">{value}</p>
+          <p className="mt-2 text-sm text-gray-500">{use}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const foundationDefaults = {
   category: "Foundations",
   status: "draft",
@@ -302,4 +380,84 @@ export const darkModeFoundationEntry: CatalogEntry = {
     "Keep focus and status states visible against dark surfaces.",
   ],
   code: `bg-[#09090B] text-[#F4F4F5] border-white/10`,
+};
+
+export const motionFoundationEntry: CatalogEntry = {
+  ...foundationDefaults,
+  id: "motion",
+  name: "Motion",
+  subcategory: "Tokens",
+  description: "Motion tokens define restrained transition timing for dense product interfaces.",
+  preview: MotionPreview,
+  tokens: ["duration-150", "duration-200", "duration-300", "ease-out", "motion-reduce"],
+  usage: [
+    "Use fast transitions for hover, focus, and active states.",
+    "Use default transitions for menus, controls, and panel chrome.",
+    "Use longer transitions sparingly for drawers and overlays.",
+  ],
+  agentGuidance: [
+    "Use motion to clarify state change, not as decoration.",
+    "Respect reduced-motion preferences for loading and attention states.",
+  ],
+  code: `transition-colors duration-150 ease-out motion-reduce:transition-none`,
+};
+
+export const breakpointFoundationEntry: CatalogEntry = {
+  ...foundationDefaults,
+  id: "breakpoints",
+  name: "Breakpoints",
+  subcategory: "Tokens",
+  description: "Breakpoints define how dense dashboards, forms, and agent workspaces adapt from mobile to wide desktop.",
+  preview: BreakpointPreview,
+  tokens: ["sm:640px", "md:768px", "lg:1024px", "xl:1280px", "2xl:1536px"],
+  usage: [
+    "Use one-column layouts by default on small screens.",
+    "Use md for form groups and compact two-column regions.",
+    "Use lg and xl for dashboard split panes and persistent sidebars.",
+  ],
+  agentGuidance: [
+    "Build mobile-first, then add responsive tracks with md, lg, and xl.",
+    "Do not force desktop grids onto narrow screens.",
+  ],
+  code: `grid gap-4 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_360px]`,
+};
+
+export const focusRingFoundationEntry: CatalogEntry = {
+  ...foundationDefaults,
+  id: "focus-ring",
+  name: "Focus Ring",
+  subcategory: "Accessibility",
+  description: "Focus Ring defines the visible keyboard-focus treatment used across all interactive components.",
+  preview: FocusRingPreview,
+  tokens: ["focus-ring", "brand-100", "brand-300", "shadow-focus"],
+  usage: [
+    "Use visible focus rings on every button, link, input, select, and custom control.",
+    "Keep focus state distinct from hover and selected states.",
+    "Use semantic focus colors that remain visible on light and dark surfaces.",
+  ],
+  agentGuidance: [
+    "Apply focus-ring to every custom interactive primitive.",
+    "Never remove outlines without replacing them with an accessible focus treatment.",
+  ],
+  code: `className="focus-ring focus-visible:border-brand-300"`,
+};
+
+export const layeringFoundationEntry: CatalogEntry = {
+  ...foundationDefaults,
+  id: "layering",
+  name: "Layering",
+  subcategory: "Tokens",
+  description: "Layering tokens define predictable z-index roles for sticky chrome, popovers, drawers, and modals.",
+  preview: LayeringPreview,
+  tokens: ["z-base", "z-sticky", "z-overlay", "z-modal", "z-toast"],
+  usage: [
+    "Use sticky layers for topbars and action bars.",
+    "Use overlay layers for popovers, drawers, and menus.",
+    "Use modal layers only for blocking dialogs and destructive confirmations.",
+  ],
+  agentGuidance: [
+    "Choose z-index by UI role, not by increasing arbitrary values.",
+    "Keep overlays and modals out of normal page flow and manage focus in production.",
+  ],
+  code: `z-20 z-40 z-50`,
 };

@@ -1,7 +1,11 @@
 import { buttonEntry } from "../components/ui/button/button.meta";
 import {
+  breakpointFoundationEntry,
   colorFoundationEntry,
   darkModeFoundationEntry,
+  focusRingFoundationEntry,
+  layeringFoundationEntry,
+  motionFoundationEntry,
   radiusFoundationEntry,
   shadowFoundationEntry,
   spacingFoundationEntry,
@@ -210,6 +214,10 @@ export const catalog = [
   radiusFoundationEntry,
   shadowFoundationEntry,
   darkModeFoundationEntry,
+  motionFoundationEntry,
+  breakpointFoundationEntry,
+  focusRingFoundationEntry,
+  layeringFoundationEntry,
   buttonEntry,
   badgeEntry,
   avatarEntry,

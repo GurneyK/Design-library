@@ -8,7 +8,7 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 152,
+    "entries": 156,
     "categories": 13,
     "templates": 12
   },
@@ -6321,6 +6321,173 @@
         "Keep focus and status states visible against dark surfaces."
       ],
       "code": "bg-[#09090B] text-[#F4F4F5] border-white/10",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "motion",
+      "kind": "foundation",
+      "name": "Motion",
+      "category": "Foundations",
+      "subcategory": "Tokens",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Motion tokens define restrained transition timing for dense product interfaces.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "duration-150",
+        "duration-200",
+        "duration-300",
+        "ease-out",
+        "motion-reduce"
+      ],
+      "useWhen": [
+        "Use fast transitions for hover, focus, and active states.",
+        "Use default transitions for menus, controls, and panel chrome.",
+        "Use longer transitions sparingly for drawers and overlays."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "Use motion to clarify state change, not as decoration.",
+        "Respect reduced-motion preferences for loading and attention states."
+      ],
+      "code": "transition-colors duration-150 ease-out motion-reduce:transition-none",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "breakpoints",
+      "kind": "foundation",
+      "name": "Breakpoints",
+      "category": "Foundations",
+      "subcategory": "Tokens",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Breakpoints define how dense dashboards, forms, and agent workspaces adapt from mobile to wide desktop.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "sm:640px",
+        "md:768px",
+        "lg:1024px",
+        "xl:1280px",
+        "2xl:1536px"
+      ],
+      "useWhen": [
+        "Use one-column layouts by default on small screens.",
+        "Use md for form groups and compact two-column regions.",
+        "Use lg and xl for dashboard split panes and persistent sidebars."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "Build mobile-first, then add responsive tracks with md, lg, and xl.",
+        "Do not force desktop grids onto narrow screens."
+      ],
+      "code": "grid gap-4 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_360px]",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "focus-ring",
+      "kind": "foundation",
+      "name": "Focus Ring",
+      "category": "Foundations",
+      "subcategory": "Accessibility",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Focus Ring defines the visible keyboard-focus treatment used across all interactive components.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "focus-ring",
+        "brand-100",
+        "brand-300",
+        "shadow-focus"
+      ],
+      "useWhen": [
+        "Use visible focus rings on every button, link, input, select, and custom control.",
+        "Keep focus state distinct from hover and selected states.",
+        "Use semantic focus colors that remain visible on light and dark surfaces."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "Apply focus-ring to every custom interactive primitive.",
+        "Never remove outlines without replacing them with an accessible focus treatment."
+      ],
+      "code": "className=\"focus-ring focus-visible:border-brand-300\"",
+      "sourceFile": "src/data/foundationEntries.tsx"
+    },
+    {
+      "id": "layering",
+      "kind": "foundation",
+      "name": "Layering",
+      "category": "Foundations",
+      "subcategory": "Tokens",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "figma-deferred"
+      ],
+      "description": "Layering tokens define predictable z-index roles for sticky chrome, popovers, drawers, and modals.",
+      "variants": [],
+      "props": [],
+      "tokens": [
+        "z-base",
+        "z-sticky",
+        "z-overlay",
+        "z-modal",
+        "z-toast"
+      ],
+      "useWhen": [
+        "Use sticky layers for topbars and action bars.",
+        "Use overlay layers for popovers, drawers, and menus.",
+        "Use modal layers only for blocking dialogs and destructive confirmations."
+      ],
+      "doNotUseWhen": [
+        "Do not hardcode raw values inside component code when a Habibi token exists.",
+        "Do not introduce one-off scales without adding them to the token layer."
+      ],
+      "accessibility": [
+        "Foundation choices must preserve WCAG AA contrast for text and UI controls.",
+        "Use visible focus states for every interactive element.",
+        "Do not use color as the only signal for status or meaning."
+      ],
+      "agentGuidance": [
+        "Choose z-index by UI role, not by increasing arbitrary values.",
+        "Keep overlays and modals out of normal page flow and manage focus in production."
+      ],
+      "code": "z-20 z-40 z-50",
       "sourceFile": "src/data/foundationEntries.tsx"
     },
     {
