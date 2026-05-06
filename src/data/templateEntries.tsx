@@ -1,11 +1,15 @@
 import { AnalyticsAgentWorkspace } from "../components/templates/AnalyticsAgentWorkspace";
+import { AgentOpsConsole } from "../components/templates/AgentOpsConsole";
 import { AuthScreen } from "../components/templates/AuthScreen";
 import { CitationReviewBlock } from "../components/templates/CitationReviewBlock";
 import { DashboardOverview } from "../components/templates/DashboardOverview";
 import { EmptyStateLibrary } from "../components/templates/EmptyStateLibrary";
+import { EvaluationDashboard } from "../components/templates/EvaluationDashboard";
 import { InciLookupView } from "../components/templates/InciLookupView";
 import { MarketingWorkspace } from "../components/templates/MarketingWorkspace";
+import { PromptOpsWorkspace } from "../components/templates/PromptOpsWorkspace";
 import { SettingsFormScreen } from "../components/templates/SettingsFormScreen";
+import { SourceManagementWorkspace } from "../components/templates/SourceManagementWorkspace";
 import type { CatalogEntry } from "./catalog";
 
 const templateDefaults = {
@@ -148,4 +152,72 @@ export const settingsFormScreenEntry: CatalogEntry = {
   accessibility: ["Fields and controls keep visible labels.", "Validation appears near the actions and uses text plus icon."],
   agentGuidance: ["Compose with Alert, Form Section, Form Group, Form Field, Combobox, Date Picker, Switch, Checkbox, Validation Message, and Form Actions.", "Use this template when generating configuration or setup workflows."],
   code: `import { SettingsFormScreen } from "./SettingsFormScreen";\n\n<SettingsFormScreen />`,
+};
+
+export const agentOpsConsoleEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-agent-ops-console",
+  name: "Agent Ops Console",
+  subcategory: "Full Page",
+  description: "An operations console for monitoring live agent runs, evaluation readiness, review queue, and execution trace.",
+  preview: AgentOpsConsole,
+  variants: ["Full page", "Run monitoring", "Review queue", "Trace panel", "Evaluation summary"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "warning-50", "radius-lg"],
+  usage: ["Use for admin and operations views where teams need to monitor many active agent workflows.", "Use when run state, review work, and quality gates need to be visible together."],
+  avoid: ["Do not use for a simple single-agent chat page.", "Do not expose sensitive trace details that should stay internal."],
+  accessibility: ["Composed from semantic regions, readable status labels, and visible actions.", "Trace steps and review items remain readable without relying on icons alone."],
+  agentGuidance: ["Compose with Dashboard Header, Filter Bar, Health Summary, Run Card, Evaluation Scorecard, Review Queue, and Trace Panel.", "Use this template when generating operational monitoring surfaces for AI workflows."],
+  code: `import { AgentOpsConsole } from "./AgentOpsConsole";\n\n<AgentOpsConsole />`,
+};
+
+export const sourceManagementWorkspaceEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-source-management-workspace",
+  name: "Source Management Workspace",
+  subcategory: "Full Page",
+  description: "A source-management workflow for connecting, filtering, uploading, previewing, and approving knowledge sources.",
+  preview: SourceManagementWorkspace,
+  variants: ["Full page", "Source cards", "Upload panel", "Document preview", "Source drawer"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "warning-50", "success-50", "radius-lg"],
+  usage: ["Use when teams manage source material before agents can cite it.", "Use for knowledge-base setup, evidence review, and source governance."],
+  avoid: ["Do not use for generic file storage without source review requirements.", "Do not let unapproved sources look equivalent to approved sources."],
+  accessibility: ["Upload, source cards, previews, and source rows keep visible labels.", "Source status is expressed through text as well as color."],
+  agentGuidance: ["Compose with Dashboard Header, Filter Bar, Data Source Card, File Upload, Document Preview, Key Value Grid, and Source Drawer.", "Use this template for source-grounded and evidence-management workflows."],
+  code: `import { SourceManagementWorkspace } from "./SourceManagementWorkspace";\n\n<SourceManagementWorkspace />`,
+};
+
+export const evaluationDashboardEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-evaluation-dashboard",
+  name: "Evaluation Dashboard",
+  subcategory: "Full Page",
+  description: "A quality dashboard for model score, capability coverage, evaluation scorecards, and activity intensity.",
+  preview: EvaluationDashboard,
+  variants: ["Full page", "Gauge score", "Capability matrix", "Scorecard", "Heatmap"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "warning-50"],
+  usage: ["Use for evaluation review, agent quality monitoring, and leadership-ready quality summaries.", "Use when teams need to compare readiness across agent capabilities."],
+  avoid: ["Do not use score visualizations without explaining what the metrics mean.", "Do not rely on color-only heatmap interpretation."],
+  accessibility: ["Composed charts include visible titles and supporting text; production chart data should have table summaries.", "Matrix cells include text labels, not icons alone."],
+  agentGuidance: ["Compose with Dashboard Header, Health Summary, Chart Container, Gauge Chart, Comparison Matrix, Evaluation Scorecard, and Heatmap Chart.", "Use this template for QA, eval, and model-readiness dashboards."],
+  code: `import { EvaluationDashboard } from "./EvaluationDashboard";\n\n<EvaluationDashboard />`,
+};
+
+export const promptOpsWorkspaceEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-prompt-ops-workspace",
+  name: "Prompt Ops Workspace",
+  subcategory: "Full Page",
+  description: "A prompt-operations workspace for drafting, tagging, grounding, reviewing, and publishing reusable prompts.",
+  preview: PromptOpsWorkspace,
+  variants: ["Full page", "Prompt draft", "Prompt library", "Context panel", "Handoff card"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "warning-50", "radius-lg", "shadow-xs"],
+  usage: ["Use when teams maintain reusable prompt packs or workflow-specific prompt libraries.", "Use when prompts require grounding context and human review before publication."],
+  avoid: ["Do not use for one-off chat suggestions.", "Do not publish prompt drafts without review state when they affect production agents."],
+  accessibility: ["Fields, tags, review actions, and library items keep visible labels.", "Human handoff requirement is stated as text."],
+  agentGuidance: ["Compose with Dashboard Header, Panel, Form Field, Textarea, Token Input, Prompt Library, Context Panel, Handoff Card, and Artifact Card.", "Use this template for prompt governance and reusable prompt operations."],
+  code: `import { PromptOpsWorkspace } from "./PromptOpsWorkspace";\n\n<PromptOpsWorkspace />`,
 };

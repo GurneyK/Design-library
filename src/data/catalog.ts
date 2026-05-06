@@ -152,13 +152,17 @@ import {
 } from "./navigationEntries";
 import {
   analyticsAgentWorkspaceEntry,
+  agentOpsConsoleEntry,
   authScreenEntry,
   citationReviewBlockEntry,
   dashboardOverviewEntry,
   emptyStateLibraryEntry,
+  evaluationDashboardEntry,
   inciLookupViewEntry,
   marketingWorkspaceEntry,
+  promptOpsWorkspaceEntry,
   settingsFormScreenEntry,
+  sourceManagementWorkspaceEntry,
 } from "./templateEntries";
 
 export type PropRow = {
@@ -324,4 +328,8 @@ export const catalog = [
   authScreenEntry,
   citationReviewBlockEntry,
   settingsFormScreenEntry,
+  agentOpsConsoleEntry,
+  sourceManagementWorkspaceEntry,
+  evaluationDashboardEntry,
+  promptOpsWorkspaceEntry,
 ] satisfies CatalogEntry[];

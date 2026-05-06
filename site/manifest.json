@@ -8,9 +8,9 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 136,
+    "entries": 140,
     "categories": 13,
-    "templates": 8
+    "templates": 12
   },
   "categories": [
     "Primitives",
@@ -8185,6 +8185,214 @@
         "Use this template when generating configuration or setup workflows."
       ],
       "code": "import { SettingsFormScreen } from \"./SettingsFormScreen\";\n\n<SettingsFormScreen />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-agent-ops-console",
+      "kind": "template",
+      "name": "Agent Ops Console",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "An operations console for monitoring live agent runs, evaluation readiness, review queue, and execution trace.",
+      "variants": [
+        "Full page",
+        "Run monitoring",
+        "Review queue",
+        "Trace panel",
+        "Evaluation summary"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "warning-50",
+        "radius-lg"
+      ],
+      "useWhen": [
+        "Use for admin and operations views where teams need to monitor many active agent workflows.",
+        "Use when run state, review work, and quality gates need to be visible together."
+      ],
+      "doNotUseWhen": [
+        "Do not use for a simple single-agent chat page.",
+        "Do not expose sensitive trace details that should stay internal."
+      ],
+      "accessibility": [
+        "Composed from semantic regions, readable status labels, and visible actions.",
+        "Trace steps and review items remain readable without relying on icons alone."
+      ],
+      "agentGuidance": [
+        "Compose with Dashboard Header, Filter Bar, Health Summary, Run Card, Evaluation Scorecard, Review Queue, and Trace Panel.",
+        "Use this template when generating operational monitoring surfaces for AI workflows."
+      ],
+      "code": "import { AgentOpsConsole } from \"./AgentOpsConsole\";\n\n<AgentOpsConsole />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-source-management-workspace",
+      "kind": "template",
+      "name": "Source Management Workspace",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A source-management workflow for connecting, filtering, uploading, previewing, and approving knowledge sources.",
+      "variants": [
+        "Full page",
+        "Source cards",
+        "Upload panel",
+        "Document preview",
+        "Source drawer"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "warning-50",
+        "success-50",
+        "radius-lg"
+      ],
+      "useWhen": [
+        "Use when teams manage source material before agents can cite it.",
+        "Use for knowledge-base setup, evidence review, and source governance."
+      ],
+      "doNotUseWhen": [
+        "Do not use for generic file storage without source review requirements.",
+        "Do not let unapproved sources look equivalent to approved sources."
+      ],
+      "accessibility": [
+        "Upload, source cards, previews, and source rows keep visible labels.",
+        "Source status is expressed through text as well as color."
+      ],
+      "agentGuidance": [
+        "Compose with Dashboard Header, Filter Bar, Data Source Card, File Upload, Document Preview, Key Value Grid, and Source Drawer.",
+        "Use this template for source-grounded and evidence-management workflows."
+      ],
+      "code": "import { SourceManagementWorkspace } from \"./SourceManagementWorkspace\";\n\n<SourceManagementWorkspace />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-evaluation-dashboard",
+      "kind": "template",
+      "name": "Evaluation Dashboard",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A quality dashboard for model score, capability coverage, evaluation scorecards, and activity intensity.",
+      "variants": [
+        "Full page",
+        "Gauge score",
+        "Capability matrix",
+        "Scorecard",
+        "Heatmap"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "warning-50"
+      ],
+      "useWhen": [
+        "Use for evaluation review, agent quality monitoring, and leadership-ready quality summaries.",
+        "Use when teams need to compare readiness across agent capabilities."
+      ],
+      "doNotUseWhen": [
+        "Do not use score visualizations without explaining what the metrics mean.",
+        "Do not rely on color-only heatmap interpretation."
+      ],
+      "accessibility": [
+        "Composed charts include visible titles and supporting text; production chart data should have table summaries.",
+        "Matrix cells include text labels, not icons alone."
+      ],
+      "agentGuidance": [
+        "Compose with Dashboard Header, Health Summary, Chart Container, Gauge Chart, Comparison Matrix, Evaluation Scorecard, and Heatmap Chart.",
+        "Use this template for QA, eval, and model-readiness dashboards."
+      ],
+      "code": "import { EvaluationDashboard } from \"./EvaluationDashboard\";\n\n<EvaluationDashboard />",
+      "sourceFile": "src/data/templateEntries.tsx"
+    },
+    {
+      "id": "template-prompt-ops-workspace",
+      "kind": "template",
+      "name": "Prompt Ops Workspace",
+      "category": "Templates / Blocks",
+      "subcategory": "Full Page",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "A prompt-operations workspace for drafting, tagging, grounding, reviewing, and publishing reusable prompts.",
+      "variants": [
+        "Full page",
+        "Prompt draft",
+        "Prompt library",
+        "Context panel",
+        "Handoff card"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "warning-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when teams maintain reusable prompt packs or workflow-specific prompt libraries.",
+        "Use when prompts require grounding context and human review before publication."
+      ],
+      "doNotUseWhen": [
+        "Do not use for one-off chat suggestions.",
+        "Do not publish prompt drafts without review state when they affect production agents."
+      ],
+      "accessibility": [
+        "Fields, tags, review actions, and library items keep visible labels.",
+        "Human handoff requirement is stated as text."
+      ],
+      "agentGuidance": [
+        "Compose with Dashboard Header, Panel, Form Field, Textarea, Token Input, Prompt Library, Context Panel, Handoff Card, and Artifact Card.",
+        "Use this template for prompt governance and reusable prompt operations."
+      ],
+      "code": "import { PromptOpsWorkspace } from \"./PromptOpsWorkspace\";\n\n<PromptOpsWorkspace />",
       "sourceFile": "src/data/templateEntries.tsx"
     }
   ]
