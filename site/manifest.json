@@ -4,7 +4,7 @@
   "description": "Machine-readable component and template catalog for Habibi/Nexus-style product surfaces.",
   "publicUrl": "https://gurneyk.github.io/Design-library/",
   "manifestUrls": [
-    "https://gurneyk.github.io/Design-library/site/manifest.json"
+    "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
     "entries": 160,
@@ -1266,7 +1266,7 @@
         "Use categoryCounts and kindCounts to understand coverage before deciding whether a request is a component, foundation, or template task.",
         "For templates, copy composition patterns before inventing new layouts."
       ],
-      "code": "const manifestUrl = \"https://gurneyk.github.io/Design-library/site/manifest.json\";\nconst manifest = await fetch(manifestUrl).then((response) => response.json());\n\nconst button = manifest.entries.find((entry) => entry.id === \"button\");",
+      "code": "const manifestUrl = \"https://gurneyk.github.io/Design-library/manifest.json\";\nconst manifest = await fetch(manifestUrl).then((response) => response.json());\n\nconst button = manifest.entries.find((entry) => entry.id === \"button\");",
       "sourceFile": "src/data/agentReferenceEntries.tsx"
     },
     {
