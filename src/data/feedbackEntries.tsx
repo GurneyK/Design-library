@@ -1,10 +1,14 @@
 import { Alert } from "../components/ui/alert/Alert";
 import { Banner } from "../components/ui/banner/Banner";
 import { Button } from "../components/ui/button/Button";
+import { Callout } from "../components/ui/feedback/Callout";
 import { ConfirmationPanel } from "../components/ui/feedback/ConfirmationPanel";
+import { LoadingOverlay } from "../components/ui/feedback/LoadingOverlay";
 import { NotificationCenter } from "../components/ui/feedback/NotificationCenter";
 import { ReviewChecklist } from "../components/ui/feedback/ReviewChecklist";
+import { ResultState } from "../components/ui/feedback/ResultState";
 import { StatusSummary } from "../components/ui/feedback/StatusSummary";
+import { ToastStack } from "../components/ui/feedback/ToastStack";
 import { Progress } from "../components/ui/progress/Progress";
 import { Skeleton } from "../components/ui/skeleton/Skeleton";
 import { Spinner } from "../components/ui/spinner/Spinner";
@@ -89,6 +93,32 @@ function ReviewChecklistPreview() {
 
 function NotificationCenterPreview() {
   return <NotificationCenter />;
+}
+
+function ResultStatePreview() {
+  return (
+    <div className="space-y-4">
+      <ResultState />
+      <ResultState tone="warning" title="Approval required" description="A reviewer must approve sourced claims before this answer can be published." />
+    </div>
+  );
+}
+
+function CalloutPreview() {
+  return (
+    <div className="space-y-3">
+      <Callout />
+      <Callout tone="policy" title="Publishing policy">Do not publish claims without approved source coverage and human review.</Callout>
+    </div>
+  );
+}
+
+function LoadingOverlayPreview() {
+  return <LoadingOverlay />;
+}
+
+function ToastStackPreview() {
+  return <ToastStack />;
 }
 
 const feedbackDefaults = {
@@ -274,4 +304,83 @@ export const notificationCenterEntry: CatalogEntry = {
   accessibility: ["Notification titles and bodies are visible text.", "Unread count is visible through Badge text."],
   agentGuidance: ["Use Notification Center for recent operational events.", "Use Activity Feed for persistent dashboard history."],
   code: `import { NotificationCenter } from "./NotificationCenter";\n\n<NotificationCenter />`,
+};
+
+export const resultStateEntry: CatalogEntry = {
+  ...feedbackDefaults,
+  id: "result-state",
+  name: "Result State",
+  subcategory: "Outcome feedback",
+  description: "Result State communicates a completed workflow outcome with clear next actions.",
+  preview: ResultStatePreview,
+  variants: ["Success", "Warning", "Info", "Primary action", "Secondary action"],
+  props: [
+    { name: "tone", type: '"success" | "warning" | "info"', defaultValue: '"success"', description: "Outcome tone and icon treatment." },
+    { name: "title", type: "string", defaultValue: "tone default", description: "Outcome heading." },
+    { name: "description", type: "string", defaultValue: "-", description: "Outcome explanation and next-step context." },
+  ],
+  tokens: ["white", "gray-200", "gray-500", "gray-900", "success-50", "success-700", "warning-50", "warning-700", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use after publish, submit, export, or setup completion flows.", "Use when the user needs a clear next step after an outcome."],
+  avoid: ["Do not use for inline field validation.", "Do not use for transient notifications; use Toast or Toast Stack."],
+  accessibility: ["Outcome title and description are visible text.", "Actions are visible buttons and the icon is supplemental."],
+  agentGuidance: ["Use Result State for full-section success, review-required, and queued outcomes.", "Use Alert for inline feedback inside a page section."],
+  code: `import { ResultState } from "./ResultState";\n\n<ResultState tone="success" title="Workspace published" />`,
+};
+
+export const calloutEntry: CatalogEntry = {
+  ...feedbackDefaults,
+  id: "callout",
+  name: "Callout",
+  subcategory: "Guidance",
+  description: "Callout highlights contextual guidance, tips, and policy reminders without interrupting the workflow.",
+  preview: CalloutPreview,
+  variants: ["Tip", "Policy", "With badge", "With icon"],
+  props: [
+    { name: "tone", type: '"tip" | "policy"', defaultValue: '"tip"', description: "Guidance tone and icon treatment." },
+    { name: "title", type: "string", defaultValue: '"Source guidance"', description: "Callout heading." },
+    { name: "children", type: "string", defaultValue: "-", description: "Callout body copy." },
+  ],
+  tokens: ["brand-50", "brand-200", "brand-700", "brand-800", "brand-900", "warning-50", "warning-300", "warning-700", "warning-900", "white", "radius-lg"],
+  usage: ["Use for contextual guidance near the relevant content.", "Use policy tone for governance, compliance, and publishing reminders."],
+  avoid: ["Do not use for blocking errors.", "Do not hide required instructions only in a dismissible callout."],
+  accessibility: ["Icon and color are supplemental to title and body text.", "Use plain, direct copy for policy guidance."],
+  agentGuidance: ["Use Callout for non-blocking guidance in forms, docs, and review workflows.", "Use Alert when something has happened or requires immediate attention."],
+  code: `import { Callout } from "./Callout";\n\n<Callout title="Source guidance">Use approved source material before publishing.</Callout>`,
+};
+
+export const loadingOverlayEntry: CatalogEntry = {
+  ...feedbackDefaults,
+  id: "loading-overlay",
+  name: "Loading Overlay",
+  subcategory: "Loading",
+  description: "Loading Overlay blocks interaction with a region while preserving the underlying layout context.",
+  preview: LoadingOverlayPreview,
+  variants: ["Overlay", "Blurred background", "Spinner", "Label and description"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Evaluation running"', description: "Visible loading title." },
+    { name: "description", type: "string", defaultValue: "-", description: "Explanation of the blocked work." },
+  ],
+  tokens: ["white", "white-opacity-80", "gray-50", "gray-200", "gray-500", "gray-900", "brand-700", "radius-lg", "shadow-md", "motion-spin"],
+  usage: ["Use when a panel or workflow region cannot be interacted with during processing.", "Name the operation so users understand why the region is blocked."],
+  avoid: ["Do not overlay the whole app for background work that does not block interaction.", "Do not use without visible loading text."],
+  accessibility: ["Loading label is visible text.", "Production overlays should mark the blocked region busy with aria-busy."],
+  agentGuidance: ["Use Loading Overlay for blocking async work inside cards, panels, and workflows.", "Use Skeleton for initial content loading and Progress for determinate work."],
+  code: `import { LoadingOverlay } from "./LoadingOverlay";\n\n<LoadingOverlay label="Evaluation running" />`,
+};
+
+export const toastStackEntry: CatalogEntry = {
+  ...feedbackDefaults,
+  id: "toast-stack",
+  name: "Toast Stack",
+  subcategory: "Transient feedback",
+  description: "Toast Stack groups multiple transient product notifications with status icons and dismiss controls.",
+  preview: ToastStackPreview,
+  variants: ["Success toast", "Info toast", "Warning toast", "Dismiss action", "Stacked"],
+  props: [],
+  tokens: ["white", "gray-200", "gray-400", "gray-500", "gray-900", "success-50", "success-700", "brand-50", "brand-700", "warning-50", "warning-700", "radius-lg", "shadow-sm"],
+  usage: ["Use when several short-lived events may appear together.", "Keep toast titles concise and bodies actionable."],
+  avoid: ["Do not use toast stacks for critical blocking errors.", "Do not let persistent workflow state live only in toasts."],
+  accessibility: ["Dismiss buttons include notification-specific accessible labels.", "Production toast regions should use polite live-region behavior."],
+  agentGuidance: ["Use Toast Stack for transient save, queue, and notification events.", "Use Notification Center for persistent event history."],
+  code: `import { ToastStack } from "./ToastStack";\n\n<ToastStack />`,
 };

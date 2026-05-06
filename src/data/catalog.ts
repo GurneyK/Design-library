@@ -99,13 +99,17 @@ import {
 import {
   alertEntry,
   bannerEntry,
+  calloutEntry,
   confirmationPanelEntry,
+  loadingOverlayEntry,
   notificationCenterEntry,
   progressEntry,
   reviewChecklistEntry,
+  resultStateEntry,
   skeletonEntry,
   spinnerEntry,
   statusSummaryEntry,
+  toastStackEntry,
 } from "./feedbackEntries";
 import {
   comboboxEntry,
@@ -323,6 +327,10 @@ export const catalog = [
   statusSummaryEntry,
   reviewChecklistEntry,
   notificationCenterEntry,
+  resultStateEntry,
+  calloutEntry,
+  loadingOverlayEntry,
+  toastStackEntry,
   modalEntry,
   drawerEntry,
   popoverEntry,
