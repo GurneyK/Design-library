@@ -33,10 +33,7 @@ const manifest = {
   name: "Design Library",
   description: "Machine-readable component and template catalog for Habibi/Nexus-style product surfaces.",
   publicUrl: "https://gurneyk.github.io/Design-library/",
-  manifestUrls: [
-    "https://gurneyk.github.io/Design-library/site/manifest.json",
-    "https://gurneyk.github.io/Design-library/manifest.json"
-  ],
+  manifestUrls: ["https://gurneyk.github.io/Design-library/site/manifest.json"],
   counts: {
     entries: entries.length,
     categories: categories.length,

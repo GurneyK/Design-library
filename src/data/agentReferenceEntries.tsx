@@ -129,5 +129,5 @@ export const agentManifestEntry: CatalogEntry = {
   avoid: ["Do not scrape visual docs when the manifest is available.", "Do not generate components that are not present in the manifest unless they are approved gaps."],
   accessibility: ["The manifest entry provides visible endpoint text and readable summary metrics.", "Generated UI should still follow each entry's accessibility notes."],
   agentGuidance: ["Fetch the manifest, choose from approved entries, and honor useWhen, doNotUseWhen, props, variants, tokens, and accessibility notes.", "Use categoryCounts and kindCounts to understand coverage before deciding whether a request is a component, foundation, or template task.", "For templates, copy composition patterns before inventing new layouts."],
-  code: `const urls = [\n  "https://gurneyk.github.io/Design-library/manifest.json",\n  "https://gurneyk.github.io/Design-library/site/manifest.json",\n];\n\nconst manifest = await fetch(urls[0]).then((response) => response.json());\nconst button = manifest.entries.find((entry) => entry.id === "button");`,
+  code: `const manifestUrl = "https://gurneyk.github.io/Design-library/site/manifest.json";\nconst manifest = await fetch(manifestUrl).then((response) => response.json());\n\nconst button = manifest.entries.find((entry) => entry.id === "button");`,
 };
