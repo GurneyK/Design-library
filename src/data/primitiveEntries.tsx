@@ -2,10 +2,14 @@ import { Copy, Info, MoreHorizontal, Plus, Settings, Trash2, UserRound } from "l
 import { Avatar } from "../components/ui/avatar/Avatar";
 import { AvatarGroup } from "../components/ui/avatar-group/AvatarGroup";
 import { Badge } from "../components/ui/badge/Badge";
+import { ColorSwatch } from "../components/ui/color-swatch/ColorSwatch";
+import { CounterBadge } from "../components/ui/counter-badge/CounterBadge";
 import { Divider } from "../components/ui/divider/Divider";
 import { Button } from "../components/ui/button/Button";
 import { IconButton } from "../components/ui/icon-button/IconButton";
 import { Kbd } from "../components/ui/kbd/Kbd";
+import { MetadataChip } from "../components/ui/metadata-chip/MetadataChip";
+import { StatusDot } from "../components/ui/status-dot/StatusDot";
 import { Surface } from "../components/ui/surface/Surface";
 import { Tag } from "../components/ui/tag/Tag";
 import { Tooltip } from "../components/ui/tooltip/Tooltip";
@@ -143,6 +147,51 @@ function AvatarGroupPreview() {
     <div className="space-y-4">
       <AvatarGroup />
       <p className="text-sm text-gray-500">Use for collaborators, reviewers, and mixed human/agent ownership.</p>
+    </div>
+  );
+}
+
+function StatusDotPreview() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <StatusDot label="Active" tone="success" />
+      <StatusDot label="Pending" tone="warning" />
+      <StatusDot label="Blocked" tone="error" />
+      <StatusDot label="Running" tone="brand" />
+      <StatusDot label="Offline" tone="neutral" />
+    </div>
+  );
+}
+
+function CounterBadgePreview() {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <CounterBadge count={4} />
+      <CounterBadge count={99} tone="neutral" />
+      <CounterBadge count={128} max={99} tone="error" />
+    </div>
+  );
+}
+
+function ColorSwatchPreview() {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ColorSwatch label="Brand 700" tone="brand" value="#6941C6" />
+      <ColorSwatch label="Success 500" tone="success" value="#12B76A" />
+      <ColorSwatch label="Warning 500" tone="warning" value="#F79009" />
+      <ColorSwatch label="Error 500" tone="error" value="#F04438" />
+      <ColorSwatch label="Info 500" tone="info" value="#2E90FA" />
+      <ColorSwatch label="Gray 500" tone="gray" value="#667085" />
+    </div>
+  );
+}
+
+function MetadataChipPreview() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <MetadataChip label="Model" value="GPT-4.1" />
+      <MetadataChip label="Sources" value="248 docs" />
+      <MetadataChip label="Market" value="US + CA" />
     </div>
   );
 }
@@ -334,4 +383,87 @@ export const avatarGroupEntry: CatalogEntry = {
   accessibility: ["Each visible avatar receives an accessible label.", "Overflow count is visible text."],
   agentGuidance: ["Use Avatar Group when a row or card has multiple owners.", "Use Avatar for one identity and Agent Avatar for AI-specific status."],
   code: `import { AvatarGroup } from "./AvatarGroup";\n\n<AvatarGroup items={items} max={3} />`,
+};
+
+export const statusDotEntry: CatalogEntry = {
+  ...primitiveDefaults,
+  id: "status-dot",
+  name: "Status Dot",
+  subcategory: "Status",
+  description: "Status Dot pairs a small semantic presence mark with visible status text.",
+  preview: StatusDotPreview,
+  variants: ["Success", "Warning", "Error", "Brand", "Neutral", "With label"],
+  props: [
+    { name: "tone", type: '"success" | "warning" | "error" | "brand" | "neutral"', defaultValue: '"success"', description: "Semantic dot color." },
+    { name: "label", type: "string", defaultValue: '"Active"', description: "Visible status text." },
+  ],
+  tokens: ["success-500", "warning-500", "error-500", "brand-600", "gray-400", "gray-700", "radius-full"],
+  usage: ["Use inside rows, metadata clusters, and compact status summaries.", "Always pair the dot with text when the status matters."],
+  avoid: ["Do not use color-only dots without a label.", "Do not use as decoration."],
+  accessibility: ["Status meaning is carried by visible label text.", "Dot is aria-hidden because text provides the meaning."],
+  agentGuidance: ["Use Status Dot for compact presence or workflow state.", "Use Badge when status needs a filled pill treatment."],
+  code: `import { StatusDot } from "./StatusDot";\n\n<StatusDot label="Active" tone="success" />`,
+};
+
+export const counterBadgeEntry: CatalogEntry = {
+  ...primitiveDefaults,
+  id: "counter-badge",
+  name: "Counter Badge",
+  subcategory: "Status",
+  description: "Counter Badge displays compact numeric counts for nav items, tabs, inboxes, and review queues.",
+  preview: CounterBadgePreview,
+  variants: ["Brand", "Neutral", "Error", "Max count", "Compact"],
+  props: [
+    { name: "count", type: "number", defaultValue: "12", description: "Count to display." },
+    { name: "max", type: "number", defaultValue: "99", description: "Maximum count before showing plus notation." },
+    { name: "tone", type: '"brand" | "neutral" | "error"', defaultValue: '"brand"', description: "Count emphasis treatment." },
+  ],
+  tokens: ["brand-50", "brand-200", "brand-700", "gray-100", "gray-200", "gray-700", "error-50", "error-100", "error-700", "radius-full"],
+  usage: ["Use for unread counts, review counts, tab counts, and queue totals.", "Use max count notation for large totals in narrow spaces."],
+  avoid: ["Do not use for arbitrary labels; use Badge or Tag.", "Do not use red counts unless the count represents urgency or error."],
+  accessibility: ["Count is visible text.", "Nearby label should explain what the count refers to."],
+  agentGuidance: ["Use Counter Badge inside navigation, tabs, and review queues.", "Use Badge for status words and Counter Badge for numbers."],
+  code: `import { CounterBadge } from "./CounterBadge";\n\n<CounterBadge count={12} />`,
+};
+
+export const colorSwatchEntry: CatalogEntry = {
+  ...primitiveDefaults,
+  id: "color-swatch",
+  name: "Color Swatch",
+  subcategory: "Tokens",
+  description: "Color Swatch previews a design token with color sample, token label, and value.",
+  preview: ColorSwatchPreview,
+  variants: ["Brand", "Success", "Warning", "Error", "Info", "Gray"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Brand 700"', description: "Token label." },
+    { name: "value", type: "string", defaultValue: '"#6941C6"', description: "Token value display." },
+    { name: "tone", type: '"brand" | "success" | "warning" | "error" | "info" | "gray"', defaultValue: '"brand"', description: "Swatch color treatment." },
+  ],
+  tokens: ["brand-700", "success-500", "warning-500", "error-500", "info-500", "gray-500", "white", "gray-200", "radius-md", "shadow-xs"],
+  usage: ["Use in foundation pages and token documentation.", "Use when developers need to see token name and visual value together."],
+  avoid: ["Do not use swatches as selectable app UI without state behavior.", "Do not display token values that are not part of the system."],
+  accessibility: ["Token label and value are visible text.", "Color is previewed but not the only information."],
+  agentGuidance: ["Use Color Swatch for design-token documentation and foundation previews.", "Do not use it inside production dashboards unless documenting tokens."],
+  code: `import { ColorSwatch } from "./ColorSwatch";\n\n<ColorSwatch label="Brand 700" value="#6941C6" />`,
+};
+
+export const metadataChipEntry: CatalogEntry = {
+  ...primitiveDefaults,
+  id: "metadata-chip",
+  name: "Metadata Chip",
+  subcategory: "Metadata",
+  description: "Metadata Chip pairs a short label and value in a compact inline token for detail headers and summaries.",
+  preview: MetadataChipPreview,
+  variants: ["Label / value", "With icon", "Inline", "Multi-chip group"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Model"', description: "Metadata label." },
+    { name: "value", type: "string", defaultValue: '"GPT-4.1"', description: "Metadata value." },
+    { name: "icon", type: "ReactNode", defaultValue: "-", description: "Optional leading icon slot." },
+  ],
+  tokens: ["white", "gray-200", "gray-400", "gray-500", "gray-900", "radius-md", "shadow-xs"],
+  usage: ["Use in detail headers, artifact cards, agent context summaries, and source metadata.", "Use when metadata should stay inline rather than in a full Description List."],
+  avoid: ["Do not use for editable tag selection; use Token Input or Tag.", "Do not use for long values that will wrap awkwardly."],
+  accessibility: ["Label and value are visible text.", "Icon is supplemental and should not carry the only meaning."],
+  agentGuidance: ["Use Metadata Chip for compact label/value facts.", "Use Key Value Grid when many metadata facts need equal visual weight."],
+  code: `import { MetadataChip } from "./MetadataChip";\n\n<MetadataChip label="Model" value="GPT-4.1" />`,
 };
