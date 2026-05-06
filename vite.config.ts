@@ -8,6 +8,9 @@ export default defineConfig({
     rollupOptions: {
       input: "src/main.tsx",
       output: {
+        manualChunks: {
+          vendor: ["lucide-react", "react", "react-dom"],
+        },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name?.endsWith(".css")) {
             return "assets/app.css";
