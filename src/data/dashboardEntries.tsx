@@ -1,14 +1,18 @@
 import { ActivityFeed } from "../components/ui/dashboard/ActivityFeed";
 import { DataSourceCard } from "../components/ui/dashboard/DataSourceCard";
 import { DashboardHeader } from "../components/ui/dashboard/DashboardHeader";
+import { DashboardShell } from "../components/ui/dashboard/DashboardShell";
 import { EvaluationScorecard } from "../components/ui/dashboard/EvaluationScorecard";
 import { FilterBar } from "../components/ui/dashboard/FilterBar";
 import { HealthSummary } from "../components/ui/dashboard/HealthSummary";
 import { InsightCard } from "../components/ui/dashboard/InsightCard";
+import { KpiStrip } from "../components/ui/dashboard/KpiStrip";
 import { QuickActionPanel } from "../components/ui/dashboard/QuickActionPanel";
 import { ReviewQueue } from "../components/ui/dashboard/ReviewQueue";
 import { RunCard } from "../components/ui/dashboard/RunCard";
 import { RunStatusPill } from "../components/ui/dashboard/RunStatusPill";
+import { SavedReportCard } from "../components/ui/dashboard/SavedReportCard";
+import { SlaStatusPanel } from "../components/ui/dashboard/SlaStatusPanel";
 import { WorkspaceSwitcher } from "../components/ui/dashboard/WorkspaceSwitcher";
 import type { CatalogEntry } from "./catalog";
 
@@ -90,6 +94,26 @@ function HealthSummaryPreview() {
 
 function ReviewQueuePreview() {
   return <ReviewQueue />;
+}
+
+function KpiStripPreview() {
+  return <KpiStrip />;
+}
+
+function DashboardShellPreview() {
+  return <DashboardShell />;
+}
+
+function SavedReportCardPreview() {
+  return (
+    <div className="max-w-xl">
+      <SavedReportCard />
+    </div>
+  );
+}
+
+function SlaStatusPanelPreview() {
+  return <SlaStatusPanel />;
 }
 
 const dashboardDefaults = {
@@ -334,4 +358,72 @@ export const reviewQueueEntry: CatalogEntry = {
   accessibility: ["Rows are readable article blocks with visible open actions.", "Priority is displayed as text inside badges."],
   agentGuidance: ["Use Review Queue for human approval and remediation workflows.", "Pair with Citation Review Block, Confirmation Panel, or Review Checklist."],
   code: `import { ReviewQueue } from "./ReviewQueue";\n\n<ReviewQueue />`,
+};
+
+export const kpiStripEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "kpi-strip",
+  name: "KPI Strip",
+  subcategory: "Metrics",
+  description: "KPI Strip groups the most important dashboard metrics into one compact, scannable row.",
+  preview: KpiStripPreview,
+  variants: ["Four metrics", "Trend badges", "Responsive stack", "Operational summary"],
+  props: [],
+  tokens: ["white", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "warning-50", "radius-lg", "shadow-xs"],
+  usage: ["Use near the top of dashboards to summarize the current state.", "Use for stable metrics that users compare at a glance."],
+  avoid: ["Do not use for long metric definitions or charts.", "Do not pack more than four to six KPIs into one strip."],
+  accessibility: ["Each metric has a visible label, value, and trend text.", "Trend icons are supplemental to the text badge."],
+  agentGuidance: ["Use KPI Strip before chart grids and review queues when generating dashboards.", "Pair with Dashboard Header and Filter Bar for complete dashboard pages."],
+  code: `import { KpiStrip } from "./KpiStrip";\n\n<KpiStrip />`,
+};
+
+export const dashboardShellEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "dashboard-shell",
+  name: "Dashboard Shell",
+  subcategory: "Workspace Chrome",
+  description: "Dashboard Shell composes top chrome, section navigation, and a main content region for product dashboards.",
+  preview: DashboardShellPreview,
+  variants: ["Sidebar nav", "Header actions", "Metric region", "Content slot"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use as the page-level frame for dashboard and operations views.", "Use when a workflow needs persistent local navigation."],
+  avoid: ["Do not nest a Dashboard Shell inside another application shell.", "Do not use for small cards or modal content."],
+  accessibility: ["Navigation is labelled and uses button elements for this preview.", "The main region is separated from local navigation."],
+  agentGuidance: ["Use Dashboard Shell for full dashboard pages; use Panel, Card, or Section for smaller regions.", "Keep global navigation outside this component in app implementations."],
+  code: `import { DashboardShell } from "./DashboardShell";\n\n<DashboardShell />`,
+};
+
+export const savedReportCardEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "saved-report-card",
+  name: "Saved Report Card",
+  subcategory: "Reports",
+  description: "Saved Report Card represents a reusable dashboard report with ownership, freshness, sharing state, and quick actions.",
+  preview: SavedReportCardPreview,
+  variants: ["Shared report", "Metrics", "Favorite action", "Copy action", "Freshness"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use in report libraries, analytics workspaces, and dashboard home pages.", "Expose freshness and sharing state directly on the card."],
+  avoid: ["Do not use for individual chart cards; use Chart Container or Summary Chart Card.", "Do not hide ownership or last-updated context."],
+  accessibility: ["Report name, description, metrics, and updated time are visible text.", "Icon actions include accessible labels."],
+  agentGuidance: ["Use Saved Report Card when generating report libraries or reusable analytics dashboards.", "Pair with Search Input, Filter Bar, or Data Toolbar for report browsing."],
+  code: `import { SavedReportCard } from "./SavedReportCard";\n\n<SavedReportCard />`,
+};
+
+export const slaStatusPanelEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "sla-status-panel",
+  name: "SLA Status Panel",
+  subcategory: "Monitoring",
+  description: "SLA Status Panel summarizes operational targets, warnings, and required actions for production workspaces.",
+  preview: SlaStatusPanelPreview,
+  variants: ["Targets", "Warning summary", "Action needed", "Operational rows"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-700", "success-50", "warning-50", "error-50", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for production monitoring, model operations, and human-review dashboards.", "Use when teams need to see whether service targets are being met."],
+  avoid: ["Do not use for general marketing stats.", "Do not show target status without a follow-up action path."],
+  accessibility: ["Each row has visible target, metric, and status text.", "Status badges communicate meaning through text as well as color."],
+  agentGuidance: ["Use SLA Status Panel for operations-heavy dashboards and production agent surfaces.", "Pair with Activity Feed, Health Summary, and Review Queue for monitoring pages."],
+  code: `import { SlaStatusPanel } from "./SlaStatusPanel";\n\n<SlaStatusPanel />`,
 };

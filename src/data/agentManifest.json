@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 180,
+    "entries": 184,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 158,
+    "component": 162,
     "foundation": 10,
     "template": 12
   },
@@ -21,7 +21,7 @@
     "Agent UI": 16,
     "Agent Reference": 1,
     "Charts / Data Viz": 16,
-    "Dashboard / Product Patterns": 12,
+    "Dashboard / Product Patterns": 16,
     "Data Display": 21,
     "Data Entry": 14,
     "Feedback": 18,
@@ -2804,6 +2804,216 @@
         "Pair with Citation Review Block, Confirmation Panel, or Review Checklist."
       ],
       "code": "import { ReviewQueue } from \"./ReviewQueue\";\n\n<ReviewQueue />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "kpi-strip",
+      "kind": "component",
+      "name": "KPI Strip",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Metrics",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "KPI Strip groups the most important dashboard metrics into one compact, scannable row.",
+      "variants": [
+        "Four metrics",
+        "Trend badges",
+        "Responsive stack",
+        "Operational summary"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "warning-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use near the top of dashboards to summarize the current state.",
+        "Use for stable metrics that users compare at a glance."
+      ],
+      "doNotUseWhen": [
+        "Do not use for long metric definitions or charts.",
+        "Do not pack more than four to six KPIs into one strip."
+      ],
+      "accessibility": [
+        "Each metric has a visible label, value, and trend text.",
+        "Trend icons are supplemental to the text badge."
+      ],
+      "agentGuidance": [
+        "Use KPI Strip before chart grids and review queues when generating dashboards.",
+        "Pair with Dashboard Header and Filter Bar for complete dashboard pages."
+      ],
+      "code": "import { KpiStrip } from \"./KpiStrip\";\n\n<KpiStrip />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "dashboard-shell",
+      "kind": "component",
+      "name": "Dashboard Shell",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Workspace Chrome",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Dashboard Shell composes top chrome, section navigation, and a main content region for product dashboards.",
+      "variants": [
+        "Sidebar nav",
+        "Header actions",
+        "Metric region",
+        "Content slot"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use as the page-level frame for dashboard and operations views.",
+        "Use when a workflow needs persistent local navigation."
+      ],
+      "doNotUseWhen": [
+        "Do not nest a Dashboard Shell inside another application shell.",
+        "Do not use for small cards or modal content."
+      ],
+      "accessibility": [
+        "Navigation is labelled and uses button elements for this preview.",
+        "The main region is separated from local navigation."
+      ],
+      "agentGuidance": [
+        "Use Dashboard Shell for full dashboard pages; use Panel, Card, or Section for smaller regions.",
+        "Keep global navigation outside this component in app implementations."
+      ],
+      "code": "import { DashboardShell } from \"./DashboardShell\";\n\n<DashboardShell />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "saved-report-card",
+      "kind": "component",
+      "name": "Saved Report Card",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Reports",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Saved Report Card represents a reusable dashboard report with ownership, freshness, sharing state, and quick actions.",
+      "variants": [
+        "Shared report",
+        "Metrics",
+        "Favorite action",
+        "Copy action",
+        "Freshness"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in report libraries, analytics workspaces, and dashboard home pages.",
+        "Expose freshness and sharing state directly on the card."
+      ],
+      "doNotUseWhen": [
+        "Do not use for individual chart cards; use Chart Container or Summary Chart Card.",
+        "Do not hide ownership or last-updated context."
+      ],
+      "accessibility": [
+        "Report name, description, metrics, and updated time are visible text.",
+        "Icon actions include accessible labels."
+      ],
+      "agentGuidance": [
+        "Use Saved Report Card when generating report libraries or reusable analytics dashboards.",
+        "Pair with Search Input, Filter Bar, or Data Toolbar for report browsing."
+      ],
+      "code": "import { SavedReportCard } from \"./SavedReportCard\";\n\n<SavedReportCard />",
+      "sourceFile": "src/data/dashboardEntries.tsx"
+    },
+    {
+      "id": "sla-status-panel",
+      "kind": "component",
+      "name": "SLA Status Panel",
+      "category": "Dashboard / Product Patterns",
+      "subcategory": "Monitoring",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "SLA Status Panel summarizes operational targets, warnings, and required actions for production workspaces.",
+      "variants": [
+        "Targets",
+        "Warning summary",
+        "Action needed",
+        "Operational rows"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "success-50",
+        "warning-50",
+        "error-50",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for production monitoring, model operations, and human-review dashboards.",
+        "Use when teams need to see whether service targets are being met."
+      ],
+      "doNotUseWhen": [
+        "Do not use for general marketing stats.",
+        "Do not show target status without a follow-up action path."
+      ],
+      "accessibility": [
+        "Each row has visible target, metric, and status text.",
+        "Status badges communicate meaning through text as well as color."
+      ],
+      "agentGuidance": [
+        "Use SLA Status Panel for operations-heavy dashboards and production agent surfaces.",
+        "Pair with Activity Feed, Health Summary, and Review Queue for monitoring pages."
+      ],
+      "code": "import { SlaStatusPanel } from \"./SlaStatusPanel\";\n\n<SlaStatusPanel />",
       "sourceFile": "src/data/dashboardEntries.tsx"
     },
     {
