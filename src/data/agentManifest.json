@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 176,
+    "entries": 180,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 154,
+    "component": 158,
     "foundation": 10,
     "template": 12
   },
@@ -20,7 +20,7 @@
     "Primitives": 14,
     "Agent UI": 16,
     "Agent Reference": 1,
-    "Charts / Data Viz": 12,
+    "Charts / Data Viz": 16,
     "Dashboard / Product Patterns": 12,
     "Data Display": 21,
     "Data Entry": 14,
@@ -1610,6 +1610,94 @@
       "sourceFile": "src/data/chartEntries.tsx"
     },
     {
+      "id": "pie-chart",
+      "kind": "component",
+      "name": "Pie Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Pie Chart shows a small part-to-whole distribution when categories are few and clearly labelled.",
+      "variants": [
+        "Distribution",
+        "Three segment",
+        "With legend"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-700",
+        "info-500",
+        "success-500",
+        "white"
+      ],
+      "useWhen": [
+        "Use for simple distribution snapshots with three to five categories.",
+        "Pair with a legend or direct labels."
+      ],
+      "doNotUseWhen": [
+        "Do not use pie charts for precise comparisons.",
+        "Do not use many thin slices that are hard to scan."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation.",
+        "Legend text names each segment."
+      ],
+      "agentGuidance": [
+        "Use Pie Chart for lightweight source mix, category share, or audience split summaries."
+      ],
+      "code": "import { PieChart } from \"./PieChart\";\n\n<PieChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "stacked-bar-chart",
+      "kind": "component",
+      "name": "Stacked Bar Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Stacked Bar Chart compares totals while showing how each total breaks down by segment.",
+      "variants": [
+        "Horizontal",
+        "Segmented",
+        "With legend"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-700",
+        "info-500",
+        "success-500",
+        "gray-100",
+        "gray-500",
+        "radius-md"
+      ],
+      "useWhen": [
+        "Use for channel mix, workspace activity, and grouped usage comparisons.",
+        "Keep segment count low so the pattern stays readable."
+      ],
+      "doNotUseWhen": [
+        "Do not use stacked bars when exact segment comparison is the main task.",
+        "Do not rely on color without labels."
+      ],
+      "accessibility": [
+        "Rows include visible category labels.",
+        "Production versions should expose segment values as text or table data."
+      ],
+      "agentGuidance": [
+        "Use Stacked Bar Chart when a dashboard needs total plus composition in the same view."
+      ],
+      "code": "import { StackedBarChart } from \"./StackedBarChart\";\n\n<StackedBarChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
       "id": "scatter-chart",
       "kind": "component",
       "name": "Scatter Chart",
@@ -1652,6 +1740,50 @@
         "Use Scatter Chart for quality versus latency, cost versus usage, or confidence versus impact patterns."
       ],
       "code": "import { ScatterChart } from \"./ScatterChart\";\n\n<ScatterChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "radar-chart",
+      "kind": "component",
+      "name": "Radar Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Radar Chart compares multiple bounded dimensions in one compact profile.",
+      "variants": [
+        "Capability profile",
+        "Five axis",
+        "Filled area"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-100",
+        "brand-700",
+        "gray-100",
+        "gray-200",
+        "white"
+      ],
+      "useWhen": [
+        "Use for capability coverage, maturity scores, and multi-factor evaluations.",
+        "Use when each axis shares the same bounded scale."
+      ],
+      "doNotUseWhen": [
+        "Do not use for exact numeric comparison.",
+        "Do not compare many profiles in one radar chart."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation.",
+        "Production versions should expose each axis value in text."
+      ],
+      "agentGuidance": [
+        "Use Radar Chart for compact multi-metric profile summaries, not for detailed analytics tables."
+      ],
+      "code": "import { RadarChart } from \"./RadarChart\";\n\n<RadarChart />",
       "sourceFile": "src/data/chartEntries.tsx"
     },
     {
@@ -1841,6 +1973,55 @@
         "Use Summary Chart Card for dashboard overviews and generated analytics sections."
       ],
       "code": "import { SummaryChartCard } from \"./SummaryChartCard\";\n\n<SummaryChartCard />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "sparkline",
+      "kind": "component",
+      "name": "Sparkline",
+      "category": "Charts / Data Viz",
+      "subcategory": "Chart cards",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Sparkline pairs a compact trend line with a headline metric for dashboard overview cards.",
+      "variants": [
+        "Metric card",
+        "Trend fill",
+        "Delta badge"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in dense dashboard grids when trend context matters but full chart analysis is not needed.",
+        "Keep supporting copy short."
+      ],
+      "doNotUseWhen": [
+        "Do not use sparklines as the only way to understand a critical metric.",
+        "Do not place many unlabeled sparklines together."
+      ],
+      "accessibility": [
+        "Metric value and trend badge are visible text.",
+        "The miniature chart is supplemental."
+      ],
+      "agentGuidance": [
+        "Use Sparkline for compact overview cards in dashboards, workspaces, and analytics summaries."
+      ],
+      "code": "import { Sparkline } from \"./Sparkline\";\n\n<Sparkline />",
       "sourceFile": "src/data/chartEntries.tsx"
     },
     {

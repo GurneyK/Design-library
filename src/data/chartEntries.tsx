@@ -9,7 +9,11 @@ import { FunnelChart } from "../components/ui/charts/FunnelChart";
 import { GaugeChart } from "../components/ui/charts/GaugeChart";
 import { HeatmapChart } from "../components/ui/charts/HeatmapChart";
 import { LineChart } from "../components/ui/charts/LineChart";
+import { PieChart } from "../components/ui/charts/PieChart";
+import { RadarChart } from "../components/ui/charts/RadarChart";
 import { ScatterChart } from "../components/ui/charts/ScatterChart";
+import { Sparkline } from "../components/ui/charts/Sparkline";
+import { StackedBarChart } from "../components/ui/charts/StackedBarChart";
 import { SummaryChartCard } from "../components/ui/charts/SummaryChartCard";
 import type { CatalogEntry } from "./catalog";
 
@@ -75,10 +79,48 @@ function DonutChartPreview() {
   );
 }
 
+function PieChartPreview() {
+  return (
+    <ChartContainer title="Source mix">
+      <PieChart />
+      <ChartLegend
+        items={[
+          { color: "#6941C6", label: "Research" },
+          { color: "#2E90FA", label: "Campaigns" },
+          { color: "#12B76A", label: "Claims" },
+        ]}
+      />
+    </ChartContainer>
+  );
+}
+
+function StackedBarChartPreview() {
+  return (
+    <ChartContainer title="Usage by channel">
+      <StackedBarChart />
+      <ChartLegend
+        items={[
+          { color: "#6941C6", label: "Analytics" },
+          { color: "#2E90FA", label: "Marketing" },
+          { color: "#12B76A", label: "INCI" },
+        ]}
+      />
+    </ChartContainer>
+  );
+}
+
 function ScatterChartPreview() {
   return (
     <ChartContainer title="Latency by answer quality">
       <ScatterChart />
+    </ChartContainer>
+  );
+}
+
+function RadarChartPreview() {
+  return (
+    <ChartContainer title="Capability coverage">
+      <RadarChart />
     </ChartContainer>
   );
 }
@@ -111,6 +153,14 @@ function SummaryChartCardPreview() {
   return (
     <div className="max-w-md">
       <SummaryChartCard />
+    </div>
+  );
+}
+
+function SparklinePreview() {
+  return (
+    <div className="max-w-md">
+      <Sparkline />
     </div>
   );
 }
@@ -249,6 +299,40 @@ export const donutChartEntry: CatalogEntry = {
   code: `import { DonutChart } from "./DonutChart";\n\n<DonutChart />`,
 };
 
+export const pieChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "pie-chart",
+  name: "Pie Chart",
+  subcategory: "Charts",
+  description: "Pie Chart shows a small part-to-whole distribution when categories are few and clearly labelled.",
+  preview: PieChartPreview,
+  variants: ["Distribution", "Three segment", "With legend"],
+  props: [],
+  tokens: ["brand-700", "info-500", "success-500", "white"],
+  usage: ["Use for simple distribution snapshots with three to five categories.", "Pair with a legend or direct labels."],
+  avoid: ["Do not use pie charts for precise comparisons.", "Do not use many thin slices that are hard to scan."],
+  accessibility: ["SVG has an image role and label in this first implementation.", "Legend text names each segment."],
+  agentGuidance: ["Use Pie Chart for lightweight source mix, category share, or audience split summaries."],
+  code: `import { PieChart } from "./PieChart";\n\n<PieChart />`,
+};
+
+export const stackedBarChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "stacked-bar-chart",
+  name: "Stacked Bar Chart",
+  subcategory: "Charts",
+  description: "Stacked Bar Chart compares totals while showing how each total breaks down by segment.",
+  preview: StackedBarChartPreview,
+  variants: ["Horizontal", "Segmented", "With legend"],
+  props: [],
+  tokens: ["brand-700", "info-500", "success-500", "gray-100", "gray-500", "radius-md"],
+  usage: ["Use for channel mix, workspace activity, and grouped usage comparisons.", "Keep segment count low so the pattern stays readable."],
+  avoid: ["Do not use stacked bars when exact segment comparison is the main task.", "Do not rely on color without labels."],
+  accessibility: ["Rows include visible category labels.", "Production versions should expose segment values as text or table data."],
+  agentGuidance: ["Use Stacked Bar Chart when a dashboard needs total plus composition in the same view."],
+  code: `import { StackedBarChart } from "./StackedBarChart";\n\n<StackedBarChart />`,
+};
+
 export const scatterChartEntry: CatalogEntry = {
   ...chartDefaults,
   id: "scatter-chart",
@@ -264,6 +348,23 @@ export const scatterChartEntry: CatalogEntry = {
   accessibility: ["SVG has an image role and label in this first implementation.", "Production charts should expose the plotted data as a table or summary."],
   agentGuidance: ["Use Scatter Chart for quality versus latency, cost versus usage, or confidence versus impact patterns."],
   code: `import { ScatterChart } from "./ScatterChart";\n\n<ScatterChart />`,
+};
+
+export const radarChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "radar-chart",
+  name: "Radar Chart",
+  subcategory: "Charts",
+  description: "Radar Chart compares multiple bounded dimensions in one compact profile.",
+  preview: RadarChartPreview,
+  variants: ["Capability profile", "Five axis", "Filled area"],
+  props: [],
+  tokens: ["brand-100", "brand-700", "gray-100", "gray-200", "white"],
+  usage: ["Use for capability coverage, maturity scores, and multi-factor evaluations.", "Use when each axis shares the same bounded scale."],
+  avoid: ["Do not use for exact numeric comparison.", "Do not compare many profiles in one radar chart."],
+  accessibility: ["SVG has an image role and label in this first implementation.", "Production versions should expose each axis value in text."],
+  agentGuidance: ["Use Radar Chart for compact multi-metric profile summaries, not for detailed analytics tables."],
+  code: `import { RadarChart } from "./RadarChart";\n\n<RadarChart />`,
 };
 
 export const gaugeChartEntry: CatalogEntry = {
@@ -332,4 +433,21 @@ export const summaryChartCardEntry: CatalogEntry = {
   accessibility: ["Value and label are visible text.", "Compact chart should be supplemental."],
   agentGuidance: ["Use Summary Chart Card for dashboard overviews and generated analytics sections."],
   code: `import { SummaryChartCard } from "./SummaryChartCard";\n\n<SummaryChartCard />`,
+};
+
+export const sparklineEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "sparkline",
+  name: "Sparkline",
+  subcategory: "Chart cards",
+  description: "Sparkline pairs a compact trend line with a headline metric for dashboard overview cards.",
+  preview: SparklinePreview,
+  variants: ["Metric card", "Trend fill", "Delta badge"],
+  props: [],
+  tokens: ["white", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "success-700", "radius-lg", "shadow-xs"],
+  usage: ["Use in dense dashboard grids when trend context matters but full chart analysis is not needed.", "Keep supporting copy short."],
+  avoid: ["Do not use sparklines as the only way to understand a critical metric.", "Do not place many unlabeled sparklines together."],
+  accessibility: ["Metric value and trend badge are visible text.", "The miniature chart is supplemental."],
+  agentGuidance: ["Use Sparkline for compact overview cards in dashboards, workspaces, and analytics summaries."],
+  code: `import { Sparkline } from "./Sparkline";\n\n<Sparkline />`,
 };
