@@ -4,13 +4,17 @@ import { Textarea } from "../components/ui/textarea/Textarea";
 import { Select } from "../components/ui/select/Select";
 import { Checkbox } from "../components/ui/checkbox/Checkbox";
 import { CheckboxGroup } from "../components/ui/checkbox-group/CheckboxGroup";
+import { ColorPicker } from "../components/ui/color-picker/ColorPicker";
 import { Switch } from "../components/ui/switch/Switch";
 import { Slider } from "../components/ui/slider/Slider";
 import { SearchInput } from "../components/ui/search-input/SearchInput";
+import { PinInput } from "../components/ui/pin-input/PinInput";
 import { RadioGroup } from "../components/ui/radio-group/RadioGroup";
 import { QueryBuilder } from "../components/ui/query-builder/QueryBuilder";
+import { RangeSlider } from "../components/ui/range-slider/RangeSlider";
 import { RatingInput } from "../components/ui/rating-input/RatingInput";
 import { SegmentedControl } from "../components/ui/segmented-control/SegmentedControl";
+import { StepperInput } from "../components/ui/stepper-input/StepperInput";
 import { TransferList } from "../components/ui/transfer-list/TransferList";
 import type { CatalogEntry } from "./catalog";
 
@@ -149,6 +153,32 @@ function RatingInputPreview() {
 
 function QueryBuilderPreview() {
   return <QueryBuilder />;
+}
+
+function PinInputPreview() {
+  return (
+    <div className="space-y-3">
+      <PinInput />
+      <p className="text-sm text-gray-500">Use for one-time codes, invite tokens, and secure approvals.</p>
+    </div>
+  );
+}
+
+function StepperInputPreview() {
+  return (
+    <div className="grid gap-5 sm:grid-cols-2">
+      <StepperInput label="Max sources" value={12} />
+      <StepperInput label="Retry attempts" value={3} />
+    </div>
+  );
+}
+
+function ColorPickerPreview() {
+  return <ColorPicker />;
+}
+
+function RangeSliderPreview() {
+  return <RangeSlider />;
 }
 
 const dataEntryDefaults = {
@@ -438,4 +468,77 @@ export const queryBuilderEntry: CatalogEntry = {
   accessibility: ["Controls use native selects, inputs, and labeled icon buttons.", "Production implementations should announce added and removed rules."],
   agentGuidance: ["Use Query Builder for advanced dashboard filters and saved views.", "Use Filter Bar for common lightweight filtering."],
   code: `import { QueryBuilder } from "./QueryBuilder";\n\n<QueryBuilder />`,
+};
+
+export const pinInputEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "pin-input",
+  name: "Pin Input",
+  subcategory: "Text controls",
+  description: "Pin Input captures fixed-length numeric or short-code values across multiple single-character fields.",
+  preview: PinInputPreview,
+  variants: ["Six digits", "Numeric input", "Grouped fields", "Verification code"],
+  props: [
+    { name: "length", type: "number", defaultValue: "6", description: "Number of single-character fields to render." },
+  ],
+  tokens: ["white", "gray-300", "gray-900", "brand-300", "radius-md", "shadow-xs", "focus-ring"],
+  usage: ["Use for one-time codes, invite tokens, secure approvals, and short verification values.", "Keep the expected length obvious."],
+  avoid: ["Do not use for normal text input.", "Do not split long IDs into many fields."],
+  accessibility: ["Each field has a digit-specific accessible label.", "The group has a shared verification-code label."],
+  agentGuidance: ["Use Pin Input only when each character is entered separately.", "Use Input for normal IDs and Textarea for prompts."],
+  code: `import { PinInput } from "./PinInput";\n\n<PinInput length={6} />`,
+};
+
+export const stepperInputEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "stepper-input",
+  name: "Stepper Input",
+  subcategory: "Numeric controls",
+  description: "Stepper Input adjusts small numeric values with increment and decrement controls plus a readable number field.",
+  preview: StepperInputPreview,
+  variants: ["Decrease", "Increase", "Readonly preview value", "Compact numeric control"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Max sources"', description: "Visible numeric setting label." },
+    { name: "value", type: "number", defaultValue: "12", description: "Displayed value." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-600", "gray-900", "radius-md", "shadow-xs", "focus-ring"],
+  usage: ["Use for small bounded numbers such as retries, source limits, or visible row counts.", "Use when plus/minus adjustments are faster than typing."],
+  avoid: ["Do not use for wide numeric ranges; use Slider or Number Input.", "Do not hide min and max constraints in production."],
+  accessibility: ["Buttons include screen-reader labels.", "The numeric field keeps a visible associated label."],
+  agentGuidance: ["Use Stepper Input for small integer settings.", "Use Number Input when direct typing is primary and Slider when relative tuning is primary."],
+  code: `import { StepperInput } from "./StepperInput";\n\n<StepperInput label="Max sources" value={12} />`,
+};
+
+export const colorPickerEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "color-picker",
+  name: "Color Picker",
+  subcategory: "Choice controls",
+  description: "Color Picker lets users choose from approved semantic or brand color tokens instead of arbitrary values.",
+  preview: ColorPickerPreview,
+  variants: ["Token swatches", "Selected swatch", "Radio group semantics", "Theme accent"],
+  props: [],
+  tokens: ["brand-700", "info-500", "success-500", "warning-500", "error-500", "gray-500", "white", "brand-300", "radius-full", "focus-ring"],
+  usage: ["Use for choosing theme accents, chart series colors, and label tones from approved tokens.", "Show token labels to assistive tech and in production popovers."],
+  avoid: ["Do not use for unrestricted color entry unless the design system supports custom colors.", "Do not rely on color alone without labels."],
+  accessibility: ["Swatches use radio semantics and screen-reader labels.", "Selected state is exposed with aria-checked."],
+  agentGuidance: ["Use Color Picker for token-constrained color selection.", "Use Color Swatch for documentation-only previews."],
+  code: `import { ColorPicker } from "./ColorPicker";\n\n<ColorPicker />`,
+};
+
+export const rangeSliderEntry: CatalogEntry = {
+  ...dataEntryDefaults,
+  id: "range-slider",
+  name: "Range Slider",
+  subcategory: "Numeric controls",
+  description: "Range Slider sets a minimum and maximum within one bounded numeric scale.",
+  preview: RangeSliderPreview,
+  variants: ["Two handles", "Selected range", "Visible min/max", "Confidence range"],
+  props: [],
+  tokens: ["gray-100", "gray-500", "gray-900", "brand-700", "white", "radius-full", "shadow-sm", "focus-ring"],
+  usage: ["Use for thresholds, confidence bands, price or score ranges, and filtering bounded metrics.", "Show the selected range as text."],
+  avoid: ["Do not use when users need exact values only.", "Do not hide the current range from keyboard and screen-reader users in production."],
+  accessibility: ["Preview handles are keyboard-focusable buttons with accessible labels.", "Production versions should use range inputs or a headless slider primitive."],
+  agentGuidance: ["Use Range Slider for filtering between two bounded numeric values.", "Use Slider for one value and Stepper Input for small integer adjustments."],
+  code: `import { RangeSlider } from "./RangeSlider";\n\n<RangeSlider />`,
 };
