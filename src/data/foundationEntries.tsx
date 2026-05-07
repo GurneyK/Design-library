@@ -1,3 +1,5 @@
+import { BarChart3, MessageSquareText, Search, Settings2, ShieldCheck, Sparkles } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { CatalogEntry } from "./catalog";
 
 function Swatch({ label, value }: { label: string; value: string }) {
@@ -245,6 +247,89 @@ function LayeringPreview() {
   );
 }
 
+function BorderPreview() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {[
+        ["border-gray-100", "Subtle separation", "List dividers and quiet rows", "border-gray-100"],
+        ["border-gray-200", "Default structure", "Cards, panels, inputs", "border-gray-200"],
+        ["border-gray-300", "Control outline", "Inputs and selectable controls", "border-gray-300"],
+        ["border-brand-200", "Selected state", "Active or selected regions", "border-brand-200 bg-brand-50"],
+      ].map(([label, title, use, borderClass]) => (
+        <div className={["rounded-habibiLg border bg-white p-5 shadow-habibiXs", borderClass].join(" ")} key={label}>
+          <p className="text-sm font-semibold text-gray-900">{title}</p>
+          <p className="mt-1 font-mono text-xs text-brand-700">{label}</p>
+          <p className="mt-2 text-sm leading-6 text-gray-500">{use}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function OpacityPreview() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {[
+        ["bg-brand-700/5", "Ghost region", "Use for very quiet tinting"],
+        ["bg-brand-700/10", "Subtle selected", "Use for selected backgrounds"],
+        ["bg-brand-700/20", "Emphasis tint", "Use for active indicators"],
+        ["opacity-50", "Disabled", "Use with disabled semantics"],
+      ].map(([label, className, use]) => (
+        <div className="rounded-habibiLg border border-gray-200 bg-white p-5 shadow-habibiXs" key={label}>
+          <div className={["h-12 rounded-habibiMd", className].join(" ")} />
+          <p className="mt-4 font-mono text-xs text-brand-700">{label}</p>
+          <p className="mt-2 text-sm leading-6 text-gray-500">{use}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function IconographyPreview() {
+  const icons: Array<{ icon: LucideIcon; label: string; use: string }> = [
+    { icon: Search, label: "Search", use: "Discovery and filtering" },
+    { icon: MessageSquareText, label: "Chat", use: "Conversation surfaces" },
+    { icon: BarChart3, label: "Analytics", use: "Charts and dashboards" },
+    { icon: ShieldCheck, label: "Review", use: "Governance and approval" },
+    { icon: Settings2, label: "Settings", use: "Configuration" },
+    { icon: Sparkles, label: "AI", use: "Agent-generated output" },
+  ];
+
+  return (
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {icons.map(({ icon: Icon, label, use }) => (
+        <div className="flex items-start gap-3 rounded-habibiLg border border-gray-200 bg-white p-4 shadow-habibiXs" key={label}>
+          <div className="rounded-habibiMd bg-brand-50 p-2 text-brand-700">
+            <Icon aria-hidden="true" className="h-4 w-4" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-gray-900">{label}</p>
+            <p className="mt-1 text-sm leading-5 text-gray-500">{use}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function DensityPreview() {
+  return (
+    <div className="grid gap-4 lg:grid-cols-3">
+      {[
+        ["Compact", "p-3 gap-2", "Dense tables, menus, toolbars", "p-3"],
+        ["Default", "p-4 gap-3", "Cards, forms, panels", "p-4"],
+        ["Spacious", "p-6 gap-4", "Briefings and first-run surfaces", "p-6"],
+      ].map(([label, token, use, padding]) => (
+        <div className={["rounded-habibiLg border border-gray-200 bg-white shadow-habibiXs", padding].join(" ")} key={label}>
+          <p className="text-sm font-semibold text-gray-900">{label}</p>
+          <p className="mt-1 font-mono text-xs text-brand-700">{token}</p>
+          <p className="mt-2 text-sm leading-6 text-gray-500">{use}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const foundationDefaults = {
   category: "Foundations",
   status: "draft",
@@ -460,4 +545,84 @@ export const layeringFoundationEntry: CatalogEntry = {
     "Keep overlays and modals out of normal page flow and manage focus in production.",
   ],
   code: `z-20 z-40 z-50`,
+};
+
+export const borderFoundationEntry: CatalogEntry = {
+  ...foundationDefaults,
+  id: "borders",
+  name: "Borders",
+  subcategory: "Tokens",
+  description: "Border tokens define how surfaces, controls, dividers, and selected regions separate without adding heavy decoration.",
+  preview: BorderPreview,
+  tokens: ["border-gray-100", "border-gray-200", "border-gray-300", "border-brand-200", "border-error-300"],
+  usage: [
+    "Use gray-200 as the default structural border for cards and panels.",
+    "Use gray-300 for form controls and controls that need stronger affordance.",
+    "Use brand borders only for selected or active states.",
+  ],
+  agentGuidance: [
+    "Prefer border-gray-200 for structural containers.",
+    "Do not invent new border colors when a semantic or neutral token exists.",
+  ],
+  code: `border border-gray-200 rounded-habibiLg`,
+};
+
+export const opacityFoundationEntry: CatalogEntry = {
+  ...foundationDefaults,
+  id: "opacity",
+  name: "Opacity",
+  subcategory: "Tokens",
+  description: "Opacity tokens control subtle overlays, selected tints, disabled states, and quiet visual emphasis.",
+  preview: OpacityPreview,
+  tokens: ["opacity-50", "bg-brand-700/5", "bg-brand-700/10", "bg-brand-700/20", "bg-black/40"],
+  usage: [
+    "Use low-opacity brand tints for selected and highlighted regions.",
+    "Use opacity-50 for disabled states only when the element also has disabled semantics.",
+    "Use overlay opacity for modal backdrops and blocking surfaces.",
+  ],
+  agentGuidance: [
+    "Use opacity as a state support, not as the only state indicator.",
+    "Pair disabled opacity with disabled attributes and readable labels.",
+  ],
+  code: `bg-brand-700/10 opacity-50`,
+};
+
+export const iconographyFoundationEntry: CatalogEntry = {
+  ...foundationDefaults,
+  id: "iconography",
+  name: "Iconography",
+  subcategory: "Foundations",
+  description: "Iconography defines how lucide icons support actions, object identity, navigation, and AI-specific concepts.",
+  preview: IconographyPreview,
+  tokens: ["h-3.5 w-3.5", "h-4 w-4", "h-5 w-5", "stroke-current", "text-brand-700", "text-gray-500"],
+  usage: [
+    "Use 16px icons for buttons, menu rows, labels, and dense dashboards.",
+    "Use icons to support visible text rather than replace it.",
+    "Use consistent concepts: search for discovery, shield for governance, sparkles for AI output.",
+  ],
+  agentGuidance: [
+    "Use lucide icons when an icon exists for the concept.",
+    "Avoid icon-only actions unless the component provides an accessible label.",
+  ],
+  code: `<Search aria-hidden="true" className="h-4 w-4 text-gray-500" />`,
+};
+
+export const densityFoundationEntry: CatalogEntry = {
+  ...foundationDefaults,
+  id: "density",
+  name: "Density",
+  subcategory: "Foundations",
+  description: "Density defines how compact, default, and spacious spacing modes apply across operational tools and executive views.",
+  preview: DensityPreview,
+  tokens: ["p-3", "p-4", "p-5", "p-6", "gap-2", "gap-3", "gap-4"],
+  usage: [
+    "Use compact density for repeated controls, table rows, menus, and utility chrome.",
+    "Use default density for cards, forms, panels, and dashboards.",
+    "Use spacious density for briefings, onboarding, and first-run states.",
+  ],
+  agentGuidance: [
+    "Choose density by workflow: scan-heavy surfaces should be compact, decision surfaces can be spacious.",
+    "Do not mix multiple density modes inside one small component.",
+  ],
+  code: `p-4 gap-3 md:grid-cols-2`,
 };
