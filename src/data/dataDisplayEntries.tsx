@@ -3,11 +3,15 @@ import { Accordion } from "../components/ui/accordion/Accordion";
 import { Badge } from "../components/ui/badge/Badge";
 import { DataToolbar } from "../components/ui/data-toolbar/DataToolbar";
 import { CalendarMonth } from "../components/ui/data-display/CalendarMonth";
+import { ChangeLog } from "../components/ui/data-display/ChangeLog";
 import { CodeBlock } from "../components/ui/data-display/CodeBlock";
 import { ComparisonMatrix } from "../components/ui/data-display/ComparisonMatrix";
 import { DocumentPreview } from "../components/ui/data-display/DocumentPreview";
+import { EntityCard } from "../components/ui/data-display/EntityCard";
+import { FileList } from "../components/ui/data-display/FileList";
 import { KanbanBoard } from "../components/ui/data-display/KanbanBoard";
 import { KeyValueGrid } from "../components/ui/data-display/KeyValueGrid";
+import { MetricBreakdown } from "../components/ui/data-display/MetricBreakdown";
 import { Roadmap } from "../components/ui/data-display/Roadmap";
 import { WorkflowMap } from "../components/ui/data-display/WorkflowMap";
 import { DescriptionList } from "../components/ui/description-list/DescriptionList";
@@ -169,6 +173,22 @@ function RoadmapPreview() {
 
 function WorkflowMapPreview() {
   return <WorkflowMap />;
+}
+
+function FileListPreview() {
+  return <FileList />;
+}
+
+function EntityCardPreview() {
+  return <EntityCard />;
+}
+
+function MetricBreakdownPreview() {
+  return <MetricBreakdown />;
+}
+
+function ChangeLogPreview() {
+  return <ChangeLog />;
 }
 
 const displayDefaults = {
@@ -511,4 +531,85 @@ export const workflowMapEntry: CatalogEntry = {
   accessibility: ["Steps are rendered in an ordered list.", "Each state is shown as readable text."],
   agentGuidance: ["Use Workflow Map for linear agent workflows such as source collection, drafting, citation review, and publish.", "Use Steps for compact navigation between setup stages."],
   code: `import { WorkflowMap } from "./WorkflowMap";\n\n<WorkflowMap />`,
+};
+
+export const fileListEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "file-list",
+  name: "File List",
+  subcategory: "Source content",
+  description: "File List displays attached documents, file metadata, source status, and per-file actions.",
+  preview: FileListPreview,
+  variants: ["Document rows", "Status badges", "File metadata", "Row actions", "Download action"],
+  props: [
+    { name: "files", type: "FileListItem[]", defaultValue: "defaultFiles", description: "Files with name, type, size, status, and optional actions." },
+    { name: "onDownload", type: "() => void", defaultValue: "-", description: "Optional handler for downloading selected files." },
+  ],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "warning-50", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for source libraries, upload results, document packs, and evidence folders.", "Show both file identity and source status."],
+  avoid: ["Do not use File List for dense tabular file management; use Table with a Data Toolbar.", "Do not show status only through color."],
+  accessibility: ["File names, file metadata, and statuses are visible text.", "Row action icon buttons have accessible labels."],
+  agentGuidance: ["Use File List when the primary object is a small set of documents or source files.", "Pair with Document Preview, Source Drawer, and File Upload."],
+  code: `import { FileList } from "./FileList";\n\n<FileList />`,
+};
+
+export const entityCardEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "entity-card",
+  name: "Entity Card",
+  subcategory: "Cards",
+  description: "Entity Card summarizes a workspace, product, team, agent, or source group with metadata and a primary action.",
+  preview: EntityCardPreview,
+  variants: ["Workspace", "Status badge", "Metric cells", "Owner metadata", "Open action"],
+  props: [
+    { name: "title", type: "string", defaultValue: "-", description: "Entity name." },
+    { name: "description", type: "string", defaultValue: "-", description: "Short context for the entity." },
+    { name: "metrics", type: "EntityMetric[]", defaultValue: "[]", description: "Small label/value metrics." },
+    { name: "status", type: "ReactNode", defaultValue: "-", description: "Optional status slot." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for workspace cards, source groups, agent cards, and product areas.", "Keep the primary action obvious and singular."],
+  avoid: ["Do not use when users need to compare many rows; use Table or List.", "Do not overload the card with unrelated actions."],
+  accessibility: ["Entity name is a visible heading.", "Metrics use semantic description-list structure."],
+  agentGuidance: ["Use Entity Card for one important object that needs identity, status, and quick metadata.", "Use Stat Card for a metric and Data Source Card for connected source systems."],
+  code: `import { EntityCard } from "./EntityCard";\n\n<EntityCard />`,
+};
+
+export const metricBreakdownEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "metric-breakdown",
+  name: "Metric Breakdown",
+  subcategory: "Metrics",
+  description: "Metric Breakdown shows multiple scored dimensions with labels, status badges, and progress bars.",
+  preview: MetricBreakdownPreview,
+  variants: ["Quality score", "Source coverage", "Policy readiness", "Progress rows", "Status badge"],
+  props: [
+    { name: "metrics", type: "MetricBreakdownItem[]", defaultValue: "defaultMetrics", description: "Metric rows with label, value, and tone." },
+    { name: "title", type: "string", defaultValue: "-", description: "Breakdown title." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-700", "success-50", "warning-50", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use to explain what contributes to a score.", "Use in evaluations, quality gates, and readiness summaries."],
+  avoid: ["Do not use if the score cannot be explained by meaningful submetrics.", "Do not rely on progress color alone."],
+  accessibility: ["Each metric has text labels and numeric values.", "Progress rows use progressbar semantics from Progress."],
+  agentGuidance: ["Use Metric Breakdown when users need score decomposition.", "Use Evaluation Scorecard for a higher-level review summary."],
+  code: `import { MetricBreakdown } from "./MetricBreakdown";\n\n<MetricBreakdown />`,
+};
+
+export const changeLogEntry: CatalogEntry = {
+  ...displayDefaults,
+  id: "change-log",
+  name: "Change Log",
+  subcategory: "Events",
+  description: "Change Log presents release notes, component updates, and versioned product changes.",
+  preview: ChangeLogPreview,
+  variants: ["Version rows", "Release date", "Change tags", "Released state"],
+  props: [
+    { name: "releases", type: "ChangeLogRelease[]", defaultValue: "defaultReleases", description: "Release rows with version, date, summary, and changed items." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for library release notes, workspace updates, and version history.", "Use concise tags to expose what changed."],
+  avoid: ["Do not use for realtime activity; use Activity Feed.", "Do not use for detailed audit replay; use Timeline."],
+  accessibility: ["Releases are presented in an ordered list with visible version and date.", "Changed items are visible text inside tags."],
+  agentGuidance: ["Use Change Log to communicate versioned design-system updates.", "Use Timeline for chronological operational events."],
+  code: `import { ChangeLog } from "./ChangeLog";\n\n<ChangeLog />`,
 };
