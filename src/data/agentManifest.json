@@ -7,18 +7,18 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 184,
+    "entries": 188,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 162,
+    "component": 166,
     "foundation": 10,
     "template": 12
   },
   "categoryCounts": {
     "Primitives": 14,
-    "Agent UI": 16,
+    "Agent UI": 20,
     "Agent Reference": 1,
     "Charts / Data Viz": 16,
     "Dashboard / Product Patterns": 16,
@@ -1171,6 +1171,209 @@
         "Use Timeline for broader historical event streams."
       ],
       "code": "import { TracePanel } from \"./TracePanel\";\n\n<TracePanel />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "conversation-header",
+      "kind": "component",
+      "name": "Conversation Header",
+      "category": "Agent UI",
+      "subcategory": "Conversation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Conversation Header anchors an agent session with identity, attached source context, live state, and utility actions.",
+      "variants": [
+        "Live state",
+        "Source context",
+        "Share action",
+        "More actions"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use above chat streams and agent workspaces.",
+        "Show source count or workspace context when it affects the response."
+      ],
+      "doNotUseWhen": [
+        "Do not use for static page titles; use Page Header or Dashboard Header.",
+        "Do not place dense filters inside the conversation header."
+      ],
+      "accessibility": [
+        "Header text identifies the active agent and context.",
+        "Icon actions include accessible labels."
+      ],
+      "agentGuidance": [
+        "Use Conversation Header at the top of generated chat workspaces.",
+        "Pair with Chat Surface, Agent Status Bar, and Context Panel."
+      ],
+      "code": "import { ConversationHeader } from \"./ConversationHeader\";\n\n<ConversationHeader />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "evidence-list",
+      "kind": "component",
+      "name": "Evidence List",
+      "category": "Agent UI",
+      "subcategory": "Evidence",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Evidence List groups cited source items with confidence labels and citation actions for an agent response.",
+      "variants": [
+        "Cited sources",
+        "Confidence",
+        "Citation actions",
+        "Evidence count"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use beside answers, generated reports, and review states that need evidence.",
+        "Use when the source set is short enough to scan inline."
+      ],
+      "doNotUseWhen": [
+        "Do not use as a replacement for a full Source Drawer when there are many sources.",
+        "Do not show confidence unless it is backed by a real signal."
+      ],
+      "accessibility": [
+        "Each evidence item has visible title, metadata, confidence, and action text.",
+        "Citation chips remain keyboard reachable."
+      ],
+      "agentGuidance": [
+        "Use Evidence List for small source sets inside agent answers or side panels.",
+        "Use Source Drawer for larger, searchable evidence collections."
+      ],
+      "code": "import { EvidenceList } from \"./EvidenceList\";\n\n<EvidenceList />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "prompt-variable",
+      "kind": "component",
+      "name": "Prompt Variable",
+      "category": "Agent UI",
+      "subcategory": "Prompting",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Prompt Variable displays resolved prompt inputs such as region, timeframe, source set, or audience.",
+      "variants": [
+        "Resolved value",
+        "Removable",
+        "Inline group",
+        "Tokenized prompt context"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-50",
+        "brand-200",
+        "brand-400",
+        "brand-500",
+        "brand-700",
+        "brand-900",
+        "radius-full",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in prompt builders, composer context rows, and reusable prompt previews.",
+        "Use when users need to see which variables will ground an agent run."
+      ],
+      "doNotUseWhen": [
+        "Do not use for generic tags with no key/value relationship.",
+        "Do not expose sensitive variable values in shared views."
+      ],
+      "accessibility": [
+        "Variables include visible key and value text.",
+        "Remove buttons include screen-reader labels."
+      ],
+      "agentGuidance": [
+        "Use Prompt Variable for key/value prompt inputs.",
+        "Pair with Prompt Card, Prompt Library, Composer, or Query Builder."
+      ],
+      "code": "import { PromptVariable } from \"./PromptVariable\";\n\n<PromptVariable />",
+      "sourceFile": "src/data/agentEntries.tsx"
+    },
+    {
+      "id": "agent-status-bar",
+      "kind": "component",
+      "name": "Agent Status Bar",
+      "category": "Agent UI",
+      "subcategory": "Agent Activity",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Agent Status Bar summarizes source indexing, analysis, policy, and answer generation states in one compact row.",
+      "variants": [
+        "Source state",
+        "Running analysis",
+        "Policy state",
+        "Drafting state"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-700",
+        "brand-700",
+        "success-50",
+        "warning-50",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs",
+        "motion-spin"
+      ],
+      "useWhen": [
+        "Use above or below chat streams when users need lightweight execution transparency.",
+        "Use for multi-step agent operations that are still in progress."
+      ],
+      "doNotUseWhen": [
+        "Do not expose private reasoning or raw logs.",
+        "Do not use when a single Spinner or Streaming State is enough."
+      ],
+      "accessibility": [
+        "Each status has visible label and text status.",
+        "The running icon is supplemental to the Running badge."
+      ],
+      "agentGuidance": [
+        "Use Agent Status Bar for compact operational state; use Trace Panel for detailed execution history.",
+        "Pair with Conversation Header and Chat Surface."
+      ],
+      "code": "import { AgentStatusBar } from \"./AgentStatusBar\";\n\n<AgentStatusBar />",
       "sourceFile": "src/data/agentEntries.tsx"
     },
     {

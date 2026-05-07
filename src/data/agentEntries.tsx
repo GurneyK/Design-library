@@ -1,13 +1,17 @@
+import { AgentStatusBar } from "../components/ui/agent/AgentStatusBar";
 import { AgentAvatar } from "../components/ui/agent/AgentAvatar";
 import { ArtifactCard } from "../components/ui/agent/ArtifactCard";
 import { ChatMessage } from "../components/ui/agent/ChatMessage";
 import { ChatSurface } from "../components/ui/agent/ChatSurface";
 import { Composer } from "../components/ui/agent/Composer";
+import { ConversationHeader } from "../components/ui/agent/ConversationHeader";
 import { ContextPanel } from "../components/ui/agent/ContextPanel";
 import { CitationChip } from "../components/ui/agent/CitationChip";
+import { EvidenceList } from "../components/ui/agent/EvidenceList";
 import { HandoffCard } from "../components/ui/agent/HandoffCard";
 import { PromptCard } from "../components/ui/agent/PromptCard";
 import { PromptLibrary } from "../components/ui/agent/PromptLibrary";
+import { PromptVariable } from "../components/ui/agent/PromptVariable";
 import { SourceDrawer } from "../components/ui/agent/SourceDrawer";
 import { StreamingState } from "../components/ui/agent/StreamingState";
 import { SuggestionChips } from "../components/ui/agent/SuggestionChips";
@@ -142,6 +146,22 @@ function HandoffCardPreview() {
 
 function TracePanelPreview() {
   return <TracePanel />;
+}
+
+function ConversationHeaderPreview() {
+  return <ConversationHeader />;
+}
+
+function EvidenceListPreview() {
+  return <EvidenceList />;
+}
+
+function PromptVariablePreview() {
+  return <PromptVariable />;
+}
+
+function AgentStatusBarPreview() {
+  return <AgentStatusBar />;
 }
 
 const agentDefaults = {
@@ -459,4 +479,72 @@ export const tracePanelEntry: CatalogEntry = {
   accessibility: ["Trace renders as an ordered list with visible labels.", "Status icon is supplemental to readable step text."],
   agentGuidance: ["Use Trace Panel for observable workflow events only: prompt received, source retrieval, tool call, validation, output generated.", "Use Timeline for broader historical event streams."],
   code: `import { TracePanel } from "./TracePanel";\n\n<TracePanel />`,
+};
+
+export const conversationHeaderEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "conversation-header",
+  name: "Conversation Header",
+  subcategory: "Conversation",
+  description: "Conversation Header anchors an agent session with identity, attached source context, live state, and utility actions.",
+  preview: ConversationHeaderPreview,
+  variants: ["Live state", "Source context", "Share action", "More actions"],
+  props: [],
+  tokens: ["white", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use above chat streams and agent workspaces.", "Show source count or workspace context when it affects the response."],
+  avoid: ["Do not use for static page titles; use Page Header or Dashboard Header.", "Do not place dense filters inside the conversation header."],
+  accessibility: ["Header text identifies the active agent and context.", "Icon actions include accessible labels."],
+  agentGuidance: ["Use Conversation Header at the top of generated chat workspaces.", "Pair with Chat Surface, Agent Status Bar, and Context Panel."],
+  code: `import { ConversationHeader } from "./ConversationHeader";\n\n<ConversationHeader />`,
+};
+
+export const evidenceListEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "evidence-list",
+  name: "Evidence List",
+  subcategory: "Evidence",
+  description: "Evidence List groups cited source items with confidence labels and citation actions for an agent response.",
+  preview: EvidenceListPreview,
+  variants: ["Cited sources", "Confidence", "Citation actions", "Evidence count"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "success-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use beside answers, generated reports, and review states that need evidence.", "Use when the source set is short enough to scan inline."],
+  avoid: ["Do not use as a replacement for a full Source Drawer when there are many sources.", "Do not show confidence unless it is backed by a real signal."],
+  accessibility: ["Each evidence item has visible title, metadata, confidence, and action text.", "Citation chips remain keyboard reachable."],
+  agentGuidance: ["Use Evidence List for small source sets inside agent answers or side panels.", "Use Source Drawer for larger, searchable evidence collections."],
+  code: `import { EvidenceList } from "./EvidenceList";\n\n<EvidenceList />`,
+};
+
+export const promptVariableEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "prompt-variable",
+  name: "Prompt Variable",
+  subcategory: "Prompting",
+  description: "Prompt Variable displays resolved prompt inputs such as region, timeframe, source set, or audience.",
+  preview: PromptVariablePreview,
+  variants: ["Resolved value", "Removable", "Inline group", "Tokenized prompt context"],
+  props: [],
+  tokens: ["brand-50", "brand-200", "brand-400", "brand-500", "brand-700", "brand-900", "radius-full", "shadow-xs"],
+  usage: ["Use in prompt builders, composer context rows, and reusable prompt previews.", "Use when users need to see which variables will ground an agent run."],
+  avoid: ["Do not use for generic tags with no key/value relationship.", "Do not expose sensitive variable values in shared views."],
+  accessibility: ["Variables include visible key and value text.", "Remove buttons include screen-reader labels."],
+  agentGuidance: ["Use Prompt Variable for key/value prompt inputs.", "Pair with Prompt Card, Prompt Library, Composer, or Query Builder."],
+  code: `import { PromptVariable } from "./PromptVariable";\n\n<PromptVariable />`,
+};
+
+export const agentStatusBarEntry: CatalogEntry = {
+  ...agentDefaults,
+  id: "agent-status-bar",
+  name: "Agent Status Bar",
+  subcategory: "Agent Activity",
+  description: "Agent Status Bar summarizes source indexing, analysis, policy, and answer generation states in one compact row.",
+  preview: AgentStatusBarPreview,
+  variants: ["Source state", "Running analysis", "Policy state", "Drafting state"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-700", "brand-700", "success-50", "warning-50", "radius-md", "radius-lg", "shadow-xs", "motion-spin"],
+  usage: ["Use above or below chat streams when users need lightweight execution transparency.", "Use for multi-step agent operations that are still in progress."],
+  avoid: ["Do not expose private reasoning or raw logs.", "Do not use when a single Spinner or Streaming State is enough."],
+  accessibility: ["Each status has visible label and text status.", "The running icon is supplemental to the Running badge."],
+  agentGuidance: ["Use Agent Status Bar for compact operational state; use Trace Panel for detailed execution history.", "Pair with Conversation Header and Chat Surface."],
+  code: `import { AgentStatusBar } from "./AgentStatusBar";\n\n<AgentStatusBar />`,
 };
