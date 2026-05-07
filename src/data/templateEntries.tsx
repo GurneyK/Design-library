@@ -4,12 +4,16 @@ import { AuthScreen } from "../components/templates/AuthScreen";
 import { CitationReviewBlock } from "../components/templates/CitationReviewBlock";
 import { DashboardOverview } from "../components/templates/DashboardOverview";
 import { EmptyStateLibrary } from "../components/templates/EmptyStateLibrary";
+import { ExecutiveBriefing } from "../components/templates/ExecutiveBriefing";
 import { EvaluationDashboard } from "../components/templates/EvaluationDashboard";
 import { InciLookupView } from "../components/templates/InciLookupView";
 import { MarketingWorkspace } from "../components/templates/MarketingWorkspace";
+import { MobileAgentChat } from "../components/templates/MobileAgentChat";
 import { PromptOpsWorkspace } from "../components/templates/PromptOpsWorkspace";
+import { ReportBuilder } from "../components/templates/ReportBuilder";
 import { SettingsFormScreen } from "../components/templates/SettingsFormScreen";
 import { SourceManagementWorkspace } from "../components/templates/SourceManagementWorkspace";
+import { TeamWorkspaceHome } from "../components/templates/TeamWorkspaceHome";
 import type { CatalogEntry } from "./catalog";
 
 const templateDefaults = {
@@ -220,4 +224,72 @@ export const promptOpsWorkspaceEntry: CatalogEntry = {
   accessibility: ["Fields, tags, review actions, and library items keep visible labels.", "Human handoff requirement is stated as text."],
   agentGuidance: ["Compose with Dashboard Header, Panel, Form Field, Textarea, Token Input, Prompt Library, Context Panel, Handoff Card, and Artifact Card.", "Use this template for prompt governance and reusable prompt operations."],
   code: `import { PromptOpsWorkspace } from "./PromptOpsWorkspace";\n\n<PromptOpsWorkspace />`,
+};
+
+export const executiveBriefingEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-executive-briefing",
+  name: "Executive Briefing",
+  subcategory: "Full Page",
+  description: "A leadership-ready briefing view for delivery momentum, workspace mix, insight summary, and review timeline.",
+  preview: ExecutiveBriefing,
+  variants: ["Full page", "KPI strip", "Chart panels", "Insight summary", "Review timeline"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "warning-50", "radius-lg", "shadow-xs"],
+  usage: ["Use for stakeholder reviews and leadership readouts.", "Use when the page must summarize status, evidence, and next action quickly."],
+  avoid: ["Do not use for raw operational debugging.", "Do not include low-confidence recommendations without review state."],
+  accessibility: ["Composed from labelled sections, visible actions, and readable chart titles.", "Production chart data should include text or table alternatives."],
+  agentGuidance: ["Compose with Dashboard Header, KPI Strip, Panel, Area Chart, Donut Chart, Insight Card, and Timeline.", "Use this template when generating executive-facing summaries."],
+  code: `import { ExecutiveBriefing } from "./ExecutiveBriefing";\n\n<ExecutiveBriefing />`,
+};
+
+export const reportBuilderEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-report-builder",
+  name: "Report Builder",
+  subcategory: "Full Page",
+  description: "A report-generation workflow for defining scope, grounding variables, previewing artifacts, and collecting approval.",
+  preview: ReportBuilder,
+  variants: ["Full page", "Report setup", "Prompt variables", "Artifact preview", "Approval gate"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-500", "gray-900", "brand-50", "brand-700", "warning-50", "radius-lg", "shadow-xs"],
+  usage: ["Use when a team generates durable reports from sources and agent instructions.", "Use when report output needs review before sharing."],
+  avoid: ["Do not use for one-off chat answers.", "Do not skip approval when generated claims are externally visible."],
+  accessibility: ["Form fields have visible labels and grouped sections.", "Approval actions use visible labels."],
+  agentGuidance: ["Compose with Data Toolbar, Form Section, Form Group, Form Field, Textarea, Prompt Variable, Artifact Card, Panel, and Approval Form.", "Use this template for report, document, or brief generation workflows."],
+  code: `import { ReportBuilder } from "./ReportBuilder";\n\n<ReportBuilder />`,
+};
+
+export const teamWorkspaceHomeEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-team-workspace-home",
+  name: "Team Workspace Home",
+  subcategory: "Full Page",
+  description: "A workspace landing page combining shell navigation, health, launchers, shortcuts, notifications, recent items, and activity.",
+  preview: TeamWorkspaceHome,
+  variants: ["Full page", "Workspace shell", "App launcher", "Notifications", "Recent work"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "radius-lg", "shadow-xs"],
+  usage: ["Use as a starting page for cross-project teams and design-library workspaces.", "Use when users need to resume work and launch frequent actions."],
+  avoid: ["Do not use for single-purpose tools that have no workspace switching or recent work.", "Do not overload the home page with every available action."],
+  accessibility: ["Navigation, recent items, notifications, and actions keep visible labels.", "Status and health states include text."],
+  agentGuidance: ["Compose with Navigation Header, Health Summary, App Launcher, Shortcut Grid, Saved Report Card, Notification Menu, Recent Items, and Activity Feed.", "Use this template for team home pages and workspace landing screens."],
+  code: `import { TeamWorkspaceHome } from "./TeamWorkspaceHome";\n\n<TeamWorkspaceHome />`,
+};
+
+export const mobileAgentChatEntry: CatalogEntry = {
+  ...templateDefaults,
+  id: "template-mobile-agent-chat",
+  name: "Mobile Agent Chat",
+  subcategory: "Full Page",
+  description: "A narrow-screen agent chat surface with conversation header, status bar, suggestions, evidence, and mobile tab navigation.",
+  preview: MobileAgentChat,
+  variants: ["Mobile width", "Agent chat", "Evidence list", "Status bar", "Bottom navigation"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "radius-lg", "shadow-xs"],
+  usage: ["Use when an agent workflow needs a responsive or mobile-first preview.", "Use when evidence must stay available even on narrow screens."],
+  avoid: ["Do not use for desktop-only dashboards.", "Do not hide source evidence behind unlabeled navigation when claims require review."],
+  accessibility: ["Conversation, suggestions, evidence, and navigation keep visible text labels.", "Icon-only actions come from labelled primitives."],
+  agentGuidance: ["Compose with Conversation Header, Agent Status Bar, Chat Surface, Chat Message, Suggestion Chips, Composer, Evidence List, and Mobile Tab Bar.", "Use this template for mobile agent experiences and responsive QA checks."],
+  code: `import { MobileAgentChat } from "./MobileAgentChat";\n\n<MobileAgentChat />`,
 };

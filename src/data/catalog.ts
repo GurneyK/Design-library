@@ -221,12 +221,16 @@ import {
   citationReviewBlockEntry,
   dashboardOverviewEntry,
   emptyStateLibraryEntry,
+  executiveBriefingEntry,
   evaluationDashboardEntry,
   inciLookupViewEntry,
   marketingWorkspaceEntry,
+  mobileAgentChatEntry,
   promptOpsWorkspaceEntry,
+  reportBuilderEntry,
   settingsFormScreenEntry,
   sourceManagementWorkspaceEntry,
+  teamWorkspaceHomeEntry,
 } from "./templateEntries";
 
 export type PropRow = {
@@ -460,4 +464,8 @@ export const catalog = [
   sourceManagementWorkspaceEntry,
   evaluationDashboardEntry,
   promptOpsWorkspaceEntry,
+  executiveBriefingEntry,
+  reportBuilderEntry,
+  teamWorkspaceHomeEntry,
+  mobileAgentChatEntry,
 ] satisfies CatalogEntry[];
