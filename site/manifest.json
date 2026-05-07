@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 172,
+    "entries": 176,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 150,
+    "component": 154,
     "foundation": 10,
     "template": 12
   },
@@ -27,7 +27,7 @@
     "Feedback": 18,
     "Forms": 15,
     "Foundations": 10,
-    "Layout": 12,
+    "Layout": 16,
     "Navigation": 15,
     "Templates / Blocks": 12
   },
@@ -8108,6 +8108,282 @@
         "Use Sidebar or Navigation Rail for global app navigation."
       ],
       "code": "import { ContentSidebar } from \"./ContentSidebar\";\n\n<ContentSidebar />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "page-header",
+      "kind": "component",
+      "name": "Page Header",
+      "category": "Layout",
+      "subcategory": "Page Structure",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Page Header introduces a page with title, supporting copy, status metadata, and primary actions.",
+      "variants": [
+        "Title",
+        "Description",
+        "Status badge",
+        "Primary actions",
+        "Responsive actions"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Primary page title."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Short page summary."
+        },
+        {
+          "name": "status",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Optional badge or metadata slot."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Primary and secondary page actions."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "spacing-5"
+      ],
+      "useWhen": [
+        "Use at the top of detail pages, settings pages, and workspace subpages.",
+        "Keep actions focused on page-level commands."
+      ],
+      "doNotUseWhen": [
+        "Do not use inside a Card or Panel.",
+        "Do not duplicate App Shell topbar content."
+      ],
+      "accessibility": [
+        "Uses a header landmark and h1 title.",
+        "Actions keep visible labels and icons."
+      ],
+      "agentGuidance": [
+        "Use Page Header when a page needs title, description, status, and actions.",
+        "Use Dashboard Header for dashboard-specific workspace context."
+      ],
+      "code": "import { PageHeader } from \"./PageHeader\";\n\n<PageHeader />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "toolbar",
+      "kind": "component",
+      "name": "Toolbar",
+      "category": "Layout",
+      "subcategory": "Action Layout",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Toolbar groups search, filters, active scope, refresh, export, and related commands above content.",
+      "variants": [
+        "Search slot",
+        "Filter action",
+        "Active badge",
+        "Icon actions",
+        "Responsive wrap"
+      ],
+      "props": [
+        {
+          "name": "search",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Search or leading control slot."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Right-side actions and filter controls."
+        },
+        {
+          "name": "activeFilters",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Optional active scope or filter indicators."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-300",
+        "gray-400",
+        "gray-500",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use above tables, lists, review queues, and source collections.",
+        "Group controls that act on the content directly below."
+      ],
+      "doNotUseWhen": [
+        "Do not use Toolbar for unrelated page-level navigation.",
+        "Do not hide active filters only inside menus."
+      ],
+      "accessibility": [
+        "Search has visible placeholder text and actions have accessible labels.",
+        "Controls remain keyboard reachable when wrapped."
+      ],
+      "agentGuidance": [
+        "Use Toolbar when a content region needs local search and actions.",
+        "Use Data Toolbar when you specifically need the richer data-view pattern."
+      ],
+      "code": "import { Toolbar } from \"./Toolbar\";\n\n<Toolbar />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "scroll-area",
+      "kind": "component",
+      "name": "Scroll Area",
+      "category": "Layout",
+      "subcategory": "Overflow",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Scroll Area contains long local content inside a bounded region without taking over the page scroll.",
+      "variants": [
+        "Vertical scroll",
+        "Bounded height",
+        "Header",
+        "Count badge",
+        "List content"
+      ],
+      "props": [
+        {
+          "name": "maxHeight",
+          "type": "string",
+          "defaultValue": "\"16rem\"",
+          "description": "Maximum scrollable region height."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Scrollable content."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for source lists, activity snippets, compact drawers, and local panels with many rows.",
+        "Keep a visible heading so the scroll region has context."
+      ],
+      "doNotUseWhen": [
+        "Do not nest scroll regions unnecessarily.",
+        "Do not hide critical content inside a tiny scroll box."
+      ],
+      "accessibility": [
+        "Scrollable content remains in DOM order.",
+        "Heading and count communicate the region purpose."
+      ],
+      "agentGuidance": [
+        "Use Scroll Area for bounded local overflow.",
+        "Prefer page scroll for primary long-form content."
+      ],
+      "code": "import { ScrollArea } from \"./ScrollArea\";\n\n<ScrollArea />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "masonry-grid",
+      "kind": "component",
+      "name": "Masonry Grid",
+      "category": "Layout",
+      "subcategory": "Composition",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Masonry Grid lays out uneven cards or insight snippets without forcing identical heights.",
+      "variants": [
+        "Uneven cards",
+        "Responsive columns",
+        "Insight cards",
+        "Break-inside avoidance"
+      ],
+      "props": [
+        {
+          "name": "columns",
+          "type": "1 | 2 | 3",
+          "defaultValue": "2",
+          "description": "Responsive masonry column count."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Cards or snippets to flow through the masonry layout."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "success-50",
+        "warning-50",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for insight boards, inspiration collections, and variable-height summary cards.",
+        "Use when equal-height grid cards would waste space."
+      ],
+      "doNotUseWhen": [
+        "Do not use for ordered data where row alignment matters.",
+        "Do not use for dense analytics tables or comparison views."
+      ],
+      "accessibility": [
+        "DOM order remains the reading order.",
+        "Cards keep visible headings and status labels."
+      ],
+      "agentGuidance": [
+        "Use Masonry Grid for variable-height cards and insight collections.",
+        "Use Grid for aligned dashboard cards and Table for comparable records."
+      ],
+      "code": "import { MasonryGrid } from \"./MasonryGrid\";\n\n<MasonryGrid />",
       "sourceFile": "src/data/layoutEntries.tsx"
     },
     {

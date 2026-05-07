@@ -4,12 +4,16 @@ import { Card } from "../components/ui/layout/Card";
 import { Container } from "../components/ui/layout/Container";
 import { ContentSidebar } from "../components/ui/layout/ContentSidebar";
 import { Grid } from "../components/ui/layout/Grid";
+import { MasonryGrid } from "../components/ui/layout/MasonryGrid";
+import { PageHeader } from "../components/ui/layout/PageHeader";
 import { Panel } from "../components/ui/layout/Panel";
+import { ScrollArea } from "../components/ui/layout/ScrollArea";
 import { Section } from "../components/ui/layout/Section";
 import { Sidebar } from "../components/ui/layout/Sidebar";
 import { SplitPane } from "../components/ui/layout/SplitPane";
 import { Stack } from "../components/ui/layout/Stack";
 import { StickyFooterBar } from "../components/ui/layout/StickyFooterBar";
+import { Toolbar } from "../components/ui/layout/Toolbar";
 import { Topbar } from "../components/ui/layout/Topbar";
 import type { CatalogEntry } from "./catalog";
 
@@ -97,6 +101,22 @@ function StickyFooterBarPreview() {
 
 function ContentSidebarPreview() {
   return <ContentSidebar />;
+}
+
+function PageHeaderPreview() {
+  return <PageHeader />;
+}
+
+function ToolbarPreview() {
+  return <Toolbar />;
+}
+
+function ScrollAreaPreview() {
+  return <ScrollArea />;
+}
+
+function MasonryGridPreview() {
+  return <MasonryGrid />;
 }
 
 const layoutDefaults = {
@@ -337,4 +357,87 @@ export const contentSidebarEntry: CatalogEntry = {
   accessibility: ["Uses a labeled nav region and main content area.", "Badge counts are visible text."],
   agentGuidance: ["Use Content Sidebar for local workflow navigation.", "Use Sidebar or Navigation Rail for global app navigation."],
   code: `import { ContentSidebar } from "./ContentSidebar";\n\n<ContentSidebar />`,
+};
+
+export const pageHeaderEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "page-header",
+  name: "Page Header",
+  subcategory: "Page Structure",
+  description: "Page Header introduces a page with title, supporting copy, status metadata, and primary actions.",
+  preview: PageHeaderPreview,
+  variants: ["Title", "Description", "Status badge", "Primary actions", "Responsive actions"],
+  props: [
+    { name: "title", type: "string", defaultValue: "-", description: "Primary page title." },
+    { name: "description", type: "string", defaultValue: "-", description: "Short page summary." },
+    { name: "status", type: "ReactNode", defaultValue: "-", description: "Optional badge or metadata slot." },
+    { name: "actions", type: "ReactNode", defaultValue: "-", description: "Primary and secondary page actions." },
+  ],
+  tokens: ["white", "gray-200", "gray-500", "gray-900", "brand-700", "success-50", "success-700", "spacing-5"],
+  usage: ["Use at the top of detail pages, settings pages, and workspace subpages.", "Keep actions focused on page-level commands."],
+  avoid: ["Do not use inside a Card or Panel.", "Do not duplicate App Shell topbar content."],
+  accessibility: ["Uses a header landmark and h1 title.", "Actions keep visible labels and icons."],
+  agentGuidance: ["Use Page Header when a page needs title, description, status, and actions.", "Use Dashboard Header for dashboard-specific workspace context."],
+  code: `import { PageHeader } from "./PageHeader";\n\n<PageHeader />`,
+};
+
+export const toolbarEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "toolbar",
+  name: "Toolbar",
+  subcategory: "Action Layout",
+  description: "Toolbar groups search, filters, active scope, refresh, export, and related commands above content.",
+  preview: ToolbarPreview,
+  variants: ["Search slot", "Filter action", "Active badge", "Icon actions", "Responsive wrap"],
+  props: [
+    { name: "search", type: "ReactNode", defaultValue: "-", description: "Search or leading control slot." },
+    { name: "actions", type: "ReactNode", defaultValue: "-", description: "Right-side actions and filter controls." },
+    { name: "activeFilters", type: "ReactNode", defaultValue: "-", description: "Optional active scope or filter indicators." },
+  ],
+  tokens: ["white", "gray-200", "gray-300", "gray-400", "gray-500", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use above tables, lists, review queues, and source collections.", "Group controls that act on the content directly below."],
+  avoid: ["Do not use Toolbar for unrelated page-level navigation.", "Do not hide active filters only inside menus."],
+  accessibility: ["Search has visible placeholder text and actions have accessible labels.", "Controls remain keyboard reachable when wrapped."],
+  agentGuidance: ["Use Toolbar when a content region needs local search and actions.", "Use Data Toolbar when you specifically need the richer data-view pattern."],
+  code: `import { Toolbar } from "./Toolbar";\n\n<Toolbar />`,
+};
+
+export const scrollAreaEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "scroll-area",
+  name: "Scroll Area",
+  subcategory: "Overflow",
+  description: "Scroll Area contains long local content inside a bounded region without taking over the page scroll.",
+  preview: ScrollAreaPreview,
+  variants: ["Vertical scroll", "Bounded height", "Header", "Count badge", "List content"],
+  props: [
+    { name: "maxHeight", type: "string", defaultValue: '"16rem"', description: "Maximum scrollable region height." },
+    { name: "children", type: "ReactNode", defaultValue: "-", description: "Scrollable content." },
+  ],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for source lists, activity snippets, compact drawers, and local panels with many rows.", "Keep a visible heading so the scroll region has context."],
+  avoid: ["Do not nest scroll regions unnecessarily.", "Do not hide critical content inside a tiny scroll box."],
+  accessibility: ["Scrollable content remains in DOM order.", "Heading and count communicate the region purpose."],
+  agentGuidance: ["Use Scroll Area for bounded local overflow.", "Prefer page scroll for primary long-form content."],
+  code: `import { ScrollArea } from "./ScrollArea";\n\n<ScrollArea />`,
+};
+
+export const masonryGridEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "masonry-grid",
+  name: "Masonry Grid",
+  subcategory: "Composition",
+  description: "Masonry Grid lays out uneven cards or insight snippets without forcing identical heights.",
+  preview: MasonryGridPreview,
+  variants: ["Uneven cards", "Responsive columns", "Insight cards", "Break-inside avoidance"],
+  props: [
+    { name: "columns", type: "1 | 2 | 3", defaultValue: "2", description: "Responsive masonry column count." },
+    { name: "children", type: "ReactNode", defaultValue: "-", description: "Cards or snippets to flow through the masonry layout." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "success-50", "warning-50", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for insight boards, inspiration collections, and variable-height summary cards.", "Use when equal-height grid cards would waste space."],
+  avoid: ["Do not use for ordered data where row alignment matters.", "Do not use for dense analytics tables or comparison views."],
+  accessibility: ["DOM order remains the reading order.", "Cards keep visible headings and status labels."],
+  agentGuidance: ["Use Masonry Grid for variable-height cards and insight collections.", "Use Grid for aligned dashboard cards and Table for comparable records."],
+  code: `import { MasonryGrid } from "./MasonryGrid";\n\n<MasonryGrid />`,
 };
