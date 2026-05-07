@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 200,
+    "entries": 204,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 178,
+    "component": 182,
     "foundation": 10,
     "template": 12
   },
@@ -25,7 +25,7 @@
     "Data Display": 21,
     "Data Entry": 18,
     "Feedback": 18,
-    "Forms": 15,
+    "Forms": 19,
     "Foundations": 10,
     "Layout": 16,
     "Navigation": 19,
@@ -7761,6 +7761,219 @@
         "Use Form Section for multi-field edits."
       ],
       "code": "import { InlineEditField } from \"./InlineEditField\";\n\n<InlineEditField />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "address-form",
+      "kind": "component",
+      "name": "Address Form",
+      "category": "Forms",
+      "subcategory": "Templates",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Address Form composes location fields for shipping, market routing, workspace profile, or regional review flows.",
+      "variants": [
+        "Street fields",
+        "Region select",
+        "Postal code",
+        "Market context",
+        "Form actions"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when a workflow needs structured location or market-address details.",
+        "Keep city, region, and postal code grouped for scanning."
+      ],
+      "doNotUseWhen": [
+        "Do not use for free-form location notes.",
+        "Do not collect address details unless the workflow needs them."
+      ],
+      "accessibility": [
+        "Fields keep visible labels through Form Field.",
+        "Select and input controls preserve native semantics."
+      ],
+      "agentGuidance": [
+        "Use Address Form as a copyable composition for location workflows.",
+        "Compose with Form Section, Form Group, Input, Select, and Form Actions."
+      ],
+      "code": "import { AddressForm } from \"./AddressForm\";\n\n<AddressForm />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "payment-form",
+      "kind": "component",
+      "name": "Payment Form",
+      "category": "Forms",
+      "subcategory": "Templates",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Payment Form shows a billing-style structure for card, procurement, or budget allocation workflows.",
+      "variants": [
+        "Verified state",
+        "Cardholder",
+        "Masked card",
+        "Budget center",
+        "Form actions"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for payment-like or procurement-like flows that require careful grouped fields.",
+        "Mask sensitive values and show verification state clearly."
+      ],
+      "doNotUseWhen": [
+        "Do not store or display real card data in product UIs without the proper payment provider and compliance model.",
+        "Do not reveal secret values by default."
+      ],
+      "accessibility": [
+        "Fields keep visible labels.",
+        "Verified status is text inside a badge, not color alone."
+      ],
+      "agentGuidance": [
+        "Use Payment Form as a structure pattern for billing, procurement, or budget-center details.",
+        "Adapt labels for non-payment enterprise workflows when needed."
+      ],
+      "code": "import { PaymentForm } from \"./PaymentForm\";\n\n<PaymentForm />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "approval-form",
+      "kind": "component",
+      "name": "Approval Form",
+      "category": "Forms",
+      "subcategory": "Review",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Approval Form collects reviewer acknowledgement, required checks, and notes before a workflow can continue.",
+      "variants": [
+        "Review required",
+        "Checklist",
+        "Reviewer note",
+        "Approve action",
+        "Request changes"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "warning-50",
+        "warning-700",
+        "brand-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for source approval, legal review, policy checks, and publish gates.",
+        "Make the required human action explicit."
+      ],
+      "doNotUseWhen": [
+        "Do not use for passive read-only summaries.",
+        "Do not allow approval without the required evidence or checks."
+      ],
+      "accessibility": [
+        "Checklist items use Checkbox with visible labels and descriptions.",
+        "Action buttons use visible labels."
+      ],
+      "agentGuidance": [
+        "Use Approval Form when an AI or dashboard workflow needs human approval before continuing.",
+        "Pair with Review Queue, Handoff Card, and Form Review."
+      ],
+      "code": "import { ApprovalForm } from \"./ApprovalForm\";\n\n<ApprovalForm />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "form-review",
+      "kind": "component",
+      "name": "Form Review",
+      "category": "Forms",
+      "subcategory": "Review",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Form Review presents the final submitted values in a scannable review state before saving or publishing.",
+      "variants": [
+        "Review rows",
+        "Ready badge",
+        "Back action",
+        "Submit action",
+        "Description list"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use at the end of multi-step setup, publish, or approval workflows.",
+        "Only summarize values that matter to the decision."
+      ],
+      "doNotUseWhen": [
+        "Do not duplicate every field from a long form.",
+        "Do not use for editable values without a clear back or edit path."
+      ],
+      "accessibility": [
+        "Review values use description-list semantics.",
+        "Actions remain visible and keyboard reachable."
+      ],
+      "agentGuidance": [
+        "Use Form Review as the last step in generated setup or approval flows.",
+        "Pair with Steps, Approval Form, and Form Actions."
+      ],
+      "code": "import { FormReview } from \"./FormReview\";\n\n<FormReview />",
       "sourceFile": "src/data/formEntries.tsx"
     },
     {

@@ -1,4 +1,6 @@
 import { FormField } from "../components/ui/form-field/FormField";
+import { AddressForm } from "../components/ui/forms/AddressForm";
+import { ApprovalForm } from "../components/ui/forms/ApprovalForm";
 import { Combobox } from "../components/ui/forms/Combobox";
 import { DateRangePicker } from "../components/ui/forms/DateRangePicker";
 import { DatePicker } from "../components/ui/forms/DatePicker";
@@ -6,10 +8,12 @@ import { Fieldset } from "../components/ui/forms/Fieldset";
 import { FileUpload } from "../components/ui/forms/FileUpload";
 import { FormActions } from "../components/ui/forms/FormActions";
 import { FormGroup } from "../components/ui/forms/FormGroup";
+import { FormReview } from "../components/ui/forms/FormReview";
 import { FormSection } from "../components/ui/forms/FormSection";
 import { FormSummary } from "../components/ui/forms/FormSummary";
 import { InlineEditField } from "../components/ui/forms/InlineEditField";
 import { NumberInput } from "../components/ui/forms/NumberInput";
+import { PaymentForm } from "../components/ui/forms/PaymentForm";
 import { PasswordField } from "../components/ui/forms/PasswordField";
 import { TimePicker } from "../components/ui/forms/TimePicker";
 import { TokenInput } from "../components/ui/forms/TokenInput";
@@ -113,6 +117,22 @@ function FormSummaryPreview() {
 
 function InlineEditFieldPreview() {
   return <InlineEditField />;
+}
+
+function AddressFormPreview() {
+  return <AddressForm />;
+}
+
+function PaymentFormPreview() {
+  return <PaymentForm />;
+}
+
+function ApprovalFormPreview() {
+  return <ApprovalForm />;
+}
+
+function FormReviewPreview() {
+  return <FormReview />;
 }
 
 const formDefaults = {
@@ -424,4 +444,72 @@ export const inlineEditFieldEntry: CatalogEntry = {
   accessibility: ["Edit, save, and cancel actions have accessible labels.", "Input keeps a visible label and nearby helper text."],
   agentGuidance: ["Use Inline Edit Field for single-setting edits in detail panels and settings pages.", "Use Form Section for multi-field edits."],
   code: `import { InlineEditField } from "./InlineEditField";\n\n<InlineEditField />`,
+};
+
+export const addressFormEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "address-form",
+  name: "Address Form",
+  subcategory: "Templates",
+  description: "Address Form composes location fields for shipping, market routing, workspace profile, or regional review flows.",
+  preview: AddressFormPreview,
+  variants: ["Street fields", "Region select", "Postal code", "Market context", "Form actions"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-500", "gray-900", "brand-50", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use when a workflow needs structured location or market-address details.", "Keep city, region, and postal code grouped for scanning."],
+  avoid: ["Do not use for free-form location notes.", "Do not collect address details unless the workflow needs them."],
+  accessibility: ["Fields keep visible labels through Form Field.", "Select and input controls preserve native semantics."],
+  agentGuidance: ["Use Address Form as a copyable composition for location workflows.", "Compose with Form Section, Form Group, Input, Select, and Form Actions."],
+  code: `import { AddressForm } from "./AddressForm";\n\n<AddressForm />`,
+};
+
+export const paymentFormEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "payment-form",
+  name: "Payment Form",
+  subcategory: "Templates",
+  description: "Payment Form shows a billing-style structure for card, procurement, or budget allocation workflows.",
+  preview: PaymentFormPreview,
+  variants: ["Verified state", "Cardholder", "Masked card", "Budget center", "Form actions"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-500", "gray-900", "brand-700", "success-50", "success-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for payment-like or procurement-like flows that require careful grouped fields.", "Mask sensitive values and show verification state clearly."],
+  avoid: ["Do not store or display real card data in product UIs without the proper payment provider and compliance model.", "Do not reveal secret values by default."],
+  accessibility: ["Fields keep visible labels.", "Verified status is text inside a badge, not color alone."],
+  agentGuidance: ["Use Payment Form as a structure pattern for billing, procurement, or budget-center details.", "Adapt labels for non-payment enterprise workflows when needed."],
+  code: `import { PaymentForm } from "./PaymentForm";\n\n<PaymentForm />`,
+};
+
+export const approvalFormEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "approval-form",
+  name: "Approval Form",
+  subcategory: "Review",
+  description: "Approval Form collects reviewer acknowledgement, required checks, and notes before a workflow can continue.",
+  preview: ApprovalFormPreview,
+  variants: ["Review required", "Checklist", "Reviewer note", "Approve action", "Request changes"],
+  props: [],
+  tokens: ["white", "gray-200", "gray-300", "gray-500", "gray-900", "warning-50", "warning-700", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for source approval, legal review, policy checks, and publish gates.", "Make the required human action explicit."],
+  avoid: ["Do not use for passive read-only summaries.", "Do not allow approval without the required evidence or checks."],
+  accessibility: ["Checklist items use Checkbox with visible labels and descriptions.", "Action buttons use visible labels."],
+  agentGuidance: ["Use Approval Form when an AI or dashboard workflow needs human approval before continuing.", "Pair with Review Queue, Handoff Card, and Form Review."],
+  code: `import { ApprovalForm } from "./ApprovalForm";\n\n<ApprovalForm />`,
+};
+
+export const formReviewEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "form-review",
+  name: "Form Review",
+  subcategory: "Review",
+  description: "Form Review presents the final submitted values in a scannable review state before saving or publishing.",
+  preview: FormReviewPreview,
+  variants: ["Review rows", "Ready badge", "Back action", "Submit action", "Description list"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-700", "success-50", "success-700", "radius-lg", "shadow-xs"],
+  usage: ["Use at the end of multi-step setup, publish, or approval workflows.", "Only summarize values that matter to the decision."],
+  avoid: ["Do not duplicate every field from a long form.", "Do not use for editable values without a clear back or edit path."],
+  accessibility: ["Review values use description-list semantics.", "Actions remain visible and keyboard reachable."],
+  agentGuidance: ["Use Form Review as the last step in generated setup or approval flows.", "Pair with Steps, Approval Form, and Form Actions."],
+  code: `import { FormReview } from "./FormReview";\n\n<FormReview />`,
 };
