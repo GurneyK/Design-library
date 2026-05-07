@@ -3,11 +3,15 @@ import { AnchorNav } from "../components/ui/navigation/AnchorNav";
 import { AppLauncher } from "../components/ui/navigation/AppLauncher";
 import { Breadcrumb } from "../components/ui/navigation/Breadcrumb";
 import { CommandPalette } from "../components/ui/navigation/CommandPalette";
+import { ContextSwitcher } from "../components/ui/navigation/ContextSwitcher";
 import { Menu } from "../components/ui/navigation/Menu";
 import { NavRail } from "../components/ui/navigation/NavRail";
 import { PageTabs } from "../components/ui/navigation/PageTabs";
 import { Pagination } from "../components/ui/navigation/Pagination";
+import { RecentItems } from "../components/ui/navigation/RecentItems";
+import { SavedViews } from "../components/ui/navigation/SavedViews";
 import { SidebarNavItem } from "../components/ui/navigation/SidebarNavItem";
+import { ShortcutGrid } from "../components/ui/navigation/ShortcutGrid";
 import { Steps } from "../components/ui/navigation/Steps";
 import { Tabs } from "../components/ui/navigation/Tabs";
 import type { CatalogEntry } from "./catalog";
@@ -60,6 +64,22 @@ function PageTabsPreview() {
 
 function AppLauncherPreview() {
   return <AppLauncher />;
+}
+
+function SavedViewsPreview() {
+  return <SavedViews />;
+}
+
+function RecentItemsPreview() {
+  return <RecentItems />;
+}
+
+function ShortcutGridPreview() {
+  return <ShortcutGrid />;
+}
+
+function ContextSwitcherPreview() {
+  return <ContextSwitcher />;
 }
 
 const navigationDefaults = {
@@ -272,4 +292,82 @@ export const appLauncherEntry: CatalogEntry = {
   accessibility: ["Launcher items are buttons with visible labels and descriptions.", "Panel has a visible heading."],
   agentGuidance: ["Use App Launcher for cross-product navigation between agents, dashboards, and workspaces.", "Use Workspace Switcher when changing context within the same product area."],
   code: `import { AppLauncher } from "./AppLauncher";\n\n<AppLauncher />`,
+};
+
+export const savedViewsEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "saved-views",
+  name: "Saved Views",
+  subcategory: "Collection Navigation",
+  description: "Saved Views lets users return to named filters, review queues, and scoped data states.",
+  preview: SavedViewsPreview,
+  variants: ["Active view", "View count", "Icon rows", "Saved filter"],
+  props: [
+    { name: "views", type: "SavedView[]", defaultValue: "defaultViews", description: "Saved filters with label, metadata, icon, and active state." },
+    { name: "activeViewId", type: "string", defaultValue: "-", description: "The currently selected saved view." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "brand-800", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for recurring table filters, source scopes, review queues, and dashboards.", "Show the active view clearly so users know what data scope they are in."],
+  avoid: ["Do not use for global app navigation.", "Do not create saved views with vague labels such as 'Custom 1'."],
+  accessibility: ["Rows are buttons with visible labels and metadata.", "The active state is visible through text and background treatment."],
+  agentGuidance: ["Use Saved Views when users need to return to named data scopes.", "Pair with Data Toolbar, Table, Review Queue, or Filter Bar."],
+  code: `import { SavedViews } from "./SavedViews";\n\n<SavedViews />`,
+};
+
+export const recentItemsEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "recent-items",
+  name: "Recent Items",
+  subcategory: "Wayfinding",
+  description: "Recent Items helps users resume recently opened runs, sources, chats, and workspaces.",
+  preview: RecentItemsPreview,
+  variants: ["Recent row", "Timestamp", "Icon by type", "Workspace metadata"],
+  props: [
+    { name: "items", type: "RecentItem[]", defaultValue: "defaultItems", description: "Recent destinations with title, metadata, timestamp, and icon." },
+  ],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-400", "gray-500", "gray-600", "gray-900", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use on home screens, app launchers, and command surfaces.", "Use short metadata to clarify what type of item will open."],
+  avoid: ["Do not show sensitive recent items without access control.", "Do not use as the only path to important workflows."],
+  accessibility: ["Rows are keyboard-reachable buttons with visible labels.", "Timestamps and item type metadata are visible text."],
+  agentGuidance: ["Use Recent Items to help users resume work.", "Use Activity Feed when the content is an event stream rather than destinations."],
+  code: `import { RecentItems } from "./RecentItems";\n\n<RecentItems />`,
+};
+
+export const shortcutGridEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "shortcut-grid",
+  name: "Shortcut Grid",
+  subcategory: "Command Navigation",
+  description: "Shortcut Grid presents a small set of high-frequency commands as scannable tiles.",
+  preview: ShortcutGridPreview,
+  variants: ["Action tiles", "Icon slot", "Description", "Two-column grid"],
+  props: [
+    { name: "shortcuts", type: "ShortcutItem[]", defaultValue: "defaultShortcuts", description: "Commands with label, description, icon, and action handler." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-200", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for workspace home pages and empty-state follow-up actions.", "Limit shortcuts to the most common next actions."],
+  avoid: ["Do not use for long command lists; use Command Palette.", "Do not include destructive actions without confirmation."],
+  accessibility: ["Shortcut tiles are buttons with visible labels and descriptions.", "Icons are supplemental, not the only label."],
+  agentGuidance: ["Use Shortcut Grid for visible task launch on dashboards and home screens.", "Use Command Palette for searchable command execution."],
+  code: `import { ShortcutGrid } from "./ShortcutGrid";\n\n<ShortcutGrid />`,
+};
+
+export const contextSwitcherEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "context-switcher",
+  name: "Context Switcher",
+  subcategory: "Application Shell",
+  description: "Context Switcher changes the active product, project, or operating context inside a shared shell.",
+  preview: ContextSwitcherPreview,
+  variants: ["Current context", "Context list", "Active context", "Metadata rows"],
+  props: [
+    { name: "contexts", type: "ContextOption[]", defaultValue: "defaultContexts", description: "Available contexts with label, description, icon, and active state." },
+    { name: "activeContextId", type: "string", defaultValue: "-", description: "The current workspace or product context." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "brand-800", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use when one shell serves multiple projects, agents, or product areas.", "Keep context labels short and stable."],
+  avoid: ["Do not use for local tabs inside a page.", "Do not mix context switching with destructive actions."],
+  accessibility: ["Current context is visible as text.", "Context options are buttons with labels and metadata."],
+  agentGuidance: ["Use Context Switcher for cross-project or cross-product surfaces.", "Use Workspace Switcher for narrower workspace changes and Page Tabs for local page sections."],
+  code: `import { ContextSwitcher } from "./ContextSwitcher";\n\n<ContextSwitcher />`,
 };

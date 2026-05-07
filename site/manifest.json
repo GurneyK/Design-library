@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 164,
+    "entries": 168,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 142,
+    "component": 146,
     "foundation": 10,
     "template": 12
   },
@@ -28,7 +28,7 @@
     "Forms": 11,
     "Foundations": 10,
     "Layout": 12,
-    "Navigation": 11,
+    "Navigation": 15,
     "Templates / Blocks": 12
   },
   "consumptionGuidance": [
@@ -8464,6 +8464,257 @@
         "Use Workspace Switcher when changing context within the same product area."
       ],
       "code": "import { AppLauncher } from \"./AppLauncher\";\n\n<AppLauncher />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "saved-views",
+      "kind": "component",
+      "name": "Saved Views",
+      "category": "Navigation",
+      "subcategory": "Collection Navigation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Saved Views lets users return to named filters, review queues, and scoped data states.",
+      "variants": [
+        "Active view",
+        "View count",
+        "Icon rows",
+        "Saved filter"
+      ],
+      "props": [
+        {
+          "name": "views",
+          "type": "SavedView[]",
+          "defaultValue": "defaultViews",
+          "description": "Saved filters with label, metadata, icon, and active state."
+        },
+        {
+          "name": "activeViewId",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "The currently selected saved view."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "brand-800",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for recurring table filters, source scopes, review queues, and dashboards.",
+        "Show the active view clearly so users know what data scope they are in."
+      ],
+      "doNotUseWhen": [
+        "Do not use for global app navigation.",
+        "Do not create saved views with vague labels such as 'Custom 1'."
+      ],
+      "accessibility": [
+        "Rows are buttons with visible labels and metadata.",
+        "The active state is visible through text and background treatment."
+      ],
+      "agentGuidance": [
+        "Use Saved Views when users need to return to named data scopes.",
+        "Pair with Data Toolbar, Table, Review Queue, or Filter Bar."
+      ],
+      "code": "import { SavedViews } from \"./SavedViews\";\n\n<SavedViews />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "recent-items",
+      "kind": "component",
+      "name": "Recent Items",
+      "category": "Navigation",
+      "subcategory": "Wayfinding",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Recent Items helps users resume recently opened runs, sources, chats, and workspaces.",
+      "variants": [
+        "Recent row",
+        "Timestamp",
+        "Icon by type",
+        "Workspace metadata"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "RecentItem[]",
+          "defaultValue": "defaultItems",
+          "description": "Recent destinations with title, metadata, timestamp, and icon."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-400",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use on home screens, app launchers, and command surfaces.",
+        "Use short metadata to clarify what type of item will open."
+      ],
+      "doNotUseWhen": [
+        "Do not show sensitive recent items without access control.",
+        "Do not use as the only path to important workflows."
+      ],
+      "accessibility": [
+        "Rows are keyboard-reachable buttons with visible labels.",
+        "Timestamps and item type metadata are visible text."
+      ],
+      "agentGuidance": [
+        "Use Recent Items to help users resume work.",
+        "Use Activity Feed when the content is an event stream rather than destinations."
+      ],
+      "code": "import { RecentItems } from \"./RecentItems\";\n\n<RecentItems />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "shortcut-grid",
+      "kind": "component",
+      "name": "Shortcut Grid",
+      "category": "Navigation",
+      "subcategory": "Command Navigation",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Shortcut Grid presents a small set of high-frequency commands as scannable tiles.",
+      "variants": [
+        "Action tiles",
+        "Icon slot",
+        "Description",
+        "Two-column grid"
+      ],
+      "props": [
+        {
+          "name": "shortcuts",
+          "type": "ShortcutItem[]",
+          "defaultValue": "defaultShortcuts",
+          "description": "Commands with label, description, icon, and action handler."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-200",
+        "brand-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for workspace home pages and empty-state follow-up actions.",
+        "Limit shortcuts to the most common next actions."
+      ],
+      "doNotUseWhen": [
+        "Do not use for long command lists; use Command Palette.",
+        "Do not include destructive actions without confirmation."
+      ],
+      "accessibility": [
+        "Shortcut tiles are buttons with visible labels and descriptions.",
+        "Icons are supplemental, not the only label."
+      ],
+      "agentGuidance": [
+        "Use Shortcut Grid for visible task launch on dashboards and home screens.",
+        "Use Command Palette for searchable command execution."
+      ],
+      "code": "import { ShortcutGrid } from \"./ShortcutGrid\";\n\n<ShortcutGrid />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "context-switcher",
+      "kind": "component",
+      "name": "Context Switcher",
+      "category": "Navigation",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Context Switcher changes the active product, project, or operating context inside a shared shell.",
+      "variants": [
+        "Current context",
+        "Context list",
+        "Active context",
+        "Metadata rows"
+      ],
+      "props": [
+        {
+          "name": "contexts",
+          "type": "ContextOption[]",
+          "defaultValue": "defaultContexts",
+          "description": "Available contexts with label, description, icon, and active state."
+        },
+        {
+          "name": "activeContextId",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "The current workspace or product context."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-600",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "brand-800",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use when one shell serves multiple projects, agents, or product areas.",
+        "Keep context labels short and stable."
+      ],
+      "doNotUseWhen": [
+        "Do not use for local tabs inside a page.",
+        "Do not mix context switching with destructive actions."
+      ],
+      "accessibility": [
+        "Current context is visible as text.",
+        "Context options are buttons with labels and metadata."
+      ],
+      "agentGuidance": [
+        "Use Context Switcher for cross-project or cross-product surfaces.",
+        "Use Workspace Switcher for narrower workspace changes and Page Tabs for local page sections."
+      ],
+      "code": "import { ContextSwitcher } from \"./ContextSwitcher\";\n\n<ContextSwitcher />",
       "sourceFile": "src/data/navigationEntries.tsx"
     },
     {
