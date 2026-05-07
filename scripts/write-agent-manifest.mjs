@@ -7,6 +7,7 @@ const dataDir = path.join(root, "src", "data");
 const buttonMetaFile = path.join(root, "src", "components", "ui", "button", "button.meta.ts");
 const sourceManifestPath = path.join(dataDir, "agentManifest.json");
 const siteManifestPath = path.join(root, "site", "manifest.json");
+const rootManifestPath = path.join(root, "manifest.json");
 
 const dataFiles = (await readdir(dataDir))
   .filter((file) => file.endsWith("Entries.tsx"))
@@ -73,6 +74,8 @@ await writeFile(sourceManifestPath, json, "utf8");
 
 await mkdir(path.dirname(siteManifestPath), { recursive: true });
 await writeFile(siteManifestPath, json, "utf8");
+
+await writeFile(rootManifestPath, json, "utf8");
 
 async function extractEntries(file) {
   const sourceText = await readFile(file, "utf8");
