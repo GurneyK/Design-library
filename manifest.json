@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 196,
+    "entries": 200,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 174,
+    "component": 178,
     "foundation": 10,
     "template": 12
   },
@@ -28,7 +28,7 @@
     "Forms": 15,
     "Foundations": 10,
     "Layout": 16,
-    "Navigation": 15,
+    "Navigation": 19,
     "Templates / Blocks": 12
   },
   "consumptionGuidance": [
@@ -10076,6 +10076,216 @@
         "Use Workspace Switcher for narrower workspace changes and Page Tabs for local page sections."
       ],
       "code": "import { ContextSwitcher } from \"./ContextSwitcher\";\n\n<ContextSwitcher />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "user-menu",
+      "kind": "component",
+      "name": "User Menu",
+      "category": "Navigation",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "User Menu exposes account, workspace, governance, and sign-out actions from the active user identity.",
+      "variants": [
+        "Profile summary",
+        "Role badge",
+        "Menu rows",
+        "Destructive sign out"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "error-50",
+        "error-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use in topbars and application shells where user identity is present.",
+        "Group account actions separately from sign out."
+      ],
+      "doNotUseWhen": [
+        "Do not use User Menu for app navigation.",
+        "Do not hide security or governance actions behind unlabeled icons."
+      ],
+      "accessibility": [
+        "Rows are keyboard-reachable buttons with visible labels.",
+        "Sign out uses text and error color, not color alone."
+      ],
+      "agentGuidance": [
+        "Use User Menu for account-level actions in app shells.",
+        "Use Menu for generic action lists and Context Switcher for project changes."
+      ],
+      "code": "import { UserMenu } from \"./UserMenu\";\n\n<UserMenu />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "notification-menu",
+      "kind": "component",
+      "name": "Notification Menu",
+      "category": "Navigation",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Notification Menu lists recent alerts, review requests, and shared work items from a shell notification trigger.",
+      "variants": [
+        "Unread count",
+        "Review notification",
+        "Success notification",
+        "Shared report"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "success-50",
+        "warning-50",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for actionable product notifications and human-review prompts.",
+        "Keep notification rows short and route each one to a clear destination."
+      ],
+      "doNotUseWhen": [
+        "Do not use for long activity history; use Activity Feed.",
+        "Do not mix system-critical alerts with low-value noise."
+      ],
+      "accessibility": [
+        "Notification rows have visible labels and descriptions.",
+        "The unread count is shown as text."
+      ],
+      "agentGuidance": [
+        "Use Notification Menu in product shells when alerts need to be browsed from a bell action.",
+        "Use Review Queue for persistent review worklists."
+      ],
+      "code": "import { NotificationMenu } from \"./NotificationMenu\";\n\n<NotificationMenu />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "mobile-tab-bar",
+      "kind": "component",
+      "name": "Mobile Tab Bar",
+      "category": "Navigation",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Mobile Tab Bar provides persistent bottom navigation for core destinations on narrow screens.",
+      "variants": [
+        "Five items",
+        "Active tab",
+        "Icon + label",
+        "Mobile shell"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for mobile app shells with three to five primary destinations.",
+        "Keep labels short and destinations stable."
+      ],
+      "doNotUseWhen": [
+        "Do not use on desktop-only internal tools unless mobile layouts are supported.",
+        "Do not include destructive actions in a tab bar."
+      ],
+      "accessibility": [
+        "Uses a labelled navigation landmark.",
+        "Each tab has visible text and icon support."
+      ],
+      "agentGuidance": [
+        "Use Mobile Tab Bar only for mobile or responsive shell previews.",
+        "Use Nav Rail or Sidebar for desktop shells."
+      ],
+      "code": "import { MobileTabBar } from \"./MobileTabBar\";\n\n<MobileTabBar />",
+      "sourceFile": "src/data/navigationEntries.tsx"
+    },
+    {
+      "id": "navigation-header",
+      "kind": "component",
+      "name": "Navigation Header",
+      "category": "Navigation",
+      "subcategory": "Application Shell",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Navigation Header composes workspace identity, search, notifications, settings, and user presence into one shell row.",
+      "variants": [
+        "Workspace title",
+        "Search slot",
+        "Notification action",
+        "Settings action",
+        "Presence"
+      ],
+      "props": [],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "success-50",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use at the top of app shells and dashboard workspaces.",
+        "Use search only when it has a clear global or workspace scope."
+      ],
+      "doNotUseWhen": [
+        "Do not duplicate Dashboard Header content inside this shell row.",
+        "Do not overload the header with page-specific actions."
+      ],
+      "accessibility": [
+        "Header content is visible text.",
+        "Icon actions include accessible labels."
+      ],
+      "agentGuidance": [
+        "Use Navigation Header as shell chrome above workspace content.",
+        "Use Page Header or Dashboard Header for page-level titles and actions."
+      ],
+      "code": "import { NavigationHeader } from \"./NavigationHeader\";\n\n<NavigationHeader />",
       "sourceFile": "src/data/navigationEntries.tsx"
     },
     {

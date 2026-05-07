@@ -5,7 +5,10 @@ import { Breadcrumb } from "../components/ui/navigation/Breadcrumb";
 import { CommandPalette } from "../components/ui/navigation/CommandPalette";
 import { ContextSwitcher } from "../components/ui/navigation/ContextSwitcher";
 import { Menu } from "../components/ui/navigation/Menu";
+import { MobileTabBar } from "../components/ui/navigation/MobileTabBar";
 import { NavRail } from "../components/ui/navigation/NavRail";
+import { NavigationHeader } from "../components/ui/navigation/NavigationHeader";
+import { NotificationMenu } from "../components/ui/navigation/NotificationMenu";
 import { PageTabs } from "../components/ui/navigation/PageTabs";
 import { Pagination } from "../components/ui/navigation/Pagination";
 import { RecentItems } from "../components/ui/navigation/RecentItems";
@@ -14,6 +17,7 @@ import { SidebarNavItem } from "../components/ui/navigation/SidebarNavItem";
 import { ShortcutGrid } from "../components/ui/navigation/ShortcutGrid";
 import { Steps } from "../components/ui/navigation/Steps";
 import { Tabs } from "../components/ui/navigation/Tabs";
+import { UserMenu } from "../components/ui/navigation/UserMenu";
 import type { CatalogEntry } from "./catalog";
 
 function TabsPreview() {
@@ -80,6 +84,22 @@ function ShortcutGridPreview() {
 
 function ContextSwitcherPreview() {
   return <ContextSwitcher />;
+}
+
+function UserMenuPreview() {
+  return <UserMenu />;
+}
+
+function NotificationMenuPreview() {
+  return <NotificationMenu />;
+}
+
+function MobileTabBarPreview() {
+  return <MobileTabBar />;
+}
+
+function NavigationHeaderPreview() {
+  return <NavigationHeader />;
 }
 
 const navigationDefaults = {
@@ -370,4 +390,72 @@ export const contextSwitcherEntry: CatalogEntry = {
   accessibility: ["Current context is visible as text.", "Context options are buttons with labels and metadata."],
   agentGuidance: ["Use Context Switcher for cross-project or cross-product surfaces.", "Use Workspace Switcher for narrower workspace changes and Page Tabs for local page sections."],
   code: `import { ContextSwitcher } from "./ContextSwitcher";\n\n<ContextSwitcher />`,
+};
+
+export const userMenuEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "user-menu",
+  name: "User Menu",
+  subcategory: "Application Shell",
+  description: "User Menu exposes account, workspace, governance, and sign-out actions from the active user identity.",
+  preview: UserMenuPreview,
+  variants: ["Profile summary", "Role badge", "Menu rows", "Destructive sign out"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "error-50", "error-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use in topbars and application shells where user identity is present.", "Group account actions separately from sign out."],
+  avoid: ["Do not use User Menu for app navigation.", "Do not hide security or governance actions behind unlabeled icons."],
+  accessibility: ["Rows are keyboard-reachable buttons with visible labels.", "Sign out uses text and error color, not color alone."],
+  agentGuidance: ["Use User Menu for account-level actions in app shells.", "Use Menu for generic action lists and Context Switcher for project changes."],
+  code: `import { UserMenu } from "./UserMenu";\n\n<UserMenu />`,
+};
+
+export const notificationMenuEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "notification-menu",
+  name: "Notification Menu",
+  subcategory: "Application Shell",
+  description: "Notification Menu lists recent alerts, review requests, and shared work items from a shell notification trigger.",
+  preview: NotificationMenuPreview,
+  variants: ["Unread count", "Review notification", "Success notification", "Shared report"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "warning-50", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for actionable product notifications and human-review prompts.", "Keep notification rows short and route each one to a clear destination."],
+  avoid: ["Do not use for long activity history; use Activity Feed.", "Do not mix system-critical alerts with low-value noise."],
+  accessibility: ["Notification rows have visible labels and descriptions.", "The unread count is shown as text."],
+  agentGuidance: ["Use Notification Menu in product shells when alerts need to be browsed from a bell action.", "Use Review Queue for persistent review worklists."],
+  code: `import { NotificationMenu } from "./NotificationMenu";\n\n<NotificationMenu />`,
+};
+
+export const mobileTabBarEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "mobile-tab-bar",
+  name: "Mobile Tab Bar",
+  subcategory: "Application Shell",
+  description: "Mobile Tab Bar provides persistent bottom navigation for core destinations on narrow screens.",
+  preview: MobileTabBarPreview,
+  variants: ["Five items", "Active tab", "Icon + label", "Mobile shell"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for mobile app shells with three to five primary destinations.", "Keep labels short and destinations stable."],
+  avoid: ["Do not use on desktop-only internal tools unless mobile layouts are supported.", "Do not include destructive actions in a tab bar."],
+  accessibility: ["Uses a labelled navigation landmark.", "Each tab has visible text and icon support."],
+  agentGuidance: ["Use Mobile Tab Bar only for mobile or responsive shell previews.", "Use Nav Rail or Sidebar for desktop shells."],
+  code: `import { MobileTabBar } from "./MobileTabBar";\n\n<MobileTabBar />`,
+};
+
+export const navigationHeaderEntry: CatalogEntry = {
+  ...navigationDefaults,
+  id: "navigation-header",
+  name: "Navigation Header",
+  subcategory: "Application Shell",
+  description: "Navigation Header composes workspace identity, search, notifications, settings, and user presence into one shell row.",
+  preview: NavigationHeaderPreview,
+  variants: ["Workspace title", "Search slot", "Notification action", "Settings action", "Presence"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-500", "gray-900", "success-50", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use at the top of app shells and dashboard workspaces.", "Use search only when it has a clear global or workspace scope."],
+  avoid: ["Do not duplicate Dashboard Header content inside this shell row.", "Do not overload the header with page-specific actions."],
+  accessibility: ["Header content is visible text.", "Icon actions include accessible labels."],
+  agentGuidance: ["Use Navigation Header as shell chrome above workspace content.", "Use Page Header or Dashboard Header for page-level titles and actions."],
+  code: `import { NavigationHeader } from "./NavigationHeader";\n\n<NavigationHeader />`,
 };
