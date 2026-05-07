@@ -7,17 +7,17 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 188,
+    "entries": 192,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 166,
+    "component": 170,
     "foundation": 10,
     "template": 12
   },
   "categoryCounts": {
-    "Primitives": 14,
+    "Primitives": 18,
     "Agent UI": 20,
     "Agent Reference": 1,
     "Charts / Data Viz": 16,
@@ -10714,6 +10714,267 @@
         "Use Key Value Grid when many metadata facts need equal visual weight."
       ],
       "code": "import { MetadataChip } from \"./MetadataChip\";\n\n<MetadataChip label=\"Model\" value=\"GPT-4.1\" />",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "text-link",
+      "kind": "component",
+      "name": "Text Link",
+      "category": "Primitives",
+      "subcategory": "Actions",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Text Link navigates to related pages, docs, source material, and external references without the weight of a button.",
+      "variants": [
+        "Brand",
+        "Neutral",
+        "External",
+        "Inline"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"brand\" | \"neutral\"",
+          "defaultValue": "\"brand\"",
+          "description": "Controls link emphasis."
+        },
+        {
+          "name": "external",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Adds the external-link affordance."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Link label."
+        }
+      ],
+      "tokens": [
+        "brand-700",
+        "brand-800",
+        "gray-700",
+        "gray-900",
+        "radius-sm",
+        "focus-ring"
+      ],
+      "useWhen": [
+        "Use for navigation, citations, source links, and secondary actions.",
+        "Use external treatment when the destination leaves the current product or repo."
+      ],
+      "doNotUseWhen": [
+        "Do not use links for actions that mutate data; use Button.",
+        "Do not use vague labels like Click here."
+      ],
+      "accessibility": [
+        "Links use anchor semantics.",
+        "External links include a visible icon and should use descriptive labels."
+      ],
+      "agentGuidance": [
+        "Use Text Link for navigation and references.",
+        "Use Button for commands and Text Link for destinations."
+      ],
+      "code": "import { TextLink } from \"./TextLink\";\n\n<TextLink href=\"/reports\">Open report</TextLink>",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "copy-button",
+      "kind": "component",
+      "name": "Copy Button",
+      "category": "Primitives",
+      "subcategory": "Actions",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Copy Button gives code snippets, URLs, tokens, prompts, and generated outputs a consistent copy affordance.",
+      "variants": [
+        "Default",
+        "Copied",
+        "Custom label",
+        "Compact"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"Copy\"",
+          "description": "Visible copy action label."
+        },
+        {
+          "name": "copied",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Shows success treatment after copy."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-300",
+        "gray-50",
+        "gray-700",
+        "success-50",
+        "success-200",
+        "success-700",
+        "radius-md",
+        "shadow-xs",
+        "focus-ring"
+      ],
+      "useWhen": [
+        "Use near code blocks, prompt snippets, manifests, source URLs, and generated artifacts.",
+        "Switch to copied state after a successful copy interaction."
+      ],
+      "doNotUseWhen": [
+        "Do not use for download or export actions.",
+        "Do not hide the copied state when the action succeeds."
+      ],
+      "accessibility": [
+        "Button has visible text and icon support.",
+        "Copied state changes text, not color only."
+      ],
+      "agentGuidance": [
+        "Use Copy Button whenever generated UI exposes reusable code, prompts, IDs, URLs, or snippets.",
+        "Use Icon Button only when space is extremely constrained and the icon is obvious."
+      ],
+      "code": "import { CopyButton } from \"./CopyButton\";\n\n<CopyButton label=\"Copy code\" />",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "icon-label",
+      "kind": "component",
+      "name": "Icon Label",
+      "category": "Primitives",
+      "subcategory": "Metadata",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Icon Label pairs a semantic icon with a label, optional metadata, and short description for compact object summaries.",
+      "variants": [
+        "Label only",
+        "With meta",
+        "With description",
+        "Custom icon"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Primary label."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Optional supporting text."
+        },
+        {
+          "name": "meta",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Small adjacent metadata."
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "defaultValue": "Sparkles",
+          "description": "Leading icon slot."
+        }
+      ],
+      "tokens": [
+        "brand-50",
+        "brand-700",
+        "gray-500",
+        "gray-900",
+        "radius-md",
+        "spacing-3"
+      ],
+      "useWhen": [
+        "Use inside cards, rows, summaries, and templates when an object needs a compact identity block.",
+        "Use the description slot for one short clarifying sentence."
+      ],
+      "doNotUseWhen": [
+        "Do not rely on the icon as the only label.",
+        "Do not use for large card layouts that need independent actions."
+      ],
+      "accessibility": [
+        "Label and description are visible text.",
+        "Icon is supplemental and should be decorative unless the caller gives it an accessible label."
+      ],
+      "agentGuidance": [
+        "Use Icon Label to avoid inventing ad hoc icon-plus-text rows.",
+        "Pair with Surface, Data Source Card, and Tool Call Card compositions."
+      ],
+      "code": "import { IconLabel } from \"./IconLabel\";\n\n<IconLabel label=\"Source set\" meta=\"96%\" description=\"42 indexed files attached.\" />",
+      "sourceFile": "src/data/primitiveEntries.tsx"
+    },
+    {
+      "id": "timestamp",
+      "kind": "component",
+      "name": "Timestamp",
+      "category": "Primitives",
+      "subcategory": "Metadata",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Timestamp renders freshness, sync, review, and update moments with consistent icon, label, and time semantics.",
+      "variants": [
+        "Updated",
+        "Synced",
+        "Reviewed",
+        "Relative time",
+        "Absolute date"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"Updated\"",
+          "description": "Time context label."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "defaultValue": "\"18 minutes ago\"",
+          "description": "Visible formatted time."
+        }
+      ],
+      "tokens": [
+        "gray-300",
+        "gray-500",
+        "font-medium",
+        "text-xs"
+      ],
+      "useWhen": [
+        "Use on report cards, source rows, activity summaries, and dashboard objects.",
+        "Use relative time for freshness and absolute dates for audit context."
+      ],
+      "doNotUseWhen": [
+        "Do not use vague freshness labels without a visible value.",
+        "Do not use for countdowns or timers."
+      ],
+      "accessibility": [
+        "Uses a time element for the value.",
+        "Icon is decorative because the label and value carry meaning."
+      ],
+      "agentGuidance": [
+        "Use Timestamp for updated, synced, reviewed, and generated metadata.",
+        "Pair with Saved Report Card, Activity Feed, File List, and Source Drawer."
+      ],
+      "code": "import { Timestamp } from \"./Timestamp\";\n\n<Timestamp label=\"Updated\" value=\"18 minutes ago\" />",
       "sourceFile": "src/data/primitiveEntries.tsx"
     },
     {

@@ -1,17 +1,21 @@
-import { Copy, Info, MoreHorizontal, Plus, Settings, Trash2, UserRound } from "lucide-react";
+import { BarChart3, Copy, Database, Info, MoreHorizontal, Plus, Settings, ShieldCheck, Trash2, UserRound } from "lucide-react";
 import { Avatar } from "../components/ui/avatar/Avatar";
 import { AvatarGroup } from "../components/ui/avatar-group/AvatarGroup";
 import { Badge } from "../components/ui/badge/Badge";
 import { ColorSwatch } from "../components/ui/color-swatch/ColorSwatch";
+import { CopyButton } from "../components/ui/copy-button/CopyButton";
 import { CounterBadge } from "../components/ui/counter-badge/CounterBadge";
 import { Divider } from "../components/ui/divider/Divider";
 import { Button } from "../components/ui/button/Button";
+import { IconLabel } from "../components/ui/icon-label/IconLabel";
 import { IconButton } from "../components/ui/icon-button/IconButton";
 import { Kbd } from "../components/ui/kbd/Kbd";
 import { MetadataChip } from "../components/ui/metadata-chip/MetadataChip";
 import { StatusDot } from "../components/ui/status-dot/StatusDot";
 import { Surface } from "../components/ui/surface/Surface";
 import { Tag } from "../components/ui/tag/Tag";
+import { TextLink } from "../components/ui/text-link/TextLink";
+import { Timestamp } from "../components/ui/timestamp/Timestamp";
 import { Tooltip } from "../components/ui/tooltip/Tooltip";
 import type { CatalogEntry } from "./catalog";
 
@@ -192,6 +196,48 @@ function MetadataChipPreview() {
       <MetadataChip label="Model" value="GPT-4.1" />
       <MetadataChip label="Sources" value="248 docs" />
       <MetadataChip label="Market" value="US + CA" />
+    </div>
+  );
+}
+
+function TextLinkPreview() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <TextLink href="#text-link">Open report</TextLink>
+      <TextLink external href="https://gurneyk.github.io/Design-library/" target="_blank" rel="noreferrer">
+        View library
+      </TextLink>
+      <TextLink href="#text-link-neutral" variant="neutral">Neutral link</TextLink>
+    </div>
+  );
+}
+
+function CopyButtonPreview() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <CopyButton label="Copy code" />
+      <CopyButton copied />
+      <CopyButton label="Copy manifest URL" />
+    </div>
+  );
+}
+
+function IconLabelPreview() {
+  return (
+    <div className="grid gap-4 md:grid-cols-3">
+      <IconLabel description="Ready for dashboard generation." icon={<BarChart3 className="h-4 w-4" />} label="Analytics" meta="Agent" />
+      <IconLabel description="42 indexed source files attached." icon={<Database className="h-4 w-4" />} label="Source set" meta="96%" />
+      <IconLabel description="Policy checks passed." icon={<ShieldCheck className="h-4 w-4" />} label="Governance" meta="Clean" />
+    </div>
+  );
+}
+
+function TimestampPreview() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <Timestamp />
+      <Timestamp label="Synced" value="2 minutes ago" />
+      <Timestamp label="Reviewed" value="May 7, 2026" />
     </div>
   );
 }
@@ -466,4 +512,87 @@ export const metadataChipEntry: CatalogEntry = {
   accessibility: ["Label and value are visible text.", "Icon is supplemental and should not carry the only meaning."],
   agentGuidance: ["Use Metadata Chip for compact label/value facts.", "Use Key Value Grid when many metadata facts need equal visual weight."],
   code: `import { MetadataChip } from "./MetadataChip";\n\n<MetadataChip label="Model" value="GPT-4.1" />`,
+};
+
+export const textLinkEntry: CatalogEntry = {
+  ...primitiveDefaults,
+  id: "text-link",
+  name: "Text Link",
+  subcategory: "Actions",
+  description: "Text Link navigates to related pages, docs, source material, and external references without the weight of a button.",
+  preview: TextLinkPreview,
+  variants: ["Brand", "Neutral", "External", "Inline"],
+  props: [
+    { name: "variant", type: '"brand" | "neutral"', defaultValue: '"brand"', description: "Controls link emphasis." },
+    { name: "external", type: "boolean", defaultValue: "false", description: "Adds the external-link affordance." },
+    { name: "children", type: "ReactNode", defaultValue: "-", description: "Link label." },
+  ],
+  tokens: ["brand-700", "brand-800", "gray-700", "gray-900", "radius-sm", "focus-ring"],
+  usage: ["Use for navigation, citations, source links, and secondary actions.", "Use external treatment when the destination leaves the current product or repo."],
+  avoid: ["Do not use links for actions that mutate data; use Button.", "Do not use vague labels like Click here."],
+  accessibility: ["Links use anchor semantics.", "External links include a visible icon and should use descriptive labels."],
+  agentGuidance: ["Use Text Link for navigation and references.", "Use Button for commands and Text Link for destinations."],
+  code: `import { TextLink } from "./TextLink";\n\n<TextLink href="/reports">Open report</TextLink>`,
+};
+
+export const copyButtonEntry: CatalogEntry = {
+  ...primitiveDefaults,
+  id: "copy-button",
+  name: "Copy Button",
+  subcategory: "Actions",
+  description: "Copy Button gives code snippets, URLs, tokens, prompts, and generated outputs a consistent copy affordance.",
+  preview: CopyButtonPreview,
+  variants: ["Default", "Copied", "Custom label", "Compact"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Copy"', description: "Visible copy action label." },
+    { name: "copied", type: "boolean", defaultValue: "false", description: "Shows success treatment after copy." },
+  ],
+  tokens: ["white", "gray-300", "gray-50", "gray-700", "success-50", "success-200", "success-700", "radius-md", "shadow-xs", "focus-ring"],
+  usage: ["Use near code blocks, prompt snippets, manifests, source URLs, and generated artifacts.", "Switch to copied state after a successful copy interaction."],
+  avoid: ["Do not use for download or export actions.", "Do not hide the copied state when the action succeeds."],
+  accessibility: ["Button has visible text and icon support.", "Copied state changes text, not color only."],
+  agentGuidance: ["Use Copy Button whenever generated UI exposes reusable code, prompts, IDs, URLs, or snippets.", "Use Icon Button only when space is extremely constrained and the icon is obvious."],
+  code: `import { CopyButton } from "./CopyButton";\n\n<CopyButton label="Copy code" />`,
+};
+
+export const iconLabelEntry: CatalogEntry = {
+  ...primitiveDefaults,
+  id: "icon-label",
+  name: "Icon Label",
+  subcategory: "Metadata",
+  description: "Icon Label pairs a semantic icon with a label, optional metadata, and short description for compact object summaries.",
+  preview: IconLabelPreview,
+  variants: ["Label only", "With meta", "With description", "Custom icon"],
+  props: [
+    { name: "label", type: "string", defaultValue: "-", description: "Primary label." },
+    { name: "description", type: "string", defaultValue: "-", description: "Optional supporting text." },
+    { name: "meta", type: "string", defaultValue: "-", description: "Small adjacent metadata." },
+    { name: "icon", type: "ReactNode", defaultValue: "Sparkles", description: "Leading icon slot." },
+  ],
+  tokens: ["brand-50", "brand-700", "gray-500", "gray-900", "radius-md", "spacing-3"],
+  usage: ["Use inside cards, rows, summaries, and templates when an object needs a compact identity block.", "Use the description slot for one short clarifying sentence."],
+  avoid: ["Do not rely on the icon as the only label.", "Do not use for large card layouts that need independent actions."],
+  accessibility: ["Label and description are visible text.", "Icon is supplemental and should be decorative unless the caller gives it an accessible label."],
+  agentGuidance: ["Use Icon Label to avoid inventing ad hoc icon-plus-text rows.", "Pair with Surface, Data Source Card, and Tool Call Card compositions."],
+  code: `import { IconLabel } from "./IconLabel";\n\n<IconLabel label="Source set" meta="96%" description="42 indexed files attached." />`,
+};
+
+export const timestampEntry: CatalogEntry = {
+  ...primitiveDefaults,
+  id: "timestamp",
+  name: "Timestamp",
+  subcategory: "Metadata",
+  description: "Timestamp renders freshness, sync, review, and update moments with consistent icon, label, and time semantics.",
+  preview: TimestampPreview,
+  variants: ["Updated", "Synced", "Reviewed", "Relative time", "Absolute date"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Updated"', description: "Time context label." },
+    { name: "value", type: "string", defaultValue: '"18 minutes ago"', description: "Visible formatted time." },
+  ],
+  tokens: ["gray-300", "gray-500", "font-medium", "text-xs"],
+  usage: ["Use on report cards, source rows, activity summaries, and dashboard objects.", "Use relative time for freshness and absolute dates for audit context."],
+  avoid: ["Do not use vague freshness labels without a visible value.", "Do not use for countdowns or timers."],
+  accessibility: ["Uses a time element for the value.", "Icon is decorative because the label and value carry meaning."],
+  agentGuidance: ["Use Timestamp for updated, synced, reviewed, and generated metadata.", "Pair with Saved Report Card, Activity Feed, File List, and Source Drawer."],
+  code: `import { Timestamp } from "./Timestamp";\n\n<Timestamp label="Updated" value="18 minutes ago" />`,
 };
