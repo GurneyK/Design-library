@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 168,
+    "entries": 172,
     "categories": 13,
     "templates": 12
   },
   "kindCounts": {
-    "component": 146,
+    "component": 150,
     "foundation": 10,
     "template": 12
   },
@@ -25,7 +25,7 @@
     "Data Display": 21,
     "Data Entry": 14,
     "Feedback": 18,
-    "Forms": 11,
+    "Forms": 15,
     "Foundations": 10,
     "Layout": 12,
     "Navigation": 15,
@@ -6676,6 +6676,279 @@
         "Use Button variants to separate primary and secondary intent."
       ],
       "code": "import { FormActions } from \"./FormActions\";\n\n<FormActions />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "password-field",
+      "kind": "component",
+      "name": "Password Field",
+      "category": "Forms",
+      "subcategory": "Inputs",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Password Field captures secret text with helper guidance, hidden-by-default behavior, and a visibility control.",
+      "variants": [
+        "Hidden value",
+        "Show password action",
+        "Helper text",
+        "Leading icon"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "\"Password\"",
+          "description": "Visible field label."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Password value."
+        },
+        {
+          "name": "revealable",
+          "type": "boolean",
+          "defaultValue": "true",
+          "description": "Whether the user can show or hide the secret value."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-300",
+        "gray-400",
+        "gray-500",
+        "gray-700",
+        "gray-900",
+        "success-700",
+        "radius-md",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for passwords, API keys, and other short secret values.",
+        "Pair with validation guidance that explains requirements."
+      ],
+      "doNotUseWhen": [
+        "Do not use for long secure notes.",
+        "Do not reveal secrets by default."
+      ],
+      "accessibility": [
+        "Label is connected to the input.",
+        "Visibility action uses an icon button with an accessible label."
+      ],
+      "agentGuidance": [
+        "Use Password Field in auth, integration setup, and credential screens.",
+        "Use normal Input for non-secret text."
+      ],
+      "code": "import { PasswordField } from \"./PasswordField\";\n\n<PasswordField />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "fieldset",
+      "kind": "component",
+      "name": "Fieldset",
+      "category": "Forms",
+      "subcategory": "Composition",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Fieldset groups related checkboxes, radios, or controls under a semantic legend and supporting copy.",
+      "variants": [
+        "Legend",
+        "Description",
+        "Checkbox group",
+        "Badge summary"
+      ],
+      "props": [
+        {
+          "name": "legend",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Group label."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Supporting instructions for the group."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Grouped controls."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-200",
+        "gray-500",
+        "gray-700",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for grouped checkbox and radio choices.",
+        "Use when the group label is required for comprehension."
+      ],
+      "doNotUseWhen": [
+        "Do not use only as a visual card when no form grouping is needed.",
+        "Do not split one logical option group across multiple fieldsets."
+      ],
+      "accessibility": [
+        "Uses native fieldset and legend semantics.",
+        "Grouped controls keep visible labels."
+      ],
+      "agentGuidance": [
+        "Use Fieldset for permission groups, preference groups, and selection groups.",
+        "Use Form Section for broader multi-field areas."
+      ],
+      "code": "import { Fieldset } from \"./Fieldset\";\n\n<Fieldset />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "form-summary",
+      "kind": "component",
+      "name": "Form Summary",
+      "category": "Forms",
+      "subcategory": "Review",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Form Summary presents important values for review before saving, publishing, or submitting a workflow.",
+      "variants": [
+        "Review rows",
+        "Valid state",
+        "Icon metadata",
+        "Summary list"
+      ],
+      "props": [
+        {
+          "name": "items",
+          "type": "FormSummaryItem[]",
+          "defaultValue": "defaultItems",
+          "description": "Values to review before submit."
+        },
+        {
+          "name": "status",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Optional validation or readiness status."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "success-50",
+        "success-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use at the end of setup flows and high-risk forms.",
+        "Summarize only the fields that matter for the decision."
+      ],
+      "doNotUseWhen": [
+        "Do not duplicate every field from a long form.",
+        "Do not use as a replacement for validation messages."
+      ],
+      "accessibility": [
+        "Summary values are rendered as description-list rows.",
+        "Status is shown as visible text inside a badge."
+      ],
+      "agentGuidance": [
+        "Use Form Summary before publish, save, submit, or approval actions.",
+        "Pair with Form Actions and Validation Message."
+      ],
+      "code": "import { FormSummary } from \"./FormSummary\";\n\n<FormSummary />",
+      "sourceFile": "src/data/formEntries.tsx"
+    },
+    {
+      "id": "inline-edit-field",
+      "kind": "component",
+      "name": "Inline Edit Field",
+      "category": "Forms",
+      "subcategory": "Editing",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Inline Edit Field lets users edit a single value without leaving the surrounding detail or settings context.",
+      "variants": [
+        "Read label",
+        "Edit input",
+        "Save action",
+        "Cancel action"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Field label or setting name."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "defaultValue": "-",
+          "description": "Current editable value."
+        },
+        {
+          "name": "editing",
+          "type": "boolean",
+          "defaultValue": "false",
+          "description": "Whether the field is in edit mode."
+        }
+      ],
+      "tokens": [
+        "white",
+        "gray-50",
+        "gray-200",
+        "gray-300",
+        "gray-500",
+        "gray-900",
+        "brand-700",
+        "radius-md",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for quick edits to names, descriptions, labels, and small settings.",
+        "Keep save and cancel actions close to the edited value."
+      ],
+      "doNotUseWhen": [
+        "Do not use for complex multi-field editing.",
+        "Do not hide validation feedback after save fails."
+      ],
+      "accessibility": [
+        "Edit, save, and cancel actions have accessible labels.",
+        "Input keeps a visible label and nearby helper text."
+      ],
+      "agentGuidance": [
+        "Use Inline Edit Field for single-setting edits in detail panels and settings pages.",
+        "Use Form Section for multi-field edits."
+      ],
+      "code": "import { InlineEditField } from \"./InlineEditField\";\n\n<InlineEditField />",
       "sourceFile": "src/data/formEntries.tsx"
     },
     {

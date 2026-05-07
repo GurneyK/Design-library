@@ -2,11 +2,15 @@ import { FormField } from "../components/ui/form-field/FormField";
 import { Combobox } from "../components/ui/forms/Combobox";
 import { DateRangePicker } from "../components/ui/forms/DateRangePicker";
 import { DatePicker } from "../components/ui/forms/DatePicker";
+import { Fieldset } from "../components/ui/forms/Fieldset";
 import { FileUpload } from "../components/ui/forms/FileUpload";
 import { FormActions } from "../components/ui/forms/FormActions";
 import { FormGroup } from "../components/ui/forms/FormGroup";
 import { FormSection } from "../components/ui/forms/FormSection";
+import { FormSummary } from "../components/ui/forms/FormSummary";
+import { InlineEditField } from "../components/ui/forms/InlineEditField";
 import { NumberInput } from "../components/ui/forms/NumberInput";
+import { PasswordField } from "../components/ui/forms/PasswordField";
 import { TimePicker } from "../components/ui/forms/TimePicker";
 import { TokenInput } from "../components/ui/forms/TokenInput";
 import { ValidationMessage } from "../components/ui/forms/ValidationMessage";
@@ -93,6 +97,22 @@ function TokenInputPreview() {
 
 function FormActionsPreview() {
   return <FormActions />;
+}
+
+function PasswordFieldPreview() {
+  return <PasswordField />;
+}
+
+function FieldsetPreview() {
+  return <Fieldset />;
+}
+
+function FormSummaryPreview() {
+  return <FormSummary />;
+}
+
+function InlineEditFieldPreview() {
+  return <InlineEditField />;
 }
 
 const formDefaults = {
@@ -321,4 +341,87 @@ export const formActionsEntry: CatalogEntry = {
   accessibility: ["Buttons keep visible labels.", "Action order should match product risk and workflow expectations."],
   agentGuidance: ["Use Form Actions at the bottom of Form Section.", "Use Button variants to separate primary and secondary intent."],
   code: `import { FormActions } from "./FormActions";\n\n<FormActions />`,
+};
+
+export const passwordFieldEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "password-field",
+  name: "Password Field",
+  subcategory: "Inputs",
+  description: "Password Field captures secret text with helper guidance, hidden-by-default behavior, and a visibility control.",
+  preview: PasswordFieldPreview,
+  variants: ["Hidden value", "Show password action", "Helper text", "Leading icon"],
+  props: [
+    { name: "label", type: "string", defaultValue: '"Password"', description: "Visible field label." },
+    { name: "value", type: "string", defaultValue: "-", description: "Password value." },
+    { name: "revealable", type: "boolean", defaultValue: "true", description: "Whether the user can show or hide the secret value." },
+  ],
+  tokens: ["white", "gray-300", "gray-400", "gray-500", "gray-700", "gray-900", "success-700", "radius-md", "shadow-xs"],
+  usage: ["Use for passwords, API keys, and other short secret values.", "Pair with validation guidance that explains requirements."],
+  avoid: ["Do not use for long secure notes.", "Do not reveal secrets by default."],
+  accessibility: ["Label is connected to the input.", "Visibility action uses an icon button with an accessible label."],
+  agentGuidance: ["Use Password Field in auth, integration setup, and credential screens.", "Use normal Input for non-secret text."],
+  code: `import { PasswordField } from "./PasswordField";\n\n<PasswordField />`,
+};
+
+export const fieldsetEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "fieldset",
+  name: "Fieldset",
+  subcategory: "Composition",
+  description: "Fieldset groups related checkboxes, radios, or controls under a semantic legend and supporting copy.",
+  preview: FieldsetPreview,
+  variants: ["Legend", "Description", "Checkbox group", "Badge summary"],
+  props: [
+    { name: "legend", type: "string", defaultValue: "-", description: "Group label." },
+    { name: "description", type: "string", defaultValue: "-", description: "Supporting instructions for the group." },
+    { name: "children", type: "ReactNode", defaultValue: "-", description: "Grouped controls." },
+  ],
+  tokens: ["white", "gray-200", "gray-500", "gray-700", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use for grouped checkbox and radio choices.", "Use when the group label is required for comprehension."],
+  avoid: ["Do not use only as a visual card when no form grouping is needed.", "Do not split one logical option group across multiple fieldsets."],
+  accessibility: ["Uses native fieldset and legend semantics.", "Grouped controls keep visible labels."],
+  agentGuidance: ["Use Fieldset for permission groups, preference groups, and selection groups.", "Use Form Section for broader multi-field areas."],
+  code: `import { Fieldset } from "./Fieldset";\n\n<Fieldset />`,
+};
+
+export const formSummaryEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "form-summary",
+  name: "Form Summary",
+  subcategory: "Review",
+  description: "Form Summary presents important values for review before saving, publishing, or submitting a workflow.",
+  preview: FormSummaryPreview,
+  variants: ["Review rows", "Valid state", "Icon metadata", "Summary list"],
+  props: [
+    { name: "items", type: "FormSummaryItem[]", defaultValue: "defaultItems", description: "Values to review before submit." },
+    { name: "status", type: "ReactNode", defaultValue: "-", description: "Optional validation or readiness status." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-900", "brand-700", "success-50", "success-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use at the end of setup flows and high-risk forms.", "Summarize only the fields that matter for the decision."],
+  avoid: ["Do not duplicate every field from a long form.", "Do not use as a replacement for validation messages."],
+  accessibility: ["Summary values are rendered as description-list rows.", "Status is shown as visible text inside a badge."],
+  agentGuidance: ["Use Form Summary before publish, save, submit, or approval actions.", "Pair with Form Actions and Validation Message."],
+  code: `import { FormSummary } from "./FormSummary";\n\n<FormSummary />`,
+};
+
+export const inlineEditFieldEntry: CatalogEntry = {
+  ...formDefaults,
+  id: "inline-edit-field",
+  name: "Inline Edit Field",
+  subcategory: "Editing",
+  description: "Inline Edit Field lets users edit a single value without leaving the surrounding detail or settings context.",
+  preview: InlineEditFieldPreview,
+  variants: ["Read label", "Edit input", "Save action", "Cancel action"],
+  props: [
+    { name: "label", type: "string", defaultValue: "-", description: "Field label or setting name." },
+    { name: "value", type: "string", defaultValue: "-", description: "Current editable value." },
+    { name: "editing", type: "boolean", defaultValue: "false", description: "Whether the field is in edit mode." },
+  ],
+  tokens: ["white", "gray-50", "gray-200", "gray-300", "gray-500", "gray-900", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for quick edits to names, descriptions, labels, and small settings.", "Keep save and cancel actions close to the edited value."],
+  avoid: ["Do not use for complex multi-field editing.", "Do not hide validation feedback after save fails."],
+  accessibility: ["Edit, save, and cancel actions have accessible labels.", "Input keeps a visible label and nearby helper text."],
+  agentGuidance: ["Use Inline Edit Field for single-setting edits in detail panels and settings pages.", "Use Form Section for multi-field edits."],
+  code: `import { InlineEditField } from "./InlineEditField";\n\n<InlineEditField />`,
 };
