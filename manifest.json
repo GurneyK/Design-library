@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 216,
+    "entries": 220,
     "categories": 13,
     "templates": 16
   },
   "kindCounts": {
-    "component": 186,
+    "component": 190,
     "foundation": 14,
     "template": 16
   },
@@ -20,7 +20,7 @@
     "Primitives": 18,
     "Agent UI": 20,
     "Agent Reference": 1,
-    "Charts / Data Viz": 16,
+    "Charts / Data Viz": 20,
     "Dashboard / Product Patterns": 16,
     "Data Display": 21,
     "Data Entry": 18,
@@ -1768,6 +1768,187 @@
         "Use Bar Chart for workspace counts, monthly usage, and ranked comparisons."
       ],
       "code": "import { BarChart } from \"./BarChart\";\n\n<BarChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "histogram-chart",
+      "kind": "component",
+      "name": "Histogram Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Histogram Chart groups continuous values into buckets so teams can scan distribution and concentration.",
+      "variants": [
+        "Distribution",
+        "Highlighted bucket",
+        "Labeled buckets"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-300",
+        "brand-700",
+        "gray-100",
+        "gray-500",
+        "radius-sm"
+      ],
+      "useWhen": [
+        "Use for latency, confidence, score, or duration distributions.",
+        "Highlight the modal or selected bucket when it helps explain the shape."
+      ],
+      "doNotUseWhen": [
+        "Do not use histograms for categorical comparisons.",
+        "Do not choose bucket sizes that hide important outliers."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation.",
+        "Production versions should expose bucket labels and counts as text or table data."
+      ],
+      "agentGuidance": [
+        "Use Histogram Chart when generated analytics need to explain how values are distributed, not just the average."
+      ],
+      "code": "import { HistogramChart } from \"./HistogramChart\";\n\n<HistogramChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "waterfall-chart",
+      "kind": "component",
+      "name": "Waterfall Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Waterfall Chart explains how positive and negative deltas move a baseline to a final value.",
+      "variants": [
+        "Baseline",
+        "Increase",
+        "Decrease",
+        "Final total"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-700",
+        "success-500",
+        "error-500",
+        "gray-100",
+        "gray-300",
+        "gray-500",
+        "radius-sm"
+      ],
+      "useWhen": [
+        "Use for score movement, budget change, attribution, and before-to-after explanations.",
+        "Label every step so the visual tells a complete story."
+      ],
+      "doNotUseWhen": [
+        "Do not use when values are independent categories.",
+        "Do not hide whether a bar is a delta or a total."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation.",
+        "Positive, negative, and total states should be available as text in production."
+      ],
+      "agentGuidance": [
+        "Use Waterfall Chart when an agent needs to explain why a metric changed between two states."
+      ],
+      "code": "import { WaterfallChart } from \"./WaterfallChart\";\n\n<WaterfallChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "treemap-chart",
+      "kind": "component",
+      "name": "Treemap Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Treemap Chart compares part-to-whole composition using nested or tiled areas.",
+      "variants": [
+        "Workspace mix",
+        "Tiled area",
+        "Labeled groups"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-700",
+        "brand-300",
+        "info-500",
+        "success-500",
+        "warning-500",
+        "white",
+        "radius-md"
+      ],
+      "useWhen": [
+        "Use for portfolio mix, workspace usage, source coverage, or grouped share of total.",
+        "Keep labels short and reserve treemaps for overview scanning."
+      ],
+      "doNotUseWhen": [
+        "Do not use when exact comparison is the primary task.",
+        "Do not include many tiny tiles without a drill-down pattern."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation.",
+        "Tile names and values should be mirrored in accessible summaries in production."
+      ],
+      "agentGuidance": [
+        "Use Treemap Chart for compact part-to-whole summaries when the relative size pattern matters."
+      ],
+      "code": "import { TreemapChart } from \"./TreemapChart\";\n\n<TreemapChart />",
+      "sourceFile": "src/data/chartEntries.tsx"
+    },
+    {
+      "id": "box-plot-chart",
+      "kind": "component",
+      "name": "Box Plot Chart",
+      "category": "Charts / Data Viz",
+      "subcategory": "Charts",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Box Plot Chart compares median, spread, and range across groups.",
+      "variants": [
+        "Distribution spread",
+        "Median line",
+        "Range whiskers"
+      ],
+      "props": [],
+      "tokens": [
+        "brand-100",
+        "brand-700",
+        "gray-100",
+        "gray-500",
+        "radius-sm"
+      ],
+      "useWhen": [
+        "Use for run duration, score distribution, model quality spread, and experiment comparison.",
+        "Use when the spread matters as much as the center value."
+      ],
+      "doNotUseWhen": [
+        "Do not use box plots for audiences that need simple totals only.",
+        "Do not omit labels that explain what the quartiles mean."
+      ],
+      "accessibility": [
+        "SVG has an image role and label in this first implementation.",
+        "Median, quartile, minimum, and maximum values should be provided as data in production."
+      ],
+      "agentGuidance": [
+        "Use Box Plot Chart when comparing variability across models, workspaces, teams, or time periods."
+      ],
+      "code": "import { BoxPlotChart } from \"./BoxPlotChart\";\n\n<BoxPlotChart />",
       "sourceFile": "src/data/chartEntries.tsx"
     },
     {

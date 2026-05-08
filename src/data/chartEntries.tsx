@@ -1,6 +1,7 @@
 import { Badge } from "../components/ui/badge/Badge";
 import { AreaChart } from "../components/ui/charts/AreaChart";
 import { BarChart } from "../components/ui/charts/BarChart";
+import { BoxPlotChart } from "../components/ui/charts/BoxPlotChart";
 import { ChartContainer } from "../components/ui/charts/ChartContainer";
 import { ChartLegend } from "../components/ui/charts/ChartLegend";
 import { ChartTooltip } from "../components/ui/charts/ChartTooltip";
@@ -8,6 +9,7 @@ import { DonutChart } from "../components/ui/charts/DonutChart";
 import { FunnelChart } from "../components/ui/charts/FunnelChart";
 import { GaugeChart } from "../components/ui/charts/GaugeChart";
 import { HeatmapChart } from "../components/ui/charts/HeatmapChart";
+import { HistogramChart } from "../components/ui/charts/HistogramChart";
 import { LineChart } from "../components/ui/charts/LineChart";
 import { PieChart } from "../components/ui/charts/PieChart";
 import { RadarChart } from "../components/ui/charts/RadarChart";
@@ -15,6 +17,8 @@ import { ScatterChart } from "../components/ui/charts/ScatterChart";
 import { Sparkline } from "../components/ui/charts/Sparkline";
 import { StackedBarChart } from "../components/ui/charts/StackedBarChart";
 import { SummaryChartCard } from "../components/ui/charts/SummaryChartCard";
+import { TreemapChart } from "../components/ui/charts/TreemapChart";
+import { WaterfallChart } from "../components/ui/charts/WaterfallChart";
 import type { CatalogEntry } from "./catalog";
 
 function ChartContainerPreview() {
@@ -66,6 +70,38 @@ function BarChartPreview() {
   return (
     <ChartContainer title="Runs by workspace">
       <BarChart />
+    </ChartContainer>
+  );
+}
+
+function HistogramChartPreview() {
+  return (
+    <ChartContainer description="Distribution of answer latency across completed runs." title="Latency distribution">
+      <HistogramChart />
+    </ChartContainer>
+  );
+}
+
+function WaterfallChartPreview() {
+  return (
+    <ChartContainer description="Shows the deltas that move a starting value to its final total." title="Quality score movement">
+      <WaterfallChart />
+    </ChartContainer>
+  );
+}
+
+function TreemapChartPreview() {
+  return (
+    <ChartContainer description="Compares workspace volume by relative area." title="Usage by workspace">
+      <TreemapChart />
+    </ChartContainer>
+  );
+}
+
+function BoxPlotChartPreview() {
+  return (
+    <ChartContainer description="Compares spread, median, and outlier range across model runs." title="Run duration spread">
+      <BoxPlotChart />
     </ChartContainer>
   );
 }
@@ -280,6 +316,74 @@ export const barChartEntry: CatalogEntry = {
   accessibility: ["SVG has an image role and label in this first implementation."],
   agentGuidance: ["Use Bar Chart for workspace counts, monthly usage, and ranked comparisons."],
   code: `import { BarChart } from "./BarChart";\n\n<BarChart />`,
+};
+
+export const histogramChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "histogram-chart",
+  name: "Histogram Chart",
+  subcategory: "Charts",
+  description: "Histogram Chart groups continuous values into buckets so teams can scan distribution and concentration.",
+  preview: HistogramChartPreview,
+  variants: ["Distribution", "Highlighted bucket", "Labeled buckets"],
+  props: [],
+  tokens: ["brand-300", "brand-700", "gray-100", "gray-500", "radius-sm"],
+  usage: ["Use for latency, confidence, score, or duration distributions.", "Highlight the modal or selected bucket when it helps explain the shape."],
+  avoid: ["Do not use histograms for categorical comparisons.", "Do not choose bucket sizes that hide important outliers."],
+  accessibility: ["SVG has an image role and label in this first implementation.", "Production versions should expose bucket labels and counts as text or table data."],
+  agentGuidance: ["Use Histogram Chart when generated analytics need to explain how values are distributed, not just the average."],
+  code: `import { HistogramChart } from "./HistogramChart";\n\n<HistogramChart />`,
+};
+
+export const waterfallChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "waterfall-chart",
+  name: "Waterfall Chart",
+  subcategory: "Charts",
+  description: "Waterfall Chart explains how positive and negative deltas move a baseline to a final value.",
+  preview: WaterfallChartPreview,
+  variants: ["Baseline", "Increase", "Decrease", "Final total"],
+  props: [],
+  tokens: ["brand-700", "success-500", "error-500", "gray-100", "gray-300", "gray-500", "radius-sm"],
+  usage: ["Use for score movement, budget change, attribution, and before-to-after explanations.", "Label every step so the visual tells a complete story."],
+  avoid: ["Do not use when values are independent categories.", "Do not hide whether a bar is a delta or a total."],
+  accessibility: ["SVG has an image role and label in this first implementation.", "Positive, negative, and total states should be available as text in production."],
+  agentGuidance: ["Use Waterfall Chart when an agent needs to explain why a metric changed between two states."],
+  code: `import { WaterfallChart } from "./WaterfallChart";\n\n<WaterfallChart />`,
+};
+
+export const treemapChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "treemap-chart",
+  name: "Treemap Chart",
+  subcategory: "Charts",
+  description: "Treemap Chart compares part-to-whole composition using nested or tiled areas.",
+  preview: TreemapChartPreview,
+  variants: ["Workspace mix", "Tiled area", "Labeled groups"],
+  props: [],
+  tokens: ["brand-700", "brand-300", "info-500", "success-500", "warning-500", "white", "radius-md"],
+  usage: ["Use for portfolio mix, workspace usage, source coverage, or grouped share of total.", "Keep labels short and reserve treemaps for overview scanning."],
+  avoid: ["Do not use when exact comparison is the primary task.", "Do not include many tiny tiles without a drill-down pattern."],
+  accessibility: ["SVG has an image role and label in this first implementation.", "Tile names and values should be mirrored in accessible summaries in production."],
+  agentGuidance: ["Use Treemap Chart for compact part-to-whole summaries when the relative size pattern matters."],
+  code: `import { TreemapChart } from "./TreemapChart";\n\n<TreemapChart />`,
+};
+
+export const boxPlotChartEntry: CatalogEntry = {
+  ...chartDefaults,
+  id: "box-plot-chart",
+  name: "Box Plot Chart",
+  subcategory: "Charts",
+  description: "Box Plot Chart compares median, spread, and range across groups.",
+  preview: BoxPlotChartPreview,
+  variants: ["Distribution spread", "Median line", "Range whiskers"],
+  props: [],
+  tokens: ["brand-100", "brand-700", "gray-100", "gray-500", "radius-sm"],
+  usage: ["Use for run duration, score distribution, model quality spread, and experiment comparison.", "Use when the spread matters as much as the center value."],
+  avoid: ["Do not use box plots for audiences that need simple totals only.", "Do not omit labels that explain what the quartiles mean."],
+  accessibility: ["SVG has an image role and label in this first implementation.", "Median, quartile, minimum, and maximum values should be provided as data in production."],
+  agentGuidance: ["Use Box Plot Chart when comparing variability across models, workspaces, teams, or time periods."],
+  code: `import { BoxPlotChart } from "./BoxPlotChart";\n\n<BoxPlotChart />`,
 };
 
 export const donutChartEntry: CatalogEntry = {

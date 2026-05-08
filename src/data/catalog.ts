@@ -57,6 +57,7 @@ import {
 import {
   areaChartEntry,
   barChartEntry,
+  boxPlotChartEntry,
   chartContainerEntry,
   chartLegendEntry,
   chartTooltipEntry,
@@ -64,6 +65,7 @@ import {
   funnelChartEntry,
   gaugeChartEntry,
   heatmapChartEntry,
+  histogramChartEntry,
   lineChartEntry,
   pieChartEntry,
   radarChartEntry,
@@ -71,6 +73,8 @@ import {
   sparklineEntry,
   stackedBarChartEntry,
   summaryChartCardEntry,
+  treemapChartEntry,
+  waterfallChartEntry,
 } from "./chartEntries";
 import {
   agentAvatarEntry,
@@ -403,6 +407,10 @@ export const catalog = [
   lineChartEntry,
   areaChartEntry,
   barChartEntry,
+  histogramChartEntry,
+  waterfallChartEntry,
+  treemapChartEntry,
+  boxPlotChartEntry,
   donutChartEntry,
   pieChartEntry,
   stackedBarChartEntry,
