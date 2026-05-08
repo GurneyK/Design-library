@@ -7,12 +7,12 @@
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
   "counts": {
-    "entries": 212,
+    "entries": 216,
     "categories": 13,
     "templates": 16
   },
   "kindCounts": {
-    "component": 182,
+    "component": 186,
     "foundation": 14,
     "template": 16
   },
@@ -27,7 +27,7 @@
     "Feedback": 18,
     "Forms": 19,
     "Foundations": 14,
-    "Layout": 16,
+    "Layout": 20,
     "Navigation": 19,
     "Templates / Blocks": 16
   },
@@ -9580,6 +9580,229 @@
         "Use Grid for aligned dashboard cards and Table for comparable records."
       ],
       "code": "import { MasonryGrid } from \"./MasonryGrid\";\n\n<MasonryGrid />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "aspect-ratio",
+      "kind": "component",
+      "name": "Aspect Ratio",
+      "category": "Layout",
+      "subcategory": "Media Layout",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Aspect Ratio keeps media, generated previews, and chart frames stable across responsive layouts.",
+      "variants": [
+        "Video",
+        "Square",
+        "Wide",
+        "Preview frame"
+      ],
+      "props": [
+        {
+          "name": "ratio",
+          "type": "\"video\" | \"square\" | \"wide\"",
+          "defaultValue": "\"video\"",
+          "description": "Controls the rendered frame ratio."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Media or preview content inside the frame."
+        }
+      ],
+      "tokens": [
+        "aspect-video",
+        "aspect-square",
+        "aspect-[21/9]",
+        "gray-50",
+        "brand-50",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for charts, media, thumbnails, generated image previews, and embedded preview frames.",
+        "Use stable ratios to prevent layout shift while content loads."
+      ],
+      "doNotUseWhen": [
+        "Do not use Aspect Ratio for text-heavy content.",
+        "Do not crop important source evidence when users need to inspect it."
+      ],
+      "accessibility": [
+        "Aspect Ratio does not change child semantics.",
+        "Child media should provide alt text or an accessible name."
+      ],
+      "agentGuidance": [
+        "Use Aspect Ratio whenever generated UI needs a stable preview or media frame.",
+        "Pair with Card, Panel, or Grid for galleries and dashboards."
+      ],
+      "code": "import { AspectRatio } from \"./AspectRatio\";\n\n<AspectRatio ratio=\"video\">\n  <img alt=\"Preview\" src={previewUrl} />\n</AspectRatio>",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "centered-layout",
+      "kind": "component",
+      "name": "Centered Layout",
+      "category": "Layout",
+      "subcategory": "Page Structure",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Centered Layout places a focused message or form in the middle of an available page region.",
+      "variants": [
+        "Centered card",
+        "Empty state",
+        "Onboarding",
+        "Confirmation"
+      ],
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Focused content inside the centered region."
+        }
+      ],
+      "tokens": [
+        "gray-50",
+        "white",
+        "gray-200",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "spacing-6"
+      ],
+      "useWhen": [
+        "Use for auth panels, empty states, onboarding, confirmation, and first-run screens.",
+        "Keep content narrow and action count low."
+      ],
+      "doNotUseWhen": [
+        "Do not use for dense dashboards or multi-region workspaces.",
+        "Do not center long forms with many sections."
+      ],
+      "accessibility": [
+        "Centered content keeps normal reading order.",
+        "Actions remain visible and keyboard reachable."
+      ],
+      "agentGuidance": [
+        "Use Centered Layout for focused single-task states.",
+        "Use App Shell or Dashboard Shell for multi-region product pages."
+      ],
+      "code": "import { CenteredLayout } from \"./CenteredLayout\";\n\n<CenteredLayout>\n  <EmptyState title=\"No sources yet\" />\n</CenteredLayout>",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "detail-layout",
+      "kind": "component",
+      "name": "Detail Layout",
+      "category": "Layout",
+      "subcategory": "Workspace Layout",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Detail Layout pairs primary detail content with a supporting metadata or action aside.",
+      "variants": [
+        "Primary region",
+        "Supporting aside",
+        "Metadata panel",
+        "Responsive stack"
+      ],
+      "props": [],
+      "tokens": [
+        "gray-50",
+        "white",
+        "gray-100",
+        "gray-200",
+        "gray-500",
+        "gray-900",
+        "brand-50",
+        "brand-700",
+        "radius-lg",
+        "shadow-xs"
+      ],
+      "useWhen": [
+        "Use for detail pages, review records, source inspection, and object settings.",
+        "Keep primary content first and supporting metadata second."
+      ],
+      "doNotUseWhen": [
+        "Do not use when both panes need equal editing priority; use Split Pane.",
+        "Do not hide critical actions only in the aside."
+      ],
+      "accessibility": [
+        "Primary content appears before the aside in DOM order.",
+        "Metadata uses description-list semantics inside the aside."
+      ],
+      "agentGuidance": [
+        "Use Detail Layout for object detail pages with supporting facts.",
+        "Use Split Pane for two active work surfaces and Content Sidebar for local section navigation."
+      ],
+      "code": "import { DetailLayout } from \"./DetailLayout\";\n\n<DetailLayout />",
+      "sourceFile": "src/data/layoutEntries.tsx"
+    },
+    {
+      "id": "inset-layout",
+      "kind": "component",
+      "name": "Inset Layout",
+      "category": "Layout",
+      "subcategory": "Page Structure",
+      "status": "draft",
+      "source": [
+        "written-spec",
+        "reference-code",
+        "figma-deferred"
+      ],
+      "description": "Inset Layout creates a quiet inner content well inside a muted page background.",
+      "variants": [
+        "Muted well",
+        "Inner surface",
+        "Form shell",
+        "Review shell"
+      ],
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "defaultValue": "-",
+          "description": "Content rendered inside the inset surface."
+        }
+      ],
+      "tokens": [
+        "gray-50",
+        "white",
+        "gray-200",
+        "radius-lg",
+        "shadow-xs",
+        "spacing-3",
+        "spacing-5",
+        "spacing-6"
+      ],
+      "useWhen": [
+        "Use to frame forms, review blocks, previews, and settings content without building a full app shell.",
+        "Use when the page needs a calm well behind the active surface."
+      ],
+      "doNotUseWhen": [
+        "Do not nest Inset Layout inside Card or Panel.",
+        "Do not use as decorative padding when Container is enough."
+      ],
+      "accessibility": [
+        "Inset Layout does not change child semantics.",
+        "Use semantic sections and headings inside the inset surface."
+      ],
+      "agentGuidance": [
+        "Use Inset Layout for form and review pages that need a muted background plus inner surface.",
+        "Use Section for full-width bands and Panel for dashboard regions."
+      ],
+      "code": "import { InsetLayout } from \"./InsetLayout\";\n\n<InsetLayout>\n  <FormReview />\n</InsetLayout>",
       "sourceFile": "src/data/layoutEntries.tsx"
     },
     {

@@ -1,9 +1,13 @@
 import { AppShell } from "../components/ui/layout/AppShell";
+import { AspectRatio } from "../components/ui/layout/AspectRatio";
 import { Button } from "../components/ui/button/Button";
 import { Card } from "../components/ui/layout/Card";
+import { CenteredLayout } from "../components/ui/layout/CenteredLayout";
 import { Container } from "../components/ui/layout/Container";
 import { ContentSidebar } from "../components/ui/layout/ContentSidebar";
+import { DetailLayout } from "../components/ui/layout/DetailLayout";
 import { Grid } from "../components/ui/layout/Grid";
+import { InsetLayout } from "../components/ui/layout/InsetLayout";
 import { MasonryGrid } from "../components/ui/layout/MasonryGrid";
 import { PageHeader } from "../components/ui/layout/PageHeader";
 import { Panel } from "../components/ui/layout/Panel";
@@ -117,6 +121,28 @@ function ScrollAreaPreview() {
 
 function MasonryGridPreview() {
   return <MasonryGrid />;
+}
+
+function AspectRatioPreview() {
+  return (
+    <div className="grid gap-4 lg:grid-cols-3">
+      <AspectRatio ratio="video" />
+      <AspectRatio ratio="square" />
+      <AspectRatio ratio="wide" />
+    </div>
+  );
+}
+
+function CenteredLayoutPreview() {
+  return <CenteredLayout />;
+}
+
+function DetailLayoutPreview() {
+  return <DetailLayout />;
+}
+
+function InsetLayoutPreview() {
+  return <InsetLayout />;
 }
 
 const layoutDefaults = {
@@ -440,4 +466,79 @@ export const masonryGridEntry: CatalogEntry = {
   accessibility: ["DOM order remains the reading order.", "Cards keep visible headings and status labels."],
   agentGuidance: ["Use Masonry Grid for variable-height cards and insight collections.", "Use Grid for aligned dashboard cards and Table for comparable records."],
   code: `import { MasonryGrid } from "./MasonryGrid";\n\n<MasonryGrid />`,
+};
+
+export const aspectRatioEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "aspect-ratio",
+  name: "Aspect Ratio",
+  subcategory: "Media Layout",
+  description: "Aspect Ratio keeps media, generated previews, and chart frames stable across responsive layouts.",
+  preview: AspectRatioPreview,
+  variants: ["Video", "Square", "Wide", "Preview frame"],
+  props: [
+    { name: "ratio", type: '"video" | "square" | "wide"', defaultValue: '"video"', description: "Controls the rendered frame ratio." },
+    { name: "children", type: "ReactNode", defaultValue: "-", description: "Media or preview content inside the frame." },
+  ],
+  tokens: ["aspect-video", "aspect-square", "aspect-[21/9]", "gray-50", "brand-50", "radius-lg", "shadow-xs"],
+  usage: ["Use for charts, media, thumbnails, generated image previews, and embedded preview frames.", "Use stable ratios to prevent layout shift while content loads."],
+  avoid: ["Do not use Aspect Ratio for text-heavy content.", "Do not crop important source evidence when users need to inspect it."],
+  accessibility: ["Aspect Ratio does not change child semantics.", "Child media should provide alt text or an accessible name."],
+  agentGuidance: ["Use Aspect Ratio whenever generated UI needs a stable preview or media frame.", "Pair with Card, Panel, or Grid for galleries and dashboards."],
+  code: `import { AspectRatio } from "./AspectRatio";\n\n<AspectRatio ratio="video">\n  <img alt="Preview" src={previewUrl} />\n</AspectRatio>`,
+};
+
+export const centeredLayoutEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "centered-layout",
+  name: "Centered Layout",
+  subcategory: "Page Structure",
+  description: "Centered Layout places a focused message or form in the middle of an available page region.",
+  preview: CenteredLayoutPreview,
+  variants: ["Centered card", "Empty state", "Onboarding", "Confirmation"],
+  props: [
+    { name: "children", type: "ReactNode", defaultValue: "-", description: "Focused content inside the centered region." },
+  ],
+  tokens: ["gray-50", "white", "gray-200", "brand-50", "brand-700", "radius-lg", "spacing-6"],
+  usage: ["Use for auth panels, empty states, onboarding, confirmation, and first-run screens.", "Keep content narrow and action count low."],
+  avoid: ["Do not use for dense dashboards or multi-region workspaces.", "Do not center long forms with many sections."],
+  accessibility: ["Centered content keeps normal reading order.", "Actions remain visible and keyboard reachable."],
+  agentGuidance: ["Use Centered Layout for focused single-task states.", "Use App Shell or Dashboard Shell for multi-region product pages."],
+  code: `import { CenteredLayout } from "./CenteredLayout";\n\n<CenteredLayout>\n  <EmptyState title="No sources yet" />\n</CenteredLayout>`,
+};
+
+export const detailLayoutEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "detail-layout",
+  name: "Detail Layout",
+  subcategory: "Workspace Layout",
+  description: "Detail Layout pairs primary detail content with a supporting metadata or action aside.",
+  preview: DetailLayoutPreview,
+  variants: ["Primary region", "Supporting aside", "Metadata panel", "Responsive stack"],
+  props: [],
+  tokens: ["gray-50", "white", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "radius-lg", "shadow-xs"],
+  usage: ["Use for detail pages, review records, source inspection, and object settings.", "Keep primary content first and supporting metadata second."],
+  avoid: ["Do not use when both panes need equal editing priority; use Split Pane.", "Do not hide critical actions only in the aside."],
+  accessibility: ["Primary content appears before the aside in DOM order.", "Metadata uses description-list semantics inside the aside."],
+  agentGuidance: ["Use Detail Layout for object detail pages with supporting facts.", "Use Split Pane for two active work surfaces and Content Sidebar for local section navigation."],
+  code: `import { DetailLayout } from "./DetailLayout";\n\n<DetailLayout />`,
+};
+
+export const insetLayoutEntry: CatalogEntry = {
+  ...layoutDefaults,
+  id: "inset-layout",
+  name: "Inset Layout",
+  subcategory: "Page Structure",
+  description: "Inset Layout creates a quiet inner content well inside a muted page background.",
+  preview: InsetLayoutPreview,
+  variants: ["Muted well", "Inner surface", "Form shell", "Review shell"],
+  props: [
+    { name: "children", type: "ReactNode", defaultValue: "-", description: "Content rendered inside the inset surface." },
+  ],
+  tokens: ["gray-50", "white", "gray-200", "radius-lg", "shadow-xs", "spacing-3", "spacing-5", "spacing-6"],
+  usage: ["Use to frame forms, review blocks, previews, and settings content without building a full app shell.", "Use when the page needs a calm well behind the active surface."],
+  avoid: ["Do not nest Inset Layout inside Card or Panel.", "Do not use as decorative padding when Container is enough."],
+  accessibility: ["Inset Layout does not change child semantics.", "Use semantic sections and headings inside the inset surface."],
+  agentGuidance: ["Use Inset Layout for form and review pages that need a muted background plus inner surface.", "Use Section for full-width bands and Panel for dashboard regions."],
+  code: `import { InsetLayout } from "./InsetLayout";\n\n<InsetLayout>\n  <FormReview />\n</InsetLayout>`,
 };
