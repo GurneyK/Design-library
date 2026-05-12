@@ -27,6 +27,7 @@ test.describe("Design Library visual QA", () => {
       await expect(page.getByRole("heading", { name: entryName, level: 2 })).toBeVisible();
       await expect(page.locator("#preview")).toBeVisible();
       await expect(page.locator("#code")).toBeVisible();
+      await expect(page.locator("#developer-handoff")).toBeVisible();
       await expect(page.locator("#for-agents")).toBeVisible();
     }
   });
@@ -43,6 +44,7 @@ test.describe("Design Library visual QA", () => {
 
     await expect(page.getByRole("heading", { name: "Citation Chip", level: 2 })).toBeVisible();
     await expect(page.getByRole("article").getByText("Agent UI")).toBeVisible();
+    await expect(page.locator("#developer-handoff").getByText("Implementation source")).toBeVisible();
   });
 
   test("switches to templates and renders a full template page", async ({ page, isMobile }) => {
@@ -57,6 +59,7 @@ test.describe("Design Library visual QA", () => {
 
     await expect(page.getByRole("heading", { name: "Analytics Agent Workspace", level: 2 })).toBeVisible();
     await expect(page.locator("#preview")).toBeVisible();
+    await expect(page.locator("#developer-handoff")).toBeVisible();
     await expect(page.locator("#for-agents")).toBeVisible();
   });
 
@@ -70,5 +73,8 @@ test.describe("Design Library visual QA", () => {
     expect(manifest.kindCounts.template).toBe(16);
     expect(manifest.entries.some((entry: { id: string }) => entry.id === "button")).toBeTruthy();
     expect(manifest.entries.some((entry: { id: string }) => entry.id === "template-analytics-agent-workspace")).toBeTruthy();
+    const button = manifest.entries.find((entry: { id: string }) => entry.id === "button");
+    expect(button.developerHandoff.copyStatus).toBe("source-available");
+    expect(button.developerHandoff.sourcePaths).toContain("src/components/ui/button/Button.tsx");
   });
 });

@@ -51,6 +51,7 @@ The current MVP includes:
 - A generated machine-readable manifest for AI-agent consumption.
 - A GitHub Pages deployment that updates when `main` is pushed.
 - Desktop and mobile Playwright smoke tests for catalog render, search, templates, and manifest access.
+- Developer handoff metadata for every entry, including source links, raw files, import paths, setup notes, and copy status.
 
 ## What Is Still Post-MVP
 

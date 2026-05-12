@@ -91,6 +91,8 @@ async function validateEntry(entry) {
   if (entry.sourceFile) {
     await checkSourceFile(prefix, entry.sourceFile);
   }
+
+  validateDeveloperHandoff(prefix, entry);
 }
 
 async function checkSourceFile(prefix, sourceFile) {
@@ -104,5 +106,35 @@ async function checkSourceFile(prefix, sourceFile) {
 function expect(condition, message) {
   if (!condition) {
     errors.push(message);
+  }
+}
+
+function validateDeveloperHandoff(prefix, entry) {
+  const handoff = entry.developerHandoff;
+  if (!handoff || typeof handoff !== "object") {
+    errors.push(`${prefix} developerHandoff is required.`);
+    return;
+  }
+
+  if (!["source-available", "usage-snippet-only", "foundation-guidance", "reference-endpoint"].includes(handoff.copyStatus)) {
+    errors.push(`${prefix} developerHandoff.copyStatus is invalid.`);
+  }
+
+  for (const key of ["sourcePaths", "githubUrls", "rawUrls", "importPaths", "requiredSetup"]) {
+    if (!Array.isArray(handoff[key])) {
+      errors.push(`${prefix} developerHandoff.${key} must be an array.`);
+    }
+  }
+
+  if (entry.kind !== "foundation" && entry.category !== "Agent Reference" && handoff.copyStatus !== "source-available") {
+    errors.push(`${prefix} developerHandoff must resolve implementation source for component/template entries.`);
+  }
+
+  if (handoff.copyStatus === "source-available" && handoff.sourcePaths.length === 0) {
+    errors.push(`${prefix} developerHandoff.sourcePaths must include at least one source file.`);
+  }
+
+  if (typeof handoff.copyInstructions !== "string" || handoff.copyInstructions.trim().length === 0) {
+    errors.push(`${prefix} developerHandoff.copyInstructions must be a non-empty string.`);
   }
 }

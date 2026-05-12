@@ -4,10 +4,14 @@ import ts from "typescript";
 
 const root = process.cwd();
 const dataDir = path.join(root, "src", "data");
+const componentDirs = [path.join(root, "src", "components", "ui"), path.join(root, "src", "components", "templates")];
 const buttonMetaFile = path.join(root, "src", "components", "ui", "button", "button.meta.ts");
 const sourceManifestPath = path.join(dataDir, "agentManifest.json");
+const developerHandoffPath = path.join(dataDir, "developerHandoff.json");
 const siteManifestPath = path.join(root, "site", "manifest.json");
 const rootManifestPath = path.join(root, "manifest.json");
+const repositoryUrl = "https://github.com/GurneyK/Design-library";
+const rawRepositoryUrl = "https://raw.githubusercontent.com/GurneyK/Design-library/main";
 
 const dataFiles = (await readdir(dataDir))
   .filter((file) => file.endsWith("Entries.tsx"))
@@ -15,9 +19,18 @@ const dataFiles = (await readdir(dataDir))
 
 const files = [buttonMetaFile, ...dataFiles];
 const entries = [];
+const sourceIndex = await collectSourceIndex(componentDirs);
 
 for (const file of files) {
   entries.push(...(await extractEntries(file)));
+}
+
+const developerHandoff = Object.fromEntries(
+  entries.map((entry) => [entry.id, createDeveloperHandoff(entry, sourceIndex)]),
+);
+
+for (const entry of entries) {
+  entry.developerHandoff = developerHandoff[entry.id];
 }
 
 const categories = [...new Set(entries.map((entry) => entry.category))];
@@ -62,20 +75,54 @@ const manifest = {
     accessibility: "Baseline accessibility requirements.",
     agentGuidance: "Composition guidance for AI-assisted UI generation.",
     code: "Copyable implementation snippet or composition starter.",
+    developerHandoff: "Source links, import paths, dependencies, and setup notes for developers copying the component.",
   },
   categories,
   entries,
 };
 
 const json = `${JSON.stringify(manifest, null, 2)}\n`;
+const developerHandoffJson = `${JSON.stringify(developerHandoff, null, 2)}\n`;
 
 await mkdir(path.dirname(sourceManifestPath), { recursive: true });
 await writeFile(sourceManifestPath, json, "utf8");
+await writeFile(developerHandoffPath, developerHandoffJson, "utf8");
 
 await mkdir(path.dirname(siteManifestPath), { recursive: true });
 await writeFile(siteManifestPath, json, "utf8");
 
 await writeFile(rootManifestPath, json, "utf8");
+
+async function collectSourceIndex(directories) {
+  const sourceFiles = [];
+
+  for (const directory of directories) {
+    sourceFiles.push(...(await collectTsxFiles(directory)));
+  }
+
+  return new Map(
+    sourceFiles.map((file) => {
+      const relativePath = path.relative(root, file).replaceAll("\\", "/");
+      return [path.basename(file, ".tsx"), relativePath];
+    }),
+  );
+}
+
+async function collectTsxFiles(directory) {
+  const files = [];
+  const entries = await readdir(directory, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...(await collectTsxFiles(fullPath)));
+    } else if (entry.isFile() && entry.name.endsWith(".tsx") && !entry.name.endsWith(".meta.tsx")) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
 
 async function extractEntries(file) {
   const sourceText = await readFile(file, "utf8");
@@ -220,6 +267,80 @@ function normalizeEntry(entry, file) {
     code: String(entry.code ?? ""),
     sourceFile: path.relative(root, file).replaceAll("\\", "/"),
   };
+}
+
+function createDeveloperHandoff(entry, sourceIndex) {
+  if (entry.category === "Agent Reference") {
+    return {
+      copyStatus: "reference-endpoint",
+      usageSnippetStatus: "fetch-example",
+      repositoryUrl,
+      sourcePaths: ["manifest.json"],
+      githubUrls: [`${repositoryUrl}/blob/main/manifest.json`],
+      rawUrls: [`${rawRepositoryUrl}/manifest.json`],
+      importPaths: ["https://gurneyk.github.io/Design-library/manifest.json"],
+      requiredSetup: ["Fetch-capable runtime or server route", "JSON parser", "Use entry IDs, props, variants, tokens, and guidance before generating UI"],
+      copyInstructions:
+        "Use the public manifest URL as a fetchable API. This is a reference endpoint, not a React component file.",
+    };
+  }
+
+  const sourcePaths = resolveSourcePaths(entry, sourceIndex);
+  const copyStatus =
+    entry.kind === "foundation" ? "foundation-guidance" : sourcePaths.length > 0 ? "source-available" : "usage-snippet-only";
+
+  return {
+    copyStatus,
+    usageSnippetStatus: "example",
+    repositoryUrl,
+    sourcePaths,
+    githubUrls: sourcePaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`),
+    rawUrls: sourcePaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`),
+    importPaths: sourcePaths.map((sourcePath) => sourcePath.replace(/^src\//, "@/").replace(/\.tsx$/, "")),
+    requiredSetup: [
+      "React 18+",
+      "Tailwind CSS 3+ with this repo's tailwind.config.ts token extensions",
+      "src/index.css for base styles, focus-ring, and CSS variables",
+      "lucide-react for icons used by many components",
+    ],
+    copyInstructions:
+      copyStatus === "source-available"
+        ? "Copy the listed source file(s), then follow their local relative imports until TypeScript resolves. Keep the Habibi Tailwind config and src/index.css in the consuming app."
+        : copyStatus === "foundation-guidance"
+          ? "This is a token/foundation entry. Copy the relevant Tailwind token setup and CSS variables rather than a React component."
+          : "This entry currently has a usage snippet but no resolved implementation file. Treat it as documentation until a source file is mapped.",
+  };
+}
+
+function resolveSourcePaths(entry, sourceIndex) {
+  if (entry.kind === "foundation") {
+    return [];
+  }
+
+  const names = new Set();
+  const code = String(entry.code ?? "");
+  const importRegex = /from\s+["']\.\/([^"']+)["']/g;
+  const jsxRegex = /<([A-Z][A-Za-z0-9]*)\b/g;
+  let match;
+
+  while ((match = importRegex.exec(code))) {
+    names.add(path.basename(match[1]));
+  }
+
+  while ((match = jsxRegex.exec(code))) {
+    names.add(match[1]);
+  }
+
+  names.add(toPascalCase(entry.name));
+
+  return [...new Set([...names].map((name) => sourceIndex.get(name)).filter(Boolean))].sort();
+}
+
+function toPascalCase(value) {
+  return String(value)
+    .replace(/\/.*/, "")
+    .replace(/[^a-zA-Z0-9]+(.)/g, (_, char) => char.toUpperCase())
+    .replace(/^[a-z]/, (char) => char.toUpperCase());
 }
 
 function getPropertyName(name) {

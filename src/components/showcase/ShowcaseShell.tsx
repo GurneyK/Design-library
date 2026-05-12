@@ -66,7 +66,7 @@ export function ShowcaseShell({
                     Entry sections
                   </div>
                   <nav className="space-y-1 text-sm text-gray-600">
-                    {["Preview", "Variants", "Props", "Tokens", "Usage", "Code", "For agents"].map((item) => (
+                    {["Preview", "Variants", "Props", "Tokens", "Usage", "Code", "Developer handoff", "For agents"].map((item) => (
                       <a
                         className="block rounded-habibiSm px-2 py-1.5 hover:bg-gray-50 hover:text-gray-900"
                         href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}

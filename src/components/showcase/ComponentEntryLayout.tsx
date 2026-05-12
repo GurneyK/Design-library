@@ -1,5 +1,6 @@
-import { Accessibility, Bot, CheckCircle2, Code2, Layers, ShieldCheck } from "lucide-react";
+import { Accessibility, Bot, CheckCircle2, Code2, ExternalLink, Layers, PackageCheck, ShieldCheck } from "lucide-react";
 import type { CatalogEntry } from "../../data/catalog";
+import developerHandoff from "../../data/developerHandoff.json";
 import { CodeBlock } from "./CodeBlock";
 import { PreviewFrame } from "./PreviewFrame";
 import { PropsTable } from "./PropsTable";
@@ -11,6 +12,7 @@ interface ComponentEntryLayoutProps {
 
 export function ComponentEntryLayout({ entry }: ComponentEntryLayoutProps) {
   const Preview = entry.preview;
+  const handoff = developerHandoff[entry.id as keyof typeof developerHandoff];
 
   return (
     <article className="space-y-6">
@@ -102,6 +104,18 @@ export function ComponentEntryLayout({ entry }: ComponentEntryLayoutProps) {
       </section>
 
       <section
+        id="developer-handoff"
+        className="rounded-habibiLg border border-gray-200 bg-white p-6 shadow-habibiXs"
+      >
+        <SectionHeading
+          icon={<PackageCheck className="h-4 w-4" />}
+          title="Developer handoff"
+          description="Copy contract for full-stack teams moving this component into another React + Tailwind app."
+        />
+        <DeveloperHandoff handoff={handoff} />
+      </section>
+
+      <section
         id="for-agents"
         className="rounded-habibiLg border border-brand-200 bg-brand-50 p-6 text-brand-950"
       >
@@ -117,6 +131,104 @@ export function ComponentEntryLayout({ entry }: ComponentEntryLayoutProps) {
       </section>
     </article>
   );
+}
+
+type DeveloperHandoffData = {
+  copyInstructions: string;
+  copyStatus: string;
+  githubUrls: string[];
+  importPaths: string[];
+  rawUrls: string[];
+  repositoryUrl: string;
+  requiredSetup: string[];
+  sourcePaths: string[];
+  usageSnippetStatus: string;
+};
+
+function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
+  if (!handoff) {
+    return (
+      <p className="mt-4 rounded-habibiMd bg-warning-50 p-4 text-sm leading-6 text-warning-700">
+        Developer handoff metadata is missing for this entry. Run <code>npm run build</code> to regenerate the catalog.
+      </p>
+    );
+  }
+
+  return (
+    <div className="mt-4 space-y-5">
+      <div className="grid gap-3 md:grid-cols-3">
+        <MetadataTile label="Copy status" value={formatStatus(handoff.copyStatus)} />
+        <MetadataTile label="Usage snippet" value={formatStatus(handoff.usageSnippetStatus)} />
+        <MetadataTile label="Source files" value={String(handoff.sourcePaths.length)} />
+      </div>
+
+      <div className="rounded-habibiMd bg-gray-50 p-4 text-sm leading-6 text-gray-700">
+        {handoff.copyInstructions}
+      </div>
+
+      {handoff.sourcePaths.length > 0 ? (
+        <div>
+          <h3 className="text-sm font-semibold text-gray-900">Implementation source</h3>
+          <div className="mt-3 space-y-2">
+            {handoff.sourcePaths.map((sourcePath, index) => (
+              <div className="rounded-habibiMd border border-gray-200 p-3" key={sourcePath}>
+                <p className="font-mono text-xs text-gray-700">{sourcePath}</p>
+                <p className="mt-1 font-mono text-xs text-gray-500">{handoff.importPaths[index]}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <SourceLink href={handoff.githubUrls[index]} label="View source" />
+                  <SourceLink href={handoff.rawUrls[index]} label="Raw file" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      <div>
+        <h3 className="text-sm font-semibold text-gray-900">Required setup</h3>
+        <ul className="mt-3 grid gap-2 text-sm leading-6 text-gray-700 md:grid-cols-2">
+          {handoff.requiredSetup.map((item) => (
+            <li className="flex gap-2" key={item}>
+              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success-600" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <SourceLink href={handoff.repositoryUrl} label="Open repository" />
+    </div>
+  );
+}
+
+function MetadataTile({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-habibiMd border border-gray-200 bg-gray-50 p-3">
+      <p className="text-xs font-semibold uppercase tracking-[0.08em] text-gray-500">{label}</p>
+      <p className="mt-1 text-sm font-semibold text-gray-900">{value}</p>
+    </div>
+  );
+}
+
+function SourceLink({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      className="focus-ring inline-flex items-center gap-1.5 rounded-habibiSm text-sm font-semibold text-brand-700 hover:text-brand-800"
+      href={href}
+      rel="noreferrer"
+      target="_blank"
+    >
+      {label}
+      <ExternalLink aria-hidden="true" className="h-3.5 w-3.5" />
+    </a>
+  );
+}
+
+function formatStatus(status: string) {
+  return status
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
 }
 
 function SectionHeading({
