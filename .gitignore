@@ -4,3 +4,5 @@ dist
 *.local
 *.tsbuildinfo
 vite-dev*.log
+playwright-report
+test-results

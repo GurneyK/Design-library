@@ -43,6 +43,14 @@ npm run qa
 
 The QA command runs the production build and validates the generated catalog contract: manifest counts, duplicate IDs, required documentation fields, guidance arrays, kind/category counts, and source-file references.
 
+## Visual QA
+
+```bash
+npm run visual-qa
+```
+
+The visual QA command runs Playwright against the production preview in desktop and mobile viewports. It checks initial render, search, representative component entries, template switching, and the published manifest endpoint.
+
 ## Deployment
 
 This repo deploys to GitHub Pages on every push to `main`.

@@ -11,6 +11,8 @@ The Design Library MVP is shareable, deployed, and ready for early team review.
 - Deployment: GitHub Pages from `main`
 - Local command: `npm run dev`
 - Build command: `npm run build`
+- Catalog QA command: `npm run qa`
+- Browser QA command: `npm run visual-qa`
 
 ## Catalog Coverage
 
@@ -48,6 +50,7 @@ The current MVP includes:
 - A Templates / Blocks section for realistic Nexus and dashboard compositions.
 - A generated machine-readable manifest for AI-agent consumption.
 - A GitHub Pages deployment that updates when `main` is pushed.
+- Desktop and mobile Playwright smoke tests for catalog render, search, templates, and manifest access.
 
 ## What Is Still Post-MVP
 
