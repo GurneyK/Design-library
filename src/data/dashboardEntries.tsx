@@ -3,17 +3,21 @@ import { DataSourceCard } from "../components/ui/dashboard/DataSourceCard";
 import { DashboardHeader } from "../components/ui/dashboard/DashboardHeader";
 import { DashboardShell } from "../components/ui/dashboard/DashboardShell";
 import { EvaluationScorecard } from "../components/ui/dashboard/EvaluationScorecard";
+import { ExperimentCard } from "../components/ui/dashboard/ExperimentCard";
 import { FilterBar } from "../components/ui/dashboard/FilterBar";
 import { HealthSummary } from "../components/ui/dashboard/HealthSummary";
 import { InsightCard } from "../components/ui/dashboard/InsightCard";
+import { InsightQueue } from "../components/ui/dashboard/InsightQueue";
 import { KpiStrip } from "../components/ui/dashboard/KpiStrip";
 import { QuickActionPanel } from "../components/ui/dashboard/QuickActionPanel";
+import { ReportStatusCard } from "../components/ui/dashboard/ReportStatusCard";
 import { ReviewQueue } from "../components/ui/dashboard/ReviewQueue";
 import { RunCard } from "../components/ui/dashboard/RunCard";
 import { RunStatusPill } from "../components/ui/dashboard/RunStatusPill";
 import { SavedReportCard } from "../components/ui/dashboard/SavedReportCard";
 import { SlaStatusPanel } from "../components/ui/dashboard/SlaStatusPanel";
 import { WorkspaceSwitcher } from "../components/ui/dashboard/WorkspaceSwitcher";
+import { WorkspaceSummary } from "../components/ui/dashboard/WorkspaceSummary";
 import type { CatalogEntry } from "./catalog";
 
 function DashboardHeaderPreview() {
@@ -114,6 +118,30 @@ function SavedReportCardPreview() {
 
 function SlaStatusPanelPreview() {
   return <SlaStatusPanel />;
+}
+
+function ReportStatusCardPreview() {
+  return (
+    <div className="max-w-2xl">
+      <ReportStatusCard />
+    </div>
+  );
+}
+
+function InsightQueuePreview() {
+  return <InsightQueue />;
+}
+
+function WorkspaceSummaryPreview() {
+  return <WorkspaceSummary />;
+}
+
+function ExperimentCardPreview() {
+  return (
+    <div className="max-w-xl">
+      <ExperimentCard />
+    </div>
+  );
 }
 
 const dashboardDefaults = {
@@ -426,4 +454,72 @@ export const slaStatusPanelEntry: CatalogEntry = {
   accessibility: ["Each row has visible target, metric, and status text.", "Status badges communicate meaning through text as well as color."],
   agentGuidance: ["Use SLA Status Panel for operations-heavy dashboards and production agent surfaces.", "Pair with Activity Feed, Health Summary, and Review Queue for monitoring pages."],
   code: `import { SlaStatusPanel } from "./SlaStatusPanel";\n\n<SlaStatusPanel />`,
+};
+
+export const reportStatusCardEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "report-status-card",
+  name: "Report Status Card",
+  subcategory: "Reports",
+  description: "Report Status Card summarizes a report draft, review state, milestone progress, source count, and owner.",
+  preview: ReportStatusCardPreview,
+  variants: ["Draft", "Needs review", "Milestones", "Refresh action", "Report metrics"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-700", "gray-900", "brand-50", "brand-700", "success-600", "warning-600", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use in report libraries, dashboard workspaces, and generated briefing flows.", "Use milestones when a report has source sync, generation, and review steps."],
+  avoid: ["Do not use for generic documents without workflow state.", "Do not hide the review state in supporting text only."],
+  accessibility: ["Report title, review state, metrics, and milestones are visible text.", "Milestone icons are supplemental to the status labels."],
+  agentGuidance: ["Use Report Status Card when an AI-generated report has state, ownership, and review progress.", "Pair with Saved Report Card for report libraries and Review Queue for approvals."],
+  code: `import { ReportStatusCard } from "./ReportStatusCard";\n\n<ReportStatusCard />`,
+};
+
+export const insightQueueEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "insight-queue",
+  name: "Insight Queue",
+  subcategory: "Insights",
+  description: "Insight Queue lists agent-generated insights that are ready for review, promotion, or dismissal.",
+  preview: InsightQueuePreview,
+  variants: ["Ready insights", "Priority badge", "Review action", "Mixed tones"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-100", "gray-200", "gray-500", "gray-900", "brand-50", "brand-700", "success-50", "success-700", "warning-50", "warning-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use when multiple generated recommendations need human review.", "Use in analytics, marketing, and product workspaces where insights are a queue, not a single card."],
+  avoid: ["Do not use for raw logs or events; use Activity Feed.", "Do not show low-confidence insights without clear review language."],
+  accessibility: ["Each insight has visible title, summary, priority, and open action.", "Priority badges use text in addition to color."],
+  agentGuidance: ["Use Insight Queue when an agent has several candidate insights to review.", "Use Insight Card when one recommendation deserves focused emphasis."],
+  code: `import { InsightQueue } from "./InsightQueue";\n\n<InsightQueue />`,
+};
+
+export const workspaceSummaryEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "workspace-summary",
+  name: "Workspace Summary",
+  subcategory: "Workspace Chrome",
+  description: "Workspace Summary gives a high-level health snapshot across agents, sources, reports, and reviews.",
+  preview: WorkspaceSummaryPreview,
+  variants: ["Healthy", "Metric tiles", "Four-up summary", "Workspace health"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "info-50", "info-700", "success-50", "success-700", "warning-50", "warning-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use near the top of project home pages and workspace overview screens.", "Use when teams need a quick cross-system read before drilling into details."],
+  avoid: ["Do not use when a page needs one focused metric; use Stat Card or KPI Strip.", "Do not add metrics without clear ownership and definitions."],
+  accessibility: ["Metric labels and values are visible text.", "Status is text inside the badge, not color-only."],
+  agentGuidance: ["Use Workspace Summary for product home screens that aggregate multiple areas.", "Pair with Dashboard Header, Quick Action Panel, and Activity Feed."],
+  code: `import { WorkspaceSummary } from "./WorkspaceSummary";\n\n<WorkspaceSummary />`,
+};
+
+export const experimentCardEntry: CatalogEntry = {
+  ...dashboardDefaults,
+  id: "experiment-card",
+  name: "Experiment Card",
+  subcategory: "Evaluation",
+  description: "Experiment Card summarizes a running product or prompt experiment with coverage, signal, and audience metrics.",
+  preview: ExperimentCardPreview,
+  variants: ["Running", "Sample coverage", "Winning signal", "Audience metric", "Open action"],
+  props: [],
+  tokens: ["white", "gray-50", "gray-200", "gray-500", "gray-600", "gray-900", "brand-50", "brand-700", "radius-md", "radius-lg", "shadow-xs"],
+  usage: ["Use for prompt tests, model comparisons, content experiments, and dashboard A/B reads.", "Use when users need to understand status and early signal from one experiment."],
+  avoid: ["Do not use for completed reports; use Saved Report Card or Report Status Card.", "Do not show experiment wins without sample coverage or context."],
+  accessibility: ["Experiment name, state, progress, signal, and audience are visible text.", "Coverage uses the semantic Progress primitive."],
+  agentGuidance: ["Use Experiment Card when generated UI needs to show test state, sample progress, and early results.", "Pair with Evaluation Scorecard for deeper quality review."],
+  code: `import { ExperimentCard } from "./ExperimentCard";\n\n<ExperimentCard />`,
 };
