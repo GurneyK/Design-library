@@ -35,6 +35,14 @@ npm run build
 
 The build generates the agent manifest, type-checks the app, builds the static site into `site/`, writes the GitHub Pages index, and refreshes the manifest outputs.
 
+## QA
+
+```bash
+npm run qa
+```
+
+The QA command runs the production build and validates the generated catalog contract: manifest counts, duplicate IDs, required documentation fields, guidance arrays, kind/category counts, and source-file references.
+
 ## Deployment
 
 This repo deploys to GitHub Pages on every push to `main`.

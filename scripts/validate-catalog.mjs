@@ -1,0 +1,108 @@
+import { access, readFile } from "node:fs/promises";
+import path from "node:path";
+
+const root = process.cwd();
+const manifestPath = path.join(root, "manifest.json");
+const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+const errors = [];
+
+const entries = Array.isArray(manifest.entries) ? manifest.entries : [];
+const uniqueCategories = new Set(entries.map((entry) => entry.category));
+const uniqueKinds = new Set(entries.map((entry) => entry.kind));
+
+expect(manifest.schemaVersion, "Manifest must include schemaVersion.");
+expect(manifest.publicUrl, "Manifest must include publicUrl.");
+expect(Array.isArray(manifest.manifestUrls) && manifest.manifestUrls.length > 0, "Manifest must include at least one manifest URL.");
+expect(manifest.counts?.entries === entries.length, `Manifest count mismatch: counts.entries=${manifest.counts?.entries}, entries.length=${entries.length}.`);
+expect(manifest.counts?.categories === uniqueCategories.size, `Category count mismatch: counts.categories=${manifest.counts?.categories}, actual=${uniqueCategories.size}.`);
+
+const ids = new Map();
+for (const entry of entries) {
+  if (!entry?.id) {
+    errors.push("Entry is missing id.");
+    continue;
+  }
+  ids.set(entry.id, [...(ids.get(entry.id) ?? []), entry]);
+}
+
+for (const [id, matches] of ids) {
+  if (matches.length > 1) {
+    errors.push(`Duplicate entry id: ${id}.`);
+  }
+}
+
+for (const category of uniqueCategories) {
+  const expected = entries.filter((entry) => entry.category === category).length;
+  const actual = manifest.categoryCounts?.[category];
+  expect(actual === expected, `Category count mismatch for ${category}: manifest=${actual}, actual=${expected}.`);
+}
+
+for (const kind of uniqueKinds) {
+  const expected = entries.filter((entry) => entry.kind === kind).length;
+  const actual = manifest.kindCounts?.[kind];
+  expect(actual === expected, `Kind count mismatch for ${kind}: manifest=${actual}, actual=${expected}.`);
+}
+
+await Promise.all(entries.map((entry) => validateEntry(entry)));
+
+if (errors.length > 0) {
+  console.error("Catalog validation failed:");
+  for (const error of errors) {
+    console.error(`- ${error}`);
+  }
+  process.exit(1);
+}
+
+console.log(`Catalog validation passed: ${entries.length} entries, ${uniqueCategories.size} categories.`);
+
+async function validateEntry(entry) {
+  const prefix = entry.id ? `${entry.id}:` : "Unknown entry:";
+  const requiredStrings = ["id", "kind", "name", "category", "subcategory", "status", "description", "code", "sourceFile"];
+  const requiredArrays = ["source", "tokens", "useWhen", "doNotUseWhen", "accessibility", "agentGuidance"];
+
+  for (const key of requiredStrings) {
+    if (typeof entry[key] !== "string" || entry[key].trim().length === 0) {
+      errors.push(`${prefix} ${key} must be a non-empty string.`);
+    }
+  }
+
+  for (const key of requiredArrays) {
+    if (!Array.isArray(entry[key]) || entry[key].length === 0) {
+      errors.push(`${prefix} ${key} must be a non-empty array.`);
+    }
+  }
+
+  if (!["component", "foundation", "template"].includes(entry.kind)) {
+    errors.push(`${prefix} kind must be component, foundation, or template.`);
+  }
+
+  if (entry.kind !== "foundation" && (!Array.isArray(entry.variants) || entry.variants.length === 0)) {
+    errors.push(`${prefix} variants must be a non-empty array for components and templates.`);
+  }
+
+  if (entry.kind === "foundation" && !Array.isArray(entry.variants)) {
+    errors.push(`${prefix} variants must be an array.`);
+  }
+
+  if (!Array.isArray(entry.props)) {
+    errors.push(`${prefix} props must be an array.`);
+  }
+
+  if (entry.sourceFile) {
+    await checkSourceFile(prefix, entry.sourceFile);
+  }
+}
+
+async function checkSourceFile(prefix, sourceFile) {
+  try {
+    await access(path.join(root, sourceFile));
+  } catch {
+    errors.push(`${prefix} sourceFile does not exist: ${sourceFile}.`);
+  }
+}
+
+function expect(condition, message) {
+  if (!condition) {
+    errors.push(message);
+  }
+}
