@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const defaultHandoffUrl = "https://gurneyk.github.io/Design-library/developer-handoff.json";
@@ -6,8 +6,10 @@ const args = process.argv.slice(2);
 const entryId = args.find((arg) => !arg.startsWith("--"));
 const includeGlobals = args.includes("--globals");
 const dryRun = args.includes("--dry-run");
+const handoffFile = getOption("--handoff-file");
 const handoffUrl = getOption("--handoff-url") ?? defaultHandoffUrl;
 const outputDir = path.resolve(getOption("--out") ?? process.cwd());
+const sourceRoot = getOption("--source-root");
 
 process.exitCode = await main();
 
@@ -17,7 +19,7 @@ async function main() {
     return entryId ? 0 : 1;
   }
 
-  const handoff = await fetchJson(handoffUrl);
+  const handoff = handoffFile ? await readJsonFile(handoffFile) : await fetchJson(handoffUrl);
   const entry = handoff[entryId];
 
   if (!entry) {
@@ -56,7 +58,7 @@ async function main() {
       continue;
     }
 
-    const source = await fetchText(file.url);
+    const source = sourceRoot ? await readFile(path.join(path.resolve(sourceRoot), file.relativePath), "utf8") : await fetchText(file.url);
     await mkdir(path.dirname(targetPath), { recursive: true });
     await writeFile(targetPath, source, "utf8");
   }
@@ -112,10 +114,18 @@ Options:
   --out <path>          Output directory. Defaults to the current working directory.
   --globals            Also copy tailwind.config.ts and src/index.css.
   --dry-run            Print files without writing them.
+  --handoff-file <path> Read developer handoff JSON from a local file.
   --handoff-url <url>   Override the developer-handoff.json URL.
+  --source-root <path>  Copy files from a local repo instead of raw URLs.
 
 Examples:
   node scripts/copy-component.mjs run-card --dry-run
   node scripts/copy-component.mjs run-card --out ../my-app --globals
+  node scripts/copy-component.mjs run-card --handoff-file developer-handoff.json --source-root . --out ../my-app
 `);
+}
+
+async function readJsonFile(filePath) {
+  const json = await readFile(path.resolve(filePath), "utf8");
+  return JSON.parse(json);
 }

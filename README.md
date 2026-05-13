@@ -72,9 +72,12 @@ You can also copy any source-backed entry by ID from the command line:
 ```bash
 npm run copy:component -- run-card --dry-run
 npm run copy:component -- run-card --out ../my-app --globals
+npm run copy:component -- run-card --handoff-file developer-handoff.json --source-root . --out ../my-app
 ```
 
 Use `--globals` when the consuming app still needs the Habibi Tailwind token setup and base styles. Without `--globals`, the script copies only the component/template source and local component dependencies.
+
+Use `--handoff-file` and `--source-root` when testing from a local clone without downloading raw GitHub files.
 
 Programmatic handoff lookup:
 
