@@ -138,7 +138,7 @@ Source-backed entries must include source paths, raw URLs, copy scripts, and cop
 
 The copy helper also supports `--receipt`, which writes a local `DESIGN_LIBRARY_HANDOFF.md` file into the consuming app. The receipt is generated from `developer-handoff.json`; it is not a separate manifest field.
 
-`npm run handoff:check` verifies that source-backed handoff paths exist locally, that source/dependency/global path arrays align with their URL and import arrays, and that this contract stays synchronized with [Handoff readiness](HANDOFF-READINESS.md).
+`npm run handoff:check` verifies that source-backed handoff paths exist locally, that source/dependency/global path arrays align with their URL and import arrays, that local relative imports are included in `allCopyPaths`, and that this contract stays synchronized with [Handoff readiness](HANDOFF-READINESS.md).
 
 ## Stability Rules
 

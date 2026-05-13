@@ -80,6 +80,7 @@ That validates:
 - Every component and template resolves implementation source.
 - Source-backed entries include copy scripts and copy commands.
 - Listed source, dependency, and required global files exist in the repo.
+- Local relative imports inside copied files are included in `allCopyPaths`.
 - Generated `developer-handoff.json` matches the manifest payload.
 - This readiness page matches generated manifest and handoff counts.
 

@@ -51,6 +51,7 @@ Confirm:
 - `developerHandoff` exists for every manifest entry.
 - Source-backed entries have copy commands and copy scripts.
 - Source-backed entries point to real local source and dependency files.
+- Source-backed entries include local relative imports in `allCopyPaths`.
 - Agent Reference entry points to the public manifest endpoint.
 
 ## Deployment

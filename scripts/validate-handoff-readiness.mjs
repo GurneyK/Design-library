@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -6,6 +7,7 @@ const developerHandoff = JSON.parse(await readFile("developer-handoff.json", "ut
 const readinessDoc = await readFile("docs/HANDOFF-READINESS.md", "utf8");
 const errors = [];
 const root = process.cwd();
+const importExtensions = [".ts", ".tsx", ".js", ".jsx"];
 
 const entries = Array.isArray(manifest.entries) ? manifest.entries : [];
 const statusCounts = {};
@@ -108,6 +110,8 @@ async function validateHandoffFiles(entry, handoff) {
       `${prefix} allCopyPaths must include dependency path ${dependencyPath}.`,
     );
   }
+
+  await validateLocalImportClosure(prefix, handoff.allCopyPaths ?? []);
 }
 
 function expectSameLength(prefix, leftName, left = [], rightName, right = []) {
@@ -125,6 +129,63 @@ async function expectFileExists(prefix, filePath) {
   } catch {
     errors.push(`${prefix} handoff file path does not exist: ${filePath}.`);
   }
+}
+
+async function validateLocalImportClosure(prefix, copyPaths) {
+  const copySet = new Set(copyPaths);
+
+  for (const copyPath of copyPaths) {
+    const content = await readFile(path.join(root, copyPath), "utf8");
+    const importSpecifiers = extractLocalImportSpecifiers(content);
+
+    for (const specifier of importSpecifiers) {
+      const resolved = resolveLocalImport(path.dirname(copyPath), specifier);
+      if (!resolved) {
+        errors.push(`${prefix} local import could not be resolved from ${copyPath}: ${specifier}.`);
+        continue;
+      }
+
+      if (!copySet.has(resolved)) {
+        errors.push(`${prefix} allCopyPaths must include local import ${resolved} referenced by ${copyPath}.`);
+      }
+    }
+  }
+}
+
+function extractLocalImportSpecifiers(content) {
+  const specifiers = new Set();
+  const patterns = [
+    /(?:import|export)\s+(?:type\s+)?(?:[^'";]*?\s+from\s+)?["']([^"']+)["']/g,
+    /import\(\s*["']([^"']+)["']\s*\)/g,
+  ];
+
+  for (const pattern of patterns) {
+    for (const match of content.matchAll(pattern)) {
+      if (match[1]?.startsWith(".")) {
+        specifiers.add(match[1]);
+      }
+    }
+  }
+
+  return [...specifiers];
+}
+
+function resolveLocalImport(fromDirectory, specifier) {
+  const basePath = path.normalize(path.join(fromDirectory, specifier));
+  const candidates = [
+    ...importExtensions.map((extension) => `${basePath}${extension}`),
+    ...importExtensions.map((extension) => path.join(basePath, `index${extension}`)),
+  ];
+
+  for (const candidate of candidates) {
+    if (fileExistsSync(candidate)) {
+      return candidate.replaceAll("\\", "/");
+    }
+  }
+}
+
+function fileExistsSync(filePath) {
+  return existsSync(path.join(root, filePath));
 }
 
 function expectDocRow(label, count) {

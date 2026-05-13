@@ -31,6 +31,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Optional `--receipt` output for copied components and templates.
 - GitHub Pages deployment now runs `npm run qa` before publishing.
 - Handoff readiness validation now checks local source, dependency, and global setup paths.
+- Handoff readiness validation now checks copied local import closure.
 - Agent consumption guide.
 - Review guide.
 - Refreshed roadmap and MVP status docs.
