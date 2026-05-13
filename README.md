@@ -67,6 +67,15 @@ To reuse a component in another React + Tailwind app, copy the implementation so
 
 For source-backed entries, the `Developer handoff` section also includes generated PowerShell and Bash copy scripts that download the implementation source and local dependency files from raw GitHub URLs.
 
+You can also copy any source-backed entry by ID from the command line:
+
+```bash
+npm run copy:component -- run-card --dry-run
+npm run copy:component -- run-card --out ../my-app --globals
+```
+
+Use `--globals` when the consuming app still needs the Habibi Tailwind token setup and base styles. Without `--globals`, the script copies only the component/template source and local component dependencies.
+
 Programmatic handoff lookup:
 
 ```ts

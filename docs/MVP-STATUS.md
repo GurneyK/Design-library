@@ -56,6 +56,7 @@ The current MVP includes:
 - A standalone `developer-handoff.json` endpoint for scripts, agents, and dev tooling.
 - Lazy-loaded catalog modules so the initial app shell stays small and previews load on demand.
 - Generated PowerShell and Bash copy scripts for source-backed entries.
+- A `npm run copy:component -- <entry-id>` helper for copying source-backed entries into another React + Tailwind project.
 
 ## What Is Still Post-MVP
 
