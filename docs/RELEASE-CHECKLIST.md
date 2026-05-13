@@ -50,6 +50,7 @@ Confirm:
 - Entry counts match `docs/MVP-STATUS.md`.
 - `developerHandoff` exists for every manifest entry.
 - Source-backed entries have copy commands and copy scripts.
+- Source-backed entries point to real local source and dependency files.
 - Agent Reference entry points to the public manifest endpoint.
 
 ## Deployment
