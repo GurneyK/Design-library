@@ -261,6 +261,9 @@ export type DeveloperHandoffData = {
   allGithubUrls: string[];
   allImportPaths: string[];
   allRawUrls: string[];
+  catalogId: string;
+  copyCommand: string;
+  copyCommandWithGlobals: string;
   copyInstructions: string;
   copyScript?: string;
   copyScriptLanguage?: string;

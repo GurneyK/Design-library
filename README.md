@@ -84,6 +84,8 @@ const handoff = await fetch("https://gurneyk.github.io/Design-library/developer-
 );
 
 console.log(handoff["run-card"].allCopyPaths);
+console.log(handoff["run-card"].copyCommand);
+console.log(handoff["run-card"].copyCommandWithGlobals);
 console.log(handoff["run-card"].packageInstallCommand);
 console.log(handoff["run-card"].requiredGlobalPaths);
 console.log(handoff["run-card"].copyScripts.powershell);

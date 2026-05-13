@@ -45,6 +45,7 @@ test.describe("Design Library visual QA", () => {
     await expect(page.getByRole("heading", { name: "Citation Chip", level: 2 })).toBeVisible();
     await expect(page.getByRole("article").getByText("Agent UI")).toBeVisible();
     await expect(page.locator("#developer-handoff").getByRole("heading", { name: "Implementation source" })).toBeVisible();
+    await expect(page.locator("#developer-handoff").getByRole("heading", { name: "CLI copy command" })).toBeVisible();
     await expect(page.locator("#developer-handoff").getByRole("heading", { name: "PowerShell copy script" })).toBeVisible();
     await expect(page.locator("#developer-handoff").getByRole("heading", { name: "Bash copy script" })).toBeVisible();
   });
@@ -91,6 +92,9 @@ test.describe("Design Library visual QA", () => {
     expect(handoff["run-card"].copyScript).toContain("Invoke-WebRequest");
     expect(handoff["run-card"].copyScripts.powershell).toContain("Invoke-WebRequest");
     expect(handoff["run-card"].copyScripts.bash).toContain("curl -L");
+    expect(handoff["run-card"].catalogId).toBe("run-card");
+    expect(handoff["run-card"].copyCommand).toContain("npm run copy:component -- run-card");
+    expect(handoff["run-card"].copyCommandWithGlobals).toContain("--globals");
     expect(handoff["run-card"].packageInstallCommand).toContain("lucide-react");
     expect(handoff["run-card"].importAlias).toContain("@/*");
     expect(handoff["run-card"].requiredGlobalPaths).toContain("tailwind.config.ts");

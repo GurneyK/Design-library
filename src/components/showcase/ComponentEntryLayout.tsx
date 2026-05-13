@@ -134,6 +134,9 @@ export function ComponentEntryLayout({ entry }: ComponentEntryLayoutProps) {
 }
 
 type DeveloperHandoffData = {
+  catalogId: string;
+  copyCommand: string;
+  copyCommandWithGlobals: string;
   copyInstructions: string;
   copyScript?: string;
   copyScriptLanguage?: string;
@@ -181,6 +184,14 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
       <div className="rounded-habibiMd bg-gray-50 p-4 text-sm leading-6 text-gray-700">
         {handoff.copyInstructions}
       </div>
+
+      {handoff.copyCommand ? (
+        <CopyScriptBlock
+          code={handoff.copyCommandWithGlobals || handoff.copyCommand}
+          description={`Catalog ID: ${handoff.catalogId}. Run from the Design Library repo root, then point --out at the consuming app.`}
+          title="CLI copy command"
+        />
+      ) : null}
 
       <div className="grid gap-4 lg:grid-cols-2">
         <SetupBlock title="Install command" value={handoff.packageInstallCommand} />

@@ -287,6 +287,7 @@ function createDeveloperHandoff(entry, sourceIndex) {
     return {
       copyStatus: "reference-endpoint",
       usageSnippetStatus: "fetch-example",
+      catalogId: entry.id,
       repositoryUrl,
       sourcePaths: ["manifest.json"],
       dependencyPaths: [],
@@ -301,6 +302,8 @@ function createDeveloperHandoff(entry, sourceIndex) {
       allRawUrls: [`${rawRepositoryUrl}/manifest.json`],
       allImportPaths: ["https://gurneyk.github.io/Design-library/manifest.json"],
       copyScripts: {},
+      copyCommand: "",
+      copyCommandWithGlobals: "",
       packageInstallCommand: "No package install required for the manifest endpoint.",
       importAlias: "Public HTTPS endpoint.",
       requiredGlobalPaths: [],
@@ -332,6 +335,7 @@ function createDeveloperHandoff(entry, sourceIndex) {
   return {
     copyStatus,
     usageSnippetStatus: "example",
+    catalogId: entry.id,
     repositoryUrl,
     sourcePaths,
     dependencyPaths,
@@ -354,6 +358,8 @@ function createDeveloperHandoff(entry, sourceIndex) {
             bash: createBashCopyScript(allCopyPaths, allRawUrls),
           }
         : {},
+    copyCommand: copyStatus === "source-available" ? `npm run copy:component -- ${entry.id}` : "",
+    copyCommandWithGlobals: copyStatus === "source-available" ? `npm run copy:component -- ${entry.id} --globals` : "",
     packageInstallCommand,
     importAlias,
     requiredGlobalPaths,

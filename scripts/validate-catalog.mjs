@@ -166,6 +166,10 @@ function validateDeveloperHandoff(prefix, entry) {
     }
   }
 
+  if (handoff.catalogId !== entry.id) {
+    errors.push(`${prefix} developerHandoff.catalogId must match the entry id.`);
+  }
+
   if (entry.kind !== "foundation" && entry.category !== "Agent Reference" && handoff.copyStatus !== "source-available") {
     errors.push(`${prefix} developerHandoff must resolve implementation source for component/template entries.`);
   }
@@ -187,6 +191,12 @@ function validateDeveloperHandoff(prefix, entry) {
     }
     if (typeof handoff.copyScript !== "string" || !handoff.copyScript.includes("Invoke-WebRequest")) {
       errors.push(`${prefix} developerHandoff.copyScript must include a PowerShell download script.`);
+    }
+    if (typeof handoff.copyCommand !== "string" || !handoff.copyCommand.includes(`npm run copy:component -- ${entry.id}`)) {
+      errors.push(`${prefix} developerHandoff.copyCommand must include the catalog copy helper command.`);
+    }
+    if (typeof handoff.copyCommandWithGlobals !== "string" || !handoff.copyCommandWithGlobals.includes("--globals")) {
+      errors.push(`${prefix} developerHandoff.copyCommandWithGlobals must include --globals.`);
     }
     if (!handoff.copyScripts || typeof handoff.copyScripts !== "object") {
       errors.push(`${prefix} developerHandoff.copyScripts is required.`);
