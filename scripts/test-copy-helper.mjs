@@ -7,6 +7,31 @@ const root = process.cwd();
 const tempDir = await mkdtemp(path.join(os.tmpdir(), "design-library-copy-helper-"));
 
 try {
+  const list = await run([
+    "scripts/copy-component.mjs",
+    "--list",
+    "--manifest-file",
+    "manifest.json",
+    "--handoff-file",
+    "developer-handoff.json",
+  ]);
+  if (!list.stdout.includes("button") || !list.stdout.includes("source-available")) {
+    throw new Error("Copy helper list output should include component IDs and copy status.");
+  }
+
+  const search = await run([
+    "scripts/copy-component.mjs",
+    "--search",
+    "run",
+    "--manifest-file",
+    "manifest.json",
+    "--handoff-file",
+    "developer-handoff.json",
+  ]);
+  if (!search.stdout.includes("run-card")) {
+    throw new Error("Copy helper search output should include matching component IDs.");
+  }
+
   await run(["scripts/copy-component.mjs", "run-card", "--dry-run", "--handoff-file", "developer-handoff.json"]);
   await run([
     "scripts/copy-component.mjs",

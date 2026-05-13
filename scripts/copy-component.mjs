@@ -2,21 +2,36 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const defaultHandoffUrl = "https://gurneyk.github.io/Design-library/developer-handoff.json";
+const defaultManifestUrl = "https://gurneyk.github.io/Design-library/manifest.json";
 const args = process.argv.slice(2);
-const entryId = args.find((arg) => !arg.startsWith("--"));
+const entryId = getEntryId();
 const includeGlobals = args.includes("--globals");
+const listEntries = args.includes("--list");
 const dryRun = args.includes("--dry-run");
 const handoffFile = getOption("--handoff-file");
 const handoffUrl = getOption("--handoff-url") ?? defaultHandoffUrl;
+const manifestFile = getOption("--manifest-file");
+const manifestUrl = getOption("--manifest-url") ?? defaultManifestUrl;
 const outputDir = path.resolve(getOption("--out") ?? process.cwd());
+const searchQuery = getOption("--search");
 const sourceRoot = getOption("--source-root");
 
 process.exitCode = await main();
 
 async function main() {
-  if (!entryId || args.includes("--help") || args.includes("-h")) {
+  if (args.includes("--help") || args.includes("-h")) {
     printHelp();
-    return entryId ? 0 : 1;
+    return 0;
+  }
+
+  if (listEntries || searchQuery) {
+    await printEntries();
+    return 0;
+  }
+
+  if (!entryId) {
+    printHelp();
+    return 1;
   }
 
   const handoff = handoffFile ? await readJsonFile(handoffFile) : await fetchJson(handoffUrl);
@@ -71,6 +86,56 @@ async function main() {
   return 0;
 }
 
+async function printEntries() {
+  const manifest = manifestFile ? await readJsonFile(manifestFile) : await fetchJson(manifestUrl);
+  const handoff = handoffFile ? await readJsonFile(handoffFile) : await fetchJson(handoffUrl);
+  const query = searchQuery?.toLowerCase();
+  const entries = Array.isArray(manifest.entries) ? manifest.entries : [];
+  const matches = entries.filter((entry) => {
+    if (!query) {
+      return true;
+    }
+
+    return [entry.id, entry.name, entry.category, entry.subcategory, entry.kind]
+      .filter(Boolean)
+      .some((value) => String(value).toLowerCase().includes(query));
+  });
+
+  console.log(`Design Library entries: ${matches.length}${query ? ` matching "${searchQuery}"` : ""}`);
+  console.log("ID                                      Kind        Copy status        Category                         Name");
+
+  for (const entry of matches) {
+    const copyStatus = handoff[entry.id]?.copyStatus ?? "unknown";
+    console.log(
+      `${pad(entry.id, 39)} ${pad(entry.kind, 11)} ${pad(copyStatus, 18)} ${pad(entry.category, 32)} ${entry.name}`,
+    );
+  }
+}
+
+function getEntryId() {
+  const optionsWithValues = new Set([
+    "--handoff-file",
+    "--handoff-url",
+    "--manifest-file",
+    "--manifest-url",
+    "--out",
+    "--search",
+    "--source-root",
+  ]);
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (optionsWithValues.has(arg)) {
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--")) {
+      continue;
+    }
+    return arg;
+  }
+}
+
 function getOption(name) {
   const exact = args.findIndex((arg) => arg === name);
   if (exact >= 0) {
@@ -86,6 +151,11 @@ function toFilePairs(paths = [], urls = []) {
     relativePath,
     url: urls[index],
   }));
+}
+
+function pad(value, length) {
+  const text = String(value ?? "");
+  return text.length >= length ? text.slice(0, length - 1) + " " : text.padEnd(length, " ");
 }
 
 async function fetchJson(url) {
@@ -109,6 +179,8 @@ function printHelp() {
 
 Usage:
   node scripts/copy-component.mjs <entry-id> [options]
+  node scripts/copy-component.mjs --list [options]
+  node scripts/copy-component.mjs --search <query> [options]
 
 Options:
   --out <path>          Output directory. Defaults to the current working directory.
@@ -116,9 +188,12 @@ Options:
   --dry-run            Print files without writing them.
   --handoff-file <path> Read developer handoff JSON from a local file.
   --handoff-url <url>   Override the developer-handoff.json URL.
+  --manifest-file <path> Read manifest JSON from a local file.
+  --manifest-url <url>  Override the manifest.json URL.
   --source-root <path>  Copy files from a local repo instead of raw URLs.
 
 Examples:
+  node scripts/copy-component.mjs --search run
   node scripts/copy-component.mjs run-card --dry-run
   node scripts/copy-component.mjs run-card --out ../my-app --globals
   node scripts/copy-component.mjs run-card --handoff-file developer-handoff.json --source-root . --out ../my-app

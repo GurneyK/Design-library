@@ -70,10 +70,14 @@ For source-backed entries, the `Developer handoff` section also includes generat
 You can also copy any source-backed entry by ID from the command line:
 
 ```bash
+npm run copy:component -- --search run
+npm run copy:component -- --list
 npm run copy:component -- run-card --dry-run
 npm run copy:component -- run-card --out ../my-app --globals
 npm run copy:component -- run-card --handoff-file developer-handoff.json --source-root . --out ../my-app
 ```
+
+Use `--search` or `--list` to discover catalog IDs from the terminal before copying a component.
 
 Use `--globals` when the consuming app still needs the Habibi Tailwind token setup and base styles. Without `--globals`, the script copies only the component/template source and local component dependencies.
 
