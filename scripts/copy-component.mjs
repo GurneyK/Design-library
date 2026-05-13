@@ -8,11 +8,13 @@ const entryId = getEntryId();
 const includeGlobals = args.includes("--globals");
 const listEntries = args.includes("--list");
 const dryRun = args.includes("--dry-run");
+const writeReceipt = args.includes("--receipt");
 const handoffFile = getOption("--handoff-file");
 const handoffUrl = getOption("--handoff-url") ?? defaultHandoffUrl;
 const manifestFile = getOption("--manifest-file");
 const manifestUrl = getOption("--manifest-url") ?? defaultManifestUrl;
 const outputDir = path.resolve(getOption("--out") ?? process.cwd());
+const receiptFileName = getOption("--receipt-file") ?? "DESIGN_LIBRARY_HANDOFF.md";
 const searchQuery = getOption("--search");
 const sourceRoot = getOption("--source-root");
 
@@ -82,6 +84,16 @@ async function main() {
     console.log(`Global setup files not copied. Re-run with --globals to copy: ${entry.requiredGlobalPaths.join(", ")}`);
   }
 
+  if (writeReceipt) {
+    const receiptPath = path.join(outputDir, receiptFileName);
+    console.log(`${dryRun ? "Would write" : "Writing"} ${receiptFileName}`);
+
+    if (!dryRun) {
+      await mkdir(path.dirname(receiptPath), { recursive: true });
+      await writeFile(receiptPath, buildReceipt(entry, allFiles, { includeGlobals }), "utf8");
+    }
+  }
+
   console.log(dryRun ? "Dry run complete." : "Copy complete.");
   return 0;
 }
@@ -119,6 +131,7 @@ function getEntryId() {
     "--manifest-file",
     "--manifest-url",
     "--out",
+    "--receipt-file",
     "--search",
     "--source-root",
   ]);
@@ -190,12 +203,15 @@ Options:
   --handoff-url <url>   Override the developer-handoff.json URL.
   --manifest-file <path> Read manifest JSON from a local file.
   --manifest-url <url>  Override the manifest.json URL.
+  --receipt             Write DESIGN_LIBRARY_HANDOFF.md into the output directory.
+  --receipt-file <path> Override the handoff receipt filename.
   --source-root <path>  Copy files from a local repo instead of raw URLs.
 
 Examples:
   node scripts/copy-component.mjs --search run
   node scripts/copy-component.mjs run-card --dry-run
   node scripts/copy-component.mjs run-card --out ../my-app --globals
+  node scripts/copy-component.mjs run-card --out ../my-app --receipt
   node scripts/copy-component.mjs run-card --handoff-file developer-handoff.json --source-root . --out ../my-app
 `);
 }
@@ -203,4 +219,53 @@ Examples:
 async function readJsonFile(filePath) {
   const json = await readFile(path.resolve(filePath), "utf8");
   return JSON.parse(json);
+}
+
+function buildReceipt(entry, files, options) {
+  const lines = [
+    "# Design Library Handoff",
+    "",
+    `Catalog ID: ${entry.catalogId}`,
+    "",
+    "## Setup",
+    "",
+    "```bash",
+    entry.packageInstallCommand,
+    "```",
+    "",
+    `Import alias: ${entry.importAlias}`,
+    "",
+    "Required global setup:",
+    "",
+    ...toBullets(entry.requiredGlobalPaths),
+    "",
+    options.includeGlobals
+      ? "Global setup files were included in this copy."
+      : "Global setup files were not copied. Re-run with `--globals` if this app does not already include equivalent Habibi Tailwind tokens and base styles.",
+    "",
+    "## Copied Files",
+    "",
+    ...toBullets(files.map((file) => file.relativePath)),
+    "",
+    "## Source Links",
+    "",
+    ...toBullets(entry.allGithubUrls),
+    "",
+    "## Notes",
+    "",
+    entry.copyInstructions,
+    "",
+    "After copying, run the consuming app locally and confirm Tailwind scans the copied `src/**/*.{ts,tsx}` files.",
+    "",
+  ];
+
+  return `${lines.join("\n")}\n`;
+}
+
+function toBullets(values = []) {
+  if (values.length === 0) {
+    return ["- None"];
+  }
+
+  return values.map((value) => `- ${value}`);
 }

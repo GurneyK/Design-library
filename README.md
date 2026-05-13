@@ -90,6 +90,7 @@ npm run copy:component -- --search run
 npm run copy:component -- --list
 npm run copy:component -- run-card --dry-run
 npm run copy:component -- run-card --out ../my-app --globals
+npm run copy:component -- run-card --out ../my-app --receipt
 npm run copy:component -- run-card --handoff-file developer-handoff.json --source-root . --out ../my-app
 npm run handoff:check
 ```
@@ -97,6 +98,8 @@ npm run handoff:check
 Use `--search` or `--list` to discover catalog IDs from the terminal before copying a component.
 
 Use `--globals` when the consuming app still needs the Habibi Tailwind token setup and base styles. Without `--globals`, the script copies only the component/template source and local component dependencies.
+
+Use `--receipt` when you want the copy helper to write `DESIGN_LIBRARY_HANDOFF.md` into the target app with setup commands, copied files, source links, and follow-up checks.
 
 Use `--handoff-file` and `--source-root` when testing from a local clone without downloading raw GitHub files.
 

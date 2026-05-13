@@ -61,6 +61,7 @@ For every source-backed entry, `developer-handoff.json` includes:
 - Bash copy script.
 - `npm run copy:component` command.
 - `npm run copy:component -- --globals` command.
+- Optional local receipt support through `npm run copy:component -- <entry-id> --receipt`.
 
 The live component page also shows the same handoff data inside the Developer Handoff section.
 
@@ -86,6 +87,7 @@ For a spot check, run:
 ```bash
 npm run copy:component -- button --dry-run
 npm run copy:component -- template-agent-chat-workspace --dry-run
+npm run copy:component -- run-card --handoff-file developer-handoff.json --source-root . --out ../copy-test --receipt
 ```
 
 For a local copy test without downloading from GitHub:

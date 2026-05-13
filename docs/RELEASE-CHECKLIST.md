@@ -32,6 +32,7 @@ Expected:
 - Release/version validation passes.
 - Markdown local-link validation passes.
 - Handoff readiness validation passes.
+- Copy-helper receipt generation passes.
 - Playwright desktop and mobile smoke tests pass.
 
 ## Generated Contracts

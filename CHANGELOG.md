@@ -28,6 +28,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Component authoring guide for future contributors.
 - Handoff readiness summary for full-stack reuse coverage.
 - Handoff readiness validation in `npm run qa` and `npm run handoff:check`.
+- Optional `--receipt` output for copied components and templates.
 - Agent consumption guide.
 - Review guide.
 - Refreshed roadmap and MVP status docs.

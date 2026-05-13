@@ -1,4 +1,4 @@
-import { mkdtemp, readdir, rm } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawn } from "node:child_process";
@@ -43,6 +43,7 @@ try {
     "--out",
     tempDir,
     "--globals",
+    "--receipt",
   ]);
 
   const copiedFiles = await listFiles(tempDir);
@@ -53,12 +54,18 @@ try {
     "src/components/ui/progress/Progress.tsx",
     "tailwind.config.ts",
     "src/index.css",
+    "DESIGN_LIBRARY_HANDOFF.md",
   ];
 
   for (const expectedFile of expectedFiles) {
     if (!copiedFiles.includes(expectedFile)) {
       throw new Error(`Copy helper did not create ${expectedFile}.`);
     }
+  }
+
+  const receipt = await readFile(path.join(tempDir, "DESIGN_LIBRARY_HANDOFF.md"), "utf8");
+  if (!receipt.includes("Catalog ID: run-card") || !receipt.includes("src/components/ui/dashboard/RunCard.tsx")) {
+    throw new Error("Copy helper receipt should include the catalog ID and copied source files.");
   }
 
   const unknown = await run(["scripts/copy-component.mjs", "unknown-entry", "--handoff-file", "developer-handoff.json"], {

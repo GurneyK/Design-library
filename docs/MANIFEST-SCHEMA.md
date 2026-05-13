@@ -136,6 +136,8 @@ Required handoff fields:
 
 Source-backed entries must include source paths, raw URLs, copy scripts, and copy commands. Foundation entries provide guidance rather than component source files.
 
+The copy helper also supports `--receipt`, which writes a local `DESIGN_LIBRARY_HANDOFF.md` file into the consuming app. The receipt is generated from `developer-handoff.json`; it is not a separate manifest field.
+
 ## Stability Rules
 
 - Existing `id` values should remain stable.

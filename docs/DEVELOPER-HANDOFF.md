@@ -57,6 +57,14 @@ npm run copy:component -- run-card --out ../my-app --globals
 
 Use `--globals` when the consuming app does not already have the Design Library Tailwind token extensions and base focus styles.
 
+Write a local receipt into the consuming app:
+
+```bash
+npm run copy:component -- run-card --out ../my-app --receipt
+```
+
+The receipt file is named `DESIGN_LIBRARY_HANDOFF.md` by default. It records the catalog ID, install command, import alias, copied files, source links, and setup notes so the receiving engineer has a local checklist next to the copied source.
+
 ## Local Clone Mode
 
 When testing from a local clone without downloading raw GitHub files:

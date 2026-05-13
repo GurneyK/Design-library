@@ -165,6 +165,7 @@ For a specific source-backed component, test the copy path:
 ```bash
 npm run copy:component -- <entry-id> --dry-run
 npm run copy:component -- <entry-id> --handoff-file developer-handoff.json --source-root . --out ../copy-test
+npm run copy:component -- <entry-id> --handoff-file developer-handoff.json --source-root . --out ../copy-test --receipt
 ```
 
 Use `--globals` when the consuming app also needs the Habibi Tailwind config and base CSS:
