@@ -58,6 +58,7 @@ The current MVP includes:
 - Generated PowerShell and Bash copy scripts for source-backed entries.
 - A `npm run copy:component -- <entry-id>` helper for copying source-backed entries into another React + Tailwind project.
 - A developer handoff guide covering install requirements, CLI discovery, copy commands, local clone mode, programmatic handoff, and reuse QA.
+- An agent consumption guide covering manifest selection, composition rules, gap behavior, prompt patterns, and generated UI review checks.
 
 ## What Is Still Post-MVP
 
@@ -89,7 +90,8 @@ For a developer review, start with:
 
 For an AI-agent review, start with:
 
-1. https://gurneyk.github.io/Design-library/manifest.json
-2. Entry `agentGuidance` fields
-3. Entry `usage` and `avoid` fields
-4. Entry `tokens`, `variants`, and `code`
+1. `docs/AGENT-CONSUMPTION.md`
+2. https://gurneyk.github.io/Design-library/manifest.json
+3. Entry `agentGuidance` fields
+4. Entry `usage` and `avoid` fields
+5. Entry `tokens`, `variants`, and `code`

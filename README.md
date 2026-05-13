@@ -8,6 +8,8 @@ Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
 
 Developer handoff JSON: https://gurneyk.github.io/Design-library/developer-handoff.json
 
+Agent consumption guide: [Agent consumption](docs/AGENT-CONSUMPTION.md)
+
 ## What This Contains
 
 - 224 catalog entries across foundations, primitives, layout, navigation, data entry, forms, data display, charts, feedback, agent UI, dashboard/product patterns, and templates.
@@ -116,6 +118,7 @@ Deployment flow:
 
 ## Project Docs
 
+- [Agent consumption](docs/AGENT-CONSUMPTION.md)
 - [Project brief](docs/PROJECT-BRIEF.md)
 - [Developer handoff](docs/DEVELOPER-HANDOFF.md)
 - [Taxonomy](docs/TAXONOMY.md)
