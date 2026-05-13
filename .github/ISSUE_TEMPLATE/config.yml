@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Live Design Library preview
+    url: https://gurneyk.github.io/Design-library/
+    about: Open the current deployed catalog before filing feedback.
+  - name: Team review packet
+    url: https://github.com/GurneyK/Design-library/blob/main/docs/TEAM-REVIEW-PACKET.md
+    about: Use the review route and feedback labels.

@@ -36,6 +36,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Agent consumption guide.
 - Review guide.
 - Team review packet for sharing the MVP with designers, engineers, product partners, and AI reviewers.
+- GitHub issue templates for component, template/block, and agent-manifest feedback.
 - Refreshed roadmap and MVP status docs.
 - Catalog validation and copy-helper validation in `npm run qa`.
 - Release/version validation in `npm run qa` and `npm run version:check`.

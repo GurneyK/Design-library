@@ -16,6 +16,8 @@ Review guide: [Review guide](docs/REVIEW-GUIDE.md)
 
 Team review packet: [Team review packet](docs/TEAM-REVIEW-PACKET.md)
 
+Review feedback can be filed through the GitHub issue templates for component, template/block, and agent-manifest feedback.
+
 Component authoring guide: [Component authoring](docs/COMPONENT-AUTHORING.md)
 
 Handoff readiness: [Handoff readiness](docs/HANDOFF-READINESS.md)

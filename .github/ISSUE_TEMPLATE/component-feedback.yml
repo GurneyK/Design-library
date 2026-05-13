@@ -1,0 +1,68 @@
+name: Component feedback
+description: Report feedback on a Design Library component entry.
+title: "[Component]: "
+labels: ["component-feedback"]
+body:
+  - type: input
+    id: entry
+    attributes:
+      label: Component entry
+      description: Component name or catalog ID.
+      placeholder: "Button, chat-message, run-card"
+    validations:
+      required: true
+  - type: dropdown
+    id: feedback_type
+    attributes:
+      label: Feedback type
+      options:
+        - visual-fidelity
+        - handoff
+        - accessibility
+        - agent-readability
+        - content-polish
+        - figma-backport
+        - other
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - critical
+        - high
+        - medium
+        - low
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: Issue
+      description: What feels wrong, missing, confusing, or blocked?
+      placeholder: "The disabled state is not visually distinct enough."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior or visual
+      description: What should happen instead?
+      placeholder: "Disabled should use lower contrast, remove hover affordance, and keep readable text."
+  - type: textarea
+    id: reference
+    attributes:
+      label: Reference
+      description: Add Figma link, screenshot, code snippet, or related component if available.
+  - type: checkboxes
+    id: review_surface
+    attributes:
+      label: Surfaces checked
+      options:
+        - label: Live preview
+        - label: Code snippet
+        - label: Props / variants
+        - label: Tokens
+        - label: Developer handoff
+        - label: Manifest / agent guidance

@@ -1,0 +1,54 @@
+name: Agent manifest feedback
+description: Report feedback on manifest, metadata, or AI-agent usability.
+title: "[Agent manifest]: "
+labels: ["agent-readability"]
+body:
+  - type: dropdown
+    id: feedback_type
+    attributes:
+      label: Feedback type
+      options:
+        - missing guidance
+        - wrong component selection
+        - missing props or variants
+        - unclear useWhen / doNotUseWhen
+        - handoff metadata
+        - manifest schema
+        - other
+    validations:
+      required: true
+  - type: input
+    id: entry
+    attributes:
+      label: Related entry
+      description: Catalog ID, category, or template, if this is about a specific entry.
+      placeholder: "chat-message, Templates / Blocks, Agent UI"
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - critical
+        - high
+        - medium
+        - low
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: Issue
+      description: What would make an AI agent choose or compose incorrectly?
+      placeholder: "The manifest does not explain when to use CitationChip versus SourceDrawer."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected metadata or guidance
+      description: What should be added, changed, or clarified?
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Prompt or generated output
+      description: Paste the prompt, generated UI, or manifest field that showed the issue.

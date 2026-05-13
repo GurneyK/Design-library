@@ -1,0 +1,66 @@
+name: Template or block feedback
+description: Report feedback on a Templates / Blocks entry.
+title: "[Template]: "
+labels: ["template-feedback"]
+body:
+  - type: input
+    id: entry
+    attributes:
+      label: Template or block entry
+      description: Template name or catalog ID.
+      placeholder: "template-agent-chat-workspace"
+    validations:
+      required: true
+  - type: dropdown
+    id: feedback_type
+    attributes:
+      label: Feedback type
+      options:
+        - template-gap
+        - visual-fidelity
+        - handoff
+        - accessibility
+        - agent-readability
+        - content-polish
+        - other
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - critical
+        - high
+        - medium
+        - low
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: Issue
+      description: What workflow, state, layout, or composition concern should be addressed?
+      placeholder: "The dashboard template does not show a realistic empty-data state."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected workflow or composition
+      description: What should the template represent or compose from?
+  - type: textarea
+    id: reference
+    attributes:
+      label: Reference
+      description: Add product screenshot, Figma link, workflow note, or comparable pattern if available.
+  - type: checkboxes
+    id: review_surface
+    attributes:
+      label: Surfaces checked
+      options:
+        - label: Live template preview
+        - label: Composes from list
+        - label: Copyable code
+        - label: Developer handoff
+        - label: Agent guidance

@@ -111,6 +111,12 @@ Use these labels when collecting feedback:
 | `figma-backport` | Code-side component should be recreated or reconciled in Figma. |
 | `content-polish` | Naming, wording, usage guidance, or docs clarity. |
 
+GitHub issue templates are available for:
+
+- Component feedback
+- Template or block feedback
+- Agent manifest feedback
+
 ## MVP Confidence
 
 Current confidence: 92-94%.
