@@ -77,4 +77,15 @@ test.describe("Design Library visual QA", () => {
     expect(button.developerHandoff.copyStatus).toBe("source-available");
     expect(button.developerHandoff.sourcePaths).toContain("src/components/ui/button/Button.tsx");
   });
+
+  test("publishes standalone developer handoff data", async ({ request }) => {
+    const response = await request.get("/developer-handoff.json");
+    expect(response.ok()).toBeTruthy();
+
+    const handoff = await response.json();
+    expect(handoff["run-card"].copyStatus).toBe("source-available");
+    expect(handoff["run-card"].sourcePaths).toContain("src/components/ui/dashboard/RunCard.tsx");
+    expect(handoff["run-card"].dependencyPaths).toContain("src/components/ui/progress/Progress.tsx");
+    expect(handoff["agent-manifest"].copyStatus).toBe("reference-endpoint");
+  });
 });

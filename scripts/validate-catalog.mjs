@@ -3,7 +3,9 @@ import path from "node:path";
 
 const root = process.cwd();
 const manifestPath = path.join(root, "manifest.json");
+const developerHandoffPath = path.join(root, "developer-handoff.json");
 const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+const developerHandoff = JSON.parse(await readFile(developerHandoffPath, "utf8"));
 const errors = [];
 
 const entries = Array.isArray(manifest.entries) ? manifest.entries : [];
@@ -13,8 +15,16 @@ const uniqueKinds = new Set(entries.map((entry) => entry.kind));
 expect(manifest.schemaVersion, "Manifest must include schemaVersion.");
 expect(manifest.publicUrl, "Manifest must include publicUrl.");
 expect(Array.isArray(manifest.manifestUrls) && manifest.manifestUrls.length > 0, "Manifest must include at least one manifest URL.");
+expect(
+  Array.isArray(manifest.developerHandoffUrls) && manifest.developerHandoffUrls.length > 0,
+  "Manifest must include at least one developer handoff URL.",
+);
 expect(manifest.counts?.entries === entries.length, `Manifest count mismatch: counts.entries=${manifest.counts?.entries}, entries.length=${entries.length}.`);
 expect(manifest.counts?.categories === uniqueCategories.size, `Category count mismatch: counts.categories=${manifest.counts?.categories}, actual=${uniqueCategories.size}.`);
+expect(
+  Object.keys(developerHandoff).length === entries.length,
+  `Developer handoff count mismatch: handoff=${Object.keys(developerHandoff).length}, entries=${entries.length}.`,
+);
 
 const ids = new Map();
 for (const entry of entries) {
@@ -114,6 +124,13 @@ function validateDeveloperHandoff(prefix, entry) {
   if (!handoff || typeof handoff !== "object") {
     errors.push(`${prefix} developerHandoff is required.`);
     return;
+  }
+
+  const externalHandoff = developerHandoff[entry.id];
+  if (!externalHandoff) {
+    errors.push(`${prefix} standalone developer-handoff.json entry is required.`);
+  } else if (JSON.stringify(externalHandoff) !== JSON.stringify(handoff)) {
+    errors.push(`${prefix} standalone developer-handoff.json must match manifest developerHandoff.`);
   }
 
   if (!["source-available", "usage-snippet-only", "foundation-guidance", "reference-endpoint"].includes(handoff.copyStatus)) {

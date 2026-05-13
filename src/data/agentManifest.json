@@ -6,6 +6,9 @@
   "manifestUrls": [
     "https://gurneyk.github.io/Design-library/manifest.json"
   ],
+  "developerHandoffUrls": [
+    "https://gurneyk.github.io/Design-library/developer-handoff.json"
+  ],
   "counts": {
     "entries": 224,
     "categories": 13,

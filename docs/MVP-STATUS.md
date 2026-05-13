@@ -8,6 +8,7 @@ The Design Library MVP is shareable, deployed, and ready for early team review.
 
 - Live preview: https://gurneyk.github.io/Design-library/
 - Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
+- Developer handoff JSON: https://gurneyk.github.io/Design-library/developer-handoff.json
 - Deployment: GitHub Pages from `main`
 - Local command: `npm run dev`
 - Build command: `npm run build`
@@ -52,6 +53,7 @@ The current MVP includes:
 - A GitHub Pages deployment that updates when `main` is pushed.
 - Desktop and mobile Playwright smoke tests for catalog render, search, templates, and manifest access.
 - Developer handoff metadata for every entry, including source links, raw files, import paths, setup notes, and copy status.
+- A standalone `developer-handoff.json` endpoint for scripts, agents, and dev tooling.
 
 ## What Is Still Post-MVP
 

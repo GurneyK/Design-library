@@ -6,12 +6,15 @@ Live preview: https://gurneyk.github.io/Design-library/
 
 Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
 
+Developer handoff JSON: https://gurneyk.github.io/Design-library/developer-handoff.json
+
 ## What This Contains
 
 - 224 catalog entries across foundations, primitives, layout, navigation, data entry, forms, data display, charts, feedback, agent UI, dashboard/product patterns, and templates.
 - 194 live React component entries.
 - 16 assembled template/block entries for Nexus-style workspaces and screens.
 - A generated `manifest.json` that AI agents can read for names, categories, props, variants, tokens, usage guidance, and code snippets.
+- A generated `developer-handoff.json` that developers and agents can read for source files, dependency files, raw URLs, and copy setup.
 - GitHub Pages deployment through `.github/workflows/deploy.yml`.
 
 ## Local Development
@@ -59,6 +62,16 @@ Each catalog entry includes two developer-facing code surfaces:
 - `Developer handoff` links to the real implementation source, local dependency files, raw files, import paths, required setup, and copy instructions.
 
 To reuse a component in another React + Tailwind app, copy the implementation source plus any listed local dependencies, install `lucide-react` when icons are used, and bring over the Habibi Tailwind token setup from `tailwind.config.ts` plus the base styles in `src/index.css`.
+
+Programmatic handoff lookup:
+
+```ts
+const handoff = await fetch("https://gurneyk.github.io/Design-library/developer-handoff.json").then((response) =>
+  response.json(),
+);
+
+console.log(handoff["run-card"].allCopyPaths);
+```
 
 ## Deployment
 

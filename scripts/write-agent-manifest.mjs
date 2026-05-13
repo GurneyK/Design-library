@@ -9,7 +9,9 @@ const buttonMetaFile = path.join(root, "src", "components", "ui", "button", "but
 const sourceManifestPath = path.join(dataDir, "agentManifest.json");
 const developerHandoffPath = path.join(dataDir, "developerHandoff.json");
 const siteManifestPath = path.join(root, "site", "manifest.json");
+const siteDeveloperHandoffPath = path.join(root, "site", "developer-handoff.json");
 const rootManifestPath = path.join(root, "manifest.json");
+const rootDeveloperHandoffPath = path.join(root, "developer-handoff.json");
 const repositoryUrl = "https://github.com/GurneyK/Design-library";
 const rawRepositoryUrl = "https://raw.githubusercontent.com/GurneyK/Design-library/main";
 
@@ -48,6 +50,7 @@ const manifest = {
   description: "Machine-readable component and template catalog for Habibi/Nexus-style product surfaces.",
   publicUrl: "https://gurneyk.github.io/Design-library/",
   manifestUrls: ["https://gurneyk.github.io/Design-library/manifest.json"],
+  developerHandoffUrls: ["https://gurneyk.github.io/Design-library/developer-handoff.json"],
   counts: {
     entries: entries.length,
     categories: categories.length,
@@ -90,8 +93,10 @@ await writeFile(developerHandoffPath, developerHandoffJson, "utf8");
 
 await mkdir(path.dirname(siteManifestPath), { recursive: true });
 await writeFile(siteManifestPath, json, "utf8");
+await writeFile(siteDeveloperHandoffPath, developerHandoffJson, "utf8");
 
 await writeFile(rootManifestPath, json, "utf8");
+await writeFile(rootDeveloperHandoffPath, developerHandoffJson, "utf8");
 
 async function collectSourceIndex(directories) {
   const sourceFiles = [];
