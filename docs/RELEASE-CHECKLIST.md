@@ -72,6 +72,7 @@ Share these links:
 
 - Live preview: https://gurneyk.github.io/Design-library/
 - Review guide: `docs/REVIEW-GUIDE.md`
+- Team review packet: `docs/TEAM-REVIEW-PACKET.md`
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
 - Component authoring: `docs/COMPONENT-AUTHORING.md`
 - Handoff readiness: `docs/HANDOFF-READINESS.md`

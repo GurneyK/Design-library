@@ -6,6 +6,7 @@ This folder contains the project, review, developer, agent, and release document
 
 - [MVP status](MVP-STATUS.md): current state, catalog counts, review paths, and remaining gaps.
 - [Review guide](REVIEW-GUIDE.md): how designers, engineers, product partners, and AI-agent reviewers should evaluate the library.
+- [Team review packet](TEAM-REVIEW-PACKET.md): copyable review message, links, feedback route, and triage labels.
 - [Developer handoff](DEVELOPER-HANDOFF.md): how to copy components into another React + Tailwind app.
 - [Component authoring](COMPONENT-AUTHORING.md): how to add or edit entries without breaking previews, copy flow, or agent metadata.
 - [Handoff readiness](HANDOFF-READINESS.md): current source-copyable coverage and verification path.
@@ -34,9 +35,10 @@ This folder contains the project, review, developer, agent, and release document
 Designer:
 
 1. [Review guide](REVIEW-GUIDE.md)
-2. [MVP status](MVP-STATUS.md)
-3. [Taxonomy](TAXONOMY.md)
-4. Live preview
+2. [Team review packet](TEAM-REVIEW-PACKET.md)
+3. [MVP status](MVP-STATUS.md)
+4. [Taxonomy](TAXONOMY.md)
+5. Live preview
 
 Engineer:
 
@@ -57,7 +59,8 @@ AI Agent / Automation:
 
 Product / Stakeholder:
 
-1. [Review guide](REVIEW-GUIDE.md)
-2. [Project brief](PROJECT-BRIEF.md)
-3. [Roadmap](ROADMAP.md)
-4. Live preview
+1. [Team review packet](TEAM-REVIEW-PACKET.md)
+2. [Review guide](REVIEW-GUIDE.md)
+3. [Project brief](PROJECT-BRIEF.md)
+4. [Roadmap](ROADMAP.md)
+5. Live preview

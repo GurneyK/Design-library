@@ -65,6 +65,7 @@ The current MVP includes:
 - An agent consumption guide covering manifest selection, composition rules, gap behavior, prompt patterns, and generated UI review checks.
 - A manifest schema guide covering generated JSON fields, handoff metadata, and stability rules.
 - A review guide for design, engineering, product, and AI-agent feedback.
+- A team review packet with share links, a copyable message, review route, and feedback labels.
 - A changelog and release checklist for versioned review milestones.
 - A docs index that gives each audience a clear path through the project documentation.
 
@@ -82,12 +83,13 @@ The current MVP includes:
 For a design review, start with:
 
 1. `docs/README.md`
-2. `docs/REVIEW-GUIDE.md`
-3. Foundations
-4. Primitives
-5. Agent UI
-6. Dashboard / Product Patterns
-7. Templates / Blocks
+2. `docs/TEAM-REVIEW-PACKET.md`
+3. `docs/REVIEW-GUIDE.md`
+4. Foundations
+5. Primitives
+6. Agent UI
+7. Dashboard / Product Patterns
+8. Templates / Blocks
 
 For a developer review, start with:
 

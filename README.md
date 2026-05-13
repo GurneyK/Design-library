@@ -14,6 +14,8 @@ Agent consumption guide: [Agent consumption](docs/AGENT-CONSUMPTION.md)
 
 Review guide: [Review guide](docs/REVIEW-GUIDE.md)
 
+Team review packet: [Team review packet](docs/TEAM-REVIEW-PACKET.md)
+
 Component authoring guide: [Component authoring](docs/COMPONENT-AUTHORING.md)
 
 Handoff readiness: [Handoff readiness](docs/HANDOFF-READINESS.md)
@@ -145,6 +147,7 @@ Deployment flow:
 - [Handoff readiness](docs/HANDOFF-READINESS.md)
 - [Manifest schema](docs/MANIFEST-SCHEMA.md)
 - [Review guide](docs/REVIEW-GUIDE.md)
+- [Team review packet](docs/TEAM-REVIEW-PACKET.md)
 - [Release checklist](docs/RELEASE-CHECKLIST.md)
 - [Taxonomy](docs/TAXONOMY.md)
 - [Decisions](docs/DECISIONS.md)

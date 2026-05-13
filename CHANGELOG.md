@@ -35,6 +35,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Token usage validation for source-backed component files.
 - Agent consumption guide.
 - Review guide.
+- Team review packet for sharing the MVP with designers, engineers, product partners, and AI reviewers.
 - Refreshed roadmap and MVP status docs.
 - Catalog validation and copy-helper validation in `npm run qa`.
 - Release/version validation in `npm run qa` and `npm run version:check`.
