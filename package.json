@@ -7,7 +7,8 @@
     "dev": "vite --host 127.0.0.1",
     "build": "node scripts/write-agent-manifest.mjs && tsc -b && vite build && node scripts/write-site-index.mjs && node scripts/write-agent-manifest.mjs",
     "copy:component": "node scripts/copy-component.mjs",
-    "qa": "npm run build && node scripts/validate-catalog.mjs && node scripts/test-copy-helper.mjs && node scripts/validate-release.mjs",
+    "docs:check": "node scripts/validate-doc-links.mjs",
+    "qa": "npm run build && node scripts/validate-catalog.mjs && node scripts/test-copy-helper.mjs && node scripts/validate-release.mjs && node scripts/validate-doc-links.mjs",
     "version:check": "node scripts/validate-release.mjs",
     "visual-qa": "playwright test",
     "preview": "vite preview --host 127.0.0.1"

@@ -30,6 +30,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Refreshed roadmap and MVP status docs.
 - Catalog validation and copy-helper validation in `npm run qa`.
 - Release/version validation in `npm run qa` and `npm run version:check`.
+- Markdown local-link validation in `npm run qa` and `npm run docs:check`.
 - Desktop and mobile Playwright smoke tests in `npm run visual-qa`.
 
 ### Known Gaps
