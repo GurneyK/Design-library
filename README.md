@@ -120,6 +120,7 @@ Deployment flow:
 
 ## Project Docs
 
+- [Docs index](docs/README.md)
 - [Changelog](CHANGELOG.md)
 - [Agent consumption](docs/AGENT-CONSUMPTION.md)
 - [Project brief](docs/PROJECT-BRIEF.md)

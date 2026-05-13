@@ -61,6 +61,7 @@ The current MVP includes:
 - An agent consumption guide covering manifest selection, composition rules, gap behavior, prompt patterns, and generated UI review checks.
 - A review guide for design, engineering, product, and AI-agent feedback.
 - A changelog and release checklist for versioned review milestones.
+- A docs index that gives each audience a clear path through the project documentation.
 
 ## What Is Still Post-MVP
 
@@ -75,26 +76,29 @@ The current MVP includes:
 
 For a design review, start with:
 
-1. `docs/REVIEW-GUIDE.md`
-2. Foundations
-3. Primitives
-4. Agent UI
-5. Dashboard / Product Patterns
-6. Templates / Blocks
+1. `docs/README.md`
+2. `docs/REVIEW-GUIDE.md`
+3. Foundations
+4. Primitives
+5. Agent UI
+6. Dashboard / Product Patterns
+7. Templates / Blocks
 
 For a developer review, start with:
 
-1. `docs/DEVELOPER-HANDOFF.md`
-2. `src/data/catalog.ts`
-3. `src/data/*Entries.tsx`
-4. `src/components/ui/`
-5. `scripts/write-agent-manifest.mjs`
-6. `manifest.json`
+1. `docs/README.md`
+2. `docs/DEVELOPER-HANDOFF.md`
+3. `src/data/catalog.ts`
+4. `src/data/*Entries.tsx`
+5. `src/components/ui/`
+6. `scripts/write-agent-manifest.mjs`
+7. `manifest.json`
 
 For an AI-agent review, start with:
 
-1. `docs/AGENT-CONSUMPTION.md`
-2. https://gurneyk.github.io/Design-library/manifest.json
-3. Entry `agentGuidance` fields
-4. Entry `usage` and `avoid` fields
-5. Entry `tokens`, `variants`, and `code`
+1. `docs/README.md`
+2. `docs/AGENT-CONSUMPTION.md`
+3. https://gurneyk.github.io/Design-library/manifest.json
+4. Entry `agentGuidance` fields
+5. Entry `usage` and `avoid` fields
+6. Entry `tokens`, `variants`, and `code`
