@@ -7,6 +7,7 @@ This folder contains the project, review, developer, agent, and release document
 - [MVP status](MVP-STATUS.md): current state, catalog counts, review paths, and remaining gaps.
 - [Review guide](REVIEW-GUIDE.md): how designers, engineers, product partners, and AI-agent reviewers should evaluate the library.
 - [Developer handoff](DEVELOPER-HANDOFF.md): how to copy components into another React + Tailwind app.
+- [Component authoring](COMPONENT-AUTHORING.md): how to add or edit entries without breaking previews, copy flow, or agent metadata.
 - [Agent consumption](AGENT-CONSUMPTION.md): how AI agents should read the manifest and generate grounded UI.
 - [Manifest schema](MANIFEST-SCHEMA.md): generated JSON fields, stability rules, and handoff contract.
 - [Roadmap](ROADMAP.md): shipped work, next hardening passes, and later work.
@@ -39,9 +40,10 @@ Designer:
 Engineer:
 
 1. [Developer handoff](DEVELOPER-HANDOFF.md)
-2. [Release checklist](RELEASE-CHECKLIST.md)
-3. [MVP status](MVP-STATUS.md)
-4. `npm run copy:component -- --search <term>`
+2. [Component authoring](COMPONENT-AUTHORING.md)
+3. [Release checklist](RELEASE-CHECKLIST.md)
+4. [MVP status](MVP-STATUS.md)
+5. `npm run copy:component -- --search <term>`
 
 AI Agent / Automation:
 

@@ -58,6 +58,7 @@ The current MVP includes:
 - Generated PowerShell and Bash copy scripts for source-backed entries.
 - A `npm run copy:component -- <entry-id>` helper for copying source-backed entries into another React + Tailwind project.
 - A developer handoff guide covering install requirements, CLI discovery, copy commands, local clone mode, programmatic handoff, and reuse QA.
+- A component authoring guide covering entry metadata, source-backed snippets, loader registration, manifest output, and copy QA.
 - An agent consumption guide covering manifest selection, composition rules, gap behavior, prompt patterns, and generated UI review checks.
 - A manifest schema guide covering generated JSON fields, handoff metadata, and stability rules.
 - A review guide for design, engineering, product, and AI-agent feedback.
@@ -89,11 +90,12 @@ For a developer review, start with:
 
 1. `docs/README.md`
 2. `docs/DEVELOPER-HANDOFF.md`
-3. `src/data/catalog.ts`
-4. `src/data/*Entries.tsx`
-5. `src/components/ui/`
-6. `scripts/write-agent-manifest.mjs`
-7. `manifest.json`
+3. `docs/COMPONENT-AUTHORING.md`
+4. `src/data/catalog.ts`
+5. `src/data/*Entries.tsx`
+6. `src/components/ui/`
+7. `scripts/write-agent-manifest.mjs`
+8. `manifest.json`
 
 For an AI-agent review, start with:
 

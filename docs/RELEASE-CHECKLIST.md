@@ -7,6 +7,7 @@ Use this checklist before sharing a new Design Library release or review milesto
 - Confirm `README.md` links are current.
 - Confirm `docs/MVP-STATUS.md` reflects current catalog counts and status.
 - Confirm `docs/ROADMAP.md` reflects shipped, next, and later work.
+- Confirm `docs/COMPONENT-AUTHORING.md` reflects the current catalog and handoff workflow.
 - Confirm `CHANGELOG.md` has an entry for the release.
 - Confirm public links are appropriate for the intended audience.
 
@@ -64,6 +65,7 @@ Share these links:
 - Live preview: https://gurneyk.github.io/Design-library/
 - Review guide: `docs/REVIEW-GUIDE.md`
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
+- Component authoring: `docs/COMPONENT-AUTHORING.md`
 - Agent consumption: `docs/AGENT-CONSUMPTION.md`
 - Changelog: `CHANGELOG.md`
 

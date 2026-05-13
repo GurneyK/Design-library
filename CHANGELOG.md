@@ -25,6 +25,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
   - `--source-root`
 - Lazy-loaded catalog modules so the initial app shell stays lightweight.
 - Developer handoff guide.
+- Component authoring guide for future contributors.
 - Agent consumption guide.
 - Review guide.
 - Refreshed roadmap and MVP status docs.

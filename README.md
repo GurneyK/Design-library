@@ -12,6 +12,8 @@ Agent consumption guide: [Agent consumption](docs/AGENT-CONSUMPTION.md)
 
 Review guide: [Review guide](docs/REVIEW-GUIDE.md)
 
+Component authoring guide: [Component authoring](docs/COMPONENT-AUTHORING.md)
+
 ## What This Contains
 
 - 224 catalog entries across foundations, primitives, layout, navigation, data entry, forms, data display, charts, feedback, agent UI, dashboard/product patterns, and templates.
@@ -63,6 +65,8 @@ The visual QA command runs Playwright against the production preview in desktop 
 ## Reusing Components
 
 Full developer handoff guide: [Developer handoff](docs/DEVELOPER-HANDOFF.md)
+
+Future contributor guide: [Component authoring](docs/COMPONENT-AUTHORING.md)
 
 Each catalog entry includes two developer-facing code surfaces:
 
@@ -125,6 +129,7 @@ Deployment flow:
 - [Agent consumption](docs/AGENT-CONSUMPTION.md)
 - [Project brief](docs/PROJECT-BRIEF.md)
 - [Developer handoff](docs/DEVELOPER-HANDOFF.md)
+- [Component authoring](docs/COMPONENT-AUTHORING.md)
 - [Manifest schema](docs/MANIFEST-SCHEMA.md)
 - [Review guide](docs/REVIEW-GUIDE.md)
 - [Release checklist](docs/RELEASE-CHECKLIST.md)
