@@ -1,142 +1,87 @@
-# Design Library Roadmap
+# Roadmap
 
-## Phase 0: Understand And Propose
+Last updated: May 13, 2026
 
-Status: Complete
+The Design Library is now in MVP review state. It has a deployed showcase, live React + Tailwind entries, copyable source metadata, a developer handoff path, and an agent-readable manifest.
 
-Done:
-- Read Habibi MD files and zipped specs.
-- Read Polaris/Nexus README.
-- Studied Ant Design and 21st.dev as references.
-- Tried Figma MCP and marked it deferred when tools were unavailable.
-- Cloned the reference repo for local inspection.
+## Shipped
 
-## Phase 1: Discovery And Inventory
+Discovery and planning:
 
-Status: Complete
+- Read local Habibi component/spec files.
+- Read Polaris/Nexus project context.
+- Studied Ant Design and 21st.dev as quality references.
+- Created project brief, taxonomy, decisions, inventory, and gap analysis.
+- Deferred Figma MCP extraction when access was unstable.
 
-Done:
-- Created `inventory/master-inventory.md`.
-- Inventoried written-spec components, patterns, templates, and gaps.
-- Audited the reference Nexus frontend.
-- Compared taxonomy against Ant Design and 21st.dev.
+Showcase:
 
-## Phase 2: Taxonomy And Gap Analysis
+- Built Vite + React + TypeScript + Tailwind app.
+- Deployed to GitHub Pages.
+- Added category navigation, search, Components/Templates switch, preview area, code blocks, props, tokens, usage, accessibility, and agent guidance.
+- Added lazy-loaded catalog entry modules to keep the initial shell lightweight.
 
-Status: Complete
+Catalog:
 
-Done:
-- Created `inventory/taxonomy-proposal.md`.
-- Created `inventory/gap-analysis.md`.
-- Approved broad scope: include all major UI library categories plus Agent UI, Dashboard/Product Patterns, Flow Builder, Auth, Charts, and Templates.
+- 224 catalog entries.
+- 194 live component entries.
+- 16 template/block entries.
+- 14 foundation entries.
+- Categories cover Foundations, Primitives, Layout, Navigation, Data Entry, Forms, Data Display, Charts, Feedback, Agent UI, Dashboard/Product Patterns, Agent Reference, and Templates / Blocks.
 
-## Phase 2.5: Condensed Planning Docs
+Developer and agent handoff:
 
-Status: In progress
+- Generated `manifest.json`.
+- Generated `developer-handoff.json`.
+- Added source paths, dependency paths, raw GitHub URLs, import paths, copy status, package install command, global setup files, and copy commands.
+- Added PowerShell and Bash copy scripts per source-backed entry.
+- Added `npm run copy:component` helper with search, list, dry-run, local clone mode, and global setup copying.
+- Added developer handoff guide.
+- Added agent consumption guide.
+- Added review guide.
 
-Goal:
-Create readable repo-friendly docs that summarize the project without requiring people to read the full inventory.
+Quality:
 
-Outputs:
-- `docs/PROJECT-BRIEF.md`
-- `docs/TAXONOMY.md`
-- `docs/ROADMAP.md`
-- `docs/DECISIONS.md`
+- `npm run qa` builds, validates catalog metadata, and tests the copy helper.
+- `npm run visual-qa` runs Playwright smoke tests across desktop and mobile.
+- GitHub Actions and GitHub Pages run on push to `main`.
 
-## Phase 3: Showcase Shell
+## Next
 
-Status: Next
+Short-term review:
 
-Goal:
-Create the first runnable Design Library app.
+- Share live preview with design, engineering, and product reviewers.
+- Use `docs/REVIEW-GUIDE.md` to collect structured feedback.
+- Review Foundations, Primitives, Agent UI, Dashboard / Product Patterns, and Templates / Blocks first.
+- Confirm which proposed code-side components should be back-ported into Figma.
 
-Recommended stack:
-- Vite
-- React
-- TypeScript
-- Tailwind CSS
-- React Router or simple local route state
-- Radix/headless primitives where behavior is complex
-- lucide-react icons
-- Recharts for early chart examples
+Design-system hardening:
 
-Expected shell:
-- Sidebar navigation by taxonomy
-- Search
-- Components / Templates switch
-- Component entry layout
-- Template entry layout
-- Preview frame
-- Props table
-- Code block
-- Token display
-- Metadata model
+- Reconnect Figma MCP when available.
+- Pixel-check high-priority components against Figma.
+- Add Figma node references and preview assets to inventory where possible.
+- Map Figma component names to React component names.
+- Decide which proposed components become official Habibi components.
 
-First worked example:
-- Button
+Engineering hardening:
 
-Deployment target:
-- GitHub Pages through GitHub Actions
-- Public/shareable preview URL
+- Add deeper unit tests for manifest generation.
+- Add copy-helper tests for templates with larger dependency graphs.
+- Add accessibility walkthroughs for keyboard and focus behavior.
+- Continue watching bundle size as the catalog grows.
+- Consider packaging strategy if teams want npm-style installation later.
 
-## Phase 4: Build Existing Components
+Agent-readability hardening:
 
-Status: Future
+- Add more explicit composition examples for the highest-use templates.
+- Add stricter manifest schema versioning.
+- Add machine-readable gap/proposal metadata.
+- Add endpoint or static file for recommended prompt instructions.
 
-Build order:
-1. Foundations
-2. Primitives
-3. Data Entry
-4. Feedback and Data Display essentials
-5. Agent UI essentials
-6. Charts
-7. Dashboard/Product patterns
+## Later
 
-Each category should stop for review before the next category starts.
-
-## Phase 5: Proposed Components And Gaps
-
-Status: Future
-
-Approved broad direction:
-Include proposed gaps as part of the Design Library now, clearly labeled as proposed until Figma or design review catches up.
-
-Important proposed components:
-- Source Drawer
-- Command Palette
-- Enterprise Table advanced states
-- Stepper
-- Combobox
-- Popconfirm
-- Flow Builder Node / Canvas
-- Auth / SSO template
-
-## Phase 5b: Templates / Blocks
-
-Status: Future
-
-Priority templates:
-- Analytics Agent Chat
-- Marketing Agent Workspace
-- INCI Lookup View
-- Agent Dashboard
-- Evaluation Kit Dashboard
-- Agent Creation Flow
-- Data Table Block
-- Citation Drawer Block
-- Empty State Set
-- Auth / SSO Screen
-
-## Phase 6: Agent Readability
-
-Status: Future
-
-Goal:
-Make the library consumable by AI agents.
-
-Outputs:
-- Sidecar metadata for every component.
-- Root `manifest.json`.
-- Agent guidance per entry.
-- Composition rules and anti-patterns.
-
+- Figma Code Connect mapping.
+- Versioned releases and changelog.
+- Proposed component review workflow.
+- More templates for full Nexus/Polaris workflows.
+- Internal hosting or auth if Unilever constraints require it.

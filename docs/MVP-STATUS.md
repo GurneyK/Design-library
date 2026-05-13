@@ -59,6 +59,7 @@ The current MVP includes:
 - A `npm run copy:component -- <entry-id>` helper for copying source-backed entries into another React + Tailwind project.
 - A developer handoff guide covering install requirements, CLI discovery, copy commands, local clone mode, programmatic handoff, and reuse QA.
 - An agent consumption guide covering manifest selection, composition rules, gap behavior, prompt patterns, and generated UI review checks.
+- A review guide for design, engineering, product, and AI-agent feedback.
 
 ## What Is Still Post-MVP
 
@@ -73,11 +74,12 @@ The current MVP includes:
 
 For a design review, start with:
 
-1. Foundations
-2. Primitives
-3. Agent UI
-4. Dashboard / Product Patterns
-5. Templates / Blocks
+1. `docs/REVIEW-GUIDE.md`
+2. Foundations
+3. Primitives
+4. Agent UI
+5. Dashboard / Product Patterns
+6. Templates / Blocks
 
 For a developer review, start with:
 

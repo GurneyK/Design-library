@@ -10,6 +10,8 @@ Developer handoff JSON: https://gurneyk.github.io/Design-library/developer-hando
 
 Agent consumption guide: [Agent consumption](docs/AGENT-CONSUMPTION.md)
 
+Review guide: [Review guide](docs/REVIEW-GUIDE.md)
+
 ## What This Contains
 
 - 224 catalog entries across foundations, primitives, layout, navigation, data entry, forms, data display, charts, feedback, agent UI, dashboard/product patterns, and templates.
@@ -121,6 +123,7 @@ Deployment flow:
 - [Agent consumption](docs/AGENT-CONSUMPTION.md)
 - [Project brief](docs/PROJECT-BRIEF.md)
 - [Developer handoff](docs/DEVELOPER-HANDOFF.md)
+- [Review guide](docs/REVIEW-GUIDE.md)
 - [Taxonomy](docs/TAXONOMY.md)
 - [Decisions](docs/DECISIONS.md)
 - [Roadmap](docs/ROADMAP.md)
