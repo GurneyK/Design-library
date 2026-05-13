@@ -141,8 +141,13 @@ type DeveloperHandoffData = {
   copyStatus: string;
   githubUrls: string[];
   importPaths: string[];
+  importAlias: string;
+  packageInstallCommand: string;
   rawUrls: string[];
   repositoryUrl: string;
+  requiredGlobalGithubUrls: string[];
+  requiredGlobalPaths: string[];
+  requiredGlobalRawUrls: string[];
   requiredSetup: string[];
   sourcePaths: string[];
   allCopyPaths: string[];
@@ -175,6 +180,11 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
 
       <div className="rounded-habibiMd bg-gray-50 p-4 text-sm leading-6 text-gray-700">
         {handoff.copyInstructions}
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <SetupBlock title="Install command" value={handoff.packageInstallCommand} />
+        <SetupBlock title="Import alias" value={handoff.importAlias} />
       </div>
 
       {handoff.copyScripts?.powershell ? (
@@ -215,6 +225,21 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
         </div>
       ) : null}
 
+      {handoff.requiredGlobalPaths.length > 0 ? (
+        <div>
+          <h3 className="text-sm font-semibold text-gray-900">Global setup files</h3>
+          <p className="mt-1 text-sm leading-6 text-gray-500">
+            Review these before copying into an existing app; they define the shared token layer and base focus styles.
+          </p>
+          <SourceFileList
+            githubUrls={handoff.requiredGlobalGithubUrls}
+            importPaths={handoff.requiredGlobalPaths}
+            rawUrls={handoff.requiredGlobalRawUrls}
+            sourcePaths={handoff.requiredGlobalPaths}
+          />
+        </div>
+      ) : null}
+
       <div>
         <h3 className="text-sm font-semibold text-gray-900">Required setup</h3>
         <ul className="mt-3 grid gap-2 text-sm leading-6 text-gray-700 md:grid-cols-2">
@@ -228,6 +253,15 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
       </div>
 
       <SourceLink href={handoff.repositoryUrl} label="Open repository" />
+    </div>
+  );
+}
+
+function SetupBlock({ title, value }: { title: string; value: string }) {
+  return (
+    <div className="rounded-habibiMd border border-gray-200 bg-gray-50 p-4">
+      <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
+      <p className="mt-2 break-words font-mono text-xs leading-5 text-gray-700">{value}</p>
     </div>
   );
 }

@@ -150,10 +150,19 @@ function validateDeveloperHandoff(prefix, entry) {
     "allGithubUrls",
     "allRawUrls",
     "allImportPaths",
+    "requiredGlobalPaths",
+    "requiredGlobalGithubUrls",
+    "requiredGlobalRawUrls",
     "requiredSetup",
   ]) {
     if (!Array.isArray(handoff[key])) {
       errors.push(`${prefix} developerHandoff.${key} must be an array.`);
+    }
+  }
+
+  for (const key of ["packageInstallCommand", "importAlias"]) {
+    if (typeof handoff[key] !== "string" || handoff[key].trim().length === 0) {
+      errors.push(`${prefix} developerHandoff.${key} must be a non-empty string.`);
     }
   }
 

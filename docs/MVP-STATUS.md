@@ -52,7 +52,7 @@ The current MVP includes:
 - A generated machine-readable manifest for AI-agent consumption.
 - A GitHub Pages deployment that updates when `main` is pushed.
 - Desktop and mobile Playwright smoke tests for catalog render, search, templates, and manifest access.
-- Developer handoff metadata for every entry, including source links, raw files, import paths, setup notes, and copy status.
+- Developer handoff metadata for every entry, including source links, raw files, import paths, package install command, global setup files, setup notes, and copy status.
 - A standalone `developer-handoff.json` endpoint for scripts, agents, and dev tooling.
 - Lazy-loaded catalog modules so the initial app shell stays small and previews load on demand.
 - Generated PowerShell and Bash copy scripts for source-backed entries.
@@ -61,7 +61,7 @@ The current MVP includes:
 
 - Pixel-level Figma QA for every entry once Figma MCP access is stable.
 - Deeper accessibility QA with keyboard walkthroughs and contrast checks.
-- Bundle code-splitting. The app currently builds successfully, but Vite warns that the main app chunk is above 500 kB because the catalog is large.
+- Continued performance budgets as the catalog grows.
 - Stronger test coverage for manifest generation and catalog schema validation.
 - More exact Code Connect-style mapping between Figma component names and React component names.
 - Back-porting proposed code-side components into the Figma library.

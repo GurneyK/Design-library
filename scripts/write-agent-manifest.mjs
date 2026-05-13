@@ -14,6 +14,9 @@ const rootManifestPath = path.join(root, "manifest.json");
 const rootDeveloperHandoffPath = path.join(root, "developer-handoff.json");
 const repositoryUrl = "https://github.com/GurneyK/Design-library";
 const rawRepositoryUrl = "https://raw.githubusercontent.com/GurneyK/Design-library/main";
+const requiredGlobalPaths = ["tailwind.config.ts", "src/index.css"];
+const packageInstallCommand = "npm install react react-dom lucide-react && npm install -D tailwindcss postcss autoprefixer";
+const importAlias = "@/* resolves to src/*";
 
 const dataFiles = (await readdir(dataDir))
   .filter((file) => file.endsWith("Entries.tsx"))
@@ -298,6 +301,11 @@ function createDeveloperHandoff(entry, sourceIndex) {
       allRawUrls: [`${rawRepositoryUrl}/manifest.json`],
       allImportPaths: ["https://gurneyk.github.io/Design-library/manifest.json"],
       copyScripts: {},
+      packageInstallCommand: "No package install required for the manifest endpoint.",
+      importAlias: "Public HTTPS endpoint.",
+      requiredGlobalPaths: [],
+      requiredGlobalGithubUrls: [],
+      requiredGlobalRawUrls: [],
       requiredSetup: ["Fetch-capable runtime or server route", "JSON parser", "Use entry IDs, props, variants, tokens, and guidance before generating UI"],
       copyInstructions:
         "Use the public manifest URL as a fetchable API. This is a reference endpoint, not a React component file.",
@@ -316,6 +324,8 @@ function createDeveloperHandoff(entry, sourceIndex) {
   const allGithubUrls = allCopyPaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`);
   const allRawUrls = allCopyPaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`);
   const allImportPaths = allCopyPaths.map(toImportPath);
+  const requiredGlobalGithubUrls = requiredGlobalPaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`);
+  const requiredGlobalRawUrls = requiredGlobalPaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`);
   const copyStatus =
     entry.kind === "foundation" ? "foundation-guidance" : sourcePaths.length > 0 ? "source-available" : "usage-snippet-only";
 
@@ -344,6 +354,11 @@ function createDeveloperHandoff(entry, sourceIndex) {
             bash: createBashCopyScript(allCopyPaths, allRawUrls),
           }
         : {},
+    packageInstallCommand,
+    importAlias,
+    requiredGlobalPaths,
+    requiredGlobalGithubUrls,
+    requiredGlobalRawUrls,
     requiredSetup: [
       "React 18+",
       "Tailwind CSS 3+ with this repo's tailwind.config.ts token extensions",

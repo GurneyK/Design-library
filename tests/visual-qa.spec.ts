@@ -91,6 +91,10 @@ test.describe("Design Library visual QA", () => {
     expect(handoff["run-card"].copyScript).toContain("Invoke-WebRequest");
     expect(handoff["run-card"].copyScripts.powershell).toContain("Invoke-WebRequest");
     expect(handoff["run-card"].copyScripts.bash).toContain("curl -L");
+    expect(handoff["run-card"].packageInstallCommand).toContain("lucide-react");
+    expect(handoff["run-card"].importAlias).toContain("@/*");
+    expect(handoff["run-card"].requiredGlobalPaths).toContain("tailwind.config.ts");
+    expect(handoff["run-card"].requiredGlobalPaths).toContain("src/index.css");
     expect(handoff["agent-manifest"].copyStatus).toBe("reference-endpoint");
   });
 });

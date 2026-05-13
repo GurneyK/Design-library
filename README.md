@@ -61,9 +61,9 @@ The visual QA command runs Playwright against the production preview in desktop 
 Each catalog entry includes two developer-facing code surfaces:
 
 - `Code` shows a usage snippet for the component or template.
-- `Developer handoff` links to the real implementation source, local dependency files, raw files, import paths, required setup, and copy instructions.
+- `Developer handoff` links to the real implementation source, local dependency files, raw files, import paths, required setup, package install command, import alias, and global token setup files.
 
-To reuse a component in another React + Tailwind app, copy the implementation source plus any listed local dependencies, install `lucide-react` when icons are used, and bring over the Habibi Tailwind token setup from `tailwind.config.ts` plus the base styles in `src/index.css`.
+To reuse a component in another React + Tailwind app, copy the implementation source plus any listed local dependencies, run the listed install command, and align the consuming app to the Habibi Tailwind token setup from `tailwind.config.ts` plus the base styles in `src/index.css`.
 
 For source-backed entries, the `Developer handoff` section also includes generated PowerShell and Bash copy scripts that download the implementation source and local dependency files from raw GitHub URLs.
 
@@ -75,6 +75,8 @@ const handoff = await fetch("https://gurneyk.github.io/Design-library/developer-
 );
 
 console.log(handoff["run-card"].allCopyPaths);
+console.log(handoff["run-card"].packageInstallCommand);
+console.log(handoff["run-card"].requiredGlobalPaths);
 console.log(handoff["run-card"].copyScripts.powershell);
 console.log(handoff["run-card"].copyScripts.bash);
 ```

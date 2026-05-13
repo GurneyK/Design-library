@@ -272,8 +272,13 @@ export type DeveloperHandoffData = {
   dependencyRawUrls: string[];
   githubUrls: string[];
   importPaths: string[];
+  importAlias: string;
+  packageInstallCommand: string;
   rawUrls: string[];
   repositoryUrl: string;
+  requiredGlobalGithubUrls: string[];
+  requiredGlobalPaths: string[];
+  requiredGlobalRawUrls: string[];
   requiredSetup: string[];
   sourcePaths: string[];
   usageSnippetStatus: string;
