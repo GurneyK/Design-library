@@ -8,6 +8,7 @@ This folder contains the project, review, developer, agent, and release document
 - [Review guide](REVIEW-GUIDE.md): how designers, engineers, product partners, and AI-agent reviewers should evaluate the library.
 - [Developer handoff](DEVELOPER-HANDOFF.md): how to copy components into another React + Tailwind app.
 - [Agent consumption](AGENT-CONSUMPTION.md): how AI agents should read the manifest and generate grounded UI.
+- [Manifest schema](MANIFEST-SCHEMA.md): generated JSON fields, stability rules, and handoff contract.
 - [Roadmap](ROADMAP.md): shipped work, next hardening passes, and later work.
 - [Release checklist](RELEASE-CHECKLIST.md): repeatable checklist before sharing a new review milestone.
 
@@ -45,9 +46,10 @@ Engineer:
 AI Agent / Automation:
 
 1. [Agent consumption](AGENT-CONSUMPTION.md)
-2. [Manifest](../manifest.json)
-3. [Developer handoff JSON](../developer-handoff.json)
-4. Entry fields: `agentGuidance`, `useWhen`, `doNotUseWhen`, `variants`, `props`, `tokens`
+2. [Manifest schema](MANIFEST-SCHEMA.md)
+3. [Manifest](../manifest.json)
+4. [Developer handoff JSON](../developer-handoff.json)
+5. Entry fields: `agentGuidance`, `useWhen`, `doNotUseWhen`, `variants`, `props`, `tokens`
 
 Product / Stakeholder:
 

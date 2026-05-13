@@ -38,6 +38,7 @@ Check:
 - `developer-handoff.json`
 - `site/manifest.json`
 - `site/developer-handoff.json`
+- `docs/MANIFEST-SCHEMA.md`
 
 Confirm:
 

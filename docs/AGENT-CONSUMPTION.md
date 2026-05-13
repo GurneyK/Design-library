@@ -18,6 +18,8 @@ https://gurneyk.github.io/Design-library/developer-handoff.json
 
 The manifest is the catalog contract. The handoff JSON is the copy/source contract.
 
+For field-level details, see [Manifest schema](MANIFEST-SCHEMA.md).
+
 ## Selection Order
 
 When generating UI, choose entries in this order:

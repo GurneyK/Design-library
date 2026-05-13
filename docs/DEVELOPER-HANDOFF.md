@@ -73,6 +73,8 @@ The public handoff endpoint is:
 https://gurneyk.github.io/Design-library/developer-handoff.json
 ```
 
+For field-level details, see [Manifest schema](MANIFEST-SCHEMA.md).
+
 Example:
 
 ```ts

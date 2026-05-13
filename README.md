@@ -125,6 +125,7 @@ Deployment flow:
 - [Agent consumption](docs/AGENT-CONSUMPTION.md)
 - [Project brief](docs/PROJECT-BRIEF.md)
 - [Developer handoff](docs/DEVELOPER-HANDOFF.md)
+- [Manifest schema](docs/MANIFEST-SCHEMA.md)
 - [Review guide](docs/REVIEW-GUIDE.md)
 - [Release checklist](docs/RELEASE-CHECKLIST.md)
 - [Taxonomy](docs/TAXONOMY.md)

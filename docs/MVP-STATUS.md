@@ -59,6 +59,7 @@ The current MVP includes:
 - A `npm run copy:component -- <entry-id>` helper for copying source-backed entries into another React + Tailwind project.
 - A developer handoff guide covering install requirements, CLI discovery, copy commands, local clone mode, programmatic handoff, and reuse QA.
 - An agent consumption guide covering manifest selection, composition rules, gap behavior, prompt patterns, and generated UI review checks.
+- A manifest schema guide covering generated JSON fields, handoff metadata, and stability rules.
 - A review guide for design, engineering, product, and AI-agent feedback.
 - A changelog and release checklist for versioned review milestones.
 - A docs index that gives each audience a clear path through the project documentation.
@@ -98,7 +99,8 @@ For an AI-agent review, start with:
 
 1. `docs/README.md`
 2. `docs/AGENT-CONSUMPTION.md`
-3. https://gurneyk.github.io/Design-library/manifest.json
-4. Entry `agentGuidance` fields
-5. Entry `usage` and `avoid` fields
-6. Entry `tokens`, `variants`, and `code`
+3. `docs/MANIFEST-SCHEMA.md`
+4. https://gurneyk.github.io/Design-library/manifest.json
+5. Entry `agentGuidance` fields
+6. Entry `usage` and `avoid` fields
+7. Entry `tokens`, `variants`, and `code`
