@@ -45,6 +45,7 @@ test.describe("Design Library visual QA", () => {
     await expect(page.getByRole("heading", { name: "Citation Chip", level: 2 })).toBeVisible();
     await expect(page.getByRole("article").getByText("Agent UI")).toBeVisible();
     await expect(page.locator("#developer-handoff").getByRole("heading", { name: "Implementation source" })).toBeVisible();
+    await expect(page.locator("#developer-handoff").getByRole("heading", { name: "Copy files script" })).toBeVisible();
   });
 
   test("switches to templates and renders a full template page", async ({ page, isMobile }) => {
@@ -86,6 +87,7 @@ test.describe("Design Library visual QA", () => {
     expect(handoff["run-card"].copyStatus).toBe("source-available");
     expect(handoff["run-card"].sourcePaths).toContain("src/components/ui/dashboard/RunCard.tsx");
     expect(handoff["run-card"].dependencyPaths).toContain("src/components/ui/progress/Progress.tsx");
+    expect(handoff["run-card"].copyScript).toContain("Invoke-WebRequest");
     expect(handoff["agent-manifest"].copyStatus).toBe("reference-endpoint");
   });
 });

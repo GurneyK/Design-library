@@ -294,6 +294,9 @@ function createDeveloperHandoff(entry, sourceIndex) {
       dependencyGithubUrls: [],
       dependencyRawUrls: [],
       dependencyImportPaths: [],
+      allGithubUrls: [`${repositoryUrl}/blob/main/manifest.json`],
+      allRawUrls: [`${rawRepositoryUrl}/manifest.json`],
+      allImportPaths: ["https://gurneyk.github.io/Design-library/manifest.json"],
       requiredSetup: ["Fetch-capable runtime or server route", "JSON parser", "Use entry IDs, props, variants, tokens, and guidance before generating UI"],
       copyInstructions:
         "Use the public manifest URL as a fetchable API. This is a reference endpoint, not a React component file.",
@@ -303,6 +306,15 @@ function createDeveloperHandoff(entry, sourceIndex) {
   const sourcePaths = resolveSourcePaths(entry, sourceIndex);
   const dependencyPaths = resolveDependencyPaths(sourcePaths, sourceIndex);
   const allCopyPaths = [...new Set([...sourcePaths, ...dependencyPaths])];
+  const sourceGithubUrls = sourcePaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`);
+  const sourceRawUrls = sourcePaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`);
+  const sourceImportPaths = sourcePaths.map(toImportPath);
+  const dependencyGithubUrls = dependencyPaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`);
+  const dependencyRawUrls = dependencyPaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`);
+  const dependencyImportPaths = dependencyPaths.map(toImportPath);
+  const allGithubUrls = allCopyPaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`);
+  const allRawUrls = allCopyPaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`);
+  const allImportPaths = allCopyPaths.map(toImportPath);
   const copyStatus =
     entry.kind === "foundation" ? "foundation-guidance" : sourcePaths.length > 0 ? "source-available" : "usage-snippet-only";
 
@@ -313,12 +325,17 @@ function createDeveloperHandoff(entry, sourceIndex) {
     sourcePaths,
     dependencyPaths,
     allCopyPaths,
-    githubUrls: sourcePaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`),
-    rawUrls: sourcePaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`),
-    importPaths: sourcePaths.map((sourcePath) => sourcePath.replace(/^src\//, "@/").replace(/\.tsx$/, "")),
-    dependencyGithubUrls: dependencyPaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`),
-    dependencyRawUrls: dependencyPaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`),
-    dependencyImportPaths: dependencyPaths.map((sourcePath) => sourcePath.replace(/^src\//, "@/").replace(/\.tsx$/, "")),
+    githubUrls: sourceGithubUrls,
+    rawUrls: sourceRawUrls,
+    importPaths: sourceImportPaths,
+    dependencyGithubUrls,
+    dependencyRawUrls,
+    dependencyImportPaths,
+    allGithubUrls,
+    allRawUrls,
+    allImportPaths,
+    copyScriptLanguage: copyStatus === "source-available" ? "powershell" : undefined,
+    copyScript: copyStatus === "source-available" ? createPowerShellCopyScript(allCopyPaths, allRawUrls) : undefined,
     requiredSetup: [
       "React 18+",
       "Tailwind CSS 3+ with this repo's tailwind.config.ts token extensions",
@@ -406,6 +423,22 @@ function resolveRelativeSourcePath(fromSourcePath, importPath, sourceIndex) {
   ];
 
   return candidates.find((candidate) => sourceIndex.byPath.has(candidate));
+}
+
+function toImportPath(sourcePath) {
+  return sourcePath.replace(/^src\//, "@/").replace(/\.tsx$/, "");
+}
+
+function createPowerShellCopyScript(sourcePaths, rawUrls) {
+  const rows = sourcePaths
+    .map((sourcePath, index) => `  @{ Path = "${escapePowerShellString(sourcePath)}"; Url = "${escapePowerShellString(rawUrls[index])}" }`)
+    .join("\n");
+
+  return `$files = @(\n${rows}\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n`;
+}
+
+function escapePowerShellString(value) {
+  return String(value).replaceAll("`", "``").replaceAll('"', '`"');
 }
 
 function toPascalCase(value) {

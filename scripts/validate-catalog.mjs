@@ -147,6 +147,9 @@ function validateDeveloperHandoff(prefix, entry) {
     "dependencyGithubUrls",
     "dependencyRawUrls",
     "dependencyImportPaths",
+    "allGithubUrls",
+    "allRawUrls",
+    "allImportPaths",
     "requiredSetup",
   ]) {
     if (!Array.isArray(handoff[key])) {
@@ -164,6 +167,18 @@ function validateDeveloperHandoff(prefix, entry) {
 
   if (handoff.copyStatus === "source-available" && handoff.allCopyPaths.length < handoff.sourcePaths.length) {
     errors.push(`${prefix} developerHandoff.allCopyPaths must include source paths and local dependencies.`);
+  }
+
+  if (handoff.copyStatus === "source-available") {
+    if (handoff.allCopyPaths.length !== handoff.allRawUrls.length) {
+      errors.push(`${prefix} developerHandoff.allRawUrls must align with allCopyPaths.`);
+    }
+    if (handoff.copyScriptLanguage !== "powershell") {
+      errors.push(`${prefix} developerHandoff.copyScriptLanguage must be powershell.`);
+    }
+    if (typeof handoff.copyScript !== "string" || !handoff.copyScript.includes("Invoke-WebRequest")) {
+      errors.push(`${prefix} developerHandoff.copyScript must include a PowerShell download script.`);
+    }
   }
 
   if (typeof handoff.copyInstructions !== "string" || handoff.copyInstructions.trim().length === 0) {

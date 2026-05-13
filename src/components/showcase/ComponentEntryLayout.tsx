@@ -1,4 +1,5 @@
-import { Accessibility, Bot, CheckCircle2, Code2, ExternalLink, Layers, PackageCheck, ShieldCheck } from "lucide-react";
+import { Accessibility, Bot, Check, CheckCircle2, Code2, Copy, ExternalLink, Layers, PackageCheck, ShieldCheck } from "lucide-react";
+import { useState } from "react";
 import type { CatalogEntry } from "../../data/catalog";
 import { CodeBlock } from "./CodeBlock";
 import { PreviewFrame } from "./PreviewFrame";
@@ -134,6 +135,8 @@ export function ComponentEntryLayout({ entry }: ComponentEntryLayoutProps) {
 
 type DeveloperHandoffData = {
   copyInstructions: string;
+  copyScript?: string;
+  copyScriptLanguage?: string;
   copyStatus: string;
   githubUrls: string[];
   importPaths: string[];
@@ -141,6 +144,10 @@ type DeveloperHandoffData = {
   repositoryUrl: string;
   requiredSetup: string[];
   sourcePaths: string[];
+  allCopyPaths: string[];
+  allGithubUrls: string[];
+  allImportPaths: string[];
+  allRawUrls: string[];
   dependencyPaths: string[];
   dependencyGithubUrls: string[];
   dependencyImportPaths: string[];
@@ -168,6 +175,8 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
       <div className="rounded-habibiMd bg-gray-50 p-4 text-sm leading-6 text-gray-700">
         {handoff.copyInstructions}
       </div>
+
+      {handoff.copyScript ? <CopyScriptBlock code={handoff.copyScript} /> : null}
 
       {handoff.sourcePaths.length > 0 ? (
         <div>
@@ -204,6 +213,38 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
       </div>
 
       <SourceLink href={handoff.repositoryUrl} label="Open repository" />
+    </div>
+  );
+}
+
+function CopyScriptBlock({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+
+  async function copyScript() {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  }
+
+  return (
+    <div className="overflow-hidden rounded-habibiLg border border-gray-200 bg-gray-950">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+        <div>
+          <h3 className="text-sm font-semibold text-white">Copy files script</h3>
+          <p className="mt-1 text-xs text-gray-400">Run from the root of a React + Tailwind project.</p>
+        </div>
+        <button
+          className="focus-ring inline-flex items-center gap-2 rounded-habibiSm bg-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/15"
+          onClick={copyScript}
+          type="button"
+        >
+          {copied ? <Check aria-hidden="true" className="h-3.5 w-3.5" /> : <Copy aria-hidden="true" className="h-3.5 w-3.5" />}
+          {copied ? "Copied" : "Copy script"}
+        </button>
+      </div>
+      <pre className="max-h-80 overflow-auto p-4 text-xs leading-5 text-gray-50">
+        <code>{code}</code>
+      </pre>
     </div>
   );
 }

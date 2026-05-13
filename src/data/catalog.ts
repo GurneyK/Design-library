@@ -257,7 +257,13 @@ export type PropRow = {
 };
 
 export type DeveloperHandoffData = {
+  allCopyPaths: string[];
+  allGithubUrls: string[];
+  allImportPaths: string[];
+  allRawUrls: string[];
   copyInstructions: string;
+  copyScript?: string;
+  copyScriptLanguage?: string;
   copyStatus: string;
   dependencyGithubUrls: string[];
   dependencyImportPaths: string[];
