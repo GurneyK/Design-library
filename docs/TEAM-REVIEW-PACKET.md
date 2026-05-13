@@ -117,6 +117,8 @@ GitHub issue templates are available for:
 - Template or block feedback
 - Agent manifest feedback
 
+Use [Feedback triage](FEEDBACK-TRIAGE.md) to label, prioritize, route, and close incoming review feedback.
+
 ## MVP Confidence
 
 Current confidence: 92-94%.

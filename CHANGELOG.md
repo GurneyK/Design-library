@@ -37,6 +37,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Review guide.
 - Team review packet for sharing the MVP with designers, engineers, product partners, and AI reviewers.
 - GitHub issue templates for component, template/block, and agent-manifest feedback.
+- Pull request template and feedback triage guide for review follow-through.
 - Refreshed roadmap and MVP status docs.
 - Catalog validation and copy-helper validation in `npm run qa`.
 - Release/version validation in `npm run qa` and `npm run version:check`.
