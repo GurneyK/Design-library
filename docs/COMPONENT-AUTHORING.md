@@ -157,6 +157,7 @@ Run the full local QA set before publishing:
 npm run qa
 npm run docs:check
 npm run handoff:check
+npm run token:check
 npm run visual-qa
 ```
 

@@ -16,7 +16,7 @@ export function ColorPicker() {
           <button
             aria-checked={index === 0}
             className={[
-              "focus-ring h-9 w-9 rounded-full border-2 border-white shadow-[0_0_0_1px_#D0D5DD]",
+              "focus-ring h-9 w-9 rounded-full border-2 border-white shadow-[0_0_0_1px_var(--habibi-gray-300)]",
               index === 0 ? "ring-2 ring-brand-300 ring-offset-2" : "",
               color.value,
             ].join(" ")}

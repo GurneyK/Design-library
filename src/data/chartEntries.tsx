@@ -29,7 +29,7 @@ function ChartContainerPreview() {
       toolbar={<Badge variant="info">Last 30 days</Badge>}
     >
       <LineChart />
-      <ChartLegend items={[{ color: "#6941C6", label: "Conversations" }]} />
+      <ChartLegend items={[{ color: "var(--habibi-brand-700)", label: "Conversations" }]} />
     </ChartContainer>
   );
 }
@@ -38,9 +38,9 @@ function LegendPreview() {
   return (
     <ChartLegend
       items={[
-        { color: "#6941C6", label: "Current period" },
-        { color: "#2E90FA", label: "Previous period" },
-        { color: "#12B76A", label: "Target" },
+        { color: "var(--habibi-brand-700)", label: "Current period" },
+        { color: "var(--habibi-info-500)", label: "Previous period" },
+        { color: "var(--habibi-success-500)", label: "Target" },
       ]}
     />
   );
@@ -110,7 +110,7 @@ function DonutChartPreview() {
   return (
     <ChartContainer title="Evaluation completion">
       <DonutChart />
-      <ChartLegend items={[{ color: "#6941C6", label: "Passed" }, { color: "#2E90FA", label: "In review" }]} />
+      <ChartLegend items={[{ color: "var(--habibi-brand-700)", label: "Passed" }, { color: "var(--habibi-info-500)", label: "In review" }]} />
     </ChartContainer>
   );
 }
@@ -121,9 +121,9 @@ function PieChartPreview() {
       <PieChart />
       <ChartLegend
         items={[
-          { color: "#6941C6", label: "Research" },
-          { color: "#2E90FA", label: "Campaigns" },
-          { color: "#12B76A", label: "Claims" },
+          { color: "var(--habibi-brand-700)", label: "Research" },
+          { color: "var(--habibi-info-500)", label: "Campaigns" },
+          { color: "var(--habibi-success-500)", label: "Claims" },
         ]}
       />
     </ChartContainer>
@@ -136,9 +136,9 @@ function StackedBarChartPreview() {
       <StackedBarChart />
       <ChartLegend
         items={[
-          { color: "#6941C6", label: "Analytics" },
-          { color: "#2E90FA", label: "Marketing" },
-          { color: "#12B76A", label: "INCI" },
+          { color: "var(--habibi-brand-700)", label: "Analytics" },
+          { color: "var(--habibi-info-500)", label: "Marketing" },
+          { color: "var(--habibi-success-500)", label: "INCI" },
         ]}
       />
     </ChartContainer>
@@ -244,7 +244,7 @@ export const chartLegendEntry: CatalogEntry = {
   avoid: ["Do not rely on legend color alone when labels can be direct.", "Do not use vague labels like Series 1."],
   accessibility: ["Legend text names each series.", "Colors should not be the only differentiator in complex charts."],
   agentGuidance: ["Use legend for multi-series dashboards.", "For one-series charts, title and axis labels may be enough."],
-  code: `import { ChartLegend } from "./ChartLegend";\n\n<ChartLegend items={[{ color: "#6941C6", label: "Current period" }]} />`,
+  code: `import { ChartLegend } from "./ChartLegend";\n\n<ChartLegend items={[{ color: "var(--habibi-brand-700)", label: "Current period" }]} />`,
 };
 
 export const chartTooltipEntry: CatalogEntry = {

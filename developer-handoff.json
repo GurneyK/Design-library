@@ -1659,10 +1659,13 @@
       "src/components/ui/charts/ChartContainer.tsx",
       "src/components/ui/charts/LineChart.tsx"
     ],
-    "dependencyPaths": [],
+    "dependencyPaths": [
+      "src/components/ui/charts/chartTokens.ts"
+    ],
     "allCopyPaths": [
       "src/components/ui/charts/ChartContainer.tsx",
-      "src/components/ui/charts/LineChart.tsx"
+      "src/components/ui/charts/LineChart.tsx",
+      "src/components/ui/charts/chartTokens.ts"
     ],
     "githubUrls": [
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/ChartContainer.tsx",
@@ -1676,26 +1679,35 @@
       "@/components/ui/charts/ChartContainer",
       "@/components/ui/charts/LineChart"
     ],
-    "dependencyGithubUrls": [],
-    "dependencyRawUrls": [],
-    "dependencyImportPaths": [],
+    "dependencyGithubUrls": [
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyRawUrls": [
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyImportPaths": [
+      "@/components/ui/charts/chartTokens.ts"
+    ],
     "allGithubUrls": [
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/ChartContainer.tsx",
-      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx"
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allRawUrls": [
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/ChartContainer.tsx",
-      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx"
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allImportPaths": [
       "@/components/ui/charts/ChartContainer",
-      "@/components/ui/charts/LineChart"
+      "@/components/ui/charts/LineChart",
+      "@/components/ui/charts/chartTokens.ts"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/ChartContainer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/ChartContainer.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/ChartContainer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/ChartContainer.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/ChartContainer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/ChartContainer.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/ui/charts/ChartContainer.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/ChartContainer.tsx\"\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/ChartContainer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/ChartContainer.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/ui/charts/ChartContainer.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/ChartContainer.tsx\"\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- chart-container",
     "copyCommandWithGlobals": "npm run copy:component -- chart-container --globals",
@@ -1855,9 +1867,12 @@
     "sourcePaths": [
       "src/components/ui/charts/LineChart.tsx"
     ],
-    "dependencyPaths": [],
+    "dependencyPaths": [
+      "src/components/ui/charts/chartTokens.ts"
+    ],
     "allCopyPaths": [
-      "src/components/ui/charts/LineChart.tsx"
+      "src/components/ui/charts/LineChart.tsx",
+      "src/components/ui/charts/chartTokens.ts"
     ],
     "githubUrls": [
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx"
@@ -1868,23 +1883,32 @@
     "importPaths": [
       "@/components/ui/charts/LineChart"
     ],
-    "dependencyGithubUrls": [],
-    "dependencyRawUrls": [],
-    "dependencyImportPaths": [],
+    "dependencyGithubUrls": [
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyRawUrls": [
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyImportPaths": [
+      "@/components/ui/charts/chartTokens.ts"
+    ],
     "allGithubUrls": [
-      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx"
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allRawUrls": [
-      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx"
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allImportPaths": [
-      "@/components/ui/charts/LineChart"
+      "@/components/ui/charts/LineChart",
+      "@/components/ui/charts/chartTokens.ts"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- line-chart",
     "copyCommandWithGlobals": "npm run copy:component -- line-chart --globals",
@@ -1918,9 +1942,12 @@
     "sourcePaths": [
       "src/components/ui/charts/AreaChart.tsx"
     ],
-    "dependencyPaths": [],
+    "dependencyPaths": [
+      "src/components/ui/charts/chartTokens.ts"
+    ],
     "allCopyPaths": [
-      "src/components/ui/charts/AreaChart.tsx"
+      "src/components/ui/charts/AreaChart.tsx",
+      "src/components/ui/charts/chartTokens.ts"
     ],
     "githubUrls": [
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/AreaChart.tsx"
@@ -1931,23 +1958,32 @@
     "importPaths": [
       "@/components/ui/charts/AreaChart"
     ],
-    "dependencyGithubUrls": [],
-    "dependencyRawUrls": [],
-    "dependencyImportPaths": [],
+    "dependencyGithubUrls": [
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyRawUrls": [
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyImportPaths": [
+      "@/components/ui/charts/chartTokens.ts"
+    ],
     "allGithubUrls": [
-      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/AreaChart.tsx"
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/AreaChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allRawUrls": [
-      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx"
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allImportPaths": [
-      "@/components/ui/charts/AreaChart"
+      "@/components/ui/charts/AreaChart",
+      "@/components/ui/charts/chartTokens.ts"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/AreaChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/AreaChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/AreaChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/ui/charts/AreaChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/AreaChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/ui/charts/AreaChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- area-chart",
     "copyCommandWithGlobals": "npm run copy:component -- area-chart --globals",
@@ -1981,9 +2017,12 @@
     "sourcePaths": [
       "src/components/ui/charts/BarChart.tsx"
     ],
-    "dependencyPaths": [],
+    "dependencyPaths": [
+      "src/components/ui/charts/chartTokens.ts"
+    ],
     "allCopyPaths": [
-      "src/components/ui/charts/BarChart.tsx"
+      "src/components/ui/charts/BarChart.tsx",
+      "src/components/ui/charts/chartTokens.ts"
     ],
     "githubUrls": [
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/BarChart.tsx"
@@ -1994,23 +2033,32 @@
     "importPaths": [
       "@/components/ui/charts/BarChart"
     ],
-    "dependencyGithubUrls": [],
-    "dependencyRawUrls": [],
-    "dependencyImportPaths": [],
+    "dependencyGithubUrls": [
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyRawUrls": [
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyImportPaths": [
+      "@/components/ui/charts/chartTokens.ts"
+    ],
     "allGithubUrls": [
-      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/BarChart.tsx"
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/BarChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allRawUrls": [
-      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx"
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allImportPaths": [
-      "@/components/ui/charts/BarChart"
+      "@/components/ui/charts/BarChart",
+      "@/components/ui/charts/chartTokens.ts"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/ui/charts/BarChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/ui/charts/BarChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- bar-chart",
     "copyCommandWithGlobals": "npm run copy:component -- bar-chart --globals",
@@ -2296,9 +2344,12 @@
     "sourcePaths": [
       "src/components/ui/charts/DonutChart.tsx"
     ],
-    "dependencyPaths": [],
+    "dependencyPaths": [
+      "src/components/ui/charts/chartTokens.ts"
+    ],
     "allCopyPaths": [
-      "src/components/ui/charts/DonutChart.tsx"
+      "src/components/ui/charts/DonutChart.tsx",
+      "src/components/ui/charts/chartTokens.ts"
     ],
     "githubUrls": [
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/DonutChart.tsx"
@@ -2309,23 +2360,32 @@
     "importPaths": [
       "@/components/ui/charts/DonutChart"
     ],
-    "dependencyGithubUrls": [],
-    "dependencyRawUrls": [],
-    "dependencyImportPaths": [],
+    "dependencyGithubUrls": [
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyRawUrls": [
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
+    ],
+    "dependencyImportPaths": [
+      "@/components/ui/charts/chartTokens.ts"
+    ],
     "allGithubUrls": [
-      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/DonutChart.tsx"
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/DonutChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allRawUrls": [
-      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx"
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allImportPaths": [
-      "@/components/ui/charts/DonutChart"
+      "@/components/ui/charts/DonutChart",
+      "@/components/ui/charts/chartTokens.ts"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/ui/charts/DonutChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/ui/charts/DonutChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- donut-chart",
     "copyCommandWithGlobals": "npm run copy:component -- donut-chart --globals",
@@ -2802,12 +2862,14 @@
     ],
     "dependencyPaths": [
       "src/components/ui/badge/Badge.tsx",
-      "src/components/ui/charts/LineChart.tsx"
+      "src/components/ui/charts/LineChart.tsx",
+      "src/components/ui/charts/chartTokens.ts"
     ],
     "allCopyPaths": [
       "src/components/ui/charts/SummaryChartCard.tsx",
       "src/components/ui/badge/Badge.tsx",
-      "src/components/ui/charts/LineChart.tsx"
+      "src/components/ui/charts/LineChart.tsx",
+      "src/components/ui/charts/chartTokens.ts"
     ],
     "githubUrls": [
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/SummaryChartCard.tsx"
@@ -2820,36 +2882,42 @@
     ],
     "dependencyGithubUrls": [
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/badge/Badge.tsx",
-      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx"
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
     ],
     "dependencyRawUrls": [
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx",
-      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx"
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
     ],
     "dependencyImportPaths": [
       "@/components/ui/badge/Badge",
-      "@/components/ui/charts/LineChart"
+      "@/components/ui/charts/LineChart",
+      "@/components/ui/charts/chartTokens.ts"
     ],
     "allGithubUrls": [
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/SummaryChartCard.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/badge/Badge.tsx",
-      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx"
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allRawUrls": [
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx",
-      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx"
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts"
     ],
     "allImportPaths": [
       "@/components/ui/charts/SummaryChartCard",
       "@/components/ui/badge/Badge",
-      "@/components/ui/charts/LineChart"
+      "@/components/ui/charts/LineChart",
+      "@/components/ui/charts/chartTokens.ts"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/ui/charts/SummaryChartCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/ui/charts/SummaryChartCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- summary-chart-card",
     "copyCommandWithGlobals": "npm run copy:component -- summary-chart-card --globals",
@@ -14663,6 +14731,7 @@
       "src/components/ui/button/Button.tsx",
       "src/components/ui/charts/LineChart.tsx",
       "src/components/ui/charts/SummaryChartCard.tsx",
+      "src/components/ui/charts/chartTokens.ts",
       "src/components/ui/dashboard/DashboardHeader.tsx",
       "src/components/ui/dashboard/InsightCard.tsx",
       "src/components/ui/dashboard/RunStatusPill.tsx",
@@ -14683,6 +14752,7 @@
       "src/components/ui/button/Button.tsx",
       "src/components/ui/charts/LineChart.tsx",
       "src/components/ui/charts/SummaryChartCard.tsx",
+      "src/components/ui/charts/chartTokens.ts",
       "src/components/ui/dashboard/DashboardHeader.tsx",
       "src/components/ui/dashboard/InsightCard.tsx",
       "src/components/ui/dashboard/RunStatusPill.tsx",
@@ -14711,6 +14781,7 @@
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/button/Button.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/SummaryChartCard.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/RunStatusPill.tsx",
@@ -14730,6 +14801,7 @@
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx",
@@ -14749,6 +14821,7 @@
       "@/components/ui/button/Button",
       "@/components/ui/charts/LineChart",
       "@/components/ui/charts/SummaryChartCard",
+      "@/components/ui/charts/chartTokens.ts",
       "@/components/ui/dashboard/DashboardHeader",
       "@/components/ui/dashboard/InsightCard",
       "@/components/ui/dashboard/RunStatusPill",
@@ -14769,6 +14842,7 @@
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/button/Button.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/SummaryChartCard.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/RunStatusPill.tsx",
@@ -14789,6 +14863,7 @@
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx",
@@ -14809,6 +14884,7 @@
       "@/components/ui/button/Button",
       "@/components/ui/charts/LineChart",
       "@/components/ui/charts/SummaryChartCard",
+      "@/components/ui/charts/chartTokens.ts",
       "@/components/ui/dashboard/DashboardHeader",
       "@/components/ui/dashboard/InsightCard",
       "@/components/ui/dashboard/RunStatusPill",
@@ -14816,10 +14892,10 @@
       "@/components/ui/layout/Panel"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/templates/AnalyticsAgentWorkspace.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/AnalyticsAgentWorkspace.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatMessage.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatSurface.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\" }\n  @{ Path = \"src/components/ui/agent/CitationChip.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/CitationChip.tsx\" }\n  @{ Path = \"src/components/ui/agent/Composer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SourceDrawer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SourceDrawer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SuggestionChips.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\" }\n  @{ Path = \"src/components/ui/agent/ToolCallCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ToolCallCard.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/templates/AnalyticsAgentWorkspace.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/AnalyticsAgentWorkspace.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatMessage.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatSurface.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\" }\n  @{ Path = \"src/components/ui/agent/CitationChip.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/CitationChip.tsx\" }\n  @{ Path = \"src/components/ui/agent/Composer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SourceDrawer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SourceDrawer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SuggestionChips.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\" }\n  @{ Path = \"src/components/ui/agent/ToolCallCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ToolCallCard.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/templates/AnalyticsAgentWorkspace.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/AnalyticsAgentWorkspace.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatMessage.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatSurface.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\" }\n  @{ Path = \"src/components/ui/agent/CitationChip.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/CitationChip.tsx\" }\n  @{ Path = \"src/components/ui/agent/Composer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SourceDrawer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SourceDrawer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SuggestionChips.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\" }\n  @{ Path = \"src/components/ui/agent/ToolCallCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ToolCallCard.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/templates/AnalyticsAgentWorkspace.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/AnalyticsAgentWorkspace.tsx\"\n  \"src/components/ui/agent/ChatMessage.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\"\n  \"src/components/ui/agent/ChatSurface.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\"\n  \"src/components/ui/agent/CitationChip.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/CitationChip.tsx\"\n  \"src/components/ui/agent/Composer.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\"\n  \"src/components/ui/agent/SourceDrawer.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SourceDrawer.tsx\"\n  \"src/components/ui/agent/SuggestionChips.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\"\n  \"src/components/ui/agent/ToolCallCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ToolCallCard.tsx\"\n  \"src/components/ui/avatar/Avatar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/button/Button.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\"\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n  \"src/components/ui/charts/SummaryChartCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\"\n  \"src/components/ui/dashboard/DashboardHeader.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\"\n  \"src/components/ui/dashboard/InsightCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\"\n  \"src/components/ui/dashboard/RunStatusPill.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\"\n  \"src/components/ui/layout/Grid.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\"\n  \"src/components/ui/layout/Panel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/templates/AnalyticsAgentWorkspace.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/AnalyticsAgentWorkspace.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatMessage.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatSurface.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\" }\n  @{ Path = \"src/components/ui/agent/CitationChip.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/CitationChip.tsx\" }\n  @{ Path = \"src/components/ui/agent/Composer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SourceDrawer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SourceDrawer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SuggestionChips.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\" }\n  @{ Path = \"src/components/ui/agent/ToolCallCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ToolCallCard.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/templates/AnalyticsAgentWorkspace.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/AnalyticsAgentWorkspace.tsx\"\n  \"src/components/ui/agent/ChatMessage.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\"\n  \"src/components/ui/agent/ChatSurface.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\"\n  \"src/components/ui/agent/CitationChip.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/CitationChip.tsx\"\n  \"src/components/ui/agent/Composer.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\"\n  \"src/components/ui/agent/SourceDrawer.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SourceDrawer.tsx\"\n  \"src/components/ui/agent/SuggestionChips.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\"\n  \"src/components/ui/agent/ToolCallCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ToolCallCard.tsx\"\n  \"src/components/ui/avatar/Avatar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/button/Button.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\"\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n  \"src/components/ui/charts/SummaryChartCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n  \"src/components/ui/dashboard/DashboardHeader.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\"\n  \"src/components/ui/dashboard/InsightCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\"\n  \"src/components/ui/dashboard/RunStatusPill.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\"\n  \"src/components/ui/layout/Grid.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\"\n  \"src/components/ui/layout/Panel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- template-analytics-agent-workspace",
     "copyCommandWithGlobals": "npm run copy:component -- template-analytics-agent-workspace --globals",
@@ -14861,6 +14937,7 @@
       "src/components/ui/charts/DonutChart.tsx",
       "src/components/ui/charts/LineChart.tsx",
       "src/components/ui/charts/SummaryChartCard.tsx",
+      "src/components/ui/charts/chartTokens.ts",
       "src/components/ui/dashboard/ActivityFeed.tsx",
       "src/components/ui/dashboard/DashboardHeader.tsx",
       "src/components/ui/dashboard/InsightCard.tsx",
@@ -14882,6 +14959,7 @@
       "src/components/ui/charts/DonutChart.tsx",
       "src/components/ui/charts/LineChart.tsx",
       "src/components/ui/charts/SummaryChartCard.tsx",
+      "src/components/ui/charts/chartTokens.ts",
       "src/components/ui/dashboard/ActivityFeed.tsx",
       "src/components/ui/dashboard/DashboardHeader.tsx",
       "src/components/ui/dashboard/InsightCard.tsx",
@@ -14911,6 +14989,7 @@
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/DonutChart.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/SummaryChartCard.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/ActivityFeed.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/InsightCard.tsx",
@@ -14931,6 +15010,7 @@
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/ActivityFeed.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx",
@@ -14951,6 +15031,7 @@
       "@/components/ui/charts/DonutChart",
       "@/components/ui/charts/LineChart",
       "@/components/ui/charts/SummaryChartCard",
+      "@/components/ui/charts/chartTokens.ts",
       "@/components/ui/dashboard/ActivityFeed",
       "@/components/ui/dashboard/DashboardHeader",
       "@/components/ui/dashboard/InsightCard",
@@ -14972,6 +15053,7 @@
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/DonutChart.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/LineChart.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/SummaryChartCard.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/ActivityFeed.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/InsightCard.tsx",
@@ -14993,6 +15075,7 @@
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/ActivityFeed.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx",
@@ -15014,6 +15097,7 @@
       "@/components/ui/charts/DonutChart",
       "@/components/ui/charts/LineChart",
       "@/components/ui/charts/SummaryChartCard",
+      "@/components/ui/charts/chartTokens.ts",
       "@/components/ui/dashboard/ActivityFeed",
       "@/components/ui/dashboard/DashboardHeader",
       "@/components/ui/dashboard/InsightCard",
@@ -15027,10 +15111,10 @@
       "@/components/ui/search-input/SearchInput"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/templates/DashboardOverview.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/DashboardOverview.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/ActivityFeed.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/ActivityFeed.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/QuickActionPanel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/WorkspaceSwitcher.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/WorkspaceSwitcher.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/layout/Sidebar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Sidebar.tsx\" }\n  @{ Path = \"src/components/ui/layout/Topbar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Topbar.tsx\" }\n  @{ Path = \"src/components/ui/search-input/SearchInput.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/templates/DashboardOverview.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/DashboardOverview.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n  @{ Path = \"src/components/ui/dashboard/ActivityFeed.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/ActivityFeed.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/QuickActionPanel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/WorkspaceSwitcher.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/WorkspaceSwitcher.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/layout/Sidebar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Sidebar.tsx\" }\n  @{ Path = \"src/components/ui/layout/Topbar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Topbar.tsx\" }\n  @{ Path = \"src/components/ui/search-input/SearchInput.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/templates/DashboardOverview.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/DashboardOverview.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/ActivityFeed.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/ActivityFeed.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/QuickActionPanel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/WorkspaceSwitcher.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/WorkspaceSwitcher.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/layout/Sidebar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Sidebar.tsx\" }\n  @{ Path = \"src/components/ui/layout/Topbar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Topbar.tsx\" }\n  @{ Path = \"src/components/ui/search-input/SearchInput.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/templates/DashboardOverview.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/DashboardOverview.tsx\"\n  \"src/components/ui/avatar/Avatar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/button/Button.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\"\n  \"src/components/ui/charts/BarChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\"\n  \"src/components/ui/charts/DonutChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\"\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n  \"src/components/ui/charts/SummaryChartCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\"\n  \"src/components/ui/dashboard/ActivityFeed.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/ActivityFeed.tsx\"\n  \"src/components/ui/dashboard/DashboardHeader.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\"\n  \"src/components/ui/dashboard/InsightCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\"\n  \"src/components/ui/dashboard/QuickActionPanel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\"\n  \"src/components/ui/dashboard/RunStatusPill.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\"\n  \"src/components/ui/dashboard/WorkspaceSwitcher.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/WorkspaceSwitcher.tsx\"\n  \"src/components/ui/layout/Grid.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\"\n  \"src/components/ui/layout/Panel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\"\n  \"src/components/ui/layout/Sidebar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Sidebar.tsx\"\n  \"src/components/ui/layout/Topbar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Topbar.tsx\"\n  \"src/components/ui/search-input/SearchInput.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/templates/DashboardOverview.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/DashboardOverview.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/LineChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/SummaryChartCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n  @{ Path = \"src/components/ui/dashboard/ActivityFeed.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/ActivityFeed.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/QuickActionPanel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/WorkspaceSwitcher.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/WorkspaceSwitcher.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/layout/Sidebar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Sidebar.tsx\" }\n  @{ Path = \"src/components/ui/layout/Topbar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Topbar.tsx\" }\n  @{ Path = \"src/components/ui/search-input/SearchInput.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/templates/DashboardOverview.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/DashboardOverview.tsx\"\n  \"src/components/ui/avatar/Avatar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/button/Button.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\"\n  \"src/components/ui/charts/BarChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\"\n  \"src/components/ui/charts/DonutChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\"\n  \"src/components/ui/charts/LineChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/LineChart.tsx\"\n  \"src/components/ui/charts/SummaryChartCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/SummaryChartCard.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n  \"src/components/ui/dashboard/ActivityFeed.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/ActivityFeed.tsx\"\n  \"src/components/ui/dashboard/DashboardHeader.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\"\n  \"src/components/ui/dashboard/InsightCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\"\n  \"src/components/ui/dashboard/QuickActionPanel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\"\n  \"src/components/ui/dashboard/RunStatusPill.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\"\n  \"src/components/ui/dashboard/WorkspaceSwitcher.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/WorkspaceSwitcher.tsx\"\n  \"src/components/ui/layout/Grid.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\"\n  \"src/components/ui/layout/Panel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\"\n  \"src/components/ui/layout/Sidebar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Sidebar.tsx\"\n  \"src/components/ui/layout/Topbar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Topbar.tsx\"\n  \"src/components/ui/search-input/SearchInput.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- template-dashboard-overview",
     "copyCommandWithGlobals": "npm run copy:component -- template-dashboard-overview --globals",
@@ -15327,6 +15411,7 @@
       "src/components/ui/badge/Badge.tsx",
       "src/components/ui/button/Button.tsx",
       "src/components/ui/charts/BarChart.tsx",
+      "src/components/ui/charts/chartTokens.ts",
       "src/components/ui/dashboard/DashboardHeader.tsx",
       "src/components/ui/dashboard/InsightCard.tsx",
       "src/components/ui/dashboard/QuickActionPanel.tsx",
@@ -15349,6 +15434,7 @@
       "src/components/ui/badge/Badge.tsx",
       "src/components/ui/button/Button.tsx",
       "src/components/ui/charts/BarChart.tsx",
+      "src/components/ui/charts/chartTokens.ts",
       "src/components/ui/dashboard/DashboardHeader.tsx",
       "src/components/ui/dashboard/InsightCard.tsx",
       "src/components/ui/dashboard/QuickActionPanel.tsx",
@@ -15379,6 +15465,7 @@
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/badge/Badge.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/button/Button.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/BarChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/QuickActionPanel.tsx",
@@ -15400,6 +15487,7 @@
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx",
@@ -15421,6 +15509,7 @@
       "@/components/ui/badge/Badge",
       "@/components/ui/button/Button",
       "@/components/ui/charts/BarChart",
+      "@/components/ui/charts/chartTokens.ts",
       "@/components/ui/dashboard/DashboardHeader",
       "@/components/ui/dashboard/InsightCard",
       "@/components/ui/dashboard/QuickActionPanel",
@@ -15443,6 +15532,7 @@
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/badge/Badge.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/button/Button.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/BarChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/QuickActionPanel.tsx",
@@ -15465,6 +15555,7 @@
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx",
@@ -15487,6 +15578,7 @@
       "@/components/ui/badge/Badge",
       "@/components/ui/button/Button",
       "@/components/ui/charts/BarChart",
+      "@/components/ui/charts/chartTokens.ts",
       "@/components/ui/dashboard/DashboardHeader",
       "@/components/ui/dashboard/InsightCard",
       "@/components/ui/dashboard/QuickActionPanel",
@@ -15500,10 +15592,10 @@
       "@/components/ui/textarea/Textarea"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/templates/MarketingWorkspace.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/MarketingWorkspace.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatMessage.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatSurface.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\" }\n  @{ Path = \"src/components/ui/agent/Composer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SuggestionChips.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/QuickActionPanel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/form-field/FormField.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/form-field/FormField.tsx\" }\n  @{ Path = \"src/components/ui/forms/FormGroup.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/forms/FormGroup.tsx\" }\n  @{ Path = \"src/components/ui/input/Input.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/input/Input.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/search-input/SearchInput.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\" }\n  @{ Path = \"src/components/ui/textarea/Textarea.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/textarea/Textarea.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/templates/MarketingWorkspace.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/MarketingWorkspace.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatMessage.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatSurface.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\" }\n  @{ Path = \"src/components/ui/agent/Composer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SuggestionChips.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/QuickActionPanel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/form-field/FormField.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/form-field/FormField.tsx\" }\n  @{ Path = \"src/components/ui/forms/FormGroup.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/forms/FormGroup.tsx\" }\n  @{ Path = \"src/components/ui/input/Input.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/input/Input.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/search-input/SearchInput.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\" }\n  @{ Path = \"src/components/ui/textarea/Textarea.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/textarea/Textarea.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/templates/MarketingWorkspace.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/MarketingWorkspace.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatMessage.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatSurface.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\" }\n  @{ Path = \"src/components/ui/agent/Composer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SuggestionChips.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/QuickActionPanel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/form-field/FormField.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/form-field/FormField.tsx\" }\n  @{ Path = \"src/components/ui/forms/FormGroup.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/forms/FormGroup.tsx\" }\n  @{ Path = \"src/components/ui/input/Input.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/input/Input.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/search-input/SearchInput.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\" }\n  @{ Path = \"src/components/ui/textarea/Textarea.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/textarea/Textarea.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/templates/MarketingWorkspace.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/MarketingWorkspace.tsx\"\n  \"src/components/ui/agent/ChatMessage.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\"\n  \"src/components/ui/agent/ChatSurface.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\"\n  \"src/components/ui/agent/Composer.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\"\n  \"src/components/ui/agent/SuggestionChips.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\"\n  \"src/components/ui/avatar/Avatar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/button/Button.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\"\n  \"src/components/ui/charts/BarChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\"\n  \"src/components/ui/dashboard/DashboardHeader.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\"\n  \"src/components/ui/dashboard/InsightCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\"\n  \"src/components/ui/dashboard/QuickActionPanel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\"\n  \"src/components/ui/dashboard/RunStatusPill.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\"\n  \"src/components/ui/form-field/FormField.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/form-field/FormField.tsx\"\n  \"src/components/ui/forms/FormGroup.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/forms/FormGroup.tsx\"\n  \"src/components/ui/input/Input.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/input/Input.tsx\"\n  \"src/components/ui/layout/Grid.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\"\n  \"src/components/ui/layout/Panel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\"\n  \"src/components/ui/search-input/SearchInput.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\"\n  \"src/components/ui/textarea/Textarea.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/textarea/Textarea.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/templates/MarketingWorkspace.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/MarketingWorkspace.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatMessage.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\" }\n  @{ Path = \"src/components/ui/agent/ChatSurface.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\" }\n  @{ Path = \"src/components/ui/agent/Composer.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\" }\n  @{ Path = \"src/components/ui/agent/SuggestionChips.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\" }\n  @{ Path = \"src/components/ui/avatar/Avatar.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/BarChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/QuickActionPanel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/form-field/FormField.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/form-field/FormField.tsx\" }\n  @{ Path = \"src/components/ui/forms/FormGroup.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/forms/FormGroup.tsx\" }\n  @{ Path = \"src/components/ui/input/Input.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/input/Input.tsx\" }\n  @{ Path = \"src/components/ui/layout/Grid.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/search-input/SearchInput.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\" }\n  @{ Path = \"src/components/ui/textarea/Textarea.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/textarea/Textarea.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/templates/MarketingWorkspace.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/MarketingWorkspace.tsx\"\n  \"src/components/ui/agent/ChatMessage.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatMessage.tsx\"\n  \"src/components/ui/agent/ChatSurface.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/ChatSurface.tsx\"\n  \"src/components/ui/agent/Composer.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/Composer.tsx\"\n  \"src/components/ui/agent/SuggestionChips.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/agent/SuggestionChips.tsx\"\n  \"src/components/ui/avatar/Avatar.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/avatar/Avatar.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/button/Button.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\"\n  \"src/components/ui/charts/BarChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/BarChart.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n  \"src/components/ui/dashboard/DashboardHeader.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\"\n  \"src/components/ui/dashboard/InsightCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\"\n  \"src/components/ui/dashboard/QuickActionPanel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/QuickActionPanel.tsx\"\n  \"src/components/ui/dashboard/RunStatusPill.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\"\n  \"src/components/ui/form-field/FormField.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/form-field/FormField.tsx\"\n  \"src/components/ui/forms/FormGroup.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/forms/FormGroup.tsx\"\n  \"src/components/ui/input/Input.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/input/Input.tsx\"\n  \"src/components/ui/layout/Grid.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Grid.tsx\"\n  \"src/components/ui/layout/Panel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\"\n  \"src/components/ui/search-input/SearchInput.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/search-input/SearchInput.tsx\"\n  \"src/components/ui/textarea/Textarea.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/textarea/Textarea.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- template-marketing-workspace",
     "copyCommandWithGlobals": "npm run copy:component -- template-marketing-workspace --globals",
@@ -16651,6 +16743,7 @@
       "src/components/ui/button/Button.tsx",
       "src/components/ui/charts/AreaChart.tsx",
       "src/components/ui/charts/DonutChart.tsx",
+      "src/components/ui/charts/chartTokens.ts",
       "src/components/ui/dashboard/DashboardHeader.tsx",
       "src/components/ui/dashboard/InsightCard.tsx",
       "src/components/ui/dashboard/KpiStrip.tsx",
@@ -16664,6 +16757,7 @@
       "src/components/ui/button/Button.tsx",
       "src/components/ui/charts/AreaChart.tsx",
       "src/components/ui/charts/DonutChart.tsx",
+      "src/components/ui/charts/chartTokens.ts",
       "src/components/ui/dashboard/DashboardHeader.tsx",
       "src/components/ui/dashboard/InsightCard.tsx",
       "src/components/ui/dashboard/KpiStrip.tsx",
@@ -16685,6 +16779,7 @@
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/button/Button.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/AreaChart.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/DonutChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/KpiStrip.tsx",
@@ -16697,6 +16792,7 @@
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/KpiStrip.tsx",
@@ -16709,6 +16805,7 @@
       "@/components/ui/button/Button",
       "@/components/ui/charts/AreaChart",
       "@/components/ui/charts/DonutChart",
+      "@/components/ui/charts/chartTokens.ts",
       "@/components/ui/dashboard/DashboardHeader",
       "@/components/ui/dashboard/InsightCard",
       "@/components/ui/dashboard/KpiStrip",
@@ -16722,6 +16819,7 @@
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/button/Button.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/AreaChart.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/DonutChart.tsx",
+      "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/charts/chartTokens.ts",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://github.com/GurneyK/Design-library/blob/main/src/components/ui/dashboard/KpiStrip.tsx",
@@ -16735,6 +16833,7 @@
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx",
+      "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx",
       "https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/KpiStrip.tsx",
@@ -16748,6 +16847,7 @@
       "@/components/ui/button/Button",
       "@/components/ui/charts/AreaChart",
       "@/components/ui/charts/DonutChart",
+      "@/components/ui/charts/chartTokens.ts",
       "@/components/ui/dashboard/DashboardHeader",
       "@/components/ui/dashboard/InsightCard",
       "@/components/ui/dashboard/KpiStrip",
@@ -16756,10 +16856,10 @@
       "@/components/ui/timeline/Timeline"
     ],
     "copyScriptLanguage": "powershell",
-    "copyScript": "$files = @(\n  @{ Path = \"src/components/templates/ExecutiveBriefing.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/ExecutiveBriefing.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/AreaChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/KpiStrip.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/KpiStrip.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/timeline/Timeline.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/timeline/Timeline.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+    "copyScript": "$files = @(\n  @{ Path = \"src/components/templates/ExecutiveBriefing.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/ExecutiveBriefing.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/AreaChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/KpiStrip.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/KpiStrip.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/timeline/Timeline.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/timeline/Timeline.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
     "copyScripts": {
-      "powershell": "$files = @(\n  @{ Path = \"src/components/templates/ExecutiveBriefing.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/ExecutiveBriefing.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/AreaChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/KpiStrip.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/KpiStrip.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/timeline/Timeline.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/timeline/Timeline.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
-      "bash": "files=(\n  \"src/components/templates/ExecutiveBriefing.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/ExecutiveBriefing.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/button/Button.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\"\n  \"src/components/ui/charts/AreaChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\"\n  \"src/components/ui/charts/DonutChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\"\n  \"src/components/ui/dashboard/DashboardHeader.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\"\n  \"src/components/ui/dashboard/InsightCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\"\n  \"src/components/ui/dashboard/KpiStrip.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/KpiStrip.tsx\"\n  \"src/components/ui/dashboard/RunStatusPill.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\"\n  \"src/components/ui/layout/Panel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\"\n  \"src/components/ui/timeline/Timeline.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/timeline/Timeline.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
+      "powershell": "$files = @(\n  @{ Path = \"src/components/templates/ExecutiveBriefing.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/ExecutiveBriefing.tsx\" }\n  @{ Path = \"src/components/ui/badge/Badge.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\" }\n  @{ Path = \"src/components/ui/button/Button.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\" }\n  @{ Path = \"src/components/ui/charts/AreaChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/DonutChart.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\" }\n  @{ Path = \"src/components/ui/charts/chartTokens.ts\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\" }\n  @{ Path = \"src/components/ui/dashboard/DashboardHeader.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/InsightCard.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/KpiStrip.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/KpiStrip.tsx\" }\n  @{ Path = \"src/components/ui/dashboard/RunStatusPill.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\" }\n  @{ Path = \"src/components/ui/layout/Panel.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\" }\n  @{ Path = \"src/components/ui/timeline/Timeline.tsx\"; Url = \"https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/timeline/Timeline.tsx\" }\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n",
+      "bash": "files=(\n  \"src/components/templates/ExecutiveBriefing.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/templates/ExecutiveBriefing.tsx\"\n  \"src/components/ui/badge/Badge.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/badge/Badge.tsx\"\n  \"src/components/ui/button/Button.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/button/Button.tsx\"\n  \"src/components/ui/charts/AreaChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/AreaChart.tsx\"\n  \"src/components/ui/charts/DonutChart.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/DonutChart.tsx\"\n  \"src/components/ui/charts/chartTokens.ts|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/charts/chartTokens.ts\"\n  \"src/components/ui/dashboard/DashboardHeader.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/DashboardHeader.tsx\"\n  \"src/components/ui/dashboard/InsightCard.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/InsightCard.tsx\"\n  \"src/components/ui/dashboard/KpiStrip.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/KpiStrip.tsx\"\n  \"src/components/ui/dashboard/RunStatusPill.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/dashboard/RunStatusPill.tsx\"\n  \"src/components/ui/layout/Panel.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/layout/Panel.tsx\"\n  \"src/components/ui/timeline/Timeline.tsx|https://raw.githubusercontent.com/GurneyK/Design-library/main/src/components/ui/timeline/Timeline.tsx\"\n)\n\nfor file in \"${files[@]}\"; do\n  path=\"${file%%|*}\"\n  url=\"${file#*|}\"\n  mkdir -p \"$(dirname \"$path\")\"\n  curl -L \"$url\" -o \"$path\"\ndone\n"
     },
     "copyCommand": "npm run copy:component -- template-executive-briefing",
     "copyCommandWithGlobals": "npm run copy:component -- template-executive-briefing --globals",

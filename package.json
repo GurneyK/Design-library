@@ -9,7 +9,8 @@
     "copy:component": "node scripts/copy-component.mjs",
     "docs:check": "node scripts/validate-doc-links.mjs",
     "handoff:check": "node scripts/validate-handoff-readiness.mjs",
-    "qa": "npm run build && node scripts/validate-catalog.mjs && node scripts/test-copy-helper.mjs && node scripts/validate-handoff-readiness.mjs && node scripts/validate-release.mjs && node scripts/validate-doc-links.mjs",
+    "token:check": "node scripts/validate-token-usage.mjs",
+    "qa": "npm run build && node scripts/validate-catalog.mjs && node scripts/test-copy-helper.mjs && node scripts/validate-handoff-readiness.mjs && node scripts/validate-token-usage.mjs && node scripts/validate-release.mjs && node scripts/validate-doc-links.mjs",
     "version:check": "node scripts/validate-release.mjs",
     "visual-qa": "playwright test",
     "preview": "vite preview --host 127.0.0.1"

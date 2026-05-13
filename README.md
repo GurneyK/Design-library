@@ -58,7 +58,7 @@ npm run qa
 
 The QA command runs the production build and validates the generated catalog contract: manifest counts, duplicate IDs, required documentation fields, guidance arrays, kind/category counts, and source-file references.
 
-It also validates handoff readiness, including source-copyable coverage, expected foundation/reference exceptions, copy scripts, and the published readiness summary.
+It also validates handoff readiness, including source-copyable coverage, expected foundation/reference exceptions, copy scripts, token usage, and the published readiness summary.
 
 ## Visual QA
 

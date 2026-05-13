@@ -18,7 +18,10 @@
   --habibi-gray-500: #667085;
   --habibi-gray-700: #344054;
   --habibi-gray-900: #101828;
+  --habibi-info-500: #2e90fa;
+  --habibi-success-500: #12b76a;
   --habibi-focus-ring: 0 0 0 4px #f4ebff;
+  --habibi-error-ring: 0 0 0 4px #fee4e2;
 }
 
 * {

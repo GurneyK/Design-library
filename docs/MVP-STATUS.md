@@ -52,6 +52,7 @@ The current MVP includes:
 - A generated machine-readable manifest for AI-agent consumption.
 - A GitHub Pages deployment that updates when `main` is pushed.
 - GitHub Actions deploy gating through `npm run qa` before publishing `site/`.
+- Token usage validation for component source files so implementation colors route through Habibi tokens or CSS variables.
 - Desktop and mobile Playwright smoke tests for catalog render, search, templates, and manifest access.
 - Developer handoff metadata for every entry, including source links, raw files, import paths, package install command, global setup files, setup notes, and copy status.
 - A standalone `developer-handoff.json` endpoint for scripts, agents, and dev tooling.

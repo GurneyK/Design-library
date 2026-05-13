@@ -129,7 +129,7 @@ async function collectTsxFiles(directory) {
     const fullPath = path.join(directory, entry.name);
     if (entry.isDirectory()) {
       files.push(...(await collectTsxFiles(fullPath)));
-    } else if (entry.isFile() && entry.name.endsWith(".tsx") && !entry.name.endsWith(".meta.tsx")) {
+    } else if (entry.isFile() && /\.(ts|tsx)$/.test(entry.name) && !entry.name.includes(".meta.")) {
       files.push(fullPath);
     }
   }
