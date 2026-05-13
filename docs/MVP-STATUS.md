@@ -54,6 +54,7 @@ The current MVP includes:
 - Desktop and mobile Playwright smoke tests for catalog render, search, templates, and manifest access.
 - Developer handoff metadata for every entry, including source links, raw files, import paths, setup notes, and copy status.
 - A standalone `developer-handoff.json` endpoint for scripts, agents, and dev tooling.
+- Lazy-loaded catalog modules so the initial app shell stays small and previews load on demand.
 
 ## What Is Still Post-MVP
 

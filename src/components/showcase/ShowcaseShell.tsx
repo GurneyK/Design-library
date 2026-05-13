@@ -1,6 +1,6 @@
 import { BookOpen, Boxes, FileCode2, LayoutTemplate } from "lucide-react";
 import type { ReactNode } from "react";
-import type { CatalogEntry } from "../../data/catalog";
+import type { CatalogEntrySummary } from "../../data/catalog";
 import { taxonomy } from "../../data/taxonomy";
 import { SearchBox } from "./SearchBox";
 import { SidebarNav } from "./SidebarNav";
@@ -9,7 +9,7 @@ import { Topbar } from "./Topbar";
 interface ShowcaseShellProps {
   activeId: string;
   children: ReactNode;
-  entries: CatalogEntry[];
+  entries: CatalogEntrySummary[];
   query: string;
   section: "components" | "templates";
   onEntryChange: (id: string) => void;

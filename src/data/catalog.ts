@@ -256,8 +256,25 @@ export type PropRow = {
   description: string;
 };
 
-export type CatalogEntry = {
+export type DeveloperHandoffData = {
+  copyInstructions: string;
+  copyStatus: string;
+  dependencyGithubUrls: string[];
+  dependencyImportPaths: string[];
+  dependencyPaths: string[];
+  dependencyRawUrls: string[];
+  githubUrls: string[];
+  importPaths: string[];
+  rawUrls: string[];
+  repositoryUrl: string;
+  requiredSetup: string[];
+  sourcePaths: string[];
+  usageSnippetStatus: string;
+};
+
+export type CatalogEntryBase = {
   id: string;
+  kind?: "component" | "foundation" | "template";
   name: string;
   category: string;
   subcategory: string;
@@ -273,6 +290,19 @@ export type CatalogEntry = {
   accessibility: readonly string[];
   agentGuidance: readonly string[];
   code: string;
+  sourceFile?: string;
+  developerHandoff?: DeveloperHandoffData;
+};
+
+export type CatalogEntry = CatalogEntryBase & {
+  preview: () => JSX.Element;
+};
+
+export type CatalogEntrySummary = Pick<
+  CatalogEntryBase,
+  "category" | "description" | "id" | "kind" | "name" | "source" | "sourceFile" | "status" | "subcategory"
+> & {
+  developerHandoff?: DeveloperHandoffData;
 };
 
 export const catalog = [

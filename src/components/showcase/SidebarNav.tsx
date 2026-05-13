@@ -1,8 +1,8 @@
-import type { CatalogEntry } from "../../data/catalog";
+import type { CatalogEntrySummary } from "../../data/catalog";
 
 interface SidebarNavProps {
   activeId: string;
-  entries: CatalogEntry[];
+  entries: CatalogEntrySummary[];
   taxonomy: readonly string[];
   onEntryChange: (id: string) => void;
 }

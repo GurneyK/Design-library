@@ -38,6 +38,8 @@ npm run build
 
 The build generates the agent manifest, type-checks the app, builds the static site into `site/`, writes the GitHub Pages index, and refreshes the manifest outputs.
 
+The showcase shell loads lightweight manifest metadata first, then lazy-loads the selected entry module on demand. This keeps the initial app bundle small while preserving live previews for the full catalog.
+
 ## QA
 
 ```bash

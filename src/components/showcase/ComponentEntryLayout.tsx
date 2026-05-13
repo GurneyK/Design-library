@@ -1,6 +1,5 @@
 import { Accessibility, Bot, CheckCircle2, Code2, ExternalLink, Layers, PackageCheck, ShieldCheck } from "lucide-react";
 import type { CatalogEntry } from "../../data/catalog";
-import developerHandoff from "../../data/developerHandoff.json";
 import { CodeBlock } from "./CodeBlock";
 import { PreviewFrame } from "./PreviewFrame";
 import { PropsTable } from "./PropsTable";
@@ -12,7 +11,7 @@ interface ComponentEntryLayoutProps {
 
 export function ComponentEntryLayout({ entry }: ComponentEntryLayoutProps) {
   const Preview = entry.preview;
-  const handoff = developerHandoff[entry.id as keyof typeof developerHandoff];
+  const handoff = entry.developerHandoff;
 
   return (
     <article className="space-y-6">
