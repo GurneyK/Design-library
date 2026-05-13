@@ -9,6 +9,7 @@ The Design Library MVP is shareable, deployed, and ready for early team review.
 - Live preview: https://gurneyk.github.io/Design-library/
 - Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
 - Developer handoff JSON: https://gurneyk.github.io/Design-library/developer-handoff.json
+- MVP readiness: 96 / 100, tracked in `docs/MVP-SCORECARD.md`
 - Deployment: GitHub Pages from `main`
 - Local command: `npm run dev`
 - Build command: `npm run build`
@@ -85,12 +86,13 @@ For a design review, start with:
 
 1. `docs/README.md`
 2. `docs/TEAM-REVIEW-PACKET.md`
-3. `docs/REVIEW-GUIDE.md`
-4. Foundations
-5. Primitives
-6. Agent UI
-7. Dashboard / Product Patterns
-8. Templates / Blocks
+3. `docs/MVP-SCORECARD.md`
+4. `docs/REVIEW-GUIDE.md`
+5. Foundations
+6. Primitives
+7. Agent UI
+8. Dashboard / Product Patterns
+9. Templates / Blocks
 
 For a developer review, start with:
 

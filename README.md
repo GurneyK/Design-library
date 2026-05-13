@@ -26,6 +26,8 @@ Handoff readiness: [Handoff readiness](docs/HANDOFF-READINESS.md)
 
 Accessibility checklist: [Accessibility checklist](docs/ACCESSIBILITY-CHECKLIST.md)
 
+MVP scorecard: [MVP scorecard](docs/MVP-SCORECARD.md)
+
 ## What This Contains
 
 - 224 catalog entries across foundations, primitives, layout, navigation, data entry, forms, data display, charts, feedback, agent UI, dashboard/product patterns, and templates.
@@ -152,6 +154,7 @@ Deployment flow:
 - [Component authoring](docs/COMPONENT-AUTHORING.md)
 - [Handoff readiness](docs/HANDOFF-READINESS.md)
 - [Accessibility checklist](docs/ACCESSIBILITY-CHECKLIST.md)
+- [MVP scorecard](docs/MVP-SCORECARD.md)
 - [Manifest schema](docs/MANIFEST-SCHEMA.md)
 - [Review guide](docs/REVIEW-GUIDE.md)
 - [Team review packet](docs/TEAM-REVIEW-PACKET.md)

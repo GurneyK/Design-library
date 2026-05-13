@@ -7,7 +7,9 @@ Use this when sending the Design Library MVP to H3L, Nexus/Polaris, or future pr
 - Live preview: https://gurneyk.github.io/Design-library/
 - GitHub repo: https://github.com/GurneyK/Design-library
 - MVP status: `docs/MVP-STATUS.md`
+- MVP scorecard: `docs/MVP-SCORECARD.md`
 - Review guide: `docs/REVIEW-GUIDE.md`
+- Accessibility checklist: `docs/ACCESSIBILITY-CHECKLIST.md`
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
 - Handoff readiness: `docs/HANDOFF-READINESS.md`
 - Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
@@ -85,7 +87,9 @@ What I need feedback on:
 Useful docs:
 - Review guide: docs/REVIEW-GUIDE.md
 - MVP status: docs/MVP-STATUS.md
+- MVP scorecard: docs/MVP-SCORECARD.md
 - Developer handoff: docs/DEVELOPER-HANDOFF.md
+- Accessibility checklist: docs/ACCESSIBILITY-CHECKLIST.md
 - Handoff readiness: docs/HANDOFF-READINESS.md
 
 Suggested feedback format:
@@ -121,7 +125,7 @@ Use [Feedback triage](FEEDBACK-TRIAGE.md) to label, prioritize, route, and close
 
 ## MVP Confidence
 
-Current confidence: 92-94%.
+Current confidence: 96 / 100.
 
 Already validated:
 
@@ -132,6 +136,7 @@ Already validated:
 - Source-copyable handoff coverage
 - Local import closure for copied files
 - Token usage validation for component source files
+- Accessibility smoke coverage for shell landmarks, skip link, selected state, and copy-action keyboard reachability
 
 Still expected after review:
 

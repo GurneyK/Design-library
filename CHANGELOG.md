@@ -36,6 +36,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Agent consumption guide.
 - Review guide.
 - Team review packet for sharing the MVP with designers, engineers, product partners, and AI reviewers.
+- MVP scorecard with a 96 / 100 readiness breakdown and remaining post-MVP points.
 - GitHub issue templates for component, template/block, and agent-manifest feedback.
 - Pull request template and feedback triage guide for review follow-through.
 - Refreshed roadmap and MVP status docs.
