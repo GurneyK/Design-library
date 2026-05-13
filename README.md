@@ -58,6 +58,8 @@ The visual QA command runs Playwright against the production preview in desktop 
 
 ## Reusing Components
 
+Full developer handoff guide: [Developer handoff](docs/DEVELOPER-HANDOFF.md)
+
 Each catalog entry includes two developer-facing code surfaces:
 
 - `Code` shows a usage snippet for the component or template.
@@ -82,6 +84,8 @@ Use `--search` or `--list` to discover catalog IDs from the terminal before copy
 Use `--globals` when the consuming app still needs the Habibi Tailwind token setup and base styles. Without `--globals`, the script copies only the component/template source and local component dependencies.
 
 Use `--handoff-file` and `--source-root` when testing from a local clone without downloading raw GitHub files.
+
+For setup details, import expectations, and the reuse checklist, see [Developer handoff](docs/DEVELOPER-HANDOFF.md).
 
 Programmatic handoff lookup:
 
@@ -113,6 +117,7 @@ Deployment flow:
 ## Project Docs
 
 - [Project brief](docs/PROJECT-BRIEF.md)
+- [Developer handoff](docs/DEVELOPER-HANDOFF.md)
 - [Taxonomy](docs/TAXONOMY.md)
 - [Decisions](docs/DECISIONS.md)
 - [Roadmap](docs/ROADMAP.md)

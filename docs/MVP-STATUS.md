@@ -1,6 +1,6 @@
 # MVP Status
 
-Last updated: May 12, 2026
+Last updated: May 13, 2026
 
 ## Status
 
@@ -57,6 +57,7 @@ The current MVP includes:
 - Lazy-loaded catalog modules so the initial app shell stays small and previews load on demand.
 - Generated PowerShell and Bash copy scripts for source-backed entries.
 - A `npm run copy:component -- <entry-id>` helper for copying source-backed entries into another React + Tailwind project.
+- A developer handoff guide covering install requirements, CLI discovery, copy commands, local clone mode, programmatic handoff, and reuse QA.
 
 ## What Is Still Post-MVP
 
@@ -79,11 +80,12 @@ For a design review, start with:
 
 For a developer review, start with:
 
-1. `src/data/catalog.ts`
-2. `src/data/*Entries.tsx`
-3. `src/components/ui/`
-4. `scripts/write-agent-manifest.mjs`
-5. `manifest.json`
+1. `docs/DEVELOPER-HANDOFF.md`
+2. `src/data/catalog.ts`
+3. `src/data/*Entries.tsx`
+4. `src/components/ui/`
+5. `scripts/write-agent-manifest.mjs`
+6. `manifest.json`
 
 For an AI-agent review, start with:
 
