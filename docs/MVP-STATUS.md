@@ -60,6 +60,7 @@ The current MVP includes:
 - A developer handoff guide covering install requirements, CLI discovery, copy commands, local clone mode, programmatic handoff, and reuse QA.
 - An agent consumption guide covering manifest selection, composition rules, gap behavior, prompt patterns, and generated UI review checks.
 - A review guide for design, engineering, product, and AI-agent feedback.
+- A changelog and release checklist for versioned review milestones.
 
 ## What Is Still Post-MVP
 

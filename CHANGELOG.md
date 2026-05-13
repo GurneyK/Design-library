@@ -1,0 +1,58 @@
+# Changelog
+
+All notable changes to the Design Library are tracked here.
+
+## 0.1.0 MVP Review - 2026-05-13
+
+Status: Deployed to GitHub Pages and ready for early team review.
+
+### Added
+
+- Public Design Library showcase at https://gurneyk.github.io/Design-library/
+- 224 catalog entries across foundations, primitives, layout, navigation, data entry, forms, data display, charts, feedback, Agent UI, dashboard/product patterns, agent reference, and templates.
+- 194 live React + Tailwind component entries.
+- 16 assembled Templates / Blocks for Nexus-style screens and liftable product compositions.
+- Machine-readable `manifest.json` for AI-agent discovery.
+- Standalone `developer-handoff.json` for source files, raw URLs, dependency files, setup requirements, and copy commands.
+- Developer handoff section in each source-backed entry.
+- PowerShell and Bash copy scripts for source-backed entries.
+- `npm run copy:component` helper with:
+  - `--search`
+  - `--list`
+  - `--dry-run`
+  - `--globals`
+  - `--handoff-file`
+  - `--source-root`
+- Lazy-loaded catalog modules so the initial app shell stays lightweight.
+- Developer handoff guide.
+- Agent consumption guide.
+- Review guide.
+- Refreshed roadmap and MVP status docs.
+- Catalog validation and copy-helper validation in `npm run qa`.
+- Desktop and mobile Playwright smoke tests in `npm run visual-qa`.
+
+### Known Gaps
+
+- Figma pixel QA is deferred until Figma MCP access is stable.
+- Proposed code-side components need design review before being treated as official Figma components.
+- Deeper keyboard and contrast audits are still needed before broad rollout.
+- Figma Code Connect-style mapping is future work.
+- Versioned package publishing is not yet implemented.
+
+### Verification
+
+- `npm run qa`
+- `npm run visual-qa`
+- GitHub Actions build
+- GitHub Pages deployment
+
+## Pre-MVP Buildout
+
+### Added
+
+- Project brief, taxonomy, decisions, roadmap, inventory, and gap-analysis docs.
+- Vite + React + TypeScript + Tailwind shell.
+- GitHub Pages deployment workflow.
+- First component and template entry layouts.
+- Broad component catalog buildout across major UI-library categories.
+- Agent-specific and dashboard-specific components for Nexus/Polaris workflows.

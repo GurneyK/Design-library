@@ -120,10 +120,12 @@ Deployment flow:
 
 ## Project Docs
 
+- [Changelog](CHANGELOG.md)
 - [Agent consumption](docs/AGENT-CONSUMPTION.md)
 - [Project brief](docs/PROJECT-BRIEF.md)
 - [Developer handoff](docs/DEVELOPER-HANDOFF.md)
 - [Review guide](docs/REVIEW-GUIDE.md)
+- [Release checklist](docs/RELEASE-CHECKLIST.md)
 - [Taxonomy](docs/TAXONOMY.md)
 - [Decisions](docs/DECISIONS.md)
 - [Roadmap](docs/ROADMAP.md)
