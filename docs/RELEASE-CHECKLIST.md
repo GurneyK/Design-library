@@ -17,6 +17,7 @@ Run:
 ```bash
 npm run qa
 npm run visual-qa
+npm run version:check
 ```
 
 Expected:
@@ -24,6 +25,7 @@ Expected:
 - Production build succeeds.
 - Catalog validation passes.
 - Copy-helper validation passes.
+- Release/version validation passes.
 - Playwright desktop and mobile smoke tests pass.
 
 ## Generated Contracts
