@@ -29,6 +29,12 @@ export function ShowcaseShell({
 }: ShowcaseShellProps) {
   return (
     <div className="flex min-h-screen bg-gray-25 text-gray-900">
+      <a
+        className="focus-ring sr-only fixed left-4 top-4 z-50 rounded-habibiMd bg-white px-4 py-2 text-sm font-semibold text-brand-700 shadow-habibiMd focus:not-sr-only"
+        href="#main-content"
+      >
+        Skip to main content
+      </a>
       <aside className="hidden w-72 shrink-0 border-r border-gray-200 bg-white lg:block">
         <div className="flex h-16 items-center gap-3 border-b border-gray-200 px-6">
           <div className="flex h-9 w-9 items-center justify-center rounded-habibiMd bg-brand-700 text-white">
@@ -55,7 +61,7 @@ export function ShowcaseShell({
           onSectionChange={onSectionChange}
         />
 
-        <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-8">
+        <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-8" id="main-content" tabIndex={-1}>
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_260px]">
             <div className="min-w-0">{children}</div>
             <aside className="hidden xl:block">
@@ -65,7 +71,7 @@ export function ShowcaseShell({
                     <BookOpen className="h-4 w-4 text-brand-700" />
                     Entry sections
                   </div>
-                  <nav className="space-y-1 text-sm text-gray-600">
+                  <nav aria-label="Entry sections" className="space-y-1 text-sm text-gray-600">
                     {["Preview", "Variants", "Props", "Tokens", "Usage", "Code", "Developer handoff", "For agents"].map((item) => (
                       <a
                         className="block rounded-habibiSm px-2 py-1.5 hover:bg-gray-50 hover:text-gray-900"

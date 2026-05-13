@@ -21,8 +21,13 @@ export function Topbar({ query, section, onQueryChange, onSectionChange }: Topba
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <SearchBox value={query} onChange={onQueryChange} />
-          <div className="grid h-10 grid-cols-2 rounded-habibiMd bg-gray-100 p-1 text-sm font-semibold text-gray-600">
+          <div
+            aria-label="Catalog section"
+            className="grid h-10 grid-cols-2 rounded-habibiMd bg-gray-100 p-1 text-sm font-semibold text-gray-600"
+            role="group"
+          >
             <button
+              aria-pressed={section === "components"}
               className={`focus-ring flex items-center justify-center gap-2 rounded-habibiSm px-3 ${
                 section === "components" ? "bg-white text-gray-900 shadow-habibiXs" : "hover:text-gray-900"
               }`}
@@ -33,6 +38,7 @@ export function Topbar({ query, section, onQueryChange, onSectionChange }: Topba
               Components
             </button>
             <button
+              aria-pressed={section === "templates"}
               className={`focus-ring flex items-center justify-center gap-2 rounded-habibiSm px-3 ${
                 section === "templates" ? "bg-white text-gray-900 shadow-habibiXs" : "hover:text-gray-900"
               }`}

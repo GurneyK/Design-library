@@ -36,6 +36,7 @@ Expected:
 - Copy-helper receipt generation passes.
 - Token usage validation passes.
 - Playwright desktop and mobile smoke tests pass.
+- Accessibility smoke tests pass inside `npm run visual-qa`.
 
 ## Generated Contracts
 
@@ -77,6 +78,7 @@ Share these links:
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
 - Component authoring: `docs/COMPONENT-AUTHORING.md`
 - Handoff readiness: `docs/HANDOFF-READINESS.md`
+- Accessibility checklist: `docs/ACCESSIBILITY-CHECKLIST.md`
 - Agent consumption: `docs/AGENT-CONSUMPTION.md`
 - Changelog: `CHANGELOG.md`
 

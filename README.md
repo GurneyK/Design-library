@@ -24,6 +24,8 @@ Component authoring guide: [Component authoring](docs/COMPONENT-AUTHORING.md)
 
 Handoff readiness: [Handoff readiness](docs/HANDOFF-READINESS.md)
 
+Accessibility checklist: [Accessibility checklist](docs/ACCESSIBILITY-CHECKLIST.md)
+
 ## What This Contains
 
 - 224 catalog entries across foundations, primitives, layout, navigation, data entry, forms, data display, charts, feedback, agent UI, dashboard/product patterns, and templates.
@@ -149,6 +151,7 @@ Deployment flow:
 - [Developer handoff](docs/DEVELOPER-HANDOFF.md)
 - [Component authoring](docs/COMPONENT-AUTHORING.md)
 - [Handoff readiness](docs/HANDOFF-READINESS.md)
+- [Accessibility checklist](docs/ACCESSIBILITY-CHECKLIST.md)
 - [Manifest schema](docs/MANIFEST-SCHEMA.md)
 - [Review guide](docs/REVIEW-GUIDE.md)
 - [Team review packet](docs/TEAM-REVIEW-PACKET.md)

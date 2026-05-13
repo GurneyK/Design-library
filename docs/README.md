@@ -8,6 +8,7 @@ This folder contains the project, review, developer, agent, and release document
 - [Review guide](REVIEW-GUIDE.md): how designers, engineers, product partners, and AI-agent reviewers should evaluate the library.
 - [Team review packet](TEAM-REVIEW-PACKET.md): copyable review message, links, feedback route, and triage labels.
 - [Feedback triage](FEEDBACK-TRIAGE.md): how to label, prioritize, route, and close review feedback.
+- [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md): shell, component, template, keyboard, semantic, and contrast review checklist.
 - [Developer handoff](DEVELOPER-HANDOFF.md): how to copy components into another React + Tailwind app.
 - [Component authoring](COMPONENT-AUTHORING.md): how to add or edit entries without breaking previews, copy flow, or agent metadata.
 - [Handoff readiness](HANDOFF-READINESS.md): current source-copyable coverage and verification path.
@@ -37,18 +38,20 @@ Designer:
 
 1. [Review guide](REVIEW-GUIDE.md)
 2. [Team review packet](TEAM-REVIEW-PACKET.md)
-3. [MVP status](MVP-STATUS.md)
-4. [Taxonomy](TAXONOMY.md)
-5. Live preview
+3. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
+4. [MVP status](MVP-STATUS.md)
+5. [Taxonomy](TAXONOMY.md)
+6. Live preview
 
 Engineer:
 
 1. [Developer handoff](DEVELOPER-HANDOFF.md)
 2. [Component authoring](COMPONENT-AUTHORING.md)
 3. [Handoff readiness](HANDOFF-READINESS.md)
-4. [Release checklist](RELEASE-CHECKLIST.md)
-5. [MVP status](MVP-STATUS.md)
-6. `npm run copy:component -- --search <term>`
+4. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
+5. [Release checklist](RELEASE-CHECKLIST.md)
+6. [MVP status](MVP-STATUS.md)
+7. `npm run copy:component -- --search <term>`
 
 AI Agent / Automation:
 

@@ -53,7 +53,7 @@ The current MVP includes:
 - A GitHub Pages deployment that updates when `main` is pushed.
 - GitHub Actions deploy gating through `npm run qa` before publishing `site/`.
 - Token usage validation for component source files so implementation colors route through Habibi tokens or CSS variables.
-- Desktop and mobile Playwright smoke tests for catalog render, search, templates, and manifest access.
+- Desktop and mobile Playwright smoke tests for catalog render, search, templates, shell accessibility, keyboard reachability, and manifest access.
 - Developer handoff metadata for every entry, including source links, raw files, import paths, package install command, global setup files, setup notes, and copy status.
 - A standalone `developer-handoff.json` endpoint for scripts, agents, and dev tooling.
 - Lazy-loaded catalog modules so the initial app shell stays small and previews load on demand.
@@ -68,11 +68,12 @@ The current MVP includes:
 - A team review packet with share links, a copyable message, review route, and feedback labels.
 - A changelog and release checklist for versioned review milestones.
 - A docs index that gives each audience a clear path through the project documentation.
+- An accessibility checklist for shell, component, template, keyboard, semantic, and contrast review.
 
 ## What Is Still Post-MVP
 
 - Pixel-level Figma QA for every entry once Figma MCP access is stable.
-- Deeper accessibility QA with keyboard walkthroughs and contrast checks.
+- Deeper accessibility QA with screen-reader walkthroughs and formal contrast checks.
 - Continued performance budgets as the catalog grows.
 - Stronger test coverage for manifest generation and catalog schema validation.
 - More exact Code Connect-style mapping between Figma component names and React component names.
