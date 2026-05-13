@@ -8,6 +8,7 @@ Use this checklist before sharing a new Design Library release or review milesto
 - Confirm `docs/MVP-STATUS.md` reflects current catalog counts and status.
 - Confirm `docs/ROADMAP.md` reflects shipped, next, and later work.
 - Confirm `docs/COMPONENT-AUTHORING.md` reflects the current catalog and handoff workflow.
+- Confirm `docs/HANDOFF-READINESS.md` reflects current source-copyable coverage.
 - Confirm `CHANGELOG.md` has an entry for the release.
 - Confirm public links are appropriate for the intended audience.
 
@@ -66,6 +67,7 @@ Share these links:
 - Review guide: `docs/REVIEW-GUIDE.md`
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
 - Component authoring: `docs/COMPONENT-AUTHORING.md`
+- Handoff readiness: `docs/HANDOFF-READINESS.md`
 - Agent consumption: `docs/AGENT-CONSUMPTION.md`
 - Changelog: `CHANGELOG.md`
 

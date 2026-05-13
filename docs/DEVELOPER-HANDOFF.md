@@ -2,6 +2,8 @@
 
 This guide is for developers copying Design Library components or templates into another React + Tailwind project.
 
+For current source-copyable coverage, see [Handoff readiness](HANDOFF-READINESS.md).
+
 ## What You Need
 
 - React 18+
