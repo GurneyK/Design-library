@@ -21,6 +21,7 @@ npm run qa
 npm run visual-qa
 npm run version:check
 npm run docs:check
+npm run handoff:check
 ```
 
 Expected:
@@ -30,6 +31,7 @@ Expected:
 - Copy-helper validation passes.
 - Release/version validation passes.
 - Markdown local-link validation passes.
+- Handoff readiness validation passes.
 - Playwright desktop and mobile smoke tests pass.
 
 ## Generated Contracts

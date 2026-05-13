@@ -70,6 +70,7 @@ Run this before sharing a release:
 
 ```bash
 npm run qa
+npm run handoff:check
 ```
 
 That validates:
@@ -78,6 +79,7 @@ That validates:
 - Every component and template resolves implementation source.
 - Source-backed entries include copy scripts and copy commands.
 - Generated `developer-handoff.json` matches the manifest payload.
+- This readiness page matches generated manifest and handoff counts.
 
 For a spot check, run:
 
