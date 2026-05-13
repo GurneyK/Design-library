@@ -51,6 +51,7 @@ The current MVP includes:
 - A Templates / Blocks section for realistic Nexus and dashboard compositions.
 - A generated machine-readable manifest for AI-agent consumption.
 - A GitHub Pages deployment that updates when `main` is pushed.
+- GitHub Actions deploy gating through `npm run qa` before publishing `site/`.
 - Desktop and mobile Playwright smoke tests for catalog render, search, templates, and manifest access.
 - Developer handoff metadata for every entry, including source links, raw files, import paths, package install command, global setup files, setup notes, and copy status.
 - A standalone `developer-handoff.json` endpoint for scripts, agents, and dev tooling.

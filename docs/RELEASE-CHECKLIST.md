@@ -56,7 +56,7 @@ Confirm:
 
 After pushing to `main`:
 
-- GitHub Actions build passes.
+- GitHub Actions QA passes.
 - GitHub Pages deployment passes.
 - Live preview loads at https://gurneyk.github.io/Design-library/
 - Live manifest loads at https://gurneyk.github.io/Design-library/manifest.json

@@ -1,5 +1,7 @@
 # Design Library
 
+[![Deploy Design Library](https://github.com/GurneyK/Design-library/actions/workflows/deploy.yml/badge.svg)](https://github.com/GurneyK/Design-library/actions/workflows/deploy.yml)
+
 Browsable React + Tailwind showcase for the Habibi design system used across Unilever H3L, Nexus/Polaris, and future internal products.
 
 Live preview: https://gurneyk.github.io/Design-library/
@@ -128,7 +130,7 @@ This repo deploys to GitHub Pages on every push to `main`.
 Deployment flow:
 
 1. Push changes to `main`.
-2. GitHub Actions runs `npm ci` and `npm run build`.
+2. GitHub Actions runs `npm ci` and `npm run qa`.
 3. The `site/` folder is uploaded to GitHub Pages.
 4. The live preview updates at https://gurneyk.github.io/Design-library/
 
