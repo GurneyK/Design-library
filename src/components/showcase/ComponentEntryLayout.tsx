@@ -137,6 +137,7 @@ type DeveloperHandoffData = {
   copyInstructions: string;
   copyScript?: string;
   copyScriptLanguage?: string;
+  copyScripts?: Record<string, string>;
   copyStatus: string;
   githubUrls: string[];
   importPaths: string[];
@@ -176,7 +177,21 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
         {handoff.copyInstructions}
       </div>
 
-      {handoff.copyScript ? <CopyScriptBlock code={handoff.copyScript} /> : null}
+      {handoff.copyScripts?.powershell ? (
+        <CopyScriptBlock
+          code={handoff.copyScripts.powershell}
+          description="Run from the root of a React + Tailwind project on Windows."
+          title="PowerShell copy script"
+        />
+      ) : null}
+
+      {handoff.copyScripts?.bash ? (
+        <CopyScriptBlock
+          code={handoff.copyScripts.bash}
+          description="Run from the root of a React + Tailwind project on macOS or Linux."
+          title="Bash copy script"
+        />
+      ) : null}
 
       {handoff.sourcePaths.length > 0 ? (
         <div>
@@ -217,7 +232,7 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
   );
 }
 
-function CopyScriptBlock({ code }: { code: string }) {
+function CopyScriptBlock({ code, description, title }: { code: string; description: string; title: string }) {
   const [copied, setCopied] = useState(false);
 
   async function copyScript() {
@@ -230,8 +245,8 @@ function CopyScriptBlock({ code }: { code: string }) {
     <div className="overflow-hidden rounded-habibiLg border border-gray-200 bg-gray-950">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
         <div>
-          <h3 className="text-sm font-semibold text-white">Copy files script</h3>
-          <p className="mt-1 text-xs text-gray-400">Run from the root of a React + Tailwind project.</p>
+          <h3 className="text-sm font-semibold text-white">{title}</h3>
+          <p className="mt-1 text-xs text-gray-400">{description}</p>
         </div>
         <button
           className="focus-ring inline-flex items-center gap-2 rounded-habibiSm bg-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/15"

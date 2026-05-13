@@ -179,6 +179,16 @@ function validateDeveloperHandoff(prefix, entry) {
     if (typeof handoff.copyScript !== "string" || !handoff.copyScript.includes("Invoke-WebRequest")) {
       errors.push(`${prefix} developerHandoff.copyScript must include a PowerShell download script.`);
     }
+    if (!handoff.copyScripts || typeof handoff.copyScripts !== "object") {
+      errors.push(`${prefix} developerHandoff.copyScripts is required.`);
+    } else {
+      if (typeof handoff.copyScripts.powershell !== "string" || !handoff.copyScripts.powershell.includes("Invoke-WebRequest")) {
+        errors.push(`${prefix} developerHandoff.copyScripts.powershell must include Invoke-WebRequest.`);
+      }
+      if (typeof handoff.copyScripts.bash !== "string" || !handoff.copyScripts.bash.includes("curl -L")) {
+        errors.push(`${prefix} developerHandoff.copyScripts.bash must include curl -L.`);
+      }
+    }
   }
 
   if (typeof handoff.copyInstructions !== "string" || handoff.copyInstructions.trim().length === 0) {

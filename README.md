@@ -65,7 +65,7 @@ Each catalog entry includes two developer-facing code surfaces:
 
 To reuse a component in another React + Tailwind app, copy the implementation source plus any listed local dependencies, install `lucide-react` when icons are used, and bring over the Habibi Tailwind token setup from `tailwind.config.ts` plus the base styles in `src/index.css`.
 
-For source-backed entries, the `Developer handoff` section also includes a generated PowerShell copy script that downloads the implementation source and local dependency files from raw GitHub URLs.
+For source-backed entries, the `Developer handoff` section also includes generated PowerShell and Bash copy scripts that download the implementation source and local dependency files from raw GitHub URLs.
 
 Programmatic handoff lookup:
 
@@ -75,7 +75,8 @@ const handoff = await fetch("https://gurneyk.github.io/Design-library/developer-
 );
 
 console.log(handoff["run-card"].allCopyPaths);
-console.log(handoff["run-card"].copyScript);
+console.log(handoff["run-card"].copyScripts.powershell);
+console.log(handoff["run-card"].copyScripts.bash);
 ```
 
 ## Deployment

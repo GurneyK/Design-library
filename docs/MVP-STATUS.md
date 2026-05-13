@@ -55,7 +55,7 @@ The current MVP includes:
 - Developer handoff metadata for every entry, including source links, raw files, import paths, setup notes, and copy status.
 - A standalone `developer-handoff.json` endpoint for scripts, agents, and dev tooling.
 - Lazy-loaded catalog modules so the initial app shell stays small and previews load on demand.
-- Generated PowerShell copy scripts for source-backed entries.
+- Generated PowerShell and Bash copy scripts for source-backed entries.
 
 ## What Is Still Post-MVP
 

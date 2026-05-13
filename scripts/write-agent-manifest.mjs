@@ -297,6 +297,7 @@ function createDeveloperHandoff(entry, sourceIndex) {
       allGithubUrls: [`${repositoryUrl}/blob/main/manifest.json`],
       allRawUrls: [`${rawRepositoryUrl}/manifest.json`],
       allImportPaths: ["https://gurneyk.github.io/Design-library/manifest.json"],
+      copyScripts: {},
       requiredSetup: ["Fetch-capable runtime or server route", "JSON parser", "Use entry IDs, props, variants, tokens, and guidance before generating UI"],
       copyInstructions:
         "Use the public manifest URL as a fetchable API. This is a reference endpoint, not a React component file.",
@@ -336,6 +337,13 @@ function createDeveloperHandoff(entry, sourceIndex) {
     allImportPaths,
     copyScriptLanguage: copyStatus === "source-available" ? "powershell" : undefined,
     copyScript: copyStatus === "source-available" ? createPowerShellCopyScript(allCopyPaths, allRawUrls) : undefined,
+    copyScripts:
+      copyStatus === "source-available"
+        ? {
+            powershell: createPowerShellCopyScript(allCopyPaths, allRawUrls),
+            bash: createBashCopyScript(allCopyPaths, allRawUrls),
+          }
+        : {},
     requiredSetup: [
       "React 18+",
       "Tailwind CSS 3+ with this repo's tailwind.config.ts token extensions",
@@ -437,8 +445,20 @@ function createPowerShellCopyScript(sourcePaths, rawUrls) {
   return `$files = @(\n${rows}\n)\n\nforeach ($file in $files) {\n  $target = Join-Path (Get-Location) $file.Path\n  New-Item -ItemType Directory -Force -Path (Split-Path $target) | Out-Null\n  Invoke-WebRequest -Uri $file.Url -OutFile $target\n}\n`;
 }
 
+function createBashCopyScript(sourcePaths, rawUrls) {
+  const rows = sourcePaths
+    .map((sourcePath, index) => `"${escapeBashString(sourcePath)}|${escapeBashString(rawUrls[index])}"`)
+    .join("\n  ");
+
+  return `files=(\n  ${rows}\n)\n\nfor file in "\${files[@]}"; do\n  path="\${file%%|*}"\n  url="\${file#*|}"\n  mkdir -p "$(dirname "$path")"\n  curl -L "$url" -o "$path"\ndone\n`;
+}
+
 function escapePowerShellString(value) {
   return String(value).replaceAll("`", "``").replaceAll('"', '`"');
+}
+
+function escapeBashString(value) {
+  return String(value).replaceAll("\\", "\\\\").replaceAll('"', '\\"').replaceAll("$", "\\$").replaceAll("`", "\\`");
 }
 
 function toPascalCase(value) {

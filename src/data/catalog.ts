@@ -264,6 +264,7 @@ export type DeveloperHandoffData = {
   copyInstructions: string;
   copyScript?: string;
   copyScriptLanguage?: string;
+  copyScripts?: Record<string, string>;
   copyStatus: string;
   dependencyGithubUrls: string[];
   dependencyImportPaths: string[];
