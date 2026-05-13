@@ -100,12 +100,17 @@ async function collectSourceIndex(directories) {
     sourceFiles.push(...(await collectTsxFiles(directory)));
   }
 
-  return new Map(
-    sourceFiles.map((file) => {
-      const relativePath = path.relative(root, file).replaceAll("\\", "/");
-      return [path.basename(file, ".tsx"), relativePath];
-    }),
-  );
+  const byName = new Map();
+  const byPath = new Map();
+
+  for (const file of sourceFiles) {
+    const relativePath = path.relative(root, file).replaceAll("\\", "/");
+    const sourceText = await readFile(file, "utf8");
+    byName.set(path.basename(file, ".tsx"), relativePath);
+    byPath.set(relativePath, { file, sourceText });
+  }
+
+  return { byName, byPath };
 }
 
 async function collectTsxFiles(directory) {
@@ -276,9 +281,14 @@ function createDeveloperHandoff(entry, sourceIndex) {
       usageSnippetStatus: "fetch-example",
       repositoryUrl,
       sourcePaths: ["manifest.json"],
+      dependencyPaths: [],
+      allCopyPaths: ["manifest.json"],
       githubUrls: [`${repositoryUrl}/blob/main/manifest.json`],
       rawUrls: [`${rawRepositoryUrl}/manifest.json`],
       importPaths: ["https://gurneyk.github.io/Design-library/manifest.json"],
+      dependencyGithubUrls: [],
+      dependencyRawUrls: [],
+      dependencyImportPaths: [],
       requiredSetup: ["Fetch-capable runtime or server route", "JSON parser", "Use entry IDs, props, variants, tokens, and guidance before generating UI"],
       copyInstructions:
         "Use the public manifest URL as a fetchable API. This is a reference endpoint, not a React component file.",
@@ -286,6 +296,8 @@ function createDeveloperHandoff(entry, sourceIndex) {
   }
 
   const sourcePaths = resolveSourcePaths(entry, sourceIndex);
+  const dependencyPaths = resolveDependencyPaths(sourcePaths, sourceIndex);
+  const allCopyPaths = [...new Set([...sourcePaths, ...dependencyPaths])];
   const copyStatus =
     entry.kind === "foundation" ? "foundation-guidance" : sourcePaths.length > 0 ? "source-available" : "usage-snippet-only";
 
@@ -294,9 +306,14 @@ function createDeveloperHandoff(entry, sourceIndex) {
     usageSnippetStatus: "example",
     repositoryUrl,
     sourcePaths,
+    dependencyPaths,
+    allCopyPaths,
     githubUrls: sourcePaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`),
     rawUrls: sourcePaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`),
     importPaths: sourcePaths.map((sourcePath) => sourcePath.replace(/^src\//, "@/").replace(/\.tsx$/, "")),
+    dependencyGithubUrls: dependencyPaths.map((sourcePath) => `${repositoryUrl}/blob/main/${sourcePath}`),
+    dependencyRawUrls: dependencyPaths.map((sourcePath) => `${rawRepositoryUrl}/${sourcePath}`),
+    dependencyImportPaths: dependencyPaths.map((sourcePath) => sourcePath.replace(/^src\//, "@/").replace(/\.tsx$/, "")),
     requiredSetup: [
       "React 18+",
       "Tailwind CSS 3+ with this repo's tailwind.config.ts token extensions",
@@ -305,7 +322,7 @@ function createDeveloperHandoff(entry, sourceIndex) {
     ],
     copyInstructions:
       copyStatus === "source-available"
-        ? "Copy the listed source file(s), then follow their local relative imports until TypeScript resolves. Keep the Habibi Tailwind config and src/index.css in the consuming app."
+        ? "Copy the implementation source plus the local dependencies listed here. Keep the Habibi Tailwind config and src/index.css in the consuming app."
         : copyStatus === "foundation-guidance"
           ? "This is a token/foundation entry. Copy the relevant Tailwind token setup and CSS variables rather than a React component."
           : "This entry currently has a usage snippet but no resolved implementation file. Treat it as documentation until a source file is mapped.",
@@ -333,7 +350,57 @@ function resolveSourcePaths(entry, sourceIndex) {
 
   names.add(toPascalCase(entry.name));
 
-  return [...new Set([...names].map((name) => sourceIndex.get(name)).filter(Boolean))].sort();
+  return [...new Set([...names].map((name) => sourceIndex.byName.get(name)).filter(Boolean))].sort();
+}
+
+function resolveDependencyPaths(sourcePaths, sourceIndex) {
+  const directSources = new Set(sourcePaths);
+  const visited = new Set();
+  const dependencies = new Set();
+
+  for (const sourcePath of sourcePaths) {
+    visitDependencies(sourcePath);
+  }
+
+  return [...dependencies].filter((sourcePath) => !directSources.has(sourcePath)).sort();
+
+  function visitDependencies(sourcePath) {
+    if (visited.has(sourcePath)) {
+      return;
+    }
+    visited.add(sourcePath);
+
+    const source = sourceIndex.byPath.get(sourcePath);
+    if (!source) {
+      return;
+    }
+
+    const importRegex = /from\s+["'](\.{1,2}\/[^"']+)["']/g;
+    let match;
+
+    while ((match = importRegex.exec(source.sourceText))) {
+      const dependencyPath = resolveRelativeSourcePath(sourcePath, match[1], sourceIndex);
+      if (!dependencyPath || dependencyPath === sourcePath) {
+        continue;
+      }
+      dependencies.add(dependencyPath);
+      visitDependencies(dependencyPath);
+    }
+  }
+}
+
+function resolveRelativeSourcePath(fromSourcePath, importPath, sourceIndex) {
+  const directory = path.posix.dirname(fromSourcePath);
+  const normalized = path.posix.normalize(path.posix.join(directory, importPath)).replaceAll("\\", "/");
+  const candidates = [
+    normalized,
+    `${normalized}.tsx`,
+    `${normalized}.ts`,
+    path.posix.join(normalized, "index.tsx"),
+    path.posix.join(normalized, "index.ts"),
+  ];
+
+  return candidates.find((candidate) => sourceIndex.byPath.has(candidate));
 }
 
 function toPascalCase(value) {

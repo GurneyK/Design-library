@@ -56,9 +56,9 @@ The visual QA command runs Playwright against the production preview in desktop 
 Each catalog entry includes two developer-facing code surfaces:
 
 - `Code` shows a usage snippet for the component or template.
-- `Developer handoff` links to the real implementation source, raw file, import path, required setup, and copy instructions.
+- `Developer handoff` links to the real implementation source, local dependency files, raw files, import paths, required setup, and copy instructions.
 
-To reuse a component in another React + Tailwind app, copy the listed source file(s), follow any local relative imports, install `lucide-react` when icons are used, and bring over the Habibi Tailwind token setup from `tailwind.config.ts` plus the base styles in `src/index.css`.
+To reuse a component in another React + Tailwind app, copy the implementation source plus any listed local dependencies, install `lucide-react` when icons are used, and bring over the Habibi Tailwind token setup from `tailwind.config.ts` plus the base styles in `src/index.css`.
 
 ## Deployment
 

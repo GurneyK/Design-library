@@ -120,7 +120,18 @@ function validateDeveloperHandoff(prefix, entry) {
     errors.push(`${prefix} developerHandoff.copyStatus is invalid.`);
   }
 
-  for (const key of ["sourcePaths", "githubUrls", "rawUrls", "importPaths", "requiredSetup"]) {
+  for (const key of [
+    "sourcePaths",
+    "dependencyPaths",
+    "allCopyPaths",
+    "githubUrls",
+    "rawUrls",
+    "importPaths",
+    "dependencyGithubUrls",
+    "dependencyRawUrls",
+    "dependencyImportPaths",
+    "requiredSetup",
+  ]) {
     if (!Array.isArray(handoff[key])) {
       errors.push(`${prefix} developerHandoff.${key} must be an array.`);
     }
@@ -132,6 +143,10 @@ function validateDeveloperHandoff(prefix, entry) {
 
   if (handoff.copyStatus === "source-available" && handoff.sourcePaths.length === 0) {
     errors.push(`${prefix} developerHandoff.sourcePaths must include at least one source file.`);
+  }
+
+  if (handoff.copyStatus === "source-available" && handoff.allCopyPaths.length < handoff.sourcePaths.length) {
+    errors.push(`${prefix} developerHandoff.allCopyPaths must include source paths and local dependencies.`);
   }
 
   if (typeof handoff.copyInstructions !== "string" || handoff.copyInstructions.trim().length === 0) {

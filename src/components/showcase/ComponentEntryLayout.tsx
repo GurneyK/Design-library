@@ -142,6 +142,10 @@ type DeveloperHandoffData = {
   repositoryUrl: string;
   requiredSetup: string[];
   sourcePaths: string[];
+  dependencyPaths: string[];
+  dependencyGithubUrls: string[];
+  dependencyImportPaths: string[];
+  dependencyRawUrls: string[];
   usageSnippetStatus: string;
 };
 
@@ -159,7 +163,7 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
       <div className="grid gap-3 md:grid-cols-3">
         <MetadataTile label="Copy status" value={formatStatus(handoff.copyStatus)} />
         <MetadataTile label="Usage snippet" value={formatStatus(handoff.usageSnippetStatus)} />
-        <MetadataTile label="Source files" value={String(handoff.sourcePaths.length)} />
+        <MetadataTile label="Files to copy" value={String(handoff.sourcePaths.length + handoff.dependencyPaths.length)} />
       </div>
 
       <div className="rounded-habibiMd bg-gray-50 p-4 text-sm leading-6 text-gray-700">
@@ -169,18 +173,22 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
       {handoff.sourcePaths.length > 0 ? (
         <div>
           <h3 className="text-sm font-semibold text-gray-900">Implementation source</h3>
-          <div className="mt-3 space-y-2">
-            {handoff.sourcePaths.map((sourcePath, index) => (
-              <div className="rounded-habibiMd border border-gray-200 p-3" key={sourcePath}>
-                <p className="font-mono text-xs text-gray-700">{sourcePath}</p>
-                <p className="mt-1 font-mono text-xs text-gray-500">{handoff.importPaths[index]}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <SourceLink href={handoff.githubUrls[index]} label="View source" />
-                  <SourceLink href={handoff.rawUrls[index]} label="Raw file" />
-                </div>
-              </div>
-            ))}
-          </div>
+          <SourceFileList githubUrls={handoff.githubUrls} importPaths={handoff.importPaths} rawUrls={handoff.rawUrls} sourcePaths={handoff.sourcePaths} />
+        </div>
+      ) : null}
+
+      {handoff.dependencyPaths.length > 0 ? (
+        <div>
+          <h3 className="text-sm font-semibold text-gray-900">Local dependencies to copy</h3>
+          <p className="mt-1 text-sm leading-6 text-gray-500">
+            These are local Design Library imports used by the implementation source.
+          </p>
+          <SourceFileList
+            githubUrls={handoff.dependencyGithubUrls}
+            importPaths={handoff.dependencyImportPaths}
+            rawUrls={handoff.dependencyRawUrls}
+            sourcePaths={handoff.dependencyPaths}
+          />
         </div>
       ) : null}
 
@@ -197,6 +205,33 @@ function DeveloperHandoff({ handoff }: { handoff?: DeveloperHandoffData }) {
       </div>
 
       <SourceLink href={handoff.repositoryUrl} label="Open repository" />
+    </div>
+  );
+}
+
+function SourceFileList({
+  githubUrls,
+  importPaths,
+  rawUrls,
+  sourcePaths,
+}: {
+  githubUrls: string[];
+  importPaths: string[];
+  rawUrls: string[];
+  sourcePaths: string[];
+}) {
+  return (
+    <div className="mt-3 max-h-80 space-y-2 overflow-y-auto pr-1">
+      {sourcePaths.map((sourcePath, index) => (
+        <div className="rounded-habibiMd border border-gray-200 p-3" key={sourcePath}>
+          <p className="font-mono text-xs text-gray-700">{sourcePath}</p>
+          <p className="mt-1 font-mono text-xs text-gray-500">{importPaths[index]}</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <SourceLink href={githubUrls[index]} label="View source" />
+            <SourceLink href={rawUrls[index]} label="Raw file" />
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

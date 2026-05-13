@@ -44,7 +44,7 @@ test.describe("Design Library visual QA", () => {
 
     await expect(page.getByRole("heading", { name: "Citation Chip", level: 2 })).toBeVisible();
     await expect(page.getByRole("article").getByText("Agent UI")).toBeVisible();
-    await expect(page.locator("#developer-handoff").getByText("Implementation source")).toBeVisible();
+    await expect(page.locator("#developer-handoff").getByRole("heading", { name: "Implementation source" })).toBeVisible();
   });
 
   test("switches to templates and renders a full template page", async ({ page, isMobile }) => {
