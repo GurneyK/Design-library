@@ -1,6 +1,6 @@
 # Roadmap
 
-Last updated: May 13, 2026
+Last updated: May 14, 2026
 
 The Design Library is now in MVP review state. It has a deployed showcase, live React + Tailwind entries, copyable source metadata, a developer handoff path, and an agent-readable manifest.
 
@@ -12,7 +12,7 @@ Discovery and planning:
 - Read Polaris/Nexus project context.
 - Studied Ant Design and 21st.dev as quality references.
 - Created project brief, taxonomy, decisions, inventory, and gap analysis.
-- Deferred Figma MCP extraction when access was unstable.
+- Deferred Figma MCP extraction when access was unstable and documented the ready Figma parity audit workflow.
 
 Showcase:
 
@@ -39,11 +39,12 @@ Developer and agent handoff:
 - Added developer handoff guide.
 - Added agent consumption guide.
 - Added review guide.
+- Added accessibility checklist, screen-reader walkthrough, and Figma parity audit workflow.
 
 Quality:
 
-- `npm run qa` builds, validates catalog metadata, and tests the copy helper.
-- `npm run visual-qa` runs Playwright smoke tests across desktop and mobile.
+- `npm run qa` builds, validates catalog metadata, validates token/contrast usage, and tests the copy helper.
+- `npm run visual-qa` runs Playwright smoke tests across desktop and mobile, including accessibility semantics coverage.
 - GitHub Actions and GitHub Pages run on push to `main`.
 
 ## Next
@@ -58,7 +59,7 @@ Short-term review:
 Design-system hardening:
 
 - Reconnect Figma MCP when available.
-- Pixel-check high-priority components against Figma.
+- Run `docs/FIGMA-PARITY-AUDIT.md` for high-priority components against Figma.
 - Add Figma node references and preview assets to inventory where possible.
 - Map Figma component names to React component names.
 - Decide which proposed components become official Habibi components.

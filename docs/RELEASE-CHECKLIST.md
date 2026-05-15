@@ -11,6 +11,7 @@ Use this checklist before sharing a new Design Library release or review milesto
 - Confirm `docs/COMPONENT-AUTHORING.md` reflects the current catalog and handoff workflow.
 - Confirm `docs/HANDOFF-READINESS.md` reflects current source-copyable coverage.
 - Confirm `docs/SCREEN-READER-WALKTHROUGH.md` reflects current core flows.
+- Confirm `docs/FIGMA-PARITY-AUDIT.md` reflects current Figma access status and first audit set.
 - Confirm `CHANGELOG.md` has an entry for the release.
 - Confirm public links are appropriate for the intended audience.
 
@@ -85,6 +86,7 @@ Share these links:
 - Handoff readiness: `docs/HANDOFF-READINESS.md`
 - Accessibility checklist: `docs/ACCESSIBILITY-CHECKLIST.md`
 - Screen reader walkthrough: `docs/SCREEN-READER-WALKTHROUGH.md`
+- Figma parity audit: `docs/FIGMA-PARITY-AUDIT.md`
 - Agent consumption: `docs/AGENT-CONSUMPTION.md`
 - Changelog: `CHANGELOG.md`
 

@@ -10,6 +10,7 @@ Use this guide when sharing the Design Library with designers, engineers, produc
 - Developer handoff guide: `docs/DEVELOPER-HANDOFF.md`
 - Agent consumption guide: `docs/AGENT-CONSUMPTION.md`
 - Screen reader walkthrough: `docs/SCREEN-READER-WALKTHROUGH.md`
+- Figma parity audit: `docs/FIGMA-PARITY-AUDIT.md`
 
 ## Recommended Walkthrough
 
@@ -31,6 +32,7 @@ Focus on:
 - Density: Do dashboard and agent surfaces feel practical for internal tools?
 - Naming: Do component names match how designers will search and discuss the system?
 - Gaps: Which components should be promoted, renamed, split, or back-ported into Figma?
+- Figma parity: Which first-audit components should be checked once MCP access is stable?
 
 Useful feedback format:
 
@@ -107,7 +109,7 @@ Low:
 
 ## Current Known Gaps
 
-- Figma pixel QA is deferred until Figma MCP access is stable.
+- Figma pixel QA execution is deferred until Figma MCP access is stable; the audit route is documented.
 - Proposed code-side components still need design review and potential Figma back-porting.
 - Deeper keyboard and contrast audits should happen before broad internal rollout.
 - Manual assistive-technology walkthrough results should be captured before broad internal rollout.

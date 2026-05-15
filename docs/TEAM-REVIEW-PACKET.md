@@ -11,6 +11,7 @@ Use this when sending the Design Library MVP to H3L, Nexus/Polaris, or future pr
 - Review guide: `docs/REVIEW-GUIDE.md`
 - Accessibility checklist: `docs/ACCESSIBILITY-CHECKLIST.md`
 - Screen reader walkthrough: `docs/SCREEN-READER-WALKTHROUGH.md`
+- Figma parity audit: `docs/FIGMA-PARITY-AUDIT.md`
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
 - Handoff readiness: `docs/HANDOFF-READINESS.md`
 - Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
@@ -92,6 +93,7 @@ Useful docs:
 - Developer handoff: docs/DEVELOPER-HANDOFF.md
 - Accessibility checklist: docs/ACCESSIBILITY-CHECKLIST.md
 - Screen reader walkthrough: docs/SCREEN-READER-WALKTHROUGH.md
+- Figma parity audit: docs/FIGMA-PARITY-AUDIT.md
 - Handoff readiness: docs/HANDOFF-READINESS.md
 
 Suggested feedback format:
@@ -127,7 +129,7 @@ Use [Feedback triage](FEEDBACK-TRIAGE.md) to label, prioritize, route, and close
 
 ## MVP Confidence
 
-Current confidence: 99 / 100.
+Current confidence: 100 / 100 for MVP readiness.
 
 Already validated:
 
@@ -142,10 +144,11 @@ Already validated:
 - Accessibility smoke coverage for shell landmarks, skip link, selected state, and copy-action keyboard reachability
 - Representative component semantics coverage for Button, Input, Switch, Modal, Table, and Chat Surface
 - Manual screen-reader walkthrough route and pass/fail criteria
+- Figma parity audit route with source URLs, first audit set, and pass/fail criteria
 
 Still expected after review:
 
-- Figma pixel QA once Figma MCP access is stable.
+- Figma pixel QA execution once Figma MCP access is stable.
 - Deeper accessibility walkthroughs for core flows.
 - Final naming and content pass after team feedback.
 - Back-port priority list for proposed code-side components.
