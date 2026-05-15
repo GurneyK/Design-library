@@ -24,6 +24,7 @@ npm run version:check
 npm run docs:check
 npm run handoff:check
 npm run token:check
+npm run contrast:check
 ```
 
 Expected:
@@ -36,6 +37,7 @@ Expected:
 - Handoff readiness validation passes.
 - Copy-helper receipt generation passes.
 - Token usage validation passes.
+- Contrast token validation passes.
 - Playwright desktop and mobile smoke tests pass.
 - Accessibility smoke tests pass inside `npm run visual-qa`.
 

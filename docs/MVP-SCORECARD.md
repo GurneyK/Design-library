@@ -1,8 +1,8 @@
 # MVP Scorecard
 
-Last updated: May 13, 2026
+Last updated: May 14, 2026
 
-Current MVP readiness: **96 / 100**
+Current MVP readiness: **97 / 100**
 
 Use this as a quick read on what is already shippable for early team review and what still belongs in post-MVP hardening.
 
@@ -17,7 +17,7 @@ Use this as a quick read on what is already shippable for early team review and 
 | Agent readability | 12 / 12 | Manifest exposes categories, props, variants, tokens, usage guidance, and handoff metadata. |
 | Templates / blocks | 8 / 8 | 16 assembled Nexus-style and future-product templates are available. |
 | QA automation | 10 / 10 | Build, catalog, docs, release, token, handoff, copy-helper, and Playwright checks pass. |
-| Accessibility baseline | 5 / 6 | Shell semantics, skip link, keyboard reachability, and checklist are in place; deeper screen-reader walkthrough remains. |
+| Accessibility baseline | 6 / 6 | Shell semantics, skip link, keyboard reachability, checklist, and token-pair contrast validation are in place. |
 | Figma parity | 3 / 4 | Specs are represented from available files; pixel-level Figma QA waits on stable Figma access. |
 
 ## What Makes It MVP-Ready
@@ -28,9 +28,8 @@ Use this as a quick read on what is already shippable for early team review and 
 - AI agents can read `manifest.json` and `developer-handoff.json` for grounded UI generation.
 - The repo has repeatable checks before publishing.
 
-## Remaining 4 Points
+## Remaining 3 Points
 
 - Run deeper screen-reader walkthroughs on core flows.
-- Complete formal contrast checks for all interactive states.
 - Reconcile visual details against Figma once Figma MCP access is stable.
 - Incorporate first-round team feedback into naming, gaps, and back-port priorities.
