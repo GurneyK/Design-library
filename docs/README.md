@@ -30,6 +30,7 @@ This folder contains the project, review, developer, agent, and release document
 ## Related Root Files
 
 - [Changelog](../CHANGELOG.md): versioned release notes.
+- [Contributing](../CONTRIBUTING.md): contributor workflow, change rules, and verification commands.
 - [Manifest](../manifest.json): machine-readable catalog for agents and tooling.
 - [Developer handoff JSON](../developer-handoff.json): source/dependency/copy metadata for developers and agents.
 - [Master inventory](../inventory/master-inventory.md): component inventory source.

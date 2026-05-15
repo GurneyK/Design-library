@@ -154,6 +154,7 @@ Deployment flow:
 
 - [Docs index](docs/README.md)
 - [Changelog](CHANGELOG.md)
+- [Contributing](CONTRIBUTING.md)
 - [Agent consumption](docs/AGENT-CONSUMPTION.md)
 - [Launch handoff](docs/LAUNCH-HANDOFF.md)
 - [Project brief](docs/PROJECT-BRIEF.md)

@@ -8,6 +8,7 @@ Use this checklist before sharing a new Design Library release or review milesto
 - Confirm `docs/MVP-STATUS.md` reflects current catalog counts and status.
 - Confirm `docs/MVP-SCORECARD.md` reflects current readiness and remaining points.
 - Confirm `docs/LAUNCH-HANDOFF.md` reflects current live links, commands, and post-MVP watchlist.
+- Confirm `CONTRIBUTING.md` reflects the current contributor workflow and verification commands.
 - Confirm `docs/ROADMAP.md` reflects shipped, next, and later work.
 - Confirm `docs/COMPONENT-AUTHORING.md` reflects the current catalog and handoff workflow.
 - Confirm `docs/HANDOFF-READINESS.md` reflects current source-copyable coverage.

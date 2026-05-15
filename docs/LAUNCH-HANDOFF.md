@@ -39,6 +39,7 @@ Live links:
 
 Core docs:
 
+- `CONTRIBUTING.md`
 - `docs/DEVELOPER-HANDOFF.md`
 - `docs/HANDOFF-READINESS.md`
 - `docs/COMPONENT-AUTHORING.md`

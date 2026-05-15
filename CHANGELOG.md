@@ -46,6 +46,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Screen-reader walkthrough with manual assistive-technology pass/fail criteria.
 - Figma parity audit workflow with source URLs, first audit set, and pass/fail criteria.
 - Launch handoff with live links, review paths, copy commands, deployment flow, and post-MVP watchlist.
+- Contributor workflow with change rules, component/template expectations, and verification commands.
 - Catalog validation and copy-helper validation in `npm run qa`.
 - Release/version validation in `npm run qa` and `npm run version:check`.
 - Markdown local-link validation in `npm run qa` and `npm run docs:check`.
