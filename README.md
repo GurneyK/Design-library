@@ -170,6 +170,7 @@ Deployment flow:
 - [Team review packet](docs/TEAM-REVIEW-PACKET.md)
 - [Feedback triage](docs/FEEDBACK-TRIAGE.md)
 - [Release checklist](docs/RELEASE-CHECKLIST.md)
+- [Versioning](docs/VERSIONING.md)
 - [Taxonomy](docs/TAXONOMY.md)
 - [Decisions](docs/DECISIONS.md)
 - [Roadmap](docs/ROADMAP.md)

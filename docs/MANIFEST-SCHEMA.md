@@ -34,6 +34,8 @@ npm run version:check
 
 to verify package version, changelog entry, manifest schema, and catalog counts.
 
+See [Versioning](VERSIONING.md) for review release, manifest schema, catalog ID, and future package rules.
+
 ## Manifest Root
 
 Required root fields:
@@ -153,4 +155,5 @@ The copy helper also supports `--receipt`, which writes a local `DESIGN_LIBRARY_
 - [Agent consumption](AGENT-CONSUMPTION.md)
 - [Developer handoff](DEVELOPER-HANDOFF.md)
 - [Release checklist](RELEASE-CHECKLIST.md)
+- [Versioning](VERSIONING.md)
 - [MVP status](MVP-STATUS.md)

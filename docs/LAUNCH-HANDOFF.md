@@ -44,6 +44,7 @@ Core docs:
 - `docs/HANDOFF-READINESS.md`
 - `docs/COMPONENT-AUTHORING.md`
 - `docs/MANIFEST-SCHEMA.md`
+- `docs/VERSIONING.md`
 
 Useful commands:
 

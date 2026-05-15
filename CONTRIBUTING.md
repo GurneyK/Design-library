@@ -11,6 +11,7 @@ Before editing, read:
 - `docs/DEVELOPER-HANDOFF.md`
 - `docs/ACCESSIBILITY-CHECKLIST.md`
 - `docs/MVP-SCORECARD.md`
+- `docs/VERSIONING.md`
 
 ## Local Setup
 
@@ -100,6 +101,7 @@ Use the pull request template and include:
 - What changed.
 - Which category or entry IDs changed.
 - Whether the change affects tokens, accessibility, handoff, manifest output, or deployment.
+- Whether the change requires a review release, manifest schema, or catalog ID migration note.
 - Verification commands run.
 - Screenshots or live-preview notes for visual changes.
 

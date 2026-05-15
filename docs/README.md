@@ -18,6 +18,7 @@ This folder contains the project, review, developer, agent, and release document
 - [Handoff readiness](HANDOFF-READINESS.md): current source-copyable coverage and verification path.
 - [Agent consumption](AGENT-CONSUMPTION.md): how AI agents should read the manifest and generate grounded UI.
 - [Manifest schema](MANIFEST-SCHEMA.md): generated JSON fields, stability rules, and handoff contract.
+- [Versioning](VERSIONING.md): review release, manifest schema, catalog ID, and future package versioning rules.
 - [Roadmap](ROADMAP.md): shipped work, next hardening passes, and later work.
 - [Release checklist](RELEASE-CHECKLIST.md): repeatable checklist before sharing a new review milestone.
 
