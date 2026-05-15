@@ -19,13 +19,14 @@ The app builds from the metadata first, then lazy-loads the full entry when a vi
 
 1. Search the existing catalog by name, component type, and intended job.
 2. Decide whether the new item is a `foundation`, `component`, or `template`.
-3. Confirm the source label:
+3. Confirm the lifecycle state and promotion path in [Component lifecycle](COMPONENT-LIFECYCLE.md).
+4. Confirm the source label:
    - `figma-verified`: visually checked against the Figma library.
    - `figma-deferred`: derived from available specs, but pixel QA is still pending.
    - `written-spec`: documented from markdown, product context, or design-system notes.
    - `reference-code`: backed by implementation patterns in this repo.
    - `proposed`: useful design-system gap that is not official in Figma yet.
-4. If the entry is net-new, make sure it came from the approved gap list or a clear project decision.
+5. If the entry is net-new, make sure it came from the approved gap list or a clear project decision.
 
 ## File Placement
 
@@ -178,3 +179,5 @@ npm run copy:component -- <entry-id> --out ../copy-test --globals
 ## Quality Bar
 
 An entry is ready when it is visually faithful, token-driven, keyboard-aware, copyable, and machine-readable. If one of those five things is missing, mark the status honestly and document what still needs review.
+
+For promotion, deprecation, rename, split, and Figma-verified rules, see [Component lifecycle](COMPONENT-LIFECYCLE.md).

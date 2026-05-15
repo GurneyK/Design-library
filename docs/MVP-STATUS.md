@@ -64,6 +64,7 @@ The current MVP includes:
 - A `npm run copy:component -- <entry-id>` helper for copying source-backed entries into another React + Tailwind project.
 - A developer handoff guide covering install requirements, CLI discovery, copy commands, local clone mode, programmatic handoff, and reuse QA.
 - A component authoring guide covering entry metadata, source-backed snippets, loader registration, manifest output, and copy QA.
+- A component lifecycle guide covering proposal, draft, ready, Figma-verified, and deprecated states.
 - A handoff readiness summary showing 209 source-copyable entries and the expected non-copy foundation/reference entries.
 - An agent consumption guide covering manifest selection, composition rules, gap behavior, prompt patterns, and generated UI review checks.
 - A manifest schema guide covering generated JSON fields, handoff metadata, and stability rules.

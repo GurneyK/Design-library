@@ -93,6 +93,8 @@ Open a gap or issue instead of copying when:
 - The target app needs behavior beyond the documented variants.
 - The copied component needs repeated local edits to work.
 
+Use [Component lifecycle](COMPONENT-LIFECYCLE.md) to decide whether the request should become a proposed entry, draft entry, ready component, or Figma verification task.
+
 Use the GitHub issue templates and include:
 
 - Component or template name.

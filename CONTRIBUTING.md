@@ -9,6 +9,7 @@ Before editing, read:
 - `docs/LAUNCH-HANDOFF.md`
 - `docs/ADOPTION-GUIDE.md`
 - `docs/COMPONENT-AUTHORING.md`
+- `docs/COMPONENT-LIFECYCLE.md`
 - `docs/DEVELOPER-HANDOFF.md`
 - `docs/ACCESSIBILITY-CHECKLIST.md`
 - `docs/MVP-SCORECARD.md`
@@ -103,6 +104,7 @@ Use the pull request template and include:
 - Which category or entry IDs changed.
 - Whether the change affects tokens, accessibility, handoff, manifest output, or deployment.
 - Whether the change requires a review release, manifest schema, or catalog ID migration note.
+- Whether the lifecycle state changed and why.
 - Verification commands run.
 - Screenshots or live-preview notes for visual changes.
 

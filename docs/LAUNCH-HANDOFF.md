@@ -45,6 +45,7 @@ Core docs:
 - `docs/DEVELOPER-HANDOFF.md`
 - `docs/HANDOFF-READINESS.md`
 - `docs/COMPONENT-AUTHORING.md`
+- `docs/COMPONENT-LIFECYCLE.md`
 - `docs/MANIFEST-SCHEMA.md`
 - `docs/VERSIONING.md`
 

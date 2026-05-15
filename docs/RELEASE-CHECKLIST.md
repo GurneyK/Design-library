@@ -11,6 +11,7 @@ Use this checklist before sharing a new Design Library release or review milesto
 - Confirm `docs/ADOPTION-GUIDE.md` reflects current copy flow and recommended first components.
 - Confirm `CONTRIBUTING.md` reflects the current contributor workflow and verification commands.
 - Confirm `docs/VERSIONING.md` reflects current release and manifest rules.
+- Confirm `docs/COMPONENT-LIFECYCLE.md` reflects current status and promotion rules.
 - Confirm `docs/ROADMAP.md` reflects shipped, next, and later work.
 - Confirm `docs/COMPONENT-AUTHORING.md` reflects the current catalog and handoff workflow.
 - Confirm `docs/HANDOFF-READINESS.md` reflects current source-copyable coverage.
@@ -89,6 +90,7 @@ Share these links:
 - Feedback triage: `docs/FEEDBACK-TRIAGE.md`
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
 - Component authoring: `docs/COMPONENT-AUTHORING.md`
+- Component lifecycle: `docs/COMPONENT-LIFECYCLE.md`
 - Handoff readiness: `docs/HANDOFF-READINESS.md`
 - Accessibility checklist: `docs/ACCESSIBILITY-CHECKLIST.md`
 - Screen reader walkthrough: `docs/SCREEN-READER-WALKTHROUGH.md`

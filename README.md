@@ -163,6 +163,7 @@ Deployment flow:
 - [Project brief](docs/PROJECT-BRIEF.md)
 - [Developer handoff](docs/DEVELOPER-HANDOFF.md)
 - [Component authoring](docs/COMPONENT-AUTHORING.md)
+- [Component lifecycle](docs/COMPONENT-LIFECYCLE.md)
 - [Handoff readiness](docs/HANDOFF-READINESS.md)
 - [Accessibility checklist](docs/ACCESSIBILITY-CHECKLIST.md)
 - [Screen reader walkthrough](docs/SCREEN-READER-WALKTHROUGH.md)

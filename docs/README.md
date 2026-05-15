@@ -16,6 +16,7 @@ This folder contains the project, review, developer, agent, and release document
 - [Adoption guide](ADOPTION-GUIDE.md): paths for teams copying, validating, and scaling components into another product.
 - [Developer handoff](DEVELOPER-HANDOFF.md): how to copy components into another React + Tailwind app.
 - [Component authoring](COMPONENT-AUTHORING.md): how to add or edit entries without breaking previews, copy flow, or agent metadata.
+- [Component lifecycle](COMPONENT-LIFECYCLE.md): status model and promotion, deprecation, rename, split, and review rules.
 - [Handoff readiness](HANDOFF-READINESS.md): current source-copyable coverage and verification path.
 - [Agent consumption](AGENT-CONSUMPTION.md): how AI agents should read the manifest and generate grounded UI.
 - [Manifest schema](MANIFEST-SCHEMA.md): generated JSON fields, stability rules, and handoff contract.
@@ -58,14 +59,15 @@ Engineer:
 1. [Adoption guide](ADOPTION-GUIDE.md)
 2. [Developer handoff](DEVELOPER-HANDOFF.md)
 3. [Component authoring](COMPONENT-AUTHORING.md)
-4. [Handoff readiness](HANDOFF-READINESS.md)
-5. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
-6. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
-7. [Figma parity audit](FIGMA-PARITY-AUDIT.md)
-8. [MVP scorecard](MVP-SCORECARD.md)
-9. [Release checklist](RELEASE-CHECKLIST.md)
-10. [MVP status](MVP-STATUS.md)
-11. `npm run copy:component -- --search <term>`
+4. [Component lifecycle](COMPONENT-LIFECYCLE.md)
+5. [Handoff readiness](HANDOFF-READINESS.md)
+6. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
+7. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
+8. [Figma parity audit](FIGMA-PARITY-AUDIT.md)
+9. [MVP scorecard](MVP-SCORECARD.md)
+10. [Release checklist](RELEASE-CHECKLIST.md)
+11. [MVP status](MVP-STATUS.md)
+12. `npm run copy:component -- --search <term>`
 
 AI Agent / Automation:
 
