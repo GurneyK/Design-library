@@ -7,14 +7,19 @@ export interface TableColumn<Row> {
 }
 
 export interface TableProps<Row> {
+  ariaLabel?: string;
   columns: Array<TableColumn<Row>>;
   rows: Row[];
 }
 
-export function Table<Row extends Record<string, ReactNode>>({ columns, rows }: TableProps<Row>) {
+export function Table<Row extends Record<string, ReactNode>>({
+  ariaLabel = "Data table",
+  columns,
+  rows,
+}: TableProps<Row>) {
   return (
     <div className="overflow-x-auto rounded-habibiLg border border-gray-200 bg-white shadow-habibiXs">
-      <table className="min-w-[720px] w-full border-collapse text-left text-sm">
+      <table aria-label={ariaLabel} className="min-w-[720px] w-full border-collapse text-left text-sm">
         <thead className="bg-gray-50 text-xs font-semibold uppercase tracking-[0.06em] text-gray-500">
           <tr>
             {columns.map((column) => (

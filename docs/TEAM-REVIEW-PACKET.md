@@ -125,7 +125,7 @@ Use [Feedback triage](FEEDBACK-TRIAGE.md) to label, prioritize, route, and close
 
 ## MVP Confidence
 
-Current confidence: 97 / 100.
+Current confidence: 98 / 100.
 
 Already validated:
 
@@ -138,6 +138,7 @@ Already validated:
 - Token usage validation for component source files
 - Token-pair contrast validation
 - Accessibility smoke coverage for shell landmarks, skip link, selected state, and copy-action keyboard reachability
+- Representative component semantics coverage for Button, Input, Switch, Modal, Table, and Chat Surface
 
 Still expected after review:
 

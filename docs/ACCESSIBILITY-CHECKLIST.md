@@ -64,7 +64,7 @@ npm run visual-qa
 npm run qa
 ```
 
-The contrast validator checks approved foreground/background token pairs for WCAG AA normal-text contrast. The Playwright accessibility smoke tests check shell landmarks, skip-link behavior, selected navigation state, section toggle state, and keyboard reachability for copy actions.
+The contrast validator checks approved foreground/background token pairs for WCAG AA normal-text contrast. The Playwright accessibility smoke tests check shell landmarks, skip-link behavior, selected navigation state, section toggle state, keyboard reachability for copy actions, and representative component semantics for Button, Input, Switch, Modal, Table, and Chat Surface.
 
 ## Known Post-MVP Work
 

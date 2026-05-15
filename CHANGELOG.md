@@ -42,6 +42,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Refreshed roadmap and MVP status docs.
 - Accessibility checklist and Playwright smoke coverage for shell landmarks, skip link, selected state, and copy-action keyboard reachability.
 - Contrast token validation for approved foreground/background pairs in `npm run qa`.
+- Representative component semantics coverage for Button, Input, Switch, Modal, Table, and Chat Surface in Playwright.
 - Catalog validation and copy-helper validation in `npm run qa`.
 - Release/version validation in `npm run qa` and `npm run version:check`.
 - Markdown local-link validation in `npm run qa` and `npm run docs:check`.

@@ -9,7 +9,7 @@ The Design Library MVP is shareable, deployed, and ready for early team review.
 - Live preview: https://gurneyk.github.io/Design-library/
 - Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
 - Developer handoff JSON: https://gurneyk.github.io/Design-library/developer-handoff.json
-- MVP readiness: 97 / 100, tracked in `docs/MVP-SCORECARD.md`
+- MVP readiness: 98 / 100, tracked in `docs/MVP-SCORECARD.md`
 - Deployment: GitHub Pages from `main`
 - Local command: `npm run dev`
 - Build command: `npm run build`
@@ -55,7 +55,7 @@ The current MVP includes:
 - GitHub Actions deploy gating through `npm run qa` before publishing `site/`.
 - Token usage validation for component source files so implementation colors route through Habibi tokens or CSS variables.
 - Contrast validation for approved foreground/background token pairs.
-- Desktop and mobile Playwright smoke tests for catalog render, search, templates, shell accessibility, keyboard reachability, and manifest access.
+- Desktop and mobile Playwright smoke tests for catalog render, search, templates, shell accessibility, representative component semantics, keyboard reachability, and manifest access.
 - Developer handoff metadata for every entry, including source links, raw files, import paths, package install command, global setup files, setup notes, and copy status.
 - A standalone `developer-handoff.json` endpoint for scripts, agents, and dev tooling.
 - Lazy-loaded catalog modules so the initial app shell stays small and previews load on demand.
@@ -75,7 +75,7 @@ The current MVP includes:
 ## What Is Still Post-MVP
 
 - Pixel-level Figma QA for every entry once Figma MCP access is stable.
-- Deeper accessibility QA with screen-reader walkthroughs and state-by-state contrast checks.
+- Manual screen-reader walkthroughs for core flows.
 - Continued performance budgets as the catalog grows.
 - Stronger test coverage for manifest generation and catalog schema validation.
 - More exact Code Connect-style mapping between Figma component names and React component names.
