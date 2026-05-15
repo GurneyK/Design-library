@@ -7,6 +7,7 @@ Use this guide when changing the Design Library. The goal is to keep every chang
 Before editing, read:
 
 - `docs/LAUNCH-HANDOFF.md`
+- `docs/ADOPTION-GUIDE.md`
 - `docs/COMPONENT-AUTHORING.md`
 - `docs/DEVELOPER-HANDOFF.md`
 - `docs/ACCESSIBILITY-CHECKLIST.md`

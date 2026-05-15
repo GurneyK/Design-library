@@ -34,12 +34,14 @@ Live links:
 4. Open Templates / Blocks and review Analytics Agent Workspace.
 5. Open `docs/MVP-SCORECARD.md`.
 6. Open `docs/TEAM-REVIEW-PACKET.md` if sharing with others.
+7. Open `docs/ADOPTION-GUIDE.md` if a team wants to start copying components.
 
 ## Engineer Handoff
 
 Core docs:
 
 - `CONTRIBUTING.md`
+- `docs/ADOPTION-GUIDE.md`
 - `docs/DEVELOPER-HANDOFF.md`
 - `docs/HANDOFF-READINESS.md`
 - `docs/COMPONENT-AUTHORING.md`

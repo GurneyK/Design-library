@@ -13,6 +13,7 @@ This folder contains the project, review, developer, agent, and release document
 - [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md): shell, component, template, keyboard, semantic, and contrast review checklist.
 - [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md): manual assistive-technology review route and pass/fail criteria.
 - [Figma parity audit](FIGMA-PARITY-AUDIT.md): MCP reconnection plan, first audit set, and pass/fail criteria for Figma verification.
+- [Adoption guide](ADOPTION-GUIDE.md): paths for teams copying, validating, and scaling components into another product.
 - [Developer handoff](DEVELOPER-HANDOFF.md): how to copy components into another React + Tailwind app.
 - [Component authoring](COMPONENT-AUTHORING.md): how to add or edit entries without breaking previews, copy flow, or agent metadata.
 - [Handoff readiness](HANDOFF-READINESS.md): current source-copyable coverage and verification path.
@@ -54,16 +55,17 @@ Designer:
 
 Engineer:
 
-1. [Developer handoff](DEVELOPER-HANDOFF.md)
-2. [Component authoring](COMPONENT-AUTHORING.md)
-3. [Handoff readiness](HANDOFF-READINESS.md)
-4. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
-5. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
-6. [Figma parity audit](FIGMA-PARITY-AUDIT.md)
-7. [MVP scorecard](MVP-SCORECARD.md)
-8. [Release checklist](RELEASE-CHECKLIST.md)
-9. [MVP status](MVP-STATUS.md)
-10. `npm run copy:component -- --search <term>`
+1. [Adoption guide](ADOPTION-GUIDE.md)
+2. [Developer handoff](DEVELOPER-HANDOFF.md)
+3. [Component authoring](COMPONENT-AUTHORING.md)
+4. [Handoff readiness](HANDOFF-READINESS.md)
+5. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
+6. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
+7. [Figma parity audit](FIGMA-PARITY-AUDIT.md)
+8. [MVP scorecard](MVP-SCORECARD.md)
+9. [Release checklist](RELEASE-CHECKLIST.md)
+10. [MVP status](MVP-STATUS.md)
+11. `npm run copy:component -- --search <term>`
 
 AI Agent / Automation:
 
@@ -76,9 +78,10 @@ AI Agent / Automation:
 Product / Stakeholder:
 
 1. [Launch handoff](LAUNCH-HANDOFF.md)
-2. [Team review packet](TEAM-REVIEW-PACKET.md)
-3. [Feedback triage](FEEDBACK-TRIAGE.md)
-4. [Review guide](REVIEW-GUIDE.md)
-5. [Project brief](PROJECT-BRIEF.md)
-6. [Roadmap](ROADMAP.md)
-7. Live preview
+2. [Adoption guide](ADOPTION-GUIDE.md)
+3. [Team review packet](TEAM-REVIEW-PACKET.md)
+4. [Feedback triage](FEEDBACK-TRIAGE.md)
+5. [Review guide](REVIEW-GUIDE.md)
+6. [Project brief](PROJECT-BRIEF.md)
+7. [Roadmap](ROADMAP.md)
+8. Live preview

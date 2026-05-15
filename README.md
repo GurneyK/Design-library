@@ -88,6 +88,8 @@ The visual QA command runs Playwright against the production preview in desktop 
 
 Full developer handoff guide: [Developer handoff](docs/DEVELOPER-HANDOFF.md)
 
+Adoption guide: [Adoption guide](docs/ADOPTION-GUIDE.md)
+
 Future contributor guide: [Component authoring](docs/COMPONENT-AUTHORING.md)
 
 Copy readiness summary: [Handoff readiness](docs/HANDOFF-READINESS.md)
@@ -155,6 +157,7 @@ Deployment flow:
 - [Docs index](docs/README.md)
 - [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md)
+- [Adoption guide](docs/ADOPTION-GUIDE.md)
 - [Agent consumption](docs/AGENT-CONSUMPTION.md)
 - [Launch handoff](docs/LAUNCH-HANDOFF.md)
 - [Project brief](docs/PROJECT-BRIEF.md)
