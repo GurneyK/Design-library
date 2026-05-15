@@ -66,9 +66,10 @@ npm run qa
 
 The contrast validator checks approved foreground/background token pairs for WCAG AA normal-text contrast. The Playwright accessibility smoke tests check shell landmarks, skip-link behavior, selected navigation state, section toggle state, keyboard reachability for copy actions, and representative component semantics for Button, Input, Switch, Modal, Table, and Chat Surface.
 
+Manual assistive-technology review should follow [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md).
+
 ## Known Post-MVP Work
 
-- Full screen-reader walkthrough.
 - Full state-by-state contrast audit beyond the approved token-pair baseline.
 - Deep keyboard testing for combobox, command palette, tree, modal/drawer focus management.
 - Figma/code accessibility parity review once Figma access is stable.

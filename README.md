@@ -26,6 +26,8 @@ Handoff readiness: [Handoff readiness](docs/HANDOFF-READINESS.md)
 
 Accessibility checklist: [Accessibility checklist](docs/ACCESSIBILITY-CHECKLIST.md)
 
+Screen reader walkthrough: [Screen reader walkthrough](docs/SCREEN-READER-WALKTHROUGH.md)
+
 MVP scorecard: [MVP scorecard](docs/MVP-SCORECARD.md)
 
 ## What This Contains
@@ -154,6 +156,7 @@ Deployment flow:
 - [Component authoring](docs/COMPONENT-AUTHORING.md)
 - [Handoff readiness](docs/HANDOFF-READINESS.md)
 - [Accessibility checklist](docs/ACCESSIBILITY-CHECKLIST.md)
+- [Screen reader walkthrough](docs/SCREEN-READER-WALKTHROUGH.md)
 - [MVP scorecard](docs/MVP-SCORECARD.md)
 - [Manifest schema](docs/MANIFEST-SCHEMA.md)
 - [Review guide](docs/REVIEW-GUIDE.md)

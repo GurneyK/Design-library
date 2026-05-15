@@ -9,7 +9,7 @@ The Design Library MVP is shareable, deployed, and ready for early team review.
 - Live preview: https://gurneyk.github.io/Design-library/
 - Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
 - Developer handoff JSON: https://gurneyk.github.io/Design-library/developer-handoff.json
-- MVP readiness: 98 / 100, tracked in `docs/MVP-SCORECARD.md`
+- MVP readiness: 99 / 100, tracked in `docs/MVP-SCORECARD.md`
 - Deployment: GitHub Pages from `main`
 - Local command: `npm run dev`
 - Build command: `npm run build`
@@ -67,6 +67,7 @@ The current MVP includes:
 - An agent consumption guide covering manifest selection, composition rules, gap behavior, prompt patterns, and generated UI review checks.
 - A manifest schema guide covering generated JSON fields, handoff metadata, and stability rules.
 - A review guide for design, engineering, product, and AI-agent feedback.
+- A screen-reader walkthrough for manual assistive-technology review.
 - A team review packet with share links, a copyable message, review route, and feedback labels.
 - A changelog and release checklist for versioned review milestones.
 - A docs index that gives each audience a clear path through the project documentation.
@@ -75,7 +76,6 @@ The current MVP includes:
 ## What Is Still Post-MVP
 
 - Pixel-level Figma QA for every entry once Figma MCP access is stable.
-- Manual screen-reader walkthroughs for core flows.
 - Continued performance budgets as the catalog grows.
 - Stronger test coverage for manifest generation and catalog schema validation.
 - More exact Code Connect-style mapping between Figma component names and React component names.

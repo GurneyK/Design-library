@@ -10,6 +10,7 @@ This folder contains the project, review, developer, agent, and release document
 - [Team review packet](TEAM-REVIEW-PACKET.md): copyable review message, links, feedback route, and triage labels.
 - [Feedback triage](FEEDBACK-TRIAGE.md): how to label, prioritize, route, and close review feedback.
 - [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md): shell, component, template, keyboard, semantic, and contrast review checklist.
+- [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md): manual assistive-technology review route and pass/fail criteria.
 - [Developer handoff](DEVELOPER-HANDOFF.md): how to copy components into another React + Tailwind app.
 - [Component authoring](COMPONENT-AUTHORING.md): how to add or edit entries without breaking previews, copy flow, or agent metadata.
 - [Handoff readiness](HANDOFF-READINESS.md): current source-copyable coverage and verification path.
@@ -40,10 +41,11 @@ Designer:
 1. [Review guide](REVIEW-GUIDE.md)
 2. [Team review packet](TEAM-REVIEW-PACKET.md)
 3. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
-4. [MVP scorecard](MVP-SCORECARD.md)
-5. [MVP status](MVP-STATUS.md)
-6. [Taxonomy](TAXONOMY.md)
-7. Live preview
+4. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
+5. [MVP scorecard](MVP-SCORECARD.md)
+6. [MVP status](MVP-STATUS.md)
+7. [Taxonomy](TAXONOMY.md)
+8. Live preview
 
 Engineer:
 
@@ -51,10 +53,11 @@ Engineer:
 2. [Component authoring](COMPONENT-AUTHORING.md)
 3. [Handoff readiness](HANDOFF-READINESS.md)
 4. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
-5. [MVP scorecard](MVP-SCORECARD.md)
-6. [Release checklist](RELEASE-CHECKLIST.md)
-7. [MVP status](MVP-STATUS.md)
-8. `npm run copy:component -- --search <term>`
+5. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
+6. [MVP scorecard](MVP-SCORECARD.md)
+7. [Release checklist](RELEASE-CHECKLIST.md)
+8. [MVP status](MVP-STATUS.md)
+9. `npm run copy:component -- --search <term>`
 
 AI Agent / Automation:
 

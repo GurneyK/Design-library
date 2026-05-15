@@ -9,6 +9,7 @@ Use this guide when sharing the Design Library with designers, engineers, produc
 - Developer handoff JSON: https://gurneyk.github.io/Design-library/developer-handoff.json
 - Developer handoff guide: `docs/DEVELOPER-HANDOFF.md`
 - Agent consumption guide: `docs/AGENT-CONSUMPTION.md`
+- Screen reader walkthrough: `docs/SCREEN-READER-WALKTHROUGH.md`
 
 ## Recommended Walkthrough
 
@@ -49,6 +50,7 @@ Focus on:
 - Props: Are props understandable and appropriately typed?
 - Dependencies: Are local dependencies and global setup files complete?
 - Accessibility: Are focus states, semantic elements, and keyboard expectations clear?
+- Assistive technology: Does the screen-reader walkthrough pass for representative core flows?
 - Reuse: Is the component general enough for multiple product surfaces?
 - Bundle health: Are heavy dependencies avoided unless justified?
 
@@ -108,4 +110,5 @@ Low:
 - Figma pixel QA is deferred until Figma MCP access is stable.
 - Proposed code-side components still need design review and potential Figma back-porting.
 - Deeper keyboard and contrast audits should happen before broad internal rollout.
+- Manual assistive-technology walkthrough results should be captured before broad internal rollout.
 - Code Connect-style mapping between Figma names and React components is still future work.

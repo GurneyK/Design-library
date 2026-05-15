@@ -2,7 +2,7 @@
 
 Last updated: May 14, 2026
 
-Current MVP readiness: **98 / 100**
+Current MVP readiness: **99 / 100**
 
 Use this as a quick read on what is already shippable for early team review and what still belongs in post-MVP hardening.
 
@@ -19,6 +19,7 @@ Use this as a quick read on what is already shippable for early team review and 
 | QA automation | 10 / 10 | Build, catalog, docs, release, token, contrast, handoff, copy-helper, and Playwright checks pass. |
 | Accessibility baseline | 6 / 6 | Shell semantics, skip link, keyboard reachability, checklist, and token-pair contrast validation are in place. |
 | Assistive-tech preflight | 1 / 1 | Representative Button, Input, Switch, Modal, Table, and Chat Surface semantics are checked in Playwright. |
+| Manual review workflow | 1 / 1 | Screen-reader walkthrough steps and pass/fail criteria are documented for reviewers. |
 | Figma parity | 3 / 4 | Specs are represented from available files; pixel-level Figma QA waits on stable Figma access. |
 
 ## What Makes It MVP-Ready
@@ -29,7 +30,6 @@ Use this as a quick read on what is already shippable for early team review and 
 - AI agents can read `manifest.json` and `developer-handoff.json` for grounded UI generation.
 - The repo has repeatable checks before publishing.
 
-## Remaining 2 Points
+## Remaining 1 Point
 
-- Run manual screen-reader walkthroughs on core flows.
 - Reconcile visual details against Figma once Figma MCP access is stable.

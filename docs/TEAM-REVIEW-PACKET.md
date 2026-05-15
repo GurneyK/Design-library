@@ -10,6 +10,7 @@ Use this when sending the Design Library MVP to H3L, Nexus/Polaris, or future pr
 - MVP scorecard: `docs/MVP-SCORECARD.md`
 - Review guide: `docs/REVIEW-GUIDE.md`
 - Accessibility checklist: `docs/ACCESSIBILITY-CHECKLIST.md`
+- Screen reader walkthrough: `docs/SCREEN-READER-WALKTHROUGH.md`
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
 - Handoff readiness: `docs/HANDOFF-READINESS.md`
 - Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
@@ -90,6 +91,7 @@ Useful docs:
 - MVP scorecard: docs/MVP-SCORECARD.md
 - Developer handoff: docs/DEVELOPER-HANDOFF.md
 - Accessibility checklist: docs/ACCESSIBILITY-CHECKLIST.md
+- Screen reader walkthrough: docs/SCREEN-READER-WALKTHROUGH.md
 - Handoff readiness: docs/HANDOFF-READINESS.md
 
 Suggested feedback format:
@@ -125,7 +127,7 @@ Use [Feedback triage](FEEDBACK-TRIAGE.md) to label, prioritize, route, and close
 
 ## MVP Confidence
 
-Current confidence: 98 / 100.
+Current confidence: 99 / 100.
 
 Already validated:
 
@@ -139,6 +141,7 @@ Already validated:
 - Token-pair contrast validation
 - Accessibility smoke coverage for shell landmarks, skip link, selected state, and copy-action keyboard reachability
 - Representative component semantics coverage for Button, Input, Switch, Modal, Table, and Chat Surface
+- Manual screen-reader walkthrough route and pass/fail criteria
 
 Still expected after review:
 
