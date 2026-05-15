@@ -78,6 +78,7 @@ Agent-readability hardening:
 - Add stricter manifest schema versioning.
 - Add machine-readable gap/proposal metadata.
 - Add endpoint or static file for recommended prompt instructions.
+- Use `docs/MAINTENANCE-CADENCE.md` to run weekly triage, biweekly catalog health checks, and monthly design-system review.
 
 ## Later
 

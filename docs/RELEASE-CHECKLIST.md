@@ -13,6 +13,7 @@ Use this checklist before sharing a new Design Library release or review milesto
 - Confirm `docs/VERSIONING.md` reflects current release and manifest rules.
 - Confirm `docs/COMPONENT-LIFECYCLE.md` reflects current status and promotion rules.
 - Confirm `docs/GAP-PROPOSAL-PROCESS.md` reflects current intake and promotion rules for missing UI.
+- Confirm `docs/MAINTENANCE-CADENCE.md` reflects current triage, catalog health, review, and release routines.
 - Confirm `docs/ROADMAP.md` reflects shipped, next, and later work.
 - Confirm `docs/COMPONENT-AUTHORING.md` reflects the current catalog and handoff workflow.
 - Confirm `docs/HANDOFF-READINESS.md` reflects current source-copyable coverage.
@@ -90,6 +91,7 @@ Share these links:
 - MVP scorecard: `docs/MVP-SCORECARD.md`
 - Feedback triage: `docs/FEEDBACK-TRIAGE.md`
 - Gap proposal process: `docs/GAP-PROPOSAL-PROCESS.md`
+- Maintenance cadence: `docs/MAINTENANCE-CADENCE.md`
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
 - Component authoring: `docs/COMPONENT-AUTHORING.md`
 - Component lifecycle: `docs/COMPONENT-LIFECYCLE.md`

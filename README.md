@@ -24,6 +24,8 @@ Feedback triage guide: [Feedback triage](docs/FEEDBACK-TRIAGE.md)
 
 Gap proposal process: [Gap proposal process](docs/GAP-PROPOSAL-PROCESS.md)
 
+Maintenance cadence: [Maintenance cadence](docs/MAINTENANCE-CADENCE.md)
+
 Component authoring guide: [Component authoring](docs/COMPONENT-AUTHORING.md)
 
 Handoff readiness: [Handoff readiness](docs/HANDOFF-READINESS.md)
@@ -176,6 +178,7 @@ Deployment flow:
 - [Team review packet](docs/TEAM-REVIEW-PACKET.md)
 - [Feedback triage](docs/FEEDBACK-TRIAGE.md)
 - [Gap proposal process](docs/GAP-PROPOSAL-PROCESS.md)
+- [Maintenance cadence](docs/MAINTENANCE-CADENCE.md)
 - [Release checklist](docs/RELEASE-CHECKLIST.md)
 - [Versioning](docs/VERSIONING.md)
 - [Taxonomy](docs/TAXONOMY.md)

@@ -51,6 +51,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Adoption guide for teams copying, validating, and scaling Design Library components into another product.
 - Component lifecycle policy for proposal, draft, ready, Figma-verified, deprecated, rename, split, and merge decisions.
 - Gap proposal process and GitHub issue template for missing components, templates, tokens, and reusable product patterns.
+- Maintenance cadence for weekly triage, biweekly catalog health, monthly design-system review, ownership, and release rhythm.
 - Catalog validation and copy-helper validation in `npm run qa`.
 - Release/version validation in `npm run qa` and `npm run version:check`.
 - Markdown local-link validation in `npm run qa` and `npm run docs:check`.

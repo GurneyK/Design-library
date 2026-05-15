@@ -46,6 +46,7 @@ Core docs:
 - `docs/HANDOFF-READINESS.md`
 - `docs/COMPONENT-AUTHORING.md`
 - `docs/COMPONENT-LIFECYCLE.md`
+- `docs/MAINTENANCE-CADENCE.md`
 - `docs/MANIFEST-SCHEMA.md`
 - `docs/VERSIONING.md`
 
@@ -109,6 +110,7 @@ Deployment happens through GitHub Actions:
 
 - Run `docs/FIGMA-PARITY-AUDIT.md` once Figma MCP exposes the required tools.
 - Capture first-round team review feedback through the issue templates.
+- Use `docs/MAINTENANCE-CADENCE.md` for weekly triage, biweekly catalog health, monthly design-system review, and release rhythm.
 - Decide which proposed code-side components should be back-ported into Figma.
 - Add deeper tests for manifest generation and complex template copy graphs.
 - Consider packaging strategy if teams want npm-style installation later.
