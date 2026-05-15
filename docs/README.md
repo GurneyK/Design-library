@@ -10,6 +10,7 @@ This folder contains the project, review, developer, agent, and release document
 - [Team review packet](TEAM-REVIEW-PACKET.md): copyable review message, links, feedback route, and triage labels.
 - [Launch handoff](LAUNCH-HANDOFF.md): quick handoff page for teammates, reviewers, maintainers, and AI-agent consumers.
 - [Feedback triage](FEEDBACK-TRIAGE.md): how to label, prioritize, route, and close review feedback.
+- [Gap proposal process](GAP-PROPOSAL-PROCESS.md): how to intake, evaluate, and promote missing components, templates, tokens, and patterns.
 - [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md): shell, component, template, keyboard, semantic, and contrast review checklist.
 - [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md): manual assistive-technology review route and pass/fail criteria.
 - [Figma parity audit](FIGMA-PARITY-AUDIT.md): MCP reconnection plan, first audit set, and pass/fail criteria for Figma verification.
@@ -60,14 +61,15 @@ Engineer:
 2. [Developer handoff](DEVELOPER-HANDOFF.md)
 3. [Component authoring](COMPONENT-AUTHORING.md)
 4. [Component lifecycle](COMPONENT-LIFECYCLE.md)
-5. [Handoff readiness](HANDOFF-READINESS.md)
-6. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
-7. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
-8. [Figma parity audit](FIGMA-PARITY-AUDIT.md)
-9. [MVP scorecard](MVP-SCORECARD.md)
-10. [Release checklist](RELEASE-CHECKLIST.md)
-11. [MVP status](MVP-STATUS.md)
-12. `npm run copy:component -- --search <term>`
+5. [Gap proposal process](GAP-PROPOSAL-PROCESS.md)
+6. [Handoff readiness](HANDOFF-READINESS.md)
+7. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
+8. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
+9. [Figma parity audit](FIGMA-PARITY-AUDIT.md)
+10. [MVP scorecard](MVP-SCORECARD.md)
+11. [Release checklist](RELEASE-CHECKLIST.md)
+12. [MVP status](MVP-STATUS.md)
+13. `npm run copy:component -- --search <term>`
 
 AI Agent / Automation:
 
@@ -83,7 +85,8 @@ Product / Stakeholder:
 2. [Adoption guide](ADOPTION-GUIDE.md)
 3. [Team review packet](TEAM-REVIEW-PACKET.md)
 4. [Feedback triage](FEEDBACK-TRIAGE.md)
-5. [Review guide](REVIEW-GUIDE.md)
-6. [Project brief](PROJECT-BRIEF.md)
-7. [Roadmap](ROADMAP.md)
-8. Live preview
+5. [Gap proposal process](GAP-PROPOSAL-PROCESS.md)
+6. [Review guide](REVIEW-GUIDE.md)
+7. [Project brief](PROJECT-BRIEF.md)
+8. [Roadmap](ROADMAP.md)
+9. Live preview

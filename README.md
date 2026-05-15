@@ -18,9 +18,11 @@ Team review packet: [Team review packet](docs/TEAM-REVIEW-PACKET.md)
 
 Launch handoff: [Launch handoff](docs/LAUNCH-HANDOFF.md)
 
-Review feedback can be filed through the GitHub issue templates for component, template/block, and agent-manifest feedback.
+Review feedback can be filed through the GitHub issue templates for component, template/block, agent-manifest, and gap-proposal feedback.
 
 Feedback triage guide: [Feedback triage](docs/FEEDBACK-TRIAGE.md)
+
+Gap proposal process: [Gap proposal process](docs/GAP-PROPOSAL-PROCESS.md)
 
 Component authoring guide: [Component authoring](docs/COMPONENT-AUTHORING.md)
 
@@ -173,6 +175,7 @@ Deployment flow:
 - [Review guide](docs/REVIEW-GUIDE.md)
 - [Team review packet](docs/TEAM-REVIEW-PACKET.md)
 - [Feedback triage](docs/FEEDBACK-TRIAGE.md)
+- [Gap proposal process](docs/GAP-PROPOSAL-PROCESS.md)
 - [Release checklist](docs/RELEASE-CHECKLIST.md)
 - [Versioning](docs/VERSIONING.md)
 - [Taxonomy](docs/TAXONOMY.md)

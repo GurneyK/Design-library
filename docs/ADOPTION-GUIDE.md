@@ -85,13 +85,15 @@ These cover primitives, feedback, data display, dashboard/product patterns, agen
 
 ## When To Open A Gap
 
-Open a gap or issue instead of copying when:
+Open a gap proposal instead of copying when:
 
 - The needed component is not in the catalog.
 - The entry is marked proposed and needs design approval.
 - The component requires a new token, density, or interaction model.
 - The target app needs behavior beyond the documented variants.
 - The copied component needs repeated local edits to work.
+
+Use [Gap proposal process](GAP-PROPOSAL-PROCESS.md) to capture the user job, closest existing entry, missing behavior, variants, token needs, accessibility needs, references, priority, and acceptance criteria.
 
 Use [Component lifecycle](COMPONENT-LIFECYCLE.md) to decide whether the request should become a proposed entry, draft entry, ready component, or Figma verification task.
 

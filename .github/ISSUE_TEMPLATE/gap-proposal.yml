@@ -1,0 +1,94 @@
+name: Gap proposal
+description: Propose a missing component, template, token, or reusable UI pattern.
+title: "[Gap]: "
+labels: ["gap-proposal"]
+body:
+  - type: input
+    id: proposed_name
+    attributes:
+      label: Proposed name
+      description: Human-readable name and likely code name, if known.
+      placeholder: "Citation Drawer / CitationDrawer"
+    validations:
+      required: true
+  - type: dropdown
+    id: gap_type
+    attributes:
+      label: Gap type
+      options:
+        - component
+        - template or block
+        - token
+        - agent UI pattern
+        - dashboard/product pattern
+        - documentation or manifest support
+        - other
+    validations:
+      required: true
+  - type: input
+    id: surface
+    attributes:
+      label: Product surface
+      description: Where is this needed?
+      placeholder: "Nexus agent workspace, dashboard, auth, shared platform"
+    validations:
+      required: true
+  - type: textarea
+    id: user_job
+    attributes:
+      label: User job
+      description: What task should this UI help someone complete?
+      placeholder: "A user needs to inspect cited sources without leaving the chat workflow."
+    validations:
+      required: true
+  - type: textarea
+    id: closest_entry
+    attributes:
+      label: Closest existing entry
+      description: List the nearest Design Library entry, Ant Design analogue, 21st.dev example, shadcn block, or product reference.
+      placeholder: "Closest Design Library entry: Citation Chip. External reference: Ant Drawer."
+  - type: textarea
+    id: missing_behavior
+    attributes:
+      label: Missing behavior
+      description: What does the current library not support?
+      placeholder: "We have inline citation chips, but no source drawer with grouped evidence, metadata, and copy actions."
+    validations:
+      required: true
+  - type: textarea
+    id: variants_states
+    attributes:
+      label: Variants and states
+      description: Include expected sizes, tones, statuses, slots, loading, empty, disabled, selected, error, and responsive behavior.
+  - type: textarea
+    id: tokens
+    attributes:
+      label: Token needs
+      description: List known color, spacing, radius, shadow, typography, chart, or motion token requirements.
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility needs
+      description: Include keyboard behavior, focus rules, semantics, live regions, or contrast concerns.
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - critical
+        - high
+        - medium
+        - low
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Add Figma links, screenshots, product notes, code snippets, or external component links.
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What must be true before this proposal is considered ready?
+      placeholder: "Live preview exists, source is copyable, focus trap works, docs include usage and avoid guidance."

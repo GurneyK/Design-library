@@ -17,6 +17,7 @@ Use this lifecycle when adding, reviewing, promoting, renaming, or retiring Desi
 Promote `Proposed` to `Draft` when:
 
 - The component need is validated by a product surface, team request, or approved gap.
+- The gap proposal records the user job, closest existing entry, variants, token needs, accessibility needs, and acceptance criteria.
 - The expected category, job, and variants are clear.
 - The entry has enough source material to build a preview.
 
@@ -107,6 +108,7 @@ For `Figma verified`:
 ## Related Docs
 
 - [Component authoring](COMPONENT-AUTHORING.md)
+- [Gap proposal process](GAP-PROPOSAL-PROCESS.md)
 - [Adoption guide](ADOPTION-GUIDE.md)
 - [Figma parity audit](FIGMA-PARITY-AUDIT.md)
 - [Versioning](VERSIONING.md)

@@ -8,6 +8,7 @@ Use this process after sharing the Design Library MVP with designers, engineers,
   - Component feedback
   - Template or block feedback
   - Agent manifest feedback
+  - Gap proposal
 - Team review packet: `docs/TEAM-REVIEW-PACKET.md`
 - Live preview: https://gurneyk.github.io/Design-library/
 - Review conversations, screenshots, or Figma comments.
@@ -24,6 +25,7 @@ Use the same language everywhere:
 | `accessibility` | Keyboard, focus, semantics, contrast, or assistive-tech issue. |
 | `agent-readability` | Manifest, guidance, metadata, or AI-generation issue. |
 | `template-gap` | Missing or unrealistic template/block. |
+| `gap-proposal` | Missing component, template, token, or reusable pattern that may become a proposed entry. |
 | `figma-backport` | Code-side component should be recreated or reconciled in Figma. |
 | `content-polish` | Naming, docs, usage, avoid guidance, or voice issue. |
 
@@ -66,6 +68,7 @@ Low:
    - Needs design decision.
    - Needs Figma back-port.
    - Needs engineering spike.
+   - Convert to a gap proposal.
 4. Batch accepted issues by category.
 5. Fix critical and high handoff/accessibility issues before adding new surface area.
 6. Run the full verification set before sharing an updated link.
@@ -95,6 +98,8 @@ For handoff-heavy changes, also run a targeted copy:
 npm run copy:component -- <entry-id> --dry-run
 npm run copy:component -- <entry-id> --handoff-file developer-handoff.json --source-root . --out ../copy-test --receipt
 ```
+
+For net-new UI requests, use [Gap proposal process](GAP-PROPOSAL-PROCESS.md) before opening component work.
 
 ## Release Note Pattern
 
