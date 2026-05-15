@@ -8,6 +8,8 @@ Use this checklist before sharing a new Design Library release or review milesto
 - Confirm `docs/MVP-STATUS.md` reflects current catalog counts and status.
 - Confirm `docs/MVP-SCORECARD.md` reflects current readiness and remaining points.
 - Confirm `docs/LAUNCH-HANDOFF.md` reflects current live links, commands, and post-MVP watchlist.
+- Confirm `docs/SHARE-READY-CHECKLIST.md` reflects current review scope and share message.
+- Confirm `docs/INTERNAL-HOSTING.md` reflects current Supermicro/internal hosting assumptions.
 - Confirm `docs/ADOPTION-GUIDE.md` reflects current copy flow and recommended first components.
 - Confirm `CONTRIBUTING.md` reflects the current contributor workflow and verification commands.
 - Confirm `docs/VERSIONING.md` reflects current release and manifest rules.
@@ -78,6 +80,7 @@ After pushing to `main`:
 - Live preview loads at https://gurneyk.github.io/Design-library/
 - Live manifest loads at https://gurneyk.github.io/Design-library/manifest.json
 - Live developer handoff loads at https://gurneyk.github.io/Design-library/developer-handoff.json
+- Internal hosted URL loads if Supermicro deployment is active.
 
 ## Review Handoff
 
@@ -85,6 +88,8 @@ Share these links:
 
 - Live preview: https://gurneyk.github.io/Design-library/
 - Launch handoff: `docs/LAUNCH-HANDOFF.md`
+- Share-ready checklist: `docs/SHARE-READY-CHECKLIST.md`
+- Internal hosting: `docs/INTERNAL-HOSTING.md`
 - Adoption guide: `docs/ADOPTION-GUIDE.md`
 - Review guide: `docs/REVIEW-GUIDE.md`
 - Team review packet: `docs/TEAM-REVIEW-PACKET.md`

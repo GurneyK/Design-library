@@ -166,14 +166,13 @@ These are not approved for build yet; they are likely gap-analysis candidates.
 | Citation Drawer | Nexus-specific source inspection | Reference repo citations, Agent UI patterns |
 | Streaming / Thinking State | Core agent trust pattern | Ant Design X, 21st AI chat components |
 
-## Checkpoint 1 Recommendation
+## Current Recommendation
 
-Proceed to Phase 2 after review with this direction:
+Continue sharing and hardening the MVP with this direction:
 
 - Use written specs as the build source until Figma MCP is available.
 - Build the new standalone project as `Design Library`.
 - Use PascalCase component names in code and preserve written/Figma names in metadata.
 - Use React + Tailwind as the default implementation layer.
 - Use Radix/headless primitives where behavior is complex: Dialog, Dropdown, Select, Tooltip, Tabs, Switch, Checkbox, Popover.
-- Use Button as the Phase 3 worked example after taxonomy and schema approval.
-
+- Treat Button and the current live catalog as reference examples for future entries.

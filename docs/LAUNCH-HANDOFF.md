@@ -14,6 +14,7 @@ Live links:
 - Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
 - Developer handoff JSON: https://gurneyk.github.io/Design-library/developer-handoff.json
 - Repository: https://github.com/GurneyK/Design-library
+- Internal Supermicro URL: pending
 
 ## What Is Included
 
@@ -26,15 +27,34 @@ Live links:
 - GitHub Pages deployment on push to `main`.
 - QA gates for catalog, handoff, token usage, contrast, docs, release status, and Playwright smoke tests.
 
+## Current Review Scope
+
+In scope now:
+
+- Component and template coverage.
+- Live preview quality.
+- Developer copyability.
+- Agent-readable manifest quality.
+- Accessibility basics.
+- Internal hosting readiness.
+
+Out of scope until Figma access is available again:
+
+- Figma MCP extraction.
+- Pixel-level Figma parity.
+- Figma Code Connect mapping.
+
 ## First 10-Minute Review
 
 1. Open the live showcase.
 2. Search for `button`, `chat`, `run card`, `table`, and `template`.
 3. Open one component entry and review Preview, Props, Tokens, Usage, Code, Developer handoff, and For agents.
 4. Open Templates / Blocks and review Analytics Agent Workspace.
-5. Open `docs/MVP-SCORECARD.md`.
-6. Open `docs/TEAM-REVIEW-PACKET.md` if sharing with others.
-7. Open `docs/ADOPTION-GUIDE.md` if a team wants to start copying components.
+5. Open `docs/SHARE-READY-CHECKLIST.md`.
+6. Open `docs/MVP-SCORECARD.md`.
+7. Open `docs/TEAM-REVIEW-PACKET.md` if sharing with others.
+8. Open `docs/INTERNAL-HOSTING.md` if preparing the Supermicro deployment.
+9. Open `docs/ADOPTION-GUIDE.md` if a team wants to start copying components.
 
 ## Engineer Handoff
 
@@ -47,6 +67,7 @@ Core docs:
 - `docs/COMPONENT-AUTHORING.md`
 - `docs/COMPONENT-LIFECYCLE.md`
 - `docs/MAINTENANCE-CADENCE.md`
+- `docs/INTERNAL-HOSTING.md`
 - `docs/MANIFEST-SCHEMA.md`
 - `docs/VERSIONING.md`
 
@@ -68,9 +89,9 @@ Core docs:
 
 - `docs/REVIEW-GUIDE.md`
 - `docs/TEAM-REVIEW-PACKET.md`
+- `docs/SHARE-READY-CHECKLIST.md`
 - `docs/ACCESSIBILITY-CHECKLIST.md`
 - `docs/SCREEN-READER-WALKTHROUGH.md`
-- `docs/FIGMA-PARITY-AUDIT.md`
 
 Review first:
 
@@ -106,11 +127,13 @@ Deployment happens through GitHub Actions:
 3. The `site/` build is published to GitHub Pages.
 4. The live URL updates at https://gurneyk.github.io/Design-library/
 
+For the internal Unilever/Supermicro path, use [Internal hosting](INTERNAL-HOSTING.md). The app is static after build and can be served from the generated `site/` folder.
+
 ## Post-MVP Watchlist
 
-- Run `docs/FIGMA-PARITY-AUDIT.md` once Figma MCP exposes the required tools.
 - Capture first-round team review feedback through the issue templates.
+- Prepare and validate the internal Supermicro-hosted URL.
 - Use `docs/MAINTENANCE-CADENCE.md` for weekly triage, biweekly catalog health, monthly design-system review, and release rhythm.
-- Decide which proposed code-side components should be back-ported into Figma.
 - Add deeper tests for manifest generation and complex template copy graphs.
 - Consider packaging strategy if teams want npm-style installation later.
+- Resume Figma parity and Code Connect work only when Figma access is available again.

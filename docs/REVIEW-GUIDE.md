@@ -10,7 +10,8 @@ Use this guide when sharing the Design Library with designers, engineers, produc
 - Developer handoff guide: `docs/DEVELOPER-HANDOFF.md`
 - Agent consumption guide: `docs/AGENT-CONSUMPTION.md`
 - Screen reader walkthrough: `docs/SCREEN-READER-WALKTHROUGH.md`
-- Figma parity audit: `docs/FIGMA-PARITY-AUDIT.md`
+- Share-ready checklist: `docs/SHARE-READY-CHECKLIST.md`
+- Internal hosting: `docs/INTERNAL-HOSTING.md`
 
 ## Recommended Walkthrough
 
@@ -26,13 +27,12 @@ Start with the live preview:
 
 Focus on:
 
-- Token fit: Are color, spacing, radius, typography, shadows, and focus treatments aligned with Habibi/Figma?
+- Token fit: Are color, spacing, radius, typography, shadows, and focus treatments aligned with Habibi direction?
 - Variant coverage: Are important states missing?
 - Composition: Do templates feel like realistic Nexus and future-product surfaces?
 - Density: Do dashboard and agent surfaces feel practical for internal tools?
 - Naming: Do component names match how designers will search and discuss the system?
-- Gaps: Which components should be promoted, renamed, split, or back-ported into Figma?
-- Figma parity: Which first-audit components should be checked once MCP access is stable?
+- Gaps: Which components should be promoted, renamed, split, or proposed as future work?
 
 Useful feedback format:
 
@@ -41,7 +41,7 @@ Component/template:
 Issue:
 Expected behavior or visual:
 Priority: critical / high / medium / low
-Figma reference, if available:
+Reference or screenshot, if available:
 ```
 
 ## Engineer Review
@@ -109,8 +109,7 @@ Low:
 
 ## Current Known Gaps
 
-- Figma pixel QA execution is deferred until Figma MCP access is stable; the audit route is documented.
-- Proposed code-side components still need design review and potential Figma back-porting.
+- Figma MCP extraction, pixel QA, and Code Connect mapping are intentionally out of scope until access is available again.
+- Proposed code-side components still need design review before broader rollout.
 - Deeper keyboard and contrast audits should happen before broad internal rollout.
 - Manual assistive-technology walkthrough results should be captured before broad internal rollout.
-- Code Connect-style mapping between Figma names and React components is still future work.

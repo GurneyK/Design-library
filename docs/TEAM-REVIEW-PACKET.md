@@ -7,13 +7,14 @@ Use this when sending the Design Library MVP to H3L, Nexus/Polaris, or future pr
 - Live preview: https://gurneyk.github.io/Design-library/
 - GitHub repo: https://github.com/GurneyK/Design-library
 - Launch handoff: `docs/LAUNCH-HANDOFF.md`
+- Share-ready checklist: `docs/SHARE-READY-CHECKLIST.md`
+- Internal hosting: `docs/INTERNAL-HOSTING.md`
 - Adoption guide: `docs/ADOPTION-GUIDE.md`
 - MVP status: `docs/MVP-STATUS.md`
 - MVP scorecard: `docs/MVP-SCORECARD.md`
 - Review guide: `docs/REVIEW-GUIDE.md`
 - Accessibility checklist: `docs/ACCESSIBILITY-CHECKLIST.md`
 - Screen reader walkthrough: `docs/SCREEN-READER-WALKTHROUGH.md`
-- Figma parity audit: `docs/FIGMA-PARITY-AUDIT.md`
 - Developer handoff: `docs/DEVELOPER-HANDOFF.md`
 - Handoff readiness: `docs/HANDOFF-READINESS.md`
 - Agent manifest: https://gurneyk.github.io/Design-library/manifest.json
@@ -25,7 +26,7 @@ Designer review:
 
 - Do the foundations, primitives, agent UI, dashboard patterns, and templates feel visually aligned with Habibi?
 - Are component names, categories, and variants searchable from a designer's mental model?
-- Which code-side proposed components should be back-ported into Figma first?
+- Which code-side proposed components should be refined before broader rollout?
 - Are any common states missing: empty, loading, error, disabled, selected, streaming, collapsed, expanded?
 
 Engineer review:
@@ -83,13 +84,15 @@ What it includes:
 - Agent-readable manifest and developer-handoff JSON
 
 What I need feedback on:
-- Designers: visual fidelity, naming, variants, missing states, and Figma back-port priorities
+- Designers: visual direction, naming, variants, missing states, and refinement priorities
 - Engineers: copyability, props, dependencies, Tailwind setup, and source usability
 - Product/stakeholders: whether templates represent the workflows teams need first
 - AI/automation reviewers: whether the manifest gives enough guidance to generate grounded UI
 
 Useful docs:
 - Launch handoff: docs/LAUNCH-HANDOFF.md
+- Share-ready checklist: docs/SHARE-READY-CHECKLIST.md
+- Internal hosting: docs/INTERNAL-HOSTING.md
 - Adoption guide: docs/ADOPTION-GUIDE.md
 - Review guide: docs/REVIEW-GUIDE.md
 - MVP status: docs/MVP-STATUS.md
@@ -97,7 +100,6 @@ Useful docs:
 - Developer handoff: docs/DEVELOPER-HANDOFF.md
 - Accessibility checklist: docs/ACCESSIBILITY-CHECKLIST.md
 - Screen reader walkthrough: docs/SCREEN-READER-WALKTHROUGH.md
-- Figma parity audit: docs/FIGMA-PARITY-AUDIT.md
 - Handoff readiness: docs/HANDOFF-READINESS.md
 
 Suggested feedback format:
@@ -128,6 +130,7 @@ GitHub issue templates are available for:
 - Component feedback
 - Template or block feedback
 - Agent manifest feedback
+- Gap proposal feedback
 
 Use [Feedback triage](FEEDBACK-TRIAGE.md) to label, prioritize, route, and close incoming review feedback.
 
@@ -148,11 +151,11 @@ Already validated:
 - Accessibility smoke coverage for shell landmarks, skip link, selected state, and copy-action keyboard reachability
 - Representative component semantics coverage for Button, Input, Switch, Modal, Table, and Chat Surface
 - Manual screen-reader walkthrough route and pass/fail criteria
-- Figma parity audit route with source URLs, first audit set, and pass/fail criteria
+- Figma parity audit route is documented, but intentionally paused for this share pass
 
 Still expected after review:
 
-- Figma pixel QA execution once Figma MCP access is stable.
 - Deeper accessibility walkthroughs for core flows.
 - Final naming and content pass after team feedback.
-- Back-port priority list for proposed code-side components.
+- Internal Supermicro-hosted preview URL.
+- Figma parity and back-port planning once Figma access is available again.

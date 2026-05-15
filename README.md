@@ -18,6 +18,10 @@ Team review packet: [Team review packet](docs/TEAM-REVIEW-PACKET.md)
 
 Launch handoff: [Launch handoff](docs/LAUNCH-HANDOFF.md)
 
+Share-ready checklist: [Share-ready checklist](docs/SHARE-READY-CHECKLIST.md)
+
+Internal hosting: [Internal hosting](docs/INTERNAL-HOSTING.md)
+
 Review feedback can be filed through the GitHub issue templates for component, template/block, agent-manifest, and gap-proposal feedback.
 
 Feedback triage guide: [Feedback triage](docs/FEEDBACK-TRIAGE.md)
@@ -164,6 +168,8 @@ Deployment flow:
 - [Adoption guide](docs/ADOPTION-GUIDE.md)
 - [Agent consumption](docs/AGENT-CONSUMPTION.md)
 - [Launch handoff](docs/LAUNCH-HANDOFF.md)
+- [Share-ready checklist](docs/SHARE-READY-CHECKLIST.md)
+- [Internal hosting](docs/INTERNAL-HOSTING.md)
 - [Project brief](docs/PROJECT-BRIEF.md)
 - [Developer handoff](docs/DEVELOPER-HANDOFF.md)
 - [Component authoring](docs/COMPONENT-AUTHORING.md)
@@ -201,4 +207,4 @@ The showcase treats components as reusable design-system entries:
 
 ## Current MVP State
 
-The MVP is complete, deployed, and ready for review at 100 / 100 readiness. Post-MVP work is tracked as explicit follow-up: Figma parity execution once MCP access is stable, first-round team feedback, deeper manifest tests, and future packaging decisions.
+The MVP is complete, deployed, and ready for review at 100 / 100 readiness. Current share-ready work focuses on team feedback, internal hosting, developer reuse, agent readability, and catalog quality. Figma MCP extraction and pixel parity are intentionally deferred until that access is available again.

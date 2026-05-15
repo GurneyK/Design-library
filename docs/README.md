@@ -9,6 +9,8 @@ This folder contains the project, review, developer, agent, and release document
 - [Review guide](REVIEW-GUIDE.md): how designers, engineers, product partners, and AI-agent reviewers should evaluate the library.
 - [Team review packet](TEAM-REVIEW-PACKET.md): copyable review message, links, feedback route, and triage labels.
 - [Launch handoff](LAUNCH-HANDOFF.md): quick handoff page for teammates, reviewers, maintainers, and AI-agent consumers.
+- [Share-ready checklist](SHARE-READY-CHECKLIST.md): current share scope, reviewer prompts, and Figma-out-of-scope note.
+- [Internal hosting](INTERNAL-HOSTING.md): static hosting notes for an internal Unilever or Supermicro deployment.
 - [Feedback triage](FEEDBACK-TRIAGE.md): how to label, prioritize, route, and close review feedback.
 - [Gap proposal process](GAP-PROPOSAL-PROCESS.md): how to intake, evaluate, and promote missing components, templates, tokens, and patterns.
 - [Maintenance cadence](MAINTENANCE-CADENCE.md): weekly, biweekly, monthly, and release routines for keeping the library healthy.
@@ -48,9 +50,9 @@ Designer:
 
 1. [Review guide](REVIEW-GUIDE.md)
 2. [Team review packet](TEAM-REVIEW-PACKET.md)
-3. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
-4. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
-5. [Figma parity audit](FIGMA-PARITY-AUDIT.md)
+3. [Share-ready checklist](SHARE-READY-CHECKLIST.md)
+4. [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md)
+5. [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md)
 6. [MVP scorecard](MVP-SCORECARD.md)
 7. [MVP status](MVP-STATUS.md)
 8. [Taxonomy](TAXONOMY.md)
@@ -84,12 +86,14 @@ AI Agent / Automation:
 Product / Stakeholder:
 
 1. [Launch handoff](LAUNCH-HANDOFF.md)
-2. [Adoption guide](ADOPTION-GUIDE.md)
-3. [Team review packet](TEAM-REVIEW-PACKET.md)
-4. [Feedback triage](FEEDBACK-TRIAGE.md)
-5. [Gap proposal process](GAP-PROPOSAL-PROCESS.md)
-6. [Maintenance cadence](MAINTENANCE-CADENCE.md)
-7. [Review guide](REVIEW-GUIDE.md)
-8. [Project brief](PROJECT-BRIEF.md)
-9. [Roadmap](ROADMAP.md)
-10. Live preview
+2. [Share-ready checklist](SHARE-READY-CHECKLIST.md)
+3. [Internal hosting](INTERNAL-HOSTING.md)
+4. [Adoption guide](ADOPTION-GUIDE.md)
+5. [Team review packet](TEAM-REVIEW-PACKET.md)
+6. [Feedback triage](FEEDBACK-TRIAGE.md)
+7. [Gap proposal process](GAP-PROPOSAL-PROCESS.md)
+8. [Maintenance cadence](MAINTENANCE-CADENCE.md)
+9. [Review guide](REVIEW-GUIDE.md)
+10. [Project brief](PROJECT-BRIEF.md)
+11. [Roadmap](ROADMAP.md)
+12. Live preview

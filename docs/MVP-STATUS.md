@@ -70,8 +70,9 @@ The current MVP includes:
 - A manifest schema guide covering generated JSON fields, handoff metadata, and stability rules.
 - A review guide for design, engineering, product, and AI-agent feedback.
 - A screen-reader walkthrough for manual assistive-technology review.
-- A Figma parity audit workflow ready for MCP reconnection.
 - A launch handoff for sharing current state, commands, review paths, and post-MVP watchlist.
+- A share-ready checklist for team review while Figma access is paused.
+- Internal hosting guidance for a future Unilever/Supermicro deployment.
 - A team review packet with share links, a copyable message, review route, and feedback labels.
 - A changelog and release checklist for versioned review milestones.
 - A docs index that gives each audience a clear path through the project documentation.
@@ -79,11 +80,12 @@ The current MVP includes:
 
 ## What Is Still Post-MVP
 
-- Pixel-level Figma QA execution once Figma MCP access is stable.
+- Figma MCP extraction, pixel-level Figma QA, and Code Connect mapping once access is stable.
 - Continued performance budgets as the catalog grows.
 - Stronger test coverage for manifest generation and catalog schema validation.
 - More exact Code Connect-style mapping between Figma component names and React component names.
 - Back-porting proposed code-side components into the Figma library.
+- Internal Supermicro deployment and URL replacement once the hosting target is ready.
 
 ## Recommended Review Path
 

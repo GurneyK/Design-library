@@ -11,8 +11,8 @@ export function SidebarNav({ activeId, entries, taxonomy, onEntryChange }: Sideb
   return (
     <nav aria-label="Catalog entries" className="h-[calc(100vh-4rem)] overflow-y-auto px-4 py-5">
       <div className="mb-5 rounded-habibiLg border border-gray-200 bg-gray-50 p-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-gray-500">Phase 3</p>
-        <p className="mt-1 text-sm font-medium text-gray-900">Shell + Button example</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-gray-500">MVP ready</p>
+        <p className="mt-1 text-sm font-medium text-gray-900">224 entries for team review</p>
       </div>
 
       <div className="space-y-5">
