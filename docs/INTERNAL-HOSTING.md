@@ -38,18 +38,37 @@ For a faster local build after dependencies are installed:
 npm run build
 ```
 
+## Package For Handoff
+
+To prepare a clean static folder for Supermicro or another internal host, run:
+
+```bash
+npm run qa
+npm run visual-qa
+npm run package:site
+```
+
+The package command writes:
+
+```text
+release/design-library-site/
+```
+
+That folder contains the full static site plus `_deployment/README.md` and `_deployment/checksums.json` for upload verification. The `release/` folder is generated locally and is not committed to git.
+
 ## Supermicro Deployment Option
 
 Recommended first internal setup:
 
 1. Build the app on a trusted machine or CI runner.
-2. Copy the full `site/` folder to the Supermicro web root or static hosting directory.
-3. Configure the web server to serve `index.html` for the Design Library route.
-4. Confirm these URLs load from the internal network:
+2. Run `npm run package:site`.
+3. Copy the full `release/design-library-site/` folder to the Supermicro web root or static hosting directory.
+4. Configure the web server to serve `index.html` for the Design Library route.
+5. Confirm these URLs load from the internal network:
    - `/`
    - `/manifest.json`
    - `/developer-handoff.json`
-5. Confirm a direct refresh on a catalog page still loads the app shell.
+6. Confirm a direct refresh on a catalog page still loads the app shell.
 
 ## Web Server Notes
 
@@ -79,6 +98,7 @@ Before sharing the internal URL:
 
 - Confirm `npm run qa` passed for the deployed build.
 - Confirm `npm run visual-qa` passed locally or in CI.
+- Confirm `npm run package:site` produced `release/design-library-site/`.
 - Confirm the internal URL loads over the expected network or VPN.
 - Confirm `manifest.json` and `developer-handoff.json` are accessible.
 - Confirm no private credentials, tokens, or local machine paths are exposed in hosted output.

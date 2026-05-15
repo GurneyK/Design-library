@@ -36,6 +36,7 @@ npm run docs:check
 npm run handoff:check
 npm run token:check
 npm run contrast:check
+npm run package:site
 ```
 
 Expected:
@@ -51,6 +52,7 @@ Expected:
 - Contrast token validation passes.
 - Playwright desktop and mobile smoke tests pass.
 - Accessibility smoke tests pass inside `npm run visual-qa`.
+- Internal static package is generated at `release/design-library-site/`.
 
 ## Generated Contracts
 
@@ -81,6 +83,7 @@ After pushing to `main`:
 - Live manifest loads at https://gurneyk.github.io/Design-library/manifest.json
 - Live developer handoff loads at https://gurneyk.github.io/Design-library/developer-handoff.json
 - Internal hosted URL loads if Supermicro deployment is active.
+- `release/design-library-site/_deployment/checksums.json` exists for internal upload verification.
 
 ## Review Handoff
 

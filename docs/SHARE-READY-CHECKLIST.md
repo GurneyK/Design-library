@@ -35,6 +35,7 @@ Confirm:
 
 - `npm run qa` passes.
 - `npm run visual-qa` passes after any UI-facing change.
+- `npm run package:site` creates `release/design-library-site/` for internal hosting handoff.
 - GitHub Actions deployment passes.
 - GitHub Pages preview loads.
 - `manifest.json` loads.
