@@ -7,6 +7,7 @@ Use this checklist before sharing a new Design Library release or review milesto
 - Confirm `README.md` links are current.
 - Confirm `docs/MVP-STATUS.md` reflects current catalog counts and status.
 - Confirm `docs/MVP-SCORECARD.md` reflects current readiness and remaining points.
+- Confirm `docs/LAUNCH-HANDOFF.md` reflects current live links, commands, and post-MVP watchlist.
 - Confirm `docs/ROADMAP.md` reflects shipped, next, and later work.
 - Confirm `docs/COMPONENT-AUTHORING.md` reflects the current catalog and handoff workflow.
 - Confirm `docs/HANDOFF-READINESS.md` reflects current source-copyable coverage.
@@ -77,6 +78,7 @@ After pushing to `main`:
 Share these links:
 
 - Live preview: https://gurneyk.github.io/Design-library/
+- Launch handoff: `docs/LAUNCH-HANDOFF.md`
 - Review guide: `docs/REVIEW-GUIDE.md`
 - Team review packet: `docs/TEAM-REVIEW-PACKET.md`
 - MVP scorecard: `docs/MVP-SCORECARD.md`

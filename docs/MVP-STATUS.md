@@ -69,6 +69,7 @@ The current MVP includes:
 - A review guide for design, engineering, product, and AI-agent feedback.
 - A screen-reader walkthrough for manual assistive-technology review.
 - A Figma parity audit workflow ready for MCP reconnection.
+- A launch handoff for sharing current state, commands, review paths, and post-MVP watchlist.
 - A team review packet with share links, a copyable message, review route, and feedback labels.
 - A changelog and release checklist for versioned review milestones.
 - A docs index that gives each audience a clear path through the project documentation.

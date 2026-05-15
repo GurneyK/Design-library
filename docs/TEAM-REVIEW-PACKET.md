@@ -6,6 +6,7 @@ Use this when sending the Design Library MVP to H3L, Nexus/Polaris, or future pr
 
 - Live preview: https://gurneyk.github.io/Design-library/
 - GitHub repo: https://github.com/GurneyK/Design-library
+- Launch handoff: `docs/LAUNCH-HANDOFF.md`
 - MVP status: `docs/MVP-STATUS.md`
 - MVP scorecard: `docs/MVP-SCORECARD.md`
 - Review guide: `docs/REVIEW-GUIDE.md`
@@ -87,6 +88,7 @@ What I need feedback on:
 - AI/automation reviewers: whether the manifest gives enough guidance to generate grounded UI
 
 Useful docs:
+- Launch handoff: docs/LAUNCH-HANDOFF.md
 - Review guide: docs/REVIEW-GUIDE.md
 - MVP status: docs/MVP-STATUS.md
 - MVP scorecard: docs/MVP-SCORECARD.md

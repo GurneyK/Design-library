@@ -36,7 +36,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Agent consumption guide.
 - Review guide.
 - Team review packet for sharing the MVP with designers, engineers, product partners, and AI reviewers.
-- MVP scorecard with a 96 / 100 readiness breakdown and remaining post-MVP points.
+- MVP scorecard with a 100 / 100 readiness breakdown and post-MVP watchlist.
 - GitHub issue templates for component, template/block, and agent-manifest feedback.
 - Pull request template and feedback triage guide for review follow-through.
 - Refreshed roadmap and MVP status docs.
@@ -45,6 +45,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Representative component semantics coverage for Button, Input, Switch, Modal, Table, and Chat Surface in Playwright.
 - Screen-reader walkthrough with manual assistive-technology pass/fail criteria.
 - Figma parity audit workflow with source URLs, first audit set, and pass/fail criteria.
+- Launch handoff with live links, review paths, copy commands, deployment flow, and post-MVP watchlist.
 - Catalog validation and copy-helper validation in `npm run qa`.
 - Release/version validation in `npm run qa` and `npm run version:check`.
 - Markdown local-link validation in `npm run qa` and `npm run docs:check`.

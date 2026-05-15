@@ -8,6 +8,7 @@ This folder contains the project, review, developer, agent, and release document
 - [MVP scorecard](MVP-SCORECARD.md): readiness score, weighted breakdown, and the remaining post-MVP points.
 - [Review guide](REVIEW-GUIDE.md): how designers, engineers, product partners, and AI-agent reviewers should evaluate the library.
 - [Team review packet](TEAM-REVIEW-PACKET.md): copyable review message, links, feedback route, and triage labels.
+- [Launch handoff](LAUNCH-HANDOFF.md): quick handoff page for teammates, reviewers, maintainers, and AI-agent consumers.
 - [Feedback triage](FEEDBACK-TRIAGE.md): how to label, prioritize, route, and close review feedback.
 - [Accessibility checklist](ACCESSIBILITY-CHECKLIST.md): shell, component, template, keyboard, semantic, and contrast review checklist.
 - [Screen reader walkthrough](SCREEN-READER-WALKTHROUGH.md): manual assistive-technology review route and pass/fail criteria.
@@ -72,9 +73,10 @@ AI Agent / Automation:
 
 Product / Stakeholder:
 
-1. [Team review packet](TEAM-REVIEW-PACKET.md)
-2. [Feedback triage](FEEDBACK-TRIAGE.md)
-3. [Review guide](REVIEW-GUIDE.md)
-4. [Project brief](PROJECT-BRIEF.md)
-5. [Roadmap](ROADMAP.md)
-6. Live preview
+1. [Launch handoff](LAUNCH-HANDOFF.md)
+2. [Team review packet](TEAM-REVIEW-PACKET.md)
+3. [Feedback triage](FEEDBACK-TRIAGE.md)
+4. [Review guide](REVIEW-GUIDE.md)
+5. [Project brief](PROJECT-BRIEF.md)
+6. [Roadmap](ROADMAP.md)
+7. Live preview

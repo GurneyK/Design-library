@@ -16,6 +16,8 @@ Review guide: [Review guide](docs/REVIEW-GUIDE.md)
 
 Team review packet: [Team review packet](docs/TEAM-REVIEW-PACKET.md)
 
+Launch handoff: [Launch handoff](docs/LAUNCH-HANDOFF.md)
+
 Review feedback can be filed through the GitHub issue templates for component, template/block, and agent-manifest feedback.
 
 Feedback triage guide: [Feedback triage](docs/FEEDBACK-TRIAGE.md)
@@ -153,6 +155,7 @@ Deployment flow:
 - [Docs index](docs/README.md)
 - [Changelog](CHANGELOG.md)
 - [Agent consumption](docs/AGENT-CONSUMPTION.md)
+- [Launch handoff](docs/LAUNCH-HANDOFF.md)
 - [Project brief](docs/PROJECT-BRIEF.md)
 - [Developer handoff](docs/DEVELOPER-HANDOFF.md)
 - [Component authoring](docs/COMPONENT-AUTHORING.md)
@@ -186,4 +189,4 @@ The showcase treats components as reusable design-system entries:
 
 ## Current MVP State
 
-The MVP is shareable and usable for review. Remaining work is polish-oriented: deeper visual QA against Figma, bundle code-splitting, and continued expansion from approved future gaps.
+The MVP is complete, deployed, and ready for review at 100 / 100 readiness. Post-MVP work is tracked as explicit follow-up: Figma parity execution once MCP access is stable, first-round team feedback, deeper manifest tests, and future packaging decisions.
