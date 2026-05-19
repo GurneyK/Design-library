@@ -1,10 +1,12 @@
-import { BookOpen, Boxes, FileCode2, LayoutTemplate } from "lucide-react";
+import { BookOpen, FileCode2, LayoutTemplate } from "lucide-react";
 import type { ReactNode } from "react";
 import type { CatalogEntrySummary } from "../../data/catalog";
 import { taxonomy } from "../../data/taxonomy";
 import { SearchBox } from "./SearchBox";
 import { SidebarNav } from "./SidebarNav";
 import { Topbar } from "./Topbar";
+
+const h3lLogoSrc = `${import.meta.env.BASE_URL}h3l-logo.png`;
 
 interface ShowcaseShellProps {
   activeId: string;
@@ -37,12 +39,13 @@ export function ShowcaseShell({
       </a>
       <aside className="hidden w-72 shrink-0 border-r border-gray-200 bg-white lg:block">
         <div className="flex h-16 items-center gap-3 border-b border-gray-200 px-6">
-          <div className="flex h-9 w-9 items-center justify-center rounded-habibiMd bg-brand-700 text-white">
-            <Boxes className="h-5 w-5" />
-          </div>
           <div>
+            <img
+              alt="Horizon 3 AI Labs at Unilever"
+              className="h-8 w-auto max-w-[180px]"
+              src={h3lLogoSrc}
+            />
             <p className="text-sm font-semibold text-gray-900">Design Library</p>
-            <p className="text-xs text-gray-500">Habibi system showcase</p>
           </div>
         </div>
         <SidebarNav

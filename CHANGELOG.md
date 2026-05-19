@@ -54,6 +54,7 @@ Status: Deployed to GitHub Pages and ready for early team review.
 - Maintenance cadence for weekly triage, biweekly catalog health, monthly design-system review, ownership, and release rhythm.
 - Share-ready checklist and internal hosting guide for Unilever/Supermicro review prep.
 - Static site packaging command for internal hosting handoff.
+- H3L logo branding in the showcase shell and internal hosting package.
 - Catalog validation and copy-helper validation in `npm run qa`.
 - Release/version validation in `npm run qa` and `npm run version:check`.
 - Markdown local-link validation in `npm run qa` and `npm run docs:check`.
