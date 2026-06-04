@@ -23,40 +23,38 @@
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback } = React;
 
-// ── Easing ────────────────────────────────────────────────
+// ── Easing ─────────────────────────────────────────────────
 const E = {
   smooth:     t => t*t*(3-2*t),
   outCubic:   t => 1 - Math.pow(1-t, 3),
   inOutCubic: t => t<0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2,
   outBack:    t => { const c=1.70158+1; return 1+c*Math.pow(t-1,3)+(c-1)*Math.pow(t-1,2); },
-  outQuart:   t => 1 - Math.pow(1-t, 4),
 };
 
 function c01(v) { return Math.max(0, Math.min(1, v)); }
 function ip(t, [i0,i1], [o0,o1], ease=E.smooth) {
-  const p = c01((t-i0)/(i1-i0));
-  return o0 + (o1-o0)*ease(p);
+  return o0 + (o1-o0)*ease(c01((t-i0)/(i1-i0)));
 }
 
-// ── Palette ───────────────────────────────────────────────
+// ── Palette ────────────────────────────────────────────────
 const C = {
-  bg:      '#080C14',
-  surf:    '#0D1626',
-  surf2:   '#111D30',
-  blue:    '#4F8EF7',
-  teal:    '#22D3A5',
-  gold:    '#F0A030',
-  text:    '#F0F4FF',
-  muted:   '#7A90B8',
-  dim:     '#2E4060',
-  border:  'rgba(79,142,247,0.14)',
+  bg:     '#080C14',
+  surf:   '#0D1626',
+  surf2:  '#111D30',
+  blue:   '#4F8EF7',
+  teal:   '#22D3A5',
+  gold:   '#F0A030',
+  text:   '#F0F4FF',
+  muted:  '#7A90B8',
+  dim:    '#2E4060',
+  border: 'rgba(79,142,247,0.14)',
 };
 
 const W = 1440, H = 810;
 const SLIDE_COUNT = 10;
-const TRANS_DUR = 0.55;
+const TRANS_DUR = 0.5;
 
-// ── Stage ─────────────────────────────────────────────────
+// ── Stage ──────────────────────────────────────────────────
 function Stage({ children }) {
   const [scale, setScale] = useState(1);
   useEffect(() => {
@@ -74,13 +72,13 @@ function Stage({ children }) {
   );
 }
 
-// ── Shared BG glow ────────────────────────────────────────
-function Glow({ id, cx='50%', cy='50%', r='50%', color, opacity=0.1 }) {
+// ── Glow ───────────────────────────────────────────────────
+function Glow({ id, cx='50%', cy='50%', r='50%', color, op=0.1 }) {
   return (
     <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
       <defs>
         <radialGradient id={id} cx={cx} cy={cy} r={r}>
-          <stop offset="0%" stopColor={color} stopOpacity={opacity}/>
+          <stop offset="0%" stopColor={color} stopOpacity={op}/>
           <stop offset="100%" stopColor={C.bg} stopOpacity={0}/>
         </radialGradient>
       </defs>
@@ -89,38 +87,17 @@ function Glow({ id, cx='50%', cy='50%', r='50%', color, opacity=0.1 }) {
   );
 }
 
-// ── Typing cursor line ────────────────────────────────────
-function TypeLine({ text, t, delay=0, style={} }) {
-  const p = ip(t, [delay, delay+0.6], [0,1], E.outCubic);
-  const chars = Math.floor(p * text.length);
-  return (
-    <span style={{ fontFamily:"'JetBrains Mono',monospace", ...style }}>
-      {text.slice(0,chars)}{p<1 && <span style={{ opacity: Math.sin(t*8)*0.5+0.5, color:C.blue }}>▌</span>}
-    </span>
-  );
-}
-
-// ── Counter ───────────────────────────────────────────────
-function Counter({ value, t, delay=0, suffix='' }) {
-  const p = c01(ip(t,[delay,delay+1.4],[0,1],E.outCubic));
-  return <>{Math.round(p*value).toLocaleString()}{suffix}</>;
-}
-
-// ── Grid lines decoration ─────────────────────────────────
-function GridBg({ opacity=0.4 }) {
+// ── Grid ───────────────────────────────────────────────────
+function Grid({ op=0.35 }) {
   const lines = [];
   for (let i=1;i<8;i++) {
-    lines.push(<line key={`h${i}`} x1={0} y1={i*H/8} x2={W} y2={i*H/8} stroke={C.border} strokeWidth={0.5} opacity={opacity}/>);
-    lines.push(<line key={`v${i}`} x1={i*W/8} y1={0} x2={i*W/8} y2={H} stroke={C.border} strokeWidth={0.5} opacity={opacity}/>);
+    lines.push(<line key={`h${i}`} x1={0} y1={i*H/8} x2={W} y2={i*H/8} stroke={C.border} strokeWidth={0.5} opacity={op}/>);
+    lines.push(<line key={`v${i}`} x1={i*W/8} y1={0} x2={i*W/8} y2={H} stroke={C.border} strokeWidth={0.5} opacity={op}/>);
   }
-  return (
-    <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
-      {lines}
-    </svg>
-  );
+  return <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>{lines}</svg>;
 }
 
-// ── Pill badge ────────────────────────────────────────────
+// ── Label chip ─────────────────────────────────────────────
 function Label({ children, color=C.blue }) {
   return (
     <div style={{ display:'inline-flex', alignItems:'center', gap:6, marginBottom:18 }}>
@@ -130,58 +107,76 @@ function Label({ children, color=C.blue }) {
   );
 }
 
+// ── Typewriter ─────────────────────────────────────────────
+function TypeLine({ text, t, delay=0, style={} }) {
+  const p = ip(t, [delay, delay+0.7], [0,1], E.outCubic);
+  const chars = Math.floor(p * text.length);
+  return (
+    <span style={{ fontFamily:"'JetBrains Mono',monospace", ...style }}>
+      {text.slice(0,chars)}{p<1 && <span style={{ opacity:Math.sin(t*8)*0.5+0.5, color:C.teal }}>▌</span>}
+    </span>
+  );
+}
+
+// ── Step row ───────────────────────────────────────────────
+function StepRow({ n, color, title, children, t, delay }) {
+  const p = ip(t,[delay,delay+0.55],[0,1],E.outCubic);
+  return (
+    <div style={{ opacity:p, transform:`translateX(${ip(t,[delay,delay+0.55],[-24,0],E.outCubic)}px)`, display:'flex', alignItems:'flex-start', gap:20, background:C.surf, border:`1px solid ${C.border}`, borderRadius:14, padding:'20px 26px' }}>
+      <div style={{ width:44, height:44, borderRadius:'50%', background:`${color}18`, border:`1.5px solid ${color}`, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, fontSize:17, fontWeight:900, color, marginTop:2 }}>{n}</div>
+      <div style={{ flex:1 }}>
+        <div style={{ fontSize:17, fontWeight:700, color:C.text, marginBottom:8 }}>{title}</div>
+        {children}
+      </div>
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────
-// SLIDE 1 — HERO
+// SLIDE 1 — WELCOME
 // ─────────────────────────────────────────────────────────
 function Slide1({ t }) {
-  const g = c01(Math.sin(t*0.6)*0.5+0.5);
-  const hP  = ip(t,[0.3,1.1],[0,1],E.outCubic);
-  const h2P = ip(t,[0.8,1.6],[0,1],E.outCubic);
-  const divP= ip(t,[1.3,1.8],[0,1],E.outCubic);
-  const tagP= ip(t,[1.5,2.2],[0,1],E.outCubic);
-  const stP = ip(t,[2.0,2.8],[0,1],E.outCubic);
+  const g    = c01(Math.sin(t*0.6)*0.5+0.5);
+  const hP   = ip(t,[0.3,1.1],[0,1],E.outCubic);
+  const h2P  = ip(t,[0.8,1.6],[0,1],E.outCubic);
+  const divP = ip(t,[1.3,1.8],[0,1],E.smooth);
+  const tagP = ip(t,[1.5,2.2],[0,1],E.outCubic);
+  const stP  = ip(t,[2.0,2.8],[0,1],E.outCubic);
 
   return (
     <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
-      <GridBg opacity={0.35}/>
-      <Glow id="g1" cx="50%" cy="40%" r="55%" color={C.blue} opacity={0.09+0.05*g}/>
+      <Grid op={0.3}/>
+      <Glow id="g1" cx="50%" cy="42%" r="55%" color={C.blue} op={0.08+0.05*g}/>
       <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
-        <line x1={W*(1-hP)*0.5} y1={H-2} x2={W*(1-(1-hP)*0.5)} y2={H-2} stroke={`url(#accentLine)`} strokeWidth={2}/>
         <defs>
-          <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="transparent"/>
-            <stop offset="50%" stopColor={C.blue}/>
-            <stop offset="100%" stopColor="transparent"/>
-          </linearGradient>
-          <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor={C.blue}/>
-            <stop offset="100%" stopColor={C.teal}/>
+          <linearGradient id="aLine" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="transparent"/><stop offset="50%" stopColor={C.blue}/><stop offset="100%" stopColor="transparent"/>
           </linearGradient>
         </defs>
+        <line x1={W*(1-hP)*0.5} y1={H-2} x2={W*(1-(1-hP)*0.5)} y2={H-2} stroke="url(#aLine)" strokeWidth={2}/>
       </svg>
 
       <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
-        <div style={{ opacity:hP, transform:`translateY(${ip(t,[0.3,1.1],[24,0],E.outCubic)}px)`, fontSize:12, fontWeight:700, letterSpacing:'0.22em', color:C.blue, textTransform:'uppercase', marginBottom:20 }}>
-          Unilever Internal Products
+        <div style={{ opacity:hP, transform:`translateY(${ip(t,[0.3,1.1],[20,0],E.outCubic)}px)`, fontSize:12, fontWeight:700, letterSpacing:'0.22em', color:C.blue, textTransform:'uppercase', marginBottom:20 }}>
+          Unilever Internal · Team Orientation
         </div>
-
-        <div style={{ opacity:hP, transform:`translateY(${ip(t,[0.3,1.1],[30,0],E.outCubic)}px)`, fontSize:112, fontWeight:900, color:C.text, lineHeight:1, letterSpacing:'-0.04em', textAlign:'center' }}>
+        <div style={{ opacity:hP, transform:`translateY(${ip(t,[0.3,1.1],[28,0],E.outCubic)}px)`, fontSize:108, fontWeight:900, color:C.text, lineHeight:1, letterSpacing:'-0.04em', textAlign:'center' }}>
           H3L
         </div>
-        <div style={{ opacity:h2P, transform:`translateY(${ip(t,[0.8,1.6],[22,0],E.outCubic)}px)`, fontSize:112, fontWeight:900, lineHeight:1, letterSpacing:'-0.04em', textAlign:'center', background:'linear-gradient(135deg, #4F8EF7, #22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
+        <div style={{ opacity:h2P, transform:`translateY(${ip(t,[0.8,1.6],[20,0],E.outCubic)}px)`, fontSize:108, fontWeight:900, lineHeight:1, letterSpacing:'-0.04em', textAlign:'center', background:'linear-gradient(135deg,#4F8EF7,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
           Design System Library
         </div>
 
-        <div style={{ width:500*divP, height:1.5, background:'linear-gradient(90deg, transparent, #4F8EF7, #22D3A5, transparent)', margin:'30px 0' }}/>
+        <div style={{ width:480*divP, height:1.5, background:'linear-gradient(90deg,transparent,#4F8EF7,#22D3A5,transparent)', margin:'28px 0' }}/>
 
-        <div style={{ opacity:tagP, transform:`translateY(${ip(t,[1.5,2.2],[14,0],E.outCubic)}px)`, fontSize:24, fontWeight:400, color:C.muted, letterSpacing:'0.06em', textAlign:'center' }}>
-          One library.&nbsp;&nbsp;&nbsp;Any engineer.&nbsp;&nbsp;&nbsp;Every product.
+        <div style={{ opacity:tagP, transform:`translateY(${ip(t,[1.5,2.2],[12,0],E.outCubic)}px)`, fontSize:22, fontWeight:400, color:C.muted, letterSpacing:'0.04em', textAlign:'center' }}>
+          How to access it.&nbsp;&nbsp;&nbsp;How to use it.&nbsp;&nbsp;&nbsp;What's inside.
         </div>
 
-        <div style={{ opacity:stP, display:'flex', gap:60, marginTop:52 }}>
-          {[['224','Components'],['194','Live Implementations'],['100','Readiness Score']].map(([n,l])=>(
+        <div style={{ opacity:stP, display:'flex', gap:52, marginTop:52 }}>
+          {[['224','Components'],['194','Live Previews'],['1 cmd','To Copy Any Component']].map(([n,l])=>(
             <div key={l} style={{ textAlign:'center' }}>
-              <div style={{ fontSize:40, fontWeight:900, color:C.text }}>{n}</div>
+              <div style={{ fontSize:36, fontWeight:900, color:C.text }}>{n}</div>
               <div style={{ fontSize:12, color:C.muted, letterSpacing:'0.12em', textTransform:'uppercase', marginTop:5 }}>{l}</div>
             </div>
           ))}
@@ -189,126 +184,149 @@ function Slide1({ t }) {
       </div>
 
       <div style={{ position:'absolute', bottom:28, right:40, opacity:stP, fontSize:12, color:C.dim, letterSpacing:'0.14em' }}>
-        MVP Complete · 2025
+        H3L Design System Library · 2025
       </div>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────
-// SLIDE 2 — THE PROBLEM
+// SLIDE 2 — WHAT IS IT
 // ─────────────────────────────────────────────────────────
 function Slide2({ t }) {
   const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
-  const probs = [
-    { icon:'⚠', color:C.gold,  title:'Inconsistency', body:'Every team builds the same button, the same modal, the same table — slightly differently. The product feels fragmented.' },
-    { icon:'⧉', color:C.blue,  title:'Duplication',    body:'Engineers rebuild components that already exist somewhere else. Velocity drops. Deadlines slip. Morale fades.' },
-    { icon:'↯', color:'#E05555', title:'Drift',         body:'Design changes in Figma. Code never catches up. QA flags regressions. Users notice. Trust erodes.' },
+  const categories = [
+    { label:'Foundations',      desc:'Tokens, colors, typography, spacing', color:C.blue  },
+    { label:'Primitives',       desc:'Button, Input, Badge, Icon, Chip',     color:C.teal  },
+    { label:'Layout',           desc:'Grid, Stack, Container, Divider',      color:C.gold  },
+    { label:'Navigation',       desc:'Nav, Sidebar, Breadcrumb, Tabs',       color:C.blue  },
+    { label:'Forms & Data Entry',desc:'Select, DatePicker, Toggle, Checkbox',color:C.teal  },
+    { label:'Data Display',     desc:'Table, Chart, Avatar, Progress',        color:C.gold  },
+    { label:'Feedback',         desc:'Toast, Alert, Modal, Spinner',         color:C.blue  },
+    { label:'Agent UI',         desc:'Chat, Command palette, AI panels',      color:C.teal  },
+    { label:'Templates',        desc:'16 full workspace screens',            color:C.gold  },
   ];
   return (
     <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
-      <Glow id="g2" cx="10%" cy="30%" r="40%" color={C.gold} opacity={0.07}/>
-      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
-        <div style={{ opacity:hP }}><Label color={C.gold}>The Challenge</Label></div>
-        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:58, fontWeight:900, color:C.text, lineHeight:1.08, letterSpacing:'-0.025em', marginBottom:56 }}>
-          Building the same thing.<br/><span style={{ color:C.gold }}>Over and over again.</span>
+      <Glow id="g2" cx="80%" cy="20%" r="45%" color={C.teal} op={0.07}/>
+      <div style={{ position:'absolute', inset:0, padding:'60px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.teal}>What's Inside</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-24,0],E.outCubic)}px)`, fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:10 }}>
+          One shared library.<br/><span style={{ color:C.teal }}>Everything your team needs.</span>
         </div>
-        <div style={{ display:'flex', gap:24 }}>
-          {probs.map(({ icon, color, title, body }, i) => {
-            const p = ip(t,[0.6+i*0.35,1.2+i*0.35],[0,1],E.outCubic);
+        <div style={{ opacity:ip(t,[0.7,1.3],[0,1],E.outCubic), fontSize:16, color:C.muted, marginBottom:32 }}>
+          224 components across 9 categories — all browsable, documented, and ready to copy into any project.
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:12 }}>
+          {categories.map(({ label, desc, color }, i) => {
+            const p = ip(t,[0.5+i*0.08,0.9+i*0.08],[0,1],E.outCubic);
             return (
-              <div key={title} style={{ flex:1, opacity:p, transform:`translateY(${ip(t,[0.6+i*0.35,1.2+i*0.35],[36,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${color}22`, borderRadius:18, padding:'36px 30px' }}>
-                <div style={{ fontSize:34, marginBottom:14 }}>{icon}</div>
-                <div style={{ fontSize:21, fontWeight:800, color, marginBottom:12 }}>{title}</div>
-                <div style={{ fontSize:15.5, color:C.muted, lineHeight:1.65 }}>{body}</div>
+              <div key={label} style={{ opacity:p, transform:`translateY(${ip(t,[0.5+i*0.08,0.9+i*0.08],[18,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${color}20`, borderLeft:`3px solid ${color}`, borderRadius:12, padding:'14px 18px' }}>
+                <div style={{ fontSize:14, fontWeight:700, color:C.text, marginBottom:4 }}>{label}</div>
+                <div style={{ fontSize:12.5, color:C.muted, lineHeight:1.5 }}>{desc}</div>
               </div>
             );
           })}
         </div>
-        <div style={{ opacity:ip(t,[2.1,2.7],[0,1],E.outCubic), marginTop:44, textAlign:'center', fontSize:19, color:C.muted, fontStyle:'italic' }}>
-          There had to be a better way.
-        </div>
       </div>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────
-// SLIDE 3 — THE SOLUTION
+// SLIDE 3 — HOW TO ACCESS
 // ─────────────────────────────────────────────────────────
 function Slide3({ t }) {
-  const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
-  const chips = ['Button','Input','Modal','Table','Card','Select','Tooltip','Badge','Nav','Chart','Form','Toast','Sidebar','Avatar','Tabs','Dialog','Chip','DatePicker','Accordion','Progress','Spinner','Alert','Breadcrumb','Toggle','Switch','Dropdown','Pagination','Drawer','Banner','Skeleton'];
+  const hP  = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const u1P = ip(t,[0.7,1.3],[0,1],E.outCubic);
+  const u2P = ip(t,[1.1,1.7],[0,1],E.outCubic);
+  const u3P = ip(t,[1.5,2.1],[0,1],E.outCubic);
+  const u4P = ip(t,[1.9,2.5],[0,1],E.outCubic);
 
   return (
     <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
-      <Glow id="g3" cx="75%" cy="50%" r="50%" color={C.blue} opacity={0.10}/>
-      {/* Left */}
-      <div style={{ position:'absolute', left:96, top:0, bottom:0, width:540, display:'flex', flexDirection:'column', justifyContent:'center' }}>
-        <div style={{ opacity:hP }}><Label color={C.blue}>The Solution</Label></div>
-        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:56, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:28 }}>
-          One library.<br/><span style={{ background:'linear-gradient(135deg,#4F8EF7,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>Built right.</span>
+      <Glow id="g3" cx="15%" cy="70%" r="40%" color={C.blue} op={0.08}/>
+      <div style={{ position:'absolute', inset:0, padding:'60px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.blue}>How to Access</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-24,0],E.outCubic)}px)`, fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:48 }}>
+          It's live.<br/><span style={{ color:C.blue }}>Open it in your browser.</span>
         </div>
-        <div style={{ opacity:ip(t,[0.7,1.4],[0,1],E.outCubic), fontSize:17, color:C.muted, lineHeight:1.72, marginBottom:32 }}>
-          A single shared source of truth for every UI component across Unilever's internal products — browsable, documented, and ready to drop into any project.
+
+        {/* Main URL */}
+        <div style={{ opacity:u1P, transform:`scale(${0.95+0.05*u1P})`, background:C.surf, border:`1.5px solid ${C.blue}50`, borderRadius:16, padding:'26px 36px', display:'flex', alignItems:'center', gap:16, marginBottom:28 }}>
+          <div style={{ width:12, height:12, borderRadius:'50%', background:C.teal, flexShrink:0 }}/>
+          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:22, color:C.blue, fontWeight:500 }}>
+            gurneyk.github.io/Design-library
+          </span>
+          <div style={{ marginLeft:'auto', fontSize:12, color:C.dim, letterSpacing:'0.12em', textTransform:'uppercase' }}>Live · Public</div>
         </div>
-        {[
-          ['224 components ready to use', C.blue],
-          ['Interactive live previews', C.teal],
-          ['One-command copy to any project', C.gold],
-          ['AI-readable manifest.json', C.blue],
-        ].map(([label, color], i) => (
-          <div key={label} style={{ opacity:ip(t,[1.0+i*0.15,1.5+i*0.15],[0,1],E.outCubic), transform:`translateX(${ip(t,[1.0+i*0.15,1.5+i*0.15],[-16,0],E.outCubic)}px)`, display:'flex', alignItems:'center', gap:12, marginBottom:14 }}>
-            <div style={{ width:8, height:8, borderRadius:'50%', background:color, flexShrink:0 }}/>
-            <span style={{ fontSize:16, color:C.text, fontWeight:500 }}>{label}</span>
-          </div>
-        ))}
-      </div>
-      {/* Right: component chip grid */}
-      <div style={{ position:'absolute', right:56, top:60, bottom:60, width:660, display:'flex', flexWrap:'wrap', gap:10, alignContent:'flex-start', overflow:'hidden' }}>
-        {chips.map((name,i) => {
-          const p = ip(t,[0.5+i*0.038,0.9+i*0.038],[0,1],E.outBack);
-          return (
-            <div key={name} style={{ opacity:Math.min(1,p), transform:`scale(${Math.min(1,0.6+0.4*p)})`, background:C.surf, border:`1px solid ${C.border}`, borderRadius:10, padding:'9px 18px', fontSize:13.5, fontWeight:600, color:C.text }}>
-              {name}
+
+        {/* Access methods */}
+        <div style={{ display:'flex', flexDirection:'column', gap:14 }}>
+          {[
+            { p:u2P, color:C.blue, icon:'⬡', title:'Browse the catalog',    body:'Land on the homepage — every component listed by category with a live preview.' },
+            { p:u3P, color:C.teal, icon:'⌕', title:'Search for anything',   body:'Use the search bar to find a component by name, type, or keyword instantly.' },
+            { p:u4P, color:C.gold, icon:'⧉', title:'View the manifest',     body:'developer-handoff.json and manifest.json are available at the root for programmatic access.' },
+          ].map(({ p, color, icon, title, body }) => (
+            <div key={title} style={{ opacity:p, transform:`translateX(${ip(t,[u1P?0.7:0,u1P?1.3:0],[-20,0],E.outCubic)}px)`, display:'flex', alignItems:'center', gap:18, background:C.surf, border:`1px solid ${color}20`, borderRadius:12, padding:'16px 24px' }}>
+              <div style={{ fontSize:22, color, width:36, textAlign:'center', flexShrink:0 }}>{icon}</div>
+              <div>
+                <div style={{ fontSize:16, fontWeight:700, color:C.text, marginBottom:3 }}>{title}</div>
+                <div style={{ fontSize:14, color:C.muted }}>{body}</div>
+              </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────
-// SLIDE 4 — THE NUMBERS
+// SLIDE 4 — BROWSING THE CATALOG
 // ─────────────────────────────────────────────────────────
 function Slide4({ t }) {
   const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
-  const stats = [
-    { val:224, suf:'',  label:'Catalog Entries',        desc:'Components, patterns, and templates',                color:C.blue },
-    { val:194, suf:'',  label:'Live Implementations',   desc:'React components with interactive previews',         color:C.teal },
-    { val:16,  suf:'',  label:'Screen Templates',       desc:'Full workspace screens for Nexus products',          color:C.gold },
-    { val:30,  suf:'+', label:'Documentation Guides',   desc:'Authoring, adoption, accessibility, agent usage',    color:C.blue },
+
+  const mockComponents = [
+    { name:'Button',      cat:'Primitives',  variants:'primary · secondary · ghost · danger',  tokens:'color.brand · spacing.2',     preview:'bg-blue' },
+    { name:'DataTable',   cat:'Data Display', variants:'sortable · paginated · selectable',     tokens:'color.surface · radius.md',   preview:'bg-teal' },
+    { name:'SideNav',     cat:'Navigation',   variants:'collapsed · expanded · rail',           tokens:'color.nav · spacing.4',       preview:'bg-gold' },
   ];
+
   return (
     <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
-      <Glow id="g4" cx="50%" cy="50%" r="55%" color={C.teal} opacity={0.06}/>
-      <div style={{ position:'absolute', inset:0, padding:'64px 96px', display:'flex', flexDirection:'column', justifyContent:'center' }}>
-        <div style={{ opacity:hP, textAlign:'center' }}><Label color={C.teal}>Scale & Substance</Label></div>
-        <div style={{ opacity:hP, textAlign:'center', fontSize:54, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:56 }}>
-          Numbers that tell<br/><span style={{ color:C.teal }}>the whole story.</span>
+      <Glow id="g4" cx="70%" cy="30%" r="45%" color={C.blue} op={0.07}/>
+      <div style={{ position:'absolute', inset:0, padding:'60px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.blue}>Browsing the Catalog</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-24,0],E.outCubic)}px)`, fontSize:48, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:10 }}>
+          Every component tells you<br/><span style={{ color:C.blue }}>everything you need to know.</span>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:22 }}>
-          {stats.map(({ val, suf, label, desc, color }, i) => {
-            const p = ip(t,[0.4+i*0.18,1.0+i*0.18],[0,1],E.outCubic);
+        <div style={{ opacity:ip(t,[0.6,1.2],[0,1],E.outCubic), fontSize:15.5, color:C.muted, marginBottom:32 }}>
+          Each entry includes a live preview, props table, variant list, design token references, and copy instructions.
+        </div>
+
+        <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
+          {mockComponents.map(({ name, cat, variants, tokens, preview }, i) => {
+            const p = ip(t,[0.5+i*0.25,1.1+i*0.25],[0,1],E.outCubic);
+            const colors = { 'bg-blue':C.blue, 'bg-teal':C.teal, 'bg-gold':C.gold };
+            const col = colors[preview];
             return (
-              <div key={label} style={{ opacity:p, transform:`translateY(${ip(t,[0.4+i*0.18,1.0+i*0.18],[28,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${color}20`, borderLeft:`3px solid ${color}`, borderRadius:16, padding:'28px 32px', display:'flex', alignItems:'center', gap:28 }}>
-                <div style={{ fontSize:68, fontWeight:900, color, lineHeight:1, minWidth:150, fontVariantNumeric:'tabular-nums' }}>
-                  <Counter value={val} t={t} delay={0.4+i*0.18} suffix={suf}/>
+              <div key={name} style={{ opacity:p, transform:`translateY(${ip(t,[0.5+i*0.25,1.1+i*0.25],[20,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${C.border}`, borderRadius:14, padding:'18px 24px', display:'flex', alignItems:'center', gap:20 }}>
+                {/* Mock preview box */}
+                <div style={{ width:80, height:56, borderRadius:10, background:`${col}18`, border:`1px solid ${col}30`, flexShrink:0, display:'flex', alignItems:'center', justifyContent:'center' }}>
+                  <div style={{ width:40, height:16, borderRadius:4, background:col, opacity:0.7 }}/>
                 </div>
-                <div>
-                  <div style={{ fontSize:19, fontWeight:700, color:C.text, marginBottom:6 }}>{label}</div>
-                  <div style={{ fontSize:14.5, color:C.muted, lineHeight:1.55 }}>{desc}</div>
+                <div style={{ flex:1 }}>
+                  <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:6 }}>
+                    <span style={{ fontSize:17, fontWeight:800, color:C.text }}>{name}</span>
+                    <span style={{ fontSize:11, color:col, background:`${col}18`, borderRadius:4, padding:'2px 8px', fontWeight:600, letterSpacing:'0.08em' }}>{cat}</span>
+                  </div>
+                  <div style={{ fontSize:13, color:C.muted, marginBottom:4 }}>Variants: <span style={{ color:C.text }}>{variants}</span></div>
+                  <div style={{ fontSize:13, color:C.muted }}>Tokens: <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:12, color:col }}>{tokens}</span></div>
+                </div>
+                <div style={{ background:`${col}15`, border:`1px solid ${col}40`, borderRadius:8, padding:'8px 16px', fontSize:13, fontWeight:600, color:col, flexShrink:0 }}>
+                  View →
                 </div>
               </div>
             );
@@ -320,45 +338,40 @@ function Slide4({ t }) {
 }
 
 // ─────────────────────────────────────────────────────────
-// SLIDE 5 — ANY ENGINEER
+// SLIDE 5 — HOW TO COPY A COMPONENT
 // ─────────────────────────────────────────────────────────
 function Slide5({ t }) {
   const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
-  const steps = [
-    { n:'1', color:C.blue,  title:'Browse the live catalog',  body:'Find the component you need — previews, docs, props, variants, all in one place.', url:'gurneyk.github.io/Design-library', delay:0.55 },
-    { n:'2', color:C.teal,  title:'One command to copy',       body:null, cmd:'npm run copy:component -- button --receipt', delay:0.95 },
-    { n:'3', color:C.gold,  title:'Ship your feature',         body:'Component lands in your project with Tailwind tokens, type defs, and setup instructions. Ready.', delay:1.35 },
-  ];
   return (
     <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
-      <Glow id="g5" cx="85%" cy="20%" r="40%" color={C.blue} opacity={0.08}/>
-      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
-        <div style={{ opacity:hP }}><Label color={C.blue}>Developer Experience</Label></div>
-        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:56, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:52 }}>
-          Any engineer can<br/><span style={{ color:C.blue }}>ship faster.</span>
+      <Glow id="g5" cx="85%" cy="15%" r="40%" color={C.teal} op={0.07}/>
+      <div style={{ position:'absolute', inset:0, padding:'60px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.teal}>Copying a Component</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-24,0],E.outCubic)}px)`, fontSize:48, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:44 }}>
+          Found what you need?<br/><span style={{ color:C.teal }}>One command gets it.</span>
         </div>
-        <div style={{ display:'flex', flexDirection:'column', gap:20 }}>
-          {steps.map(({ n, color, title, body, cmd, url, delay }) => {
-            const p = ip(t,[delay,delay+0.55],[0,1],E.outCubic);
-            return (
-              <div key={n} style={{ opacity:p, transform:`translateX(${ip(t,[delay,delay+0.55],[-28,0],E.outCubic)}px)`, display:'flex', alignItems:'center', gap:22, background:C.surf, border:`1px solid ${C.border}`, borderRadius:16, padding:'22px 28px' }}>
-                <div style={{ width:50, height:50, borderRadius:'50%', background:`${color}18`, border:`1.5px solid ${color}`, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, fontSize:19, fontWeight:900, color }}>
-                  {n}
-                </div>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontSize:17.5, fontWeight:700, color:C.text, marginBottom:cmd?8:4 }}>{title}</div>
-                  {body && <div style={{ fontSize:15, color:C.muted }}>{body} {url && <span style={{ color:C.blue }}>{url}</span>}</div>}
-                  {cmd && (
-                    <div style={{ background:'#060B14', border:`1px solid ${C.dim}`, borderRadius:10, padding:'11px 18px', fontFamily:"'JetBrains Mono',monospace", fontSize:15.5, color:C.teal }}>
-                      <TypeLine text={cmd} t={t} delay={delay+0.3}/>
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+
+        <div style={{ display:'flex', flexDirection:'column', gap:18 }}>
+          <StepRow n="1" color={C.blue} title="Find the component ID on the catalog page" t={t} delay={0.55}>
+            <div style={{ fontSize:14.5, color:C.muted }}>Every component has a unique ID shown in its entry — e.g. <span style={{ fontFamily:"'JetBrains Mono',monospace", color:C.text, fontSize:13.5 }}>button</span>, <span style={{ fontFamily:"'JetBrains Mono',monospace", color:C.text, fontSize:13.5 }}>data-table</span>, <span style={{ fontFamily:"'JetBrains Mono',monospace", color:C.text, fontSize:13.5 }}>side-nav</span></div>
+          </StepRow>
+
+          <StepRow n="2" color={C.teal} title="Run the copy command from your project root" t={t} delay={0.95}>
+            <div style={{ background:'#060B14', border:`1px solid ${C.dim}`, borderRadius:10, padding:'12px 18px', marginTop:4 }}>
+              <div style={{ fontSize:13, color:C.dim, marginBottom:6, fontFamily:"'JetBrains Mono',monospace" }}># basic copy</div>
+              <TypeLine text="npm run copy:component -- button" t={t} delay={1.1} style={{ fontSize:15.5, color:C.teal }}/>
+              <br/><br/>
+              <div style={{ fontSize:13, color:C.dim, marginBottom:6, fontFamily:"'JetBrains Mono',monospace" }}># with a receipt file showing what was copied</div>
+              <TypeLine text="npm run copy:component -- button --receipt" t={t} delay={1.5} style={{ fontSize:15.5, color:C.teal }}/>
+            </div>
+          </StepRow>
+
+          <StepRow n="3" color={C.gold} title="Use the component in your project" t={t} delay={1.95}>
+            <div style={{ fontSize:14.5, color:C.muted }}>The component file, its dependencies, and Tailwind token setup land directly in your project. Import and use it immediately.</div>
+          </StepRow>
         </div>
-        <div style={{ opacity:ip(t,[2.1,2.7],[0,1],E.outCubic), marginTop:24, textAlign:'right', fontSize:13, color:C.dim }}>
+
+        <div style={{ opacity:ip(t,[2.4,3.0],[0,1],E.outCubic), marginTop:20, fontSize:13, color:C.dim, textAlign:'right' }}>
           Works on PowerShell · Bash · Windows · macOS · Linux
         </div>
       </div>
@@ -367,39 +380,45 @@ function Slide5({ t }) {
 }
 
 // ─────────────────────────────────────────────────────────
-// SLIDE 6 — HANDOFF
+// SLIDE 6 — WHAT YOU GET
 // ─────────────────────────────────────────────────────────
 function Slide6({ t }) {
   const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
-  const cards = [
-    { label:'Props & Variants',  code:'"variants": ["primary","secondary","ghost","danger"]', color:C.blue },
-    { label:'Design Tokens',     code:'"tokens": ["color.brand.primary","spacing.4","radius.md"]', color:C.teal },
-    { label:'Source File',       code:'"sourceFile": "src/components/Button.tsx"', color:C.gold },
-    { label:'Dependencies',      code:'"dependencies": ["tailwindcss","class-variance-authority"]', color:C.blue },
+  const files = [
+    { name:'Button.tsx',              desc:'The component source — typed, variant-aware, ready to use',  color:C.blue },
+    { name:'Button.stories.tsx',      desc:'Storybook stories for local preview and testing',             color:C.teal },
+    { name:'tailwind.tokens.css',     desc:'All design tokens this component depends on',                color:C.gold },
+    { name:'RECEIPT.md',              desc:'What was copied, why, and how to update it later',            color:C.blue },
   ];
   return (
     <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
-      <Glow id="g6" cx="50%" cy="90%" r="50%" color={C.gold} opacity={0.07}/>
-      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
-        <div style={{ opacity:hP }}><Label color={C.gold}>Developer Handoff</Label></div>
-        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:44 }}>
-          Every component ships<br/><span style={{ color:C.gold }}>with its own instructions.</span>
+      <Glow id="g6" cx="20%" cy="80%" r="45%" color={C.gold} op={0.07}/>
+      <div style={{ position:'absolute', inset:0, padding:'60px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.gold}>What You Get</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-24,0],E.outCubic)}px)`, fontSize:48, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:10 }}>
+          Not just the component.<br/><span style={{ color:C.gold }}>Everything it needs to work.</span>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:18, marginBottom:22 }}>
-          {cards.map(({ label, code, color }, i) => {
-            const p = ip(t,[0.45+i*0.15,1.0+i*0.15],[0,1],E.outCubic);
+        <div style={{ opacity:ip(t,[0.6,1.2],[0,1],E.outCubic), fontSize:15.5, color:C.muted, marginBottom:36 }}>
+          After running the copy command, your project receives:
+        </div>
+
+        <div style={{ display:'flex', flexDirection:'column', gap:14, marginBottom:28 }}>
+          {files.map(({ name, desc, color }, i) => {
+            const p = ip(t,[0.5+i*0.18,1.0+i*0.18],[0,1],E.outCubic);
             return (
-              <div key={label} style={{ opacity:p, transform:`translateY(${ip(t,[0.45+i*0.15,1.0+i*0.15],[22,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${color}20`, borderRadius:14, padding:'22px 26px' }}>
-                <div style={{ fontSize:15.5, fontWeight:700, color, marginBottom:10 }}>{label}</div>
-                <div style={{ background:'#050A12', borderRadius:8, padding:'9px 14px', fontFamily:"'JetBrains Mono',monospace", fontSize:12.5, color:'#7AAEEE', wordBreak:'break-all', lineHeight:1.55 }}>{code}</div>
+              <div key={name} style={{ opacity:p, transform:`translateX(${ip(t,[0.5+i*0.18,1.0+i*0.18],[-18,0],E.outCubic)}px)`, display:'flex', alignItems:'center', gap:16, background:C.surf, border:`1px solid ${color}20`, borderRadius:12, padding:'14px 22px' }}>
+                <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:14, color, minWidth:240, flexShrink:0 }}>{name}</div>
+                <div style={{ fontSize:14, color:C.muted }}>—&nbsp;&nbsp;{desc}</div>
               </div>
             );
           })}
         </div>
-        <div style={{ opacity:ip(t,[1.8,2.4],[0,1],E.outCubic), background:C.surf, border:`1px solid ${C.border}`, borderRadius:14, padding:'18px 26px', display:'flex', alignItems:'center', gap:14 }}>
-          <div style={{ width:9, height:9, borderRadius:'50%', background:C.teal, flexShrink:0 }}/>
-          <div style={{ fontSize:15.5, color:C.muted }}>
-            Exposed via <span style={{ color:C.text, fontFamily:"'JetBrains Mono',monospace", fontSize:14 }}>developer-handoff.json</span> — fetch programmatically from any tool, script, or AI agent.
+
+        {/* Handoff note */}
+        <div style={{ opacity:ip(t,[1.9,2.5],[0,1],E.outCubic), background:`${C.surf}`, border:`1px solid ${C.border}`, borderRadius:12, padding:'16px 22px', display:'flex', gap:12, alignItems:'flex-start' }}>
+          <div style={{ color:C.teal, fontSize:18, marginTop:1 }}>ℹ</div>
+          <div style={{ fontSize:14.5, color:C.muted, lineHeight:1.6 }}>
+            Every component's full dependency list, source path, and token requirements are also available in <span style={{ fontFamily:"'JetBrains Mono',monospace", color:C.text, fontSize:13.5 }}>developer-handoff.json</span> at the library root — fetch it programmatically from any script or AI tool.
           </div>
         </div>
       </div>
@@ -408,63 +427,46 @@ function Slide6({ t }) {
 }
 
 // ─────────────────────────────────────────────────────────
-// SLIDE 7 — QUALITY & TRUST
+// SLIDE 7 — COMPONENT DEMO SHOWCASE
 // ─────────────────────────────────────────────────────────
 function Slide7({ t }) {
   const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
-  const pipe = [
-    { label:'Code Push',   icon:'↑', color:C.blue },
-    { label:'QA Contract', icon:'✓', color:C.teal },
-    { label:'Playwright',  icon:'⬡', color:C.gold },
-    { label:'A11y Audit',  icon:'♿', color:C.blue },
-    { label:'Auto Deploy', icon:'⬆', color:C.teal },
+
+  const groups = [
+    { title:'Forms & Input',    color:C.blue, items:['Button','Input','Select','Checkbox','Toggle','DatePicker','Slider','Textarea'] },
+    { title:'Data & Charts',    color:C.teal, items:['DataTable','LineChart','BarChart','PieChart','Sparkline','Heatmap','KPI Card','Progress'] },
+    { title:'Navigation',       color:C.gold, items:['SideNav','TopBar','Breadcrumb','Tabs','Pagination','CommandPalette','Dropdown','Menu'] },
+    { title:'Feedback & Alerts',color:C.blue, items:['Toast','Alert','Modal','Drawer','Skeleton','Spinner','Tooltip','Badge'] },
   ];
-  const checks = [
-    'Visual regression across desktop + mobile viewports',
-    'Catalog contract — IDs, docs, counts validated every build',
-    'Handoff readiness check on every component entry',
-    'Accessibility audit with Figma parity',
-    'Auto-deploy to GitHub Pages on every push to main',
-  ];
-  const scoreP = ip(t,[1.6,2.5],[0,1],E.outCubic);
+
   return (
     <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
-      <Glow id="g7" cx="50%" cy="50%" r="50%" color={C.teal} opacity={0.06}/>
-      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
-        <div style={{ opacity:hP }}><Label color={C.teal}>Quality Assurance</Label></div>
-        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:44 }}>
-          Built to be trusted.<br/><span style={{ color:C.teal }}>Proven every push.</span>
+      <Glow id="g7" cx="50%" cy="50%" r="55%" color={C.blue} op={0.06}/>
+      <div style={{ position:'absolute', inset:0, padding:'60px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.blue}>Component Showcase</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-24,0],E.outCubic)}px)`, fontSize:48, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:36 }}>
+          224 components across<br/><span style={{ color:C.blue }}>every part of your UI.</span>
         </div>
-        {/* Pipeline */}
-        <div style={{ display:'flex', alignItems:'center', marginBottom:44 }}>
-          {pipe.map(({ label, icon, color }, i) => {
-            const p = ip(t,[0.4+i*0.18,0.9+i*0.18],[0,1],E.outCubic);
-            const ap = i<pipe.length-1 ? ip(t,[0.55+i*0.18,0.9+i*0.18],[0,1],E.outCubic) : 0;
+
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:18 }}>
+          {groups.map(({ title, color, items }, i) => {
+            const p = ip(t,[0.4+i*0.2,1.0+i*0.2],[0,1],E.outCubic);
             return (
-              <React.Fragment key={label}>
-                <div style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:10, opacity:p, transform:`scale(${0.75+0.25*p})` }}>
-                  <div style={{ width:58, height:58, borderRadius:'50%', background:`${color}15`, border:`2px solid ${color}`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, color }}>{icon}</div>
-                  <div style={{ fontSize:13, fontWeight:600, color:C.text, textAlign:'center' }}>{label}</div>
+              <div key={title} style={{ opacity:p, transform:`translateY(${ip(t,[0.4+i*0.2,1.0+i*0.2],[20,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${color}20`, borderRadius:14, padding:'20px 22px' }}>
+                <div style={{ fontSize:14, fontWeight:800, color, marginBottom:14, letterSpacing:'0.05em' }}>{title}</div>
+                <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
+                  {items.map((item, j) => {
+                    const ip2 = ip(t,[0.5+i*0.2+j*0.04,0.9+i*0.2+j*0.04],[0,1],E.outBack);
+                    return (
+                      <div key={item} style={{ opacity:Math.min(1,ip2), transform:`scale(${Math.min(1,0.7+0.3*ip2)})`, background:`${color}12`, border:`1px solid ${color}25`, borderRadius:7, padding:'5px 12px', fontSize:12.5, fontWeight:600, color:C.text }}>
+                        {item}
+                      </div>
+                    );
+                  })}
                 </div>
-                {i<pipe.length-1 && <div style={{ width:32, height:2, background:`linear-gradient(90deg,${pipe[i].color},${pipe[i+1].color})`, opacity:ap, flexShrink:0, marginBottom:20 }}/>}
-              </React.Fragment>
+              </div>
             );
           })}
-        </div>
-        {/* Score + checks */}
-        <div style={{ display:'flex', gap:28, alignItems:'flex-start' }}>
-          <div style={{ opacity:scoreP, transform:`scale(${0.8+0.2*scoreP})`, background:`${C.teal}0F`, border:`2px solid ${C.teal}`, borderRadius:18, padding:'22px 36px', textAlign:'center', flexShrink:0, minWidth:190 }}>
-            <div style={{ fontSize:76, fontWeight:900, color:C.teal, lineHeight:1 }}>100</div>
-            <div style={{ fontSize:12, color:C.muted, marginTop:5, letterSpacing:'0.12em', textTransform:'uppercase' }}>Readiness Score</div>
-          </div>
-          <div style={{ flex:1, display:'flex', flexDirection:'column', gap:13, paddingTop:8 }}>
-            {checks.map((c,i) => (
-              <div key={i} style={{ opacity:ip(t,[1.3+i*0.12,1.8+i*0.12],[0,1],E.outCubic), transform:`translateX(${ip(t,[1.3+i*0.12,1.8+i*0.12],[18,0],E.outCubic)}px)`, display:'flex', alignItems:'center', gap:12 }}>
-                <div style={{ color:C.teal, fontWeight:800, fontSize:15, flexShrink:0 }}>✓</div>
-                <div style={{ fontSize:15.5, color:C.muted }}>{c}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
@@ -472,86 +474,95 @@ function Slide7({ t }) {
 }
 
 // ─────────────────────────────────────────────────────────
-// SLIDE 8 — AI-NATIVE
+// SLIDE 8 — AI & AGENT ACCESS
 // ─────────────────────────────────────────────────────────
 function Slide8({ t }) {
-  const hP  = ip(t,[0.2,0.9],[0,1],E.outCubic);
-  const mcpP= ip(t,[0.9,1.6],[0,1],E.outCubic);
+  const hP   = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const mcpP = ip(t,[0.9,1.6],[0,1],E.outCubic);
   const pulse = c01(Math.sin(t*1.4)*0.5+0.5);
   const queries = [
     '"Show me all chart components with dark mode support"',
     '"Copy the DataTable with sorting into my project"',
-    '"What design tokens does the NavBar use?"',
+    '"What design tokens does the SideNav use?"',
+    '"List all form components that support validation states"',
   ];
   return (
     <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
       <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
         <defs>
           <radialGradient id="g8" cx="68%" cy="48%" r="45%">
-            <stop offset="0%" stopColor={C.blue} stopOpacity={0.08+0.05*pulse}/>
+            <stop offset="0%" stopColor={C.blue} stopOpacity={0.07+0.04*pulse}/>
             <stop offset="100%" stopColor={C.bg} stopOpacity={0}/>
           </radialGradient>
         </defs>
         <rect width={W} height={H} fill="url(#g8)"/>
         {[0,1,2].map(r => {
           const rp = (pulse + r*0.33)%1;
-          return <circle key={r} cx={W*0.72} cy={H*0.5} r={100+rp*200} fill="none" stroke={C.blue} strokeWidth={1} opacity={(1-rp)*0.14*mcpP}/>;
+          return <circle key={r} cx={W*0.73} cy={H*0.5} r={100+rp*200} fill="none" stroke={C.blue} strokeWidth={1} opacity={(1-rp)*0.12*mcpP}/>;
         })}
       </svg>
-      <div style={{ position:'absolute', inset:0, padding:'64px 96px 64px 96px', display:'flex', gap:48 }}>
+      <div style={{ position:'absolute', inset:0, padding:'60px 96px', display:'flex', gap:48 }}>
         <div style={{ flex:1 }}>
-          <div style={{ opacity:hP }}><Label color={C.blue}>AI-Native</Label></div>
-          <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:24 }}>
-            Your design library<br/><span style={{ background:'linear-gradient(135deg,#4F8EF7,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>speaks AI.</span>
+          <div style={{ opacity:hP }}><Label color={C.blue}>AI & Agent Access</Label></div>
+          <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-24,0],E.outCubic)}px)`, fontSize:46, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:20 }}>
+            The library is readable<br/><span style={{ background:'linear-gradient(135deg,#4F8EF7,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>by AI tools too.</span>
           </div>
-          <div style={{ opacity:ip(t,[0.7,1.3],[0,1],E.outCubic), fontSize:16.5, color:C.muted, lineHeight:1.72, marginBottom:28 }}>
-            Every component is indexed in a machine-readable <span style={{ color:C.text, fontFamily:"'JetBrains Mono',monospace", fontSize:14.5 }}>manifest.json</span> — names, categories, props, variants, tokens, usage guidance, code snippets. An AI agent can discover and use any component without human guidance.
+          <div style={{ opacity:ip(t,[0.7,1.3],[0,1],E.outCubic), fontSize:15.5, color:C.muted, lineHeight:1.7, marginBottom:24 }}>
+            <span style={{ fontFamily:"'JetBrains Mono',monospace", color:C.text, fontSize:14 }}>manifest.json</span> at the library root indexes every component — names, props, variants, tokens, usage guidance, and code snippets. Any AI agent or script can query it directly.
           </div>
-          <div style={{ opacity:mcpP, transform:`translateY(${ip(t,[0.9,1.6],[18,0],E.outCubic)}px)`, background:`linear-gradient(135deg,${C.blue}18,${C.teal}18)`, border:`1px solid ${C.blue}40`, borderRadius:16, padding:'22px 26px', marginBottom:22 }}>
-            <div style={{ fontSize:15.5, fontWeight:800, color:C.blue, marginBottom:8 }}>MCP Server — In Progress</div>
-            <div style={{ fontSize:15, color:C.muted, lineHeight:1.65 }}>A Model Context Protocol server connecting the design library directly into AI tools — Claude Code, Cursor, Copilot. Any developer using AI can scaffold production-quality, on-brand UI in seconds.</div>
+
+          <div style={{ opacity:mcpP, transform:`translateY(${ip(t,[0.9,1.6],[16,0],E.outCubic)}px)`, background:`linear-gradient(135deg,${C.blue}15,${C.teal}15)`, border:`1px solid ${C.blue}35`, borderRadius:14, padding:'18px 24px', marginBottom:20 }}>
+            <div style={{ fontSize:15, fontWeight:800, color:C.blue, marginBottom:6 }}>MCP Server — In Development</div>
+            <div style={{ fontSize:14, color:C.muted, lineHeight:1.65 }}>
+              We're building a Model Context Protocol server so AI coding tools (Claude Code, Cursor, Copilot) can directly query, browse, and copy components from the library inside your editor.
+            </div>
           </div>
-          <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+
+          <div style={{ display:'flex', flexDirection:'column', gap:9 }}>
+            <div style={{ opacity:ip(t,[1.5,1.9],[0,1],E.outCubic), fontSize:13, color:C.dim, fontWeight:600, letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:4 }}>Example agent queries</div>
             {queries.map((q,i) => (
-              <div key={i} style={{ opacity:ip(t,[1.4+i*0.2,1.9+i*0.2],[0,1],E.outCubic), background:'#060B14', border:`1px solid ${C.dim}`, borderRadius:10, padding:'10px 16px', fontFamily:"'JetBrains Mono',monospace", fontSize:13, color:C.teal, fontStyle:'italic' }}>
+              <div key={i} style={{ opacity:ip(t,[1.5+i*0.15,2.0+i*0.15],[0,1],E.outCubic), background:'#060B14', border:`1px solid ${C.dim}`, borderRadius:9, padding:'9px 14px', fontFamily:"'JetBrains Mono',monospace", fontSize:12.5, color:C.teal, fontStyle:'italic' }}>
                 {q}
               </div>
             ))}
           </div>
         </div>
-        <div style={{ width:200 }}/>
+        <div style={{ width:180 }}/>
       </div>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────
-// SLIDE 9 — OPPORTUNITIES
+// SLIDE 9 — CONTRIBUTING & FEEDBACK
 // ─────────────────────────────────────────────────────────
 function Slide9({ t }) {
   const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
-  const opps = [
-    { icon:'◈', color:C.blue, title:'Consistent Products at Scale',  body:'Every Unilever internal product — H3L, Nexus, Polaris, everything next — built from the same components. One update ships everywhere.' },
-    { icon:'⬡', color:C.teal, title:'AI-Assisted Development',       body:'Via the MCP server, describe what you need and get working, on-brand UI scaffolded in seconds inside your AI coding tool.' },
-    { icon:'⟳', color:C.gold, title:'Build Any Internal Agent',       body:'The manifest becomes the vocabulary of any AI agent. Design reviews, gap analysis, component audits — fully automatable.' },
-    { icon:'→', color:C.blue, title:'Faster Time to Market',          body:'No more rebuilding tables, forms, or modals from scratch. Teams inherit 224 battle-tested components and ship features, not infrastructure.' },
+  const ways = [
+    { color:C.blue, icon:'⊕', title:'Request a new component',    body:'Open a Gap Proposal in the repo. Describe the use case, which product needs it, and any Figma reference. We review weekly.' },
+    { color:C.teal, icon:'⟳', title:'Report a bug or regression', body:'File an issue with the component ID, what you expected, and what you saw. Include a screenshot if possible.' },
+    { color:C.gold, icon:'✎',  title:'Contribute a component',     body:'Follow the authoring guide in /docs/authoring.md. Components go through QA, a11y, and Figma parity checks before shipping.' },
+    { color:C.blue, icon:'◎', title:'Propose a pattern or template', body:'Working on a Nexus screen or a reusable layout? Share it — strong candidates get added to the 16 screen templates.' },
   ];
   return (
     <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
-      <Glow id="g9" cx="50%" cy="50%" r="60%" color={C.blue} opacity={0.06}/>
-      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
-        <div style={{ opacity:hP, textAlign:'center' }}><Label color={C.blue}>What Becomes Possible</Label></div>
-        <div style={{ opacity:hP, textAlign:'center', fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:48 }}>
-          The opportunities<br/><span style={{ background:'linear-gradient(135deg,#4F8EF7,#F0A030,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>are just beginning.</span>
+      <Glow id="g9" cx="80%" cy="70%" r="45%" color={C.teal} op={0.06}/>
+      <div style={{ position:'absolute', inset:0, padding:'60px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.teal}>Contributing & Feedback</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-24,0],E.outCubic)}px)`, fontSize:48, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:10 }}>
+          Missing something?<br/><span style={{ color:C.teal }}>Here's how to get involved.</span>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:22 }}>
-          {opps.map(({ icon, color, title, body }, i) => {
-            const p = ip(t,[0.4+i*0.18,1.0+i*0.18],[0,1],E.outBack);
+        <div style={{ opacity:ip(t,[0.6,1.2],[0,1],E.outCubic), fontSize:15.5, color:C.muted, marginBottom:32 }}>
+          The library grows with the team. Every gap proposal, bug report, and contribution makes it better for everyone.
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
+          {ways.map(({ color, icon, title, body }, i) => {
+            const p = ip(t,[0.4+i*0.18,1.0+i*0.18],[0,1],E.outCubic);
             return (
-              <div key={title} style={{ opacity:Math.min(1,p), transform:`scale(${Math.min(1,0.85+0.15*p)})`, background:C.surf, border:`1px solid ${color}22`, borderRadius:16, padding:'26px 28px' }}>
-                <div style={{ fontSize:28, color, marginBottom:10 }}>{icon}</div>
-                <div style={{ fontSize:18.5, fontWeight:800, color:C.text, marginBottom:9 }}>{title}</div>
-                <div style={{ fontSize:15, color:C.muted, lineHeight:1.62 }}>{body}</div>
+              <div key={title} style={{ opacity:p, transform:`translateY(${ip(t,[0.4+i*0.18,1.0+i*0.18],[18,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${color}20`, borderRadius:14, padding:'20px 22px' }}>
+                <div style={{ fontSize:24, color, marginBottom:10 }}>{icon}</div>
+                <div style={{ fontSize:16, fontWeight:800, color:C.text, marginBottom:8 }}>{title}</div>
+                <div style={{ fontSize:13.5, color:C.muted, lineHeight:1.6 }}>{body}</div>
               </div>
             );
           })}
@@ -562,13 +573,14 @@ function Slide9({ t }) {
 }
 
 // ─────────────────────────────────────────────────────────
-// SLIDE 10 — CTA
+// SLIDE 10 — GET STARTED
 // ─────────────────────────────────────────────────────────
 function Slide10({ t }) {
   const p1 = ip(t,[0.2,1.0],[0,1],E.outCubic);
-  const p2 = ip(t,[0.8,1.6],[0,1],E.outCubic);
-  const p3 = ip(t,[1.3,2.1],[0,1],E.outCubic);
-  const p4 = ip(t,[1.8,2.6],[0,1],E.outCubic);
+  const p2 = ip(t,[0.8,1.5],[0,1],E.outCubic);
+  const p3 = ip(t,[1.3,2.0],[0,1],E.outCubic);
+  const p4 = ip(t,[1.8,2.5],[0,1],E.outCubic);
+  const p5 = ip(t,[2.2,2.9],[0,1],E.outCubic);
   const pulse = c01(Math.sin(t*1.1)*0.5+0.5);
 
   return (
@@ -576,40 +588,55 @@ function Slide10({ t }) {
       <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
         <defs>
           <radialGradient id="g10" cx="50%" cy="50%" r="60%">
-            <stop offset="0%" stopColor={C.blue} stopOpacity={0.10+0.06*pulse}/>
+            <stop offset="0%" stopColor={C.blue} stopOpacity={0.09+0.05*pulse}/>
             <stop offset="100%" stopColor={C.bg} stopOpacity={0}/>
           </radialGradient>
         </defs>
         <rect width={W} height={H} fill="url(#g10)"/>
-        <circle cx={W/2} cy={H/2} r={300} fill="none" stroke={C.blue} strokeWidth={1} opacity={0.06}/>
-        <circle cx={W/2} cy={H/2} r={420} fill="none" stroke={C.blue} strokeWidth={1} opacity={0.03}/>
+        <circle cx={W/2} cy={H/2} r={290} fill="none" stroke={C.blue} strokeWidth={1} opacity={0.06}/>
+        <circle cx={W/2} cy={H/2} r={410} fill="none" stroke={C.blue} strokeWidth={1} opacity={0.03}/>
       </svg>
 
       <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
-        <div style={{ opacity:p1, fontSize:12, fontWeight:700, letterSpacing:'0.22em', color:C.blue, textTransform:'uppercase', marginBottom:22 }}>The Invitation</div>
-        <div style={{ opacity:p1, transform:`scale(${0.88+0.12*p1})`, fontSize:96, fontWeight:900, color:C.text, letterSpacing:'-0.04em', lineHeight:1, textAlign:'center', marginBottom:10 }}>
-          Try it today.
+        <div style={{ opacity:p1, fontSize:12, fontWeight:700, letterSpacing:'0.22em', color:C.blue, textTransform:'uppercase', marginBottom:20 }}>Get Started</div>
+        <div style={{ opacity:p1, transform:`scale(${0.9+0.1*p1})`, fontSize:88, fontWeight:900, color:C.text, letterSpacing:'-0.04em', lineHeight:1, textAlign:'center', marginBottom:10 }}>
+          Open it now.
         </div>
-        <div style={{ opacity:p2, transform:`translateY(${ip(t,[0.8,1.6],[14,0],E.outCubic)}px)`, fontSize:22, color:C.muted, marginBottom:48, letterSpacing:'0.06em' }}>
-          Browse.&nbsp;&nbsp;&nbsp;Copy.&nbsp;&nbsp;&nbsp;Ship.
+        <div style={{ opacity:p2, fontSize:20, color:C.muted, marginBottom:40, textAlign:'center', lineHeight:1.6 }}>
+          Browse the catalog. Find a component.<br/>Copy it into your project.
         </div>
 
-        <div style={{ opacity:p3, transform:`translateY(${ip(t,[1.3,2.1],[14,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${C.blue}40`, borderRadius:14, padding:'17px 38px', display:'flex', alignItems:'center', gap:14, marginBottom:44 }}>
+        {/* URL */}
+        <div style={{ opacity:p3, background:C.surf, border:`1.5px solid ${C.blue}45`, borderRadius:14, padding:'16px 36px', display:'flex', alignItems:'center', gap:14, marginBottom:16 }}>
           <div style={{ width:9, height:9, borderRadius:'50%', background:C.teal }}/>
-          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:19, color:C.blue }}>gurneyk.github.io/Design-library</span>
+          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:20, color:C.blue }}>gurneyk.github.io/Design-library</span>
         </div>
 
-        <div style={{ opacity:p4, display:'flex', gap:56 }}>
-          {[['224','Components'],['194','Implementations'],['100/100','Readiness'],['MCP','Coming Soon']].map(([n,l])=>(
-            <div key={l} style={{ textAlign:'center' }}>
-              <div style={{ fontSize:28, fontWeight:900, background:'linear-gradient(135deg,#4F8EF7,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>{n}</div>
-              <div style={{ fontSize:11, color:C.dim, textTransform:'uppercase', letterSpacing:'0.12em', marginTop:5 }}>{l}</div>
-            </div>
+        {/* Copy command */}
+        <div style={{ opacity:p4, background:'#060B14', border:`1px solid ${C.dim}`, borderRadius:14, padding:'14px 32px', display:'flex', alignItems:'center', gap:14, marginBottom:40 }}>
+          <TypeLine text="npm run copy:component -- [id]" t={t} delay={1.9} style={{ fontSize:17, color:C.teal }}/>
+        </div>
+
+        {/* Three steps inline */}
+        <div style={{ opacity:p5, display:'flex', gap:48, alignItems:'center' }}>
+          {[
+            { n:'1', label:'Browse the catalog' },
+            { n:'→', label:'' },
+            { n:'2', label:'Find your component' },
+            { n:'→', label:'' },
+            { n:'3', label:'Run the copy command' },
+          ].map(({ n, label }, i) => (
+            n === '→'
+              ? <div key={i} style={{ color:C.dim, fontSize:20 }}>→</div>
+              : <div key={i} style={{ textAlign:'center' }}>
+                  <div style={{ width:36, height:36, borderRadius:'50%', background:`${C.blue}20`, border:`1.5px solid ${C.blue}`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:15, fontWeight:900, color:C.blue, margin:'0 auto 8px' }}>{n}</div>
+                  <div style={{ fontSize:13, color:C.muted, maxWidth:120, lineHeight:1.4 }}>{label}</div>
+                </div>
           ))}
         </div>
       </div>
 
-      <div style={{ position:'absolute', bottom:30, right:42, opacity:p4, fontSize:13, color:C.dim, letterSpacing:'0.1em' }}>
+      <div style={{ position:'absolute', bottom:28, right:40, opacity:p5, fontSize:12, color:C.dim, letterSpacing:'0.12em' }}>
         H3L Design System Library · Gurnoor K
       </div>
     </div>
@@ -625,24 +652,24 @@ const SLIDES = [Slide1,Slide2,Slide3,Slide4,Slide5,Slide6,Slide7,Slide8,Slide9,S
 // APP
 // ─────────────────────────────────────────────────────────
 function App() {
-  const [active, setActive]       = useState(0);
-  const [prev, setPrev]           = useState(null);
-  const [transP, setTransP]       = useState(1);
-  const [slideT, setSlideT]       = useState(0);
-  const [showUI, setShowUI]       = useState(true);
+  const [active, setActive]         = useState(0);
+  const [prev, setPrev]             = useState(null);
+  const [transP, setTransP]         = useState(1);
+  const [slideT, setSlideT]         = useState(0);
+  const [showUI, setShowUI]         = useState(true);
   const [fullscreen, setFullscreen] = useState(false);
-  const [auto, setAuto]           = useState(false);
+  const [auto, setAuto]             = useState(false);
 
-  const raf      = useRef(null);
-  const lastTs   = useRef(null);
-  const transRef = useRef(1);
-  const slideTR  = useRef(0);
-  const activeR  = useRef(0);
-  const autoR    = useRef(false);
+  const raf           = useRef(null);
+  const lastTs        = useRef(null);
+  const transRef      = useRef(1);
+  const slideTR       = useRef(0);
+  const activeR       = useRef(0);
+  const autoR         = useRef(false);
   const transitioning = useRef(false);
-  const uiTimer  = useRef(null);
+  const uiTimer       = useRef(null);
 
-  const AUTO_SECS = 9;
+  const AUTO_SECS = 10;
 
   useEffect(() => {
     const loop = ts => {
@@ -715,7 +742,6 @@ function App() {
 
   const entering = E.inOutCubic(c01(transP));
   const exiting  = 1 - entering;
-
   const ActiveComp = SLIDES[active];
   const PrevComp   = prev !== null ? SLIDES[prev] : null;
 
@@ -737,7 +763,7 @@ function App() {
         ))}
       </div>
 
-      {/* Bottom-right controls */}
+      {/* Controls */}
       <div style={{ position:'absolute', bottom:18, right:22, display:'flex', gap:8, alignItems:'center', opacity:showUI?1:0, transition:'opacity 0.35s', zIndex:100 }}>
         <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:12, color:C.dim }}>{active+1}/{SLIDE_COUNT}</span>
         <button onClick={toggleAuto} style={{ background:auto?`${C.blue}18`:'transparent', border:`1px solid ${auto?C.blue:C.dim}`, borderRadius:7, padding:'5px 11px', cursor:'pointer', color:auto?C.blue:C.dim, fontSize:12 }}>
@@ -748,7 +774,7 @@ function App() {
         </button>
       </div>
 
-      {/* Arrow nav */}
+      {/* Arrows */}
       {active>0 && (
         <div style={{ position:'absolute', left:14, top:'50%', transform:'translateY(-50%)', opacity:showUI?1:0, transition:'opacity 0.35s', zIndex:100 }}>
           <button onClick={()=>go(active-1)} style={{ background:`${C.surf}CC`, border:`1px solid ${C.border}`, borderRadius:'50%', width:42, height:42, cursor:'pointer', color:C.text, fontSize:20, display:'flex', alignItems:'center', justifyContent:'center' }}>‹</button>
@@ -760,7 +786,7 @@ function App() {
         </div>
       )}
 
-      {/* Keyboard hint — slide 1 only */}
+      {/* Hint on slide 1 */}
       {active===0 && slideT>3.5 && (
         <div style={{ position:'absolute', bottom:58, left:'50%', transform:'translateX(-50%)', opacity:Math.min(1,(slideT-3.5)/0.5)*(showUI?1:0.4), fontSize:12, color:C.dim, letterSpacing:'0.16em', display:'flex', gap:14, zIndex:100 }}>
           <span>← → Navigate</span><span>·</span><span>F Fullscreen</span><span>·</span><span>A Auto-play</span>
