@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habibi Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #080C14; }
+    #root { width: 100vw; height: 100vh; }
+    button { font-family: 'Plus Jakarta Sans', sans-serif; }
+    :fullscreen { width: 100vw; height: 100vh; }
+    :-webkit-full-screen { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+// ── Easing ────────────────────────────────────────────────
+const E = {
+  smooth:     t => t*t*(3-2*t),
+  outCubic:   t => 1 - Math.pow(1-t, 3),
+  inOutCubic: t => t<0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2,
+  outBack:    t => { const c=1.70158+1; return 1+c*Math.pow(t-1,3)+(c-1)*Math.pow(t-1,2); },
+  outQuart:   t => 1 - Math.pow(1-t, 4),
+};
+
+function c01(v) { return Math.max(0, Math.min(1, v)); }
+function ip(t, [i0,i1], [o0,o1], ease=E.smooth) {
+  const p = c01((t-i0)/(i1-i0));
+  return o0 + (o1-o0)*ease(p);
+}
+
+// ── Palette ───────────────────────────────────────────────
+const C = {
+  bg:      '#080C14',
+  surf:    '#0D1626',
+  surf2:   '#111D30',
+  blue:    '#4F8EF7',
+  teal:    '#22D3A5',
+  gold:    '#F0A030',
+  text:    '#F0F4FF',
+  muted:   '#7A90B8',
+  dim:     '#2E4060',
+  border:  'rgba(79,142,247,0.14)',
+};
+
+const W = 1440, H = 810;
+const SLIDE_COUNT = 10;
+const TRANS_DUR = 0.55;
+
+// ── Stage ─────────────────────────────────────────────────
+function Stage({ children }) {
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    const calc = () => setScale(Math.min(window.innerWidth/W, window.innerHeight/H));
+    calc();
+    window.addEventListener('resize', calc);
+    return () => window.removeEventListener('resize', calc);
+  }, []);
+  return (
+    <div style={{ position:'fixed', inset:0, background:C.bg, display:'flex', alignItems:'center', justifyContent:'center', overflow:'hidden' }}>
+      <div style={{ width:W, height:H, transform:`scale(${scale})`, transformOrigin:'center', position:'relative', overflow:'hidden' }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ── Shared BG glow ────────────────────────────────────────
+function Glow({ id, cx='50%', cy='50%', r='50%', color, opacity=0.1 }) {
+  return (
+    <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
+      <defs>
+        <radialGradient id={id} cx={cx} cy={cy} r={r}>
+          <stop offset="0%" stopColor={color} stopOpacity={opacity}/>
+          <stop offset="100%" stopColor={C.bg} stopOpacity={0}/>
+        </radialGradient>
+      </defs>
+      <rect width={W} height={H} fill={`url(#${id})`}/>
+    </svg>
+  );
+}
+
+// ── Typing cursor line ────────────────────────────────────
+function TypeLine({ text, t, delay=0, style={} }) {
+  const p = ip(t, [delay, delay+0.6], [0,1], E.outCubic);
+  const chars = Math.floor(p * text.length);
+  return (
+    <span style={{ fontFamily:"'JetBrains Mono',monospace", ...style }}>
+      {text.slice(0,chars)}{p<1 && <span style={{ opacity: Math.sin(t*8)*0.5+0.5, color:C.blue }}>▌</span>}
+    </span>
+  );
+}
+
+// ── Counter ───────────────────────────────────────────────
+function Counter({ value, t, delay=0, suffix='' }) {
+  const p = c01(ip(t,[delay,delay+1.4],[0,1],E.outCubic));
+  return <>{Math.round(p*value).toLocaleString()}{suffix}</>;
+}
+
+// ── Grid lines decoration ─────────────────────────────────
+function GridBg({ opacity=0.4 }) {
+  const lines = [];
+  for (let i=1;i<8;i++) {
+    lines.push(<line key={`h${i}`} x1={0} y1={i*H/8} x2={W} y2={i*H/8} stroke={C.border} strokeWidth={0.5} opacity={opacity}/>);
+    lines.push(<line key={`v${i}`} x1={i*W/8} y1={0} x2={i*W/8} y2={H} stroke={C.border} strokeWidth={0.5} opacity={opacity}/>);
+  }
+  return (
+    <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
+      {lines}
+    </svg>
+  );
+}
+
+// ── Pill badge ────────────────────────────────────────────
+function Label({ children, color=C.blue }) {
+  return (
+    <div style={{ display:'inline-flex', alignItems:'center', gap:6, marginBottom:18 }}>
+      <div style={{ width:6, height:6, borderRadius:'50%', background:color }}/>
+      <span style={{ fontSize:12, fontWeight:700, letterSpacing:'0.18em', color, textTransform:'uppercase' }}>{children}</span>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 1 — HERO
+// ─────────────────────────────────────────────────────────
+function Slide1({ t }) {
+  const g = c01(Math.sin(t*0.6)*0.5+0.5);
+  const hP  = ip(t,[0.3,1.1],[0,1],E.outCubic);
+  const h2P = ip(t,[0.8,1.6],[0,1],E.outCubic);
+  const divP= ip(t,[1.3,1.8],[0,1],E.outCubic);
+  const tagP= ip(t,[1.5,2.2],[0,1],E.outCubic);
+  const stP = ip(t,[2.0,2.8],[0,1],E.outCubic);
+
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <GridBg opacity={0.35}/>
+      <Glow id="g1" cx="50%" cy="40%" r="55%" color={C.blue} opacity={0.09+0.05*g}/>
+      <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
+        <line x1={W*(1-hP)*0.5} y1={H-2} x2={W*(1-(1-hP)*0.5)} y2={H-2} stroke={`url(#accentLine)`} strokeWidth={2}/>
+        <defs>
+          <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="transparent"/>
+            <stop offset="50%" stopColor={C.blue}/>
+            <stop offset="100%" stopColor="transparent"/>
+          </linearGradient>
+          <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={C.blue}/>
+            <stop offset="100%" stopColor={C.teal}/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
+        <div style={{ opacity:hP, transform:`translateY(${ip(t,[0.3,1.1],[24,0],E.outCubic)}px)`, fontSize:12, fontWeight:700, letterSpacing:'0.22em', color:C.blue, textTransform:'uppercase', marginBottom:20 }}>
+          Unilever Internal Products
+        </div>
+
+        <div style={{ opacity:hP, transform:`translateY(${ip(t,[0.3,1.1],[30,0],E.outCubic)}px)`, fontSize:112, fontWeight:900, color:C.text, lineHeight:1, letterSpacing:'-0.04em', textAlign:'center' }}>
+          Habibi
+        </div>
+        <div style={{ opacity:h2P, transform:`translateY(${ip(t,[0.8,1.6],[22,0],E.outCubic)}px)`, fontSize:112, fontWeight:900, lineHeight:1, letterSpacing:'-0.04em', textAlign:'center', background:'linear-gradient(135deg, #4F8EF7, #22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
+          Design System
+        </div>
+
+        <div style={{ width:500*divP, height:1.5, background:'linear-gradient(90deg, transparent, #4F8EF7, #22D3A5, transparent)', margin:'30px 0' }}/>
+
+        <div style={{ opacity:tagP, transform:`translateY(${ip(t,[1.5,2.2],[14,0],E.outCubic)}px)`, fontSize:24, fontWeight:400, color:C.muted, letterSpacing:'0.06em', textAlign:'center' }}>
+          One library.&nbsp;&nbsp;&nbsp;Any engineer.&nbsp;&nbsp;&nbsp;Every product.
+        </div>
+
+        <div style={{ opacity:stP, display:'flex', gap:60, marginTop:52 }}>
+          {[['224','Components'],['194','Live Implementations'],['100','Readiness Score']].map(([n,l])=>(
+            <div key={l} style={{ textAlign:'center' }}>
+              <div style={{ fontSize:40, fontWeight:900, color:C.text }}>{n}</div>
+              <div style={{ fontSize:12, color:C.muted, letterSpacing:'0.12em', textTransform:'uppercase', marginTop:5 }}>{l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ position:'absolute', bottom:28, right:40, opacity:stP, fontSize:12, color:C.dim, letterSpacing:'0.14em' }}>
+        MVP Complete · 2025
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 2 — THE PROBLEM
+// ─────────────────────────────────────────────────────────
+function Slide2({ t }) {
+  const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const probs = [
+    { icon:'⚠', color:C.gold,  title:'Inconsistency', body:'Every team builds the same button, the same modal, the same table — slightly differently. The product feels fragmented.' },
+    { icon:'⧉', color:C.blue,  title:'Duplication',    body:'Engineers rebuild components that already exist somewhere else. Velocity drops. Deadlines slip. Morale fades.' },
+    { icon:'↯', color:'#E05555', title:'Drift',         body:'Design changes in Figma. Code never catches up. QA flags regressions. Users notice. Trust erodes.' },
+  ];
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <Glow id="g2" cx="10%" cy="30%" r="40%" color={C.gold} opacity={0.07}/>
+      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.gold}>The Challenge</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:58, fontWeight:900, color:C.text, lineHeight:1.08, letterSpacing:'-0.025em', marginBottom:56 }}>
+          Building the same thing.<br/><span style={{ color:C.gold }}>Over and over again.</span>
+        </div>
+        <div style={{ display:'flex', gap:24 }}>
+          {probs.map(({ icon, color, title, body }, i) => {
+            const p = ip(t,[0.6+i*0.35,1.2+i*0.35],[0,1],E.outCubic);
+            return (
+              <div key={title} style={{ flex:1, opacity:p, transform:`translateY(${ip(t,[0.6+i*0.35,1.2+i*0.35],[36,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${color}22`, borderRadius:18, padding:'36px 30px' }}>
+                <div style={{ fontSize:34, marginBottom:14 }}>{icon}</div>
+                <div style={{ fontSize:21, fontWeight:800, color, marginBottom:12 }}>{title}</div>
+                <div style={{ fontSize:15.5, color:C.muted, lineHeight:1.65 }}>{body}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ opacity:ip(t,[2.1,2.7],[0,1],E.outCubic), marginTop:44, textAlign:'center', fontSize:19, color:C.muted, fontStyle:'italic' }}>
+          There had to be a better way.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 3 — THE SOLUTION
+// ─────────────────────────────────────────────────────────
+function Slide3({ t }) {
+  const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const chips = ['Button','Input','Modal','Table','Card','Select','Tooltip','Badge','Nav','Chart','Form','Toast','Sidebar','Avatar','Tabs','Dialog','Chip','DatePicker','Accordion','Progress','Spinner','Alert','Breadcrumb','Toggle','Switch','Dropdown','Pagination','Drawer','Banner','Skeleton'];
+
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <Glow id="g3" cx="75%" cy="50%" r="50%" color={C.blue} opacity={0.10}/>
+      {/* Left */}
+      <div style={{ position:'absolute', left:96, top:0, bottom:0, width:540, display:'flex', flexDirection:'column', justifyContent:'center' }}>
+        <div style={{ opacity:hP }}><Label color={C.blue}>The Solution</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:56, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:28 }}>
+          One library.<br/><span style={{ background:'linear-gradient(135deg,#4F8EF7,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>Built right.</span>
+        </div>
+        <div style={{ opacity:ip(t,[0.7,1.4],[0,1],E.outCubic), fontSize:17, color:C.muted, lineHeight:1.72, marginBottom:32 }}>
+          A single shared source of truth for every UI component across Unilever's internal products — browsable, documented, and ready to drop into any project.
+        </div>
+        {[
+          ['224 components ready to use', C.blue],
+          ['Interactive live previews', C.teal],
+          ['One-command copy to any project', C.gold],
+          ['AI-readable manifest.json', C.blue],
+        ].map(([label, color], i) => (
+          <div key={label} style={{ opacity:ip(t,[1.0+i*0.15,1.5+i*0.15],[0,1],E.outCubic), transform:`translateX(${ip(t,[1.0+i*0.15,1.5+i*0.15],[-16,0],E.outCubic)}px)`, display:'flex', alignItems:'center', gap:12, marginBottom:14 }}>
+            <div style={{ width:8, height:8, borderRadius:'50%', background:color, flexShrink:0 }}/>
+            <span style={{ fontSize:16, color:C.text, fontWeight:500 }}>{label}</span>
+          </div>
+        ))}
+      </div>
+      {/* Right: component chip grid */}
+      <div style={{ position:'absolute', right:56, top:60, bottom:60, width:660, display:'flex', flexWrap:'wrap', gap:10, alignContent:'flex-start', overflow:'hidden' }}>
+        {chips.map((name,i) => {
+          const p = ip(t,[0.5+i*0.038,0.9+i*0.038],[0,1],E.outBack);
+          return (
+            <div key={name} style={{ opacity:Math.min(1,p), transform:`scale(${Math.min(1,0.6+0.4*p)})`, background:C.surf, border:`1px solid ${C.border}`, borderRadius:10, padding:'9px 18px', fontSize:13.5, fontWeight:600, color:C.text }}>
+              {name}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 4 — THE NUMBERS
+// ─────────────────────────────────────────────────────────
+function Slide4({ t }) {
+  const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const stats = [
+    { val:224, suf:'',  label:'Catalog Entries',        desc:'Components, patterns, and templates',                color:C.blue },
+    { val:194, suf:'',  label:'Live Implementations',   desc:'React components with interactive previews',         color:C.teal },
+    { val:16,  suf:'',  label:'Screen Templates',       desc:'Full workspace screens for Nexus products',          color:C.gold },
+    { val:30,  suf:'+', label:'Documentation Guides',   desc:'Authoring, adoption, accessibility, agent usage',    color:C.blue },
+  ];
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <Glow id="g4" cx="50%" cy="50%" r="55%" color={C.teal} opacity={0.06}/>
+      <div style={{ position:'absolute', inset:0, padding:'64px 96px', display:'flex', flexDirection:'column', justifyContent:'center' }}>
+        <div style={{ opacity:hP, textAlign:'center' }}><Label color={C.teal}>Scale & Substance</Label></div>
+        <div style={{ opacity:hP, textAlign:'center', fontSize:54, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:56 }}>
+          Numbers that tell<br/><span style={{ color:C.teal }}>the whole story.</span>
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:22 }}>
+          {stats.map(({ val, suf, label, desc, color }, i) => {
+            const p = ip(t,[0.4+i*0.18,1.0+i*0.18],[0,1],E.outCubic);
+            return (
+              <div key={label} style={{ opacity:p, transform:`translateY(${ip(t,[0.4+i*0.18,1.0+i*0.18],[28,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${color}20`, borderLeft:`3px solid ${color}`, borderRadius:16, padding:'28px 32px', display:'flex', alignItems:'center', gap:28 }}>
+                <div style={{ fontSize:68, fontWeight:900, color, lineHeight:1, minWidth:150, fontVariantNumeric:'tabular-nums' }}>
+                  <Counter value={val} t={t} delay={0.4+i*0.18} suffix={suf}/>
+                </div>
+                <div>
+                  <div style={{ fontSize:19, fontWeight:700, color:C.text, marginBottom:6 }}>{label}</div>
+                  <div style={{ fontSize:14.5, color:C.muted, lineHeight:1.55 }}>{desc}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 5 — ANY ENGINEER
+// ─────────────────────────────────────────────────────────
+function Slide5({ t }) {
+  const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const steps = [
+    { n:'1', color:C.blue,  title:'Browse the live catalog',  body:'Find the component you need — previews, docs, props, variants, all in one place.', url:'gurneyk.github.io/Design-library', delay:0.55 },
+    { n:'2', color:C.teal,  title:'One command to copy',       body:null, cmd:'npm run copy:component -- button --receipt', delay:0.95 },
+    { n:'3', color:C.gold,  title:'Ship your feature',         body:'Component lands in your project with Tailwind tokens, type defs, and setup instructions. Ready.', delay:1.35 },
+  ];
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <Glow id="g5" cx="85%" cy="20%" r="40%" color={C.blue} opacity={0.08}/>
+      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.blue}>Developer Experience</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:56, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:52 }}>
+          Any engineer can<br/><span style={{ color:C.blue }}>ship faster.</span>
+        </div>
+        <div style={{ display:'flex', flexDirection:'column', gap:20 }}>
+          {steps.map(({ n, color, title, body, cmd, url, delay }) => {
+            const p = ip(t,[delay,delay+0.55],[0,1],E.outCubic);
+            return (
+              <div key={n} style={{ opacity:p, transform:`translateX(${ip(t,[delay,delay+0.55],[-28,0],E.outCubic)}px)`, display:'flex', alignItems:'center', gap:22, background:C.surf, border:`1px solid ${C.border}`, borderRadius:16, padding:'22px 28px' }}>
+                <div style={{ width:50, height:50, borderRadius:'50%', background:`${color}18`, border:`1.5px solid ${color}`, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, fontSize:19, fontWeight:900, color }}>
+                  {n}
+                </div>
+                <div style={{ flex:1 }}>
+                  <div style={{ fontSize:17.5, fontWeight:700, color:C.text, marginBottom:cmd?8:4 }}>{title}</div>
+                  {body && <div style={{ fontSize:15, color:C.muted }}>{body} {url && <span style={{ color:C.blue }}>{url}</span>}</div>}
+                  {cmd && (
+                    <div style={{ background:'#060B14', border:`1px solid ${C.dim}`, borderRadius:10, padding:'11px 18px', fontFamily:"'JetBrains Mono',monospace", fontSize:15.5, color:C.teal }}>
+                      <TypeLine text={cmd} t={t} delay={delay+0.3}/>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ opacity:ip(t,[2.1,2.7],[0,1],E.outCubic), marginTop:24, textAlign:'right', fontSize:13, color:C.dim }}>
+          Works on PowerShell · Bash · Windows · macOS · Linux
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 6 — HANDOFF
+// ─────────────────────────────────────────────────────────
+function Slide6({ t }) {
+  const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const cards = [
+    { label:'Props & Variants',  code:'"variants": ["primary","secondary","ghost","danger"]', color:C.blue },
+    { label:'Design Tokens',     code:'"tokens": ["color.brand.primary","spacing.4","radius.md"]', color:C.teal },
+    { label:'Source File',       code:'"sourceFile": "src/components/Button.tsx"', color:C.gold },
+    { label:'Dependencies',      code:'"dependencies": ["tailwindcss","class-variance-authority"]', color:C.blue },
+  ];
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <Glow id="g6" cx="50%" cy="90%" r="50%" color={C.gold} opacity={0.07}/>
+      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.gold}>Developer Handoff</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:44 }}>
+          Every component ships<br/><span style={{ color:C.gold }}>with its own instructions.</span>
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:18, marginBottom:22 }}>
+          {cards.map(({ label, code, color }, i) => {
+            const p = ip(t,[0.45+i*0.15,1.0+i*0.15],[0,1],E.outCubic);
+            return (
+              <div key={label} style={{ opacity:p, transform:`translateY(${ip(t,[0.45+i*0.15,1.0+i*0.15],[22,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${color}20`, borderRadius:14, padding:'22px 26px' }}>
+                <div style={{ fontSize:15.5, fontWeight:700, color, marginBottom:10 }}>{label}</div>
+                <div style={{ background:'#050A12', borderRadius:8, padding:'9px 14px', fontFamily:"'JetBrains Mono',monospace", fontSize:12.5, color:'#7AAEEE', wordBreak:'break-all', lineHeight:1.55 }}>{code}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ opacity:ip(t,[1.8,2.4],[0,1],E.outCubic), background:C.surf, border:`1px solid ${C.border}`, borderRadius:14, padding:'18px 26px', display:'flex', alignItems:'center', gap:14 }}>
+          <div style={{ width:9, height:9, borderRadius:'50%', background:C.teal, flexShrink:0 }}/>
+          <div style={{ fontSize:15.5, color:C.muted }}>
+            Exposed via <span style={{ color:C.text, fontFamily:"'JetBrains Mono',monospace", fontSize:14 }}>developer-handoff.json</span> — fetch programmatically from any tool, script, or AI agent.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 7 — QUALITY & TRUST
+// ─────────────────────────────────────────────────────────
+function Slide7({ t }) {
+  const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const pipe = [
+    { label:'Code Push',   icon:'↑', color:C.blue },
+    { label:'QA Contract', icon:'✓', color:C.teal },
+    { label:'Playwright',  icon:'⬡', color:C.gold },
+    { label:'A11y Audit',  icon:'♿', color:C.blue },
+    { label:'Auto Deploy', icon:'⬆', color:C.teal },
+  ];
+  const checks = [
+    'Visual regression across desktop + mobile viewports',
+    'Catalog contract — IDs, docs, counts validated every build',
+    'Handoff readiness check on every component entry',
+    'Accessibility audit with Figma parity',
+    'Auto-deploy to GitHub Pages on every push to main',
+  ];
+  const scoreP = ip(t,[1.6,2.5],[0,1],E.outCubic);
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <Glow id="g7" cx="50%" cy="50%" r="50%" color={C.teal} opacity={0.06}/>
+      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
+        <div style={{ opacity:hP }}><Label color={C.teal}>Quality Assurance</Label></div>
+        <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:44 }}>
+          Built to be trusted.<br/><span style={{ color:C.teal }}>Proven every push.</span>
+        </div>
+        {/* Pipeline */}
+        <div style={{ display:'flex', alignItems:'center', marginBottom:44 }}>
+          {pipe.map(({ label, icon, color }, i) => {
+            const p = ip(t,[0.4+i*0.18,0.9+i*0.18],[0,1],E.outCubic);
+            const ap = i<pipe.length-1 ? ip(t,[0.55+i*0.18,0.9+i*0.18],[0,1],E.outCubic) : 0;
+            return (
+              <React.Fragment key={label}>
+                <div style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:10, opacity:p, transform:`scale(${0.75+0.25*p})` }}>
+                  <div style={{ width:58, height:58, borderRadius:'50%', background:`${color}15`, border:`2px solid ${color}`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, color }}>{icon}</div>
+                  <div style={{ fontSize:13, fontWeight:600, color:C.text, textAlign:'center' }}>{label}</div>
+                </div>
+                {i<pipe.length-1 && <div style={{ width:32, height:2, background:`linear-gradient(90deg,${pipe[i].color},${pipe[i+1].color})`, opacity:ap, flexShrink:0, marginBottom:20 }}/>}
+              </React.Fragment>
+            );
+          })}
+        </div>
+        {/* Score + checks */}
+        <div style={{ display:'flex', gap:28, alignItems:'flex-start' }}>
+          <div style={{ opacity:scoreP, transform:`scale(${0.8+0.2*scoreP})`, background:`${C.teal}0F`, border:`2px solid ${C.teal}`, borderRadius:18, padding:'22px 36px', textAlign:'center', flexShrink:0, minWidth:190 }}>
+            <div style={{ fontSize:76, fontWeight:900, color:C.teal, lineHeight:1 }}>100</div>
+            <div style={{ fontSize:12, color:C.muted, marginTop:5, letterSpacing:'0.12em', textTransform:'uppercase' }}>Readiness Score</div>
+          </div>
+          <div style={{ flex:1, display:'flex', flexDirection:'column', gap:13, paddingTop:8 }}>
+            {checks.map((c,i) => (
+              <div key={i} style={{ opacity:ip(t,[1.3+i*0.12,1.8+i*0.12],[0,1],E.outCubic), transform:`translateX(${ip(t,[1.3+i*0.12,1.8+i*0.12],[18,0],E.outCubic)}px)`, display:'flex', alignItems:'center', gap:12 }}>
+                <div style={{ color:C.teal, fontWeight:800, fontSize:15, flexShrink:0 }}>✓</div>
+                <div style={{ fontSize:15.5, color:C.muted }}>{c}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 8 — AI-NATIVE
+// ─────────────────────────────────────────────────────────
+function Slide8({ t }) {
+  const hP  = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const mcpP= ip(t,[0.9,1.6],[0,1],E.outCubic);
+  const pulse = c01(Math.sin(t*1.4)*0.5+0.5);
+  const queries = [
+    '"Show me all chart components with dark mode support"',
+    '"Copy the DataTable with sorting into my project"',
+    '"What design tokens does the NavBar use?"',
+  ];
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
+        <defs>
+          <radialGradient id="g8" cx="68%" cy="48%" r="45%">
+            <stop offset="0%" stopColor={C.blue} stopOpacity={0.08+0.05*pulse}/>
+            <stop offset="100%" stopColor={C.bg} stopOpacity={0}/>
+          </radialGradient>
+        </defs>
+        <rect width={W} height={H} fill="url(#g8)"/>
+        {[0,1,2].map(r => {
+          const rp = (pulse + r*0.33)%1;
+          return <circle key={r} cx={W*0.72} cy={H*0.5} r={100+rp*200} fill="none" stroke={C.blue} strokeWidth={1} opacity={(1-rp)*0.14*mcpP}/>;
+        })}
+      </svg>
+      <div style={{ position:'absolute', inset:0, padding:'64px 96px 64px 96px', display:'flex', gap:48 }}>
+        <div style={{ flex:1 }}>
+          <div style={{ opacity:hP }}><Label color={C.blue}>AI-Native</Label></div>
+          <div style={{ opacity:hP, transform:`translateX(${ip(t,[0.2,0.9],[-28,0],E.outCubic)}px)`, fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:24 }}>
+            Your design library<br/><span style={{ background:'linear-gradient(135deg,#4F8EF7,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>speaks AI.</span>
+          </div>
+          <div style={{ opacity:ip(t,[0.7,1.3],[0,1],E.outCubic), fontSize:16.5, color:C.muted, lineHeight:1.72, marginBottom:28 }}>
+            Every component is indexed in a machine-readable <span style={{ color:C.text, fontFamily:"'JetBrains Mono',monospace", fontSize:14.5 }}>manifest.json</span> — names, categories, props, variants, tokens, usage guidance, code snippets. An AI agent can discover and use any component without human guidance.
+          </div>
+          <div style={{ opacity:mcpP, transform:`translateY(${ip(t,[0.9,1.6],[18,0],E.outCubic)}px)`, background:`linear-gradient(135deg,${C.blue}18,${C.teal}18)`, border:`1px solid ${C.blue}40`, borderRadius:16, padding:'22px 26px', marginBottom:22 }}>
+            <div style={{ fontSize:15.5, fontWeight:800, color:C.blue, marginBottom:8 }}>MCP Server — In Progress</div>
+            <div style={{ fontSize:15, color:C.muted, lineHeight:1.65 }}>A Model Context Protocol server connecting the design library directly into AI tools — Claude Code, Cursor, Copilot. Any developer using AI can scaffold production-quality, on-brand UI in seconds.</div>
+          </div>
+          <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+            {queries.map((q,i) => (
+              <div key={i} style={{ opacity:ip(t,[1.4+i*0.2,1.9+i*0.2],[0,1],E.outCubic), background:'#060B14', border:`1px solid ${C.dim}`, borderRadius:10, padding:'10px 16px', fontFamily:"'JetBrains Mono',monospace", fontSize:13, color:C.teal, fontStyle:'italic' }}>
+                {q}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{ width:200 }}/>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 9 — OPPORTUNITIES
+// ─────────────────────────────────────────────────────────
+function Slide9({ t }) {
+  const hP = ip(t,[0.2,0.9],[0,1],E.outCubic);
+  const opps = [
+    { icon:'◈', color:C.blue, title:'Consistent Products at Scale',  body:'Every Unilever internal product — H3L, Nexus, Polaris, everything next — built from the same components. One update ships everywhere.' },
+    { icon:'⬡', color:C.teal, title:'AI-Assisted Development',       body:'Via the MCP server, describe what you need and get working, on-brand UI scaffolded in seconds inside your AI coding tool.' },
+    { icon:'⟳', color:C.gold, title:'Build Any Internal Agent',       body:'The manifest becomes the vocabulary of any AI agent. Design reviews, gap analysis, component audits — fully automatable.' },
+    { icon:'→', color:C.blue, title:'Faster Time to Market',          body:'No more rebuilding tables, forms, or modals from scratch. Teams inherit 224 battle-tested components and ship features, not infrastructure.' },
+  ];
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <Glow id="g9" cx="50%" cy="50%" r="60%" color={C.blue} opacity={0.06}/>
+      <div style={{ position:'absolute', inset:0, padding:'64px 96px' }}>
+        <div style={{ opacity:hP, textAlign:'center' }}><Label color={C.blue}>What Becomes Possible</Label></div>
+        <div style={{ opacity:hP, textAlign:'center', fontSize:52, fontWeight:900, color:C.text, lineHeight:1.1, letterSpacing:'-0.025em', marginBottom:48 }}>
+          The opportunities<br/><span style={{ background:'linear-gradient(135deg,#4F8EF7,#F0A030,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>are just beginning.</span>
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:22 }}>
+          {opps.map(({ icon, color, title, body }, i) => {
+            const p = ip(t,[0.4+i*0.18,1.0+i*0.18],[0,1],E.outBack);
+            return (
+              <div key={title} style={{ opacity:Math.min(1,p), transform:`scale(${Math.min(1,0.85+0.15*p)})`, background:C.surf, border:`1px solid ${color}22`, borderRadius:16, padding:'26px 28px' }}>
+                <div style={{ fontSize:28, color, marginBottom:10 }}>{icon}</div>
+                <div style={{ fontSize:18.5, fontWeight:800, color:C.text, marginBottom:9 }}>{title}</div>
+                <div style={{ fontSize:15, color:C.muted, lineHeight:1.62 }}>{body}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE 10 — CTA
+// ─────────────────────────────────────────────────────────
+function Slide10({ t }) {
+  const p1 = ip(t,[0.2,1.0],[0,1],E.outCubic);
+  const p2 = ip(t,[0.8,1.6],[0,1],E.outCubic);
+  const p3 = ip(t,[1.3,2.1],[0,1],E.outCubic);
+  const p4 = ip(t,[1.8,2.6],[0,1],E.outCubic);
+  const pulse = c01(Math.sin(t*1.1)*0.5+0.5);
+
+  return (
+    <div style={{ width:W, height:H, background:C.bg, position:'relative', overflow:'hidden' }}>
+      <svg style={{ position:'absolute', inset:0, pointerEvents:'none' }} width={W} height={H}>
+        <defs>
+          <radialGradient id="g10" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stopColor={C.blue} stopOpacity={0.10+0.06*pulse}/>
+            <stop offset="100%" stopColor={C.bg} stopOpacity={0}/>
+          </radialGradient>
+        </defs>
+        <rect width={W} height={H} fill="url(#g10)"/>
+        <circle cx={W/2} cy={H/2} r={300} fill="none" stroke={C.blue} strokeWidth={1} opacity={0.06}/>
+        <circle cx={W/2} cy={H/2} r={420} fill="none" stroke={C.blue} strokeWidth={1} opacity={0.03}/>
+      </svg>
+
+      <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
+        <div style={{ opacity:p1, fontSize:12, fontWeight:700, letterSpacing:'0.22em', color:C.blue, textTransform:'uppercase', marginBottom:22 }}>The Invitation</div>
+        <div style={{ opacity:p1, transform:`scale(${0.88+0.12*p1})`, fontSize:96, fontWeight:900, color:C.text, letterSpacing:'-0.04em', lineHeight:1, textAlign:'center', marginBottom:10 }}>
+          Try it today.
+        </div>
+        <div style={{ opacity:p2, transform:`translateY(${ip(t,[0.8,1.6],[14,0],E.outCubic)}px)`, fontSize:22, color:C.muted, marginBottom:48, letterSpacing:'0.06em' }}>
+          Browse.&nbsp;&nbsp;&nbsp;Copy.&nbsp;&nbsp;&nbsp;Ship.
+        </div>
+
+        <div style={{ opacity:p3, transform:`translateY(${ip(t,[1.3,2.1],[14,0],E.outCubic)}px)`, background:C.surf, border:`1px solid ${C.blue}40`, borderRadius:14, padding:'17px 38px', display:'flex', alignItems:'center', gap:14, marginBottom:44 }}>
+          <div style={{ width:9, height:9, borderRadius:'50%', background:C.teal }}/>
+          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:19, color:C.blue }}>gurneyk.github.io/Design-library</span>
+        </div>
+
+        <div style={{ opacity:p4, display:'flex', gap:56 }}>
+          {[['224','Components'],['194','Implementations'],['100/100','Readiness'],['MCP','Coming Soon']].map(([n,l])=>(
+            <div key={l} style={{ textAlign:'center' }}>
+              <div style={{ fontSize:28, fontWeight:900, background:'linear-gradient(135deg,#4F8EF7,#22D3A5)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>{n}</div>
+              <div style={{ fontSize:11, color:C.dim, textTransform:'uppercase', letterSpacing:'0.12em', marginTop:5 }}>{l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ position:'absolute', bottom:30, right:42, opacity:p4, fontSize:13, color:C.dim, letterSpacing:'0.1em' }}>
+        Habibi Design System · Gurnoor K
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────
+// SLIDE REGISTRY
+// ─────────────────────────────────────────────────────────
+const SLIDES = [Slide1,Slide2,Slide3,Slide4,Slide5,Slide6,Slide7,Slide8,Slide9,Slide10];
+
+// ─────────────────────────────────────────────────────────
+// APP
+// ─────────────────────────────────────────────────────────
+function App() {
+  const [active, setActive]       = useState(0);
+  const [prev, setPrev]           = useState(null);
+  const [transP, setTransP]       = useState(1);
+  const [slideT, setSlideT]       = useState(0);
+  const [showUI, setShowUI]       = useState(true);
+  const [fullscreen, setFullscreen] = useState(false);
+  const [auto, setAuto]           = useState(false);
+
+  const raf      = useRef(null);
+  const lastTs   = useRef(null);
+  const transRef = useRef(1);
+  const slideTR  = useRef(0);
+  const activeR  = useRef(0);
+  const autoR    = useRef(false);
+  const transitioning = useRef(false);
+  const uiTimer  = useRef(null);
+
+  const AUTO_SECS = 9;
+
+  useEffect(() => {
+    const loop = ts => {
+      const dt = lastTs.current ? Math.min((ts - lastTs.current)/1000, 0.1) : 0;
+      lastTs.current = ts;
+
+      if (transRef.current < 1) {
+        transRef.current = Math.min(1, transRef.current + dt/TRANS_DUR);
+        setTransP(transRef.current);
+        if (transRef.current >= 1) { setPrev(null); transitioning.current = false; }
+      }
+
+      slideTR.current += dt;
+      setSlideT(slideTR.current);
+
+      if (autoR.current && slideTR.current > AUTO_SECS && !transitioning.current) {
+        if (activeR.current < SLIDE_COUNT - 1) go(activeR.current + 1);
+        else { autoR.current = false; setAuto(false); }
+      }
+
+      raf.current = requestAnimationFrame(loop);
+    };
+    raf.current = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf.current);
+  }, []);
+
+  const go = useCallback(idx => {
+    if (transitioning.current || idx < 0 || idx >= SLIDE_COUNT) return;
+    transitioning.current = true;
+    setPrev(activeR.current);
+    activeR.current = idx;
+    setActive(idx);
+    transRef.current = 0;
+    setTransP(0);
+    slideTR.current = 0;
+    setSlideT(0);
+  }, []);
+
+  useEffect(() => {
+    const k = e => {
+      if (e.key==='ArrowRight'||e.key===' '||e.key==='ArrowDown') { e.preventDefault(); go(activeR.current+1); }
+      else if (e.key==='ArrowLeft'||e.key==='ArrowUp') { e.preventDefault(); go(activeR.current-1); }
+      else if (e.key==='f'||e.key==='F') toggleFS();
+      else if (e.key==='a'||e.key==='A') toggleAuto();
+    };
+    window.addEventListener('keydown', k);
+    return () => window.removeEventListener('keydown', k);
+  }, [go]);
+
+  const toggleFS = useCallback(() => {
+    if (!document.fullscreenElement) { document.documentElement.requestFullscreen?.(); setFullscreen(true); }
+    else { document.exitFullscreen?.(); setFullscreen(false); }
+  }, []);
+
+  const toggleAuto = useCallback(() => {
+    const n = !autoR.current;
+    autoR.current = n;
+    setAuto(n);
+  }, []);
+
+  useEffect(() => {
+    const mv = () => {
+      setShowUI(true);
+      clearTimeout(uiTimer.current);
+      uiTimer.current = setTimeout(() => setShowUI(false), 3200);
+    };
+    window.addEventListener('mousemove', mv);
+    return () => window.removeEventListener('mousemove', mv);
+  }, []);
+
+  const entering = E.inOutCubic(c01(transP));
+  const exiting  = 1 - entering;
+
+  const ActiveComp = SLIDES[active];
+  const PrevComp   = prev !== null ? SLIDES[prev] : null;
+
+  return (
+    <Stage>
+      {PrevComp && (
+        <div style={{ position:'absolute', inset:0, opacity:exiting, transform:`scale(${1-exiting*0.04})`, pointerEvents:'none' }}>
+          <PrevComp t={slideTR.current}/>
+        </div>
+      )}
+      <div style={{ position:'absolute', inset:0, opacity:entering, transform:`scale(${0.97+entering*0.03})` }}>
+        <ActiveComp t={slideT}/>
+      </div>
+
+      {/* Dot nav */}
+      <div style={{ position:'absolute', bottom:22, left:'50%', transform:'translateX(-50%)', display:'flex', gap:8, alignItems:'center', opacity:showUI?1:0, transition:'opacity 0.35s', zIndex:100 }}>
+        {Array.from({length:SLIDE_COUNT},(_,i)=>(
+          <div key={i} onClick={()=>go(i)} style={{ width:i===active?26:8, height:8, borderRadius:4, background:i===active?C.blue:C.dim, cursor:'pointer', transition:'all 0.3s' }}/>
+        ))}
+      </div>
+
+      {/* Bottom-right controls */}
+      <div style={{ position:'absolute', bottom:18, right:22, display:'flex', gap:8, alignItems:'center', opacity:showUI?1:0, transition:'opacity 0.35s', zIndex:100 }}>
+        <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:12, color:C.dim }}>{active+1}/{SLIDE_COUNT}</span>
+        <button onClick={toggleAuto} style={{ background:auto?`${C.blue}18`:'transparent', border:`1px solid ${auto?C.blue:C.dim}`, borderRadius:7, padding:'5px 11px', cursor:'pointer', color:auto?C.blue:C.dim, fontSize:12 }}>
+          {auto?'⏸ Auto':'▶ Auto'}
+        </button>
+        <button onClick={toggleFS} style={{ background:'transparent', border:`1px solid ${C.dim}`, borderRadius:7, padding:'5px 11px', cursor:'pointer', color:C.dim, fontSize:12 }}>
+          {fullscreen?'⛶ Exit':'⛶'}
+        </button>
+      </div>
+
+      {/* Arrow nav */}
+      {active>0 && (
+        <div style={{ position:'absolute', left:14, top:'50%', transform:'translateY(-50%)', opacity:showUI?1:0, transition:'opacity 0.35s', zIndex:100 }}>
+          <button onClick={()=>go(active-1)} style={{ background:`${C.surf}CC`, border:`1px solid ${C.border}`, borderRadius:'50%', width:42, height:42, cursor:'pointer', color:C.text, fontSize:20, display:'flex', alignItems:'center', justifyContent:'center' }}>‹</button>
+        </div>
+      )}
+      {active<SLIDE_COUNT-1 && (
+        <div style={{ position:'absolute', right:14, top:'50%', transform:'translateY(-50%)', opacity:showUI?1:0, transition:'opacity 0.35s', zIndex:100 }}>
+          <button onClick={()=>go(active+1)} style={{ background:`${C.surf}CC`, border:`1px solid ${C.border}`, borderRadius:'50%', width:42, height:42, cursor:'pointer', color:C.text, fontSize:20, display:'flex', alignItems:'center', justifyContent:'center' }}>›</button>
+        </div>
+      )}
+
+      {/* Keyboard hint — slide 1 only */}
+      {active===0 && slideT>3.5 && (
+        <div style={{ position:'absolute', bottom:58, left:'50%', transform:'translateX(-50%)', opacity:Math.min(1,(slideT-3.5)/0.5)*(showUI?1:0.4), fontSize:12, color:C.dim, letterSpacing:'0.16em', display:'flex', gap:14, zIndex:100 }}>
+          <span>← → Navigate</span><span>·</span><span>F Fullscreen</span><span>·</span><span>A Auto-play</span>
+        </div>
+      )}
+    </Stage>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
